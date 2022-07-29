@@ -1,0 +1,5 @@
+Livingroom Lights:
+  entities:
+    - light.livingroom_color_lamp_1
+    - light.livingroom_color_lamp_2
+    - light.livingroom_color_lamp_3

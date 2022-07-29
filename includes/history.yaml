@@ -1,0 +1,10 @@
+exclude:
+  domains:
+    - automation
+    - media_player
+    - timer
+  entities:
+    - sensor.u_s_air_pollution_level
+    - sensor.chinese_air_pollution_level
+    - sensor.time
+    - sensor.time_date

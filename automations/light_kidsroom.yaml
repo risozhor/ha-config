@@ -1,0 +1,103 @@
+- alias: kidsroom_light_on
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "single"
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "hold"
+  condition:
+    - condition: state
+      entity_id: light.0x0017880103aa4b71
+      state: "off"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+        payload: '{"state": "ON","brightness": 254,"color_temp": 400,"transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+        qos: 1
+
+- alias: kidsroom_light_on_20perc
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "double"
+  condition:
+    - condition: state
+      entity_id: light.0x0017880103aa4b71
+      state: "off"
+
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+        payload: '{"state": "ON","brightness": 30,"color_temp": 400,"transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+        qos: 1
+
+- alias: kidsroom_light_off
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "single"
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "double"
+    - platform: state
+      entity_id: sensor.kids_room_switch_action
+      to: "hold"
+
+  condition:
+    - condition: state
+      entity_id: light.0x0017880103aa4b71
+      state: "on"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+        qos: 1
+# - alias: decrease_kidsroom_brightness
+#   initial_state: true
+#   trigger:
+#   - platform: state
+#     entity_id: sensor.0x0017880104e51953_action
+#     to: 'down-press'
+#   - platform: state
+#     entity_id: sensor.0x0017880104e51953_action
+#     to: 'down-hold'
+#   condition:
+#     - condition: state
+#       entity_id: light.0x0017880103aa4b71
+#       state: 'on'
+#   action:
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.0x0017880103aa4b71
+#         brightness_step_pct: -10
+#         transition: 1
+
+# - alias: increase_kidsroom_brightness
+#   initial_state: true
+#   trigger:
+#   - platform: state
+#     entity_id: sensor.0x0017880104e51953_action
+#     to: 'up-press'
+#   - platform: state
+#     entity_id: sensor.0x0017880104e51953_action
+#     to: 'up-hold'
+#   condition:
+#     - condition: state
+#       entity_id: light.0x0017880103aa4b71_light
+#       state: 'on'
+#   action:
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.0x0017880103aa4b71
+#         brightness_step_pct: 10
+#         transition: 1

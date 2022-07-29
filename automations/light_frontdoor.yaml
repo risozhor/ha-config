@@ -1,0 +1,64 @@
+- alias: floodlight_on_night
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.outdoor_motion_sensor_occupancy
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.outdoor_floodlight
+      state: "off"
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "nightmode"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.outdoor_floodlight
+    - service: timer.start
+      entity_id: timer.floodlight_off_timer_2m
+- alias: floodlight_on_sleep
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.outdoor_motion_sensor_occupancy
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.outdoor_floodlight
+      state: "off"
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "sleepingmode"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.outdoor_floodlight
+    - service: timer.start
+      entity_id: timer.floodlight_off_timer_2m
+- alias: floodlight_off_night_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.floodlight_off_timer_2m
+  condition:
+    - condition: state
+      entity_id: switch.outdoor_floodlight
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.outdoor_floodlight
+    - service: timer.cancel
+      entity_id: timer.floodlight_off_timer_2m
+- alias: floodlight_timer_cancel
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: switch.outdoor_floodlight
+      to: "off"
+  action:
+    - service: timer.cancel
+      entity_id: timer.floodlight_off_timer_2m

@@ -1,0 +1,98 @@
+#  **** Вмикаємо wled при виявленні руху лише вночі ****  #
+- alias: diningroom_wled_on_night_from_guestroom
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.guestroom_motion_sensor_occupancy
+      to: "on"
+
+  condition:
+    - condition: state
+      entity_id: light.dining_room_stripe_3
+      state: "off"
+    - or:
+        - condition: state
+          entity_id: sensor.home_mode
+          state: "nightmode"
+        - condition: state
+          entity_id: sensor.home_mode
+          state: "sleepingmode"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dining_room_stripe_3
+    - service: select.select_option
+      target:
+        entity_id: select.dining_room_stripe_preset_3
+      data:
+        option: tc1
+    - service: timer.start
+      entity_id: timer.diningroom_wled_from_guestroom
+
+- alias: diningroom_wled_on_night_from_diningroom
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.dining_room_motion_sensor_occupancy
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: light.dining_room_stripe_3
+      state: "off"
+    - or:
+        - condition: state
+          entity_id: sensor.home_mode
+          state: "nightmode"
+        - condition: state
+          entity_id: sensor.home_mode
+          state: "sleepingmode"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.dining_room_stripe_3
+    - service: select.select_option
+      target:
+        entity_id: select.dining_room_stripe_preset_3
+      data:
+        option: tc1
+    - service: timer.start
+      entity_id: timer.diningroom_wled_from_diningroom
+
+#  **** Вимикаємо wled в кінці таймеру ****  #
+- alias: diningroom_wled_on_sleep_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.diningroom_wled_from_guestroom
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.diningroom_wled_from_diningroom
+  condition:
+    - condition: state
+      entity_id: light.dining_room_stripe_3
+      state: "on"
+  action:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.dining_room_stripe_3
+    - service: timer.cancel
+      entity_id: timer.diningroom_wled_from_diningroom
+    - service: timer.cancel
+      entity_id: timer.diningroom_wled_from_guestroom
+
+#  **** Обнуляємо таймер при вимиканні wled руками ****  #
+- alias: diningroom_wled_timer_cancel
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: light.dining_room_stripe_3
+      to: "off"
+  action:
+    - service: timer.cancel
+      entity_id: timer.diningroom_wled_from_diningroom
+    - service: timer.cancel
+      entity_id: timer.diningroom_wled_from_guestroom

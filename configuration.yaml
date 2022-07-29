@@ -1,0 +1,80 @@
+#default_config:
+config:
+energy:
+# logbook:
+my:
+http:
+  ip_ban_enabled: false
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.0.0.0/16
+    - 172.30.33.0/24
+cloud:
+#stream:
+recorder: !include includes/recorder.yaml
+# google_assistant: !include includes/google_assistant.yaml
+# google: !include includes/google_calendars.yaml
+homeassistant:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: metric
+  currency: UAH
+  time_zone: Europe/Kiev
+  customize: !include_dir_merge_named customize
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  packages: !include_dir_merge_named includes/packages
+frontend:
+  themes: !include_dir_merge_named themes
+stream:
+# camera: !include includes/camera.yaml
+tts: !include includes/tts.yaml
+map:
+# weather:
+#   - platform: pirateweather
+#     api_key: !secret pirateweather_api_key
+#     mode: "daily"
+#calendar:
+media_source:
+ssdp:
+notify: !include includes/notify.yaml
+telegram_bot: !include includes/telegram.yaml
+sun:
+mobile_app:
+history: !include includes/history.yaml
+shopping_list:
+system_health:
+#updater:
+zeroconf:
+light: !include includes/light.yaml
+discovery:
+# upnp:
+timer: !include includes/timer.yaml
+input_number: !include includes/input_number.yaml
+input_select: !include includes/input_select.yaml
+input_boolean: !include includes/input_boolean.yaml
+# lock: !include includes/lock.yaml
+sensor: !include_dir_merge_list includes/sensor
+binary_sensor: !include includes/binary_sensors.yaml
+switch: !include includes/switch.yaml
+automation: !include_dir_merge_list automations
+# script: !include scripts.yaml
+utility_meter: !include includes/utility_meter.yaml
+climate: !include includes/climate/climate.yaml
+mqtt:
+  lock:
+    - name: "Frontdoor"
+      unique_id: "frontdoor_lock"
+      state_topic: "zigbee2mqtt_lan/Relay"
+      command_topic: "zigbee2mqtt_lan/Relay/right/set"
+      payload_lock: "OFF"
+      payload_unlock: "ON"
+      state_locked: "OFF"
+      state_unlocked: "ON"
+      qos: 1
+      value_template: "{{ value_json.state_right }}"
+# nest:
+#   client_id: !secret nest_client_id
+#   client_secret: !secret nest_client_secret
+#   project_id: !secret nest_project_id

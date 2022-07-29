@@ -1,0 +1,16 @@
+switch.outlet:
+  friendly_name: Smart plug
+  device_class: plug
+  icon: mdi:power-plug
+  retain: true
+switch.outdoor_floodlight:
+  friendly_name: Floodlight
+  icon: mdi:string-lights
+  device_class: light
+switch.yard_light:
+  icon: mdi:string-lights
+  device_class: light
+switch.backyard_light:
+  friendly_name: Backyard Light
+  icon: mdi:spotlight-beam #mdi-flip-h
+  device_class: light

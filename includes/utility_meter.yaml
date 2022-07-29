@@ -1,0 +1,6 @@
+monthly_energy:
+  source: sensor.energy_meter_energy
+  name: Monthly Energy
+  cycle: monthly
+  tariffs:
+    - normal

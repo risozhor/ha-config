@@ -1,0 +1,28 @@
+sensor.memory_use_percent:
+  friendly_name: RAM
+  icon: fas:sd-card
+sensor.disk_free:
+  friendly_name: Free
+sensor.disk_use_percent:
+  friendly_name: Disk use
+  icon: fas:chart-pie
+sensor.last_boot:
+  friendly_name: Last boot
+sensor.last_boot_custom:
+  friendly_name: Powered ON
+sensor.0x00158d0001644741_click:
+  icon: mdi:gesture-tap-hold
+sensor.0x286d9700010450de_temperature:
+  friendly_name: Hallway temperature
+sensor.livingroom_aqi:
+  friendly_name: Livingroom AQI
+  icon: mdi:weather-windy
+sensor.maria_db_size:
+  icon: mdi:database-cog
+sensor.guestroom_plug_energy:
+  state_class: total_increasing
+
+sensor.living_room_humidity:
+  friendly_name: Living room Humidity by Nest
+sensor.living_room_temperature:
+  friendly_name: Living room Temperature by Nest

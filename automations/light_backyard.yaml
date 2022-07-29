@@ -1,0 +1,113 @@
+# - alias: backyardlightswitch_on_night
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.backyard_motion_sensor_occupancy
+#       to: "on"
+#   condition:
+#     - condition: state
+#       entity_id: switch.0x00124b001b797251_switch
+#       state: "off"
+#     - condition: state
+#       entity_id: sensor.home_mode
+#       state: "nightmode"
+#   action:
+#     - service: switch.turn_on
+#       data:
+#         entity_id: switch.0x00124b001b797251_switch
+#     - service: timer.start
+#       entity_id: timer.backyardlightswitch_5m
+
+# - alias: backyardlightswitch_on_sleep
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.backyard_motion_sensor_occupancy
+#       to: "on"
+#   condition:
+#     - condition: state
+#       entity_id: switch.0x00124b001b797251_switch
+#       state: "off"
+#     - condition: state
+#       entity_id: sensor.home_mode
+#       state: "sleepingmode"
+#   action:
+#     - service: switch.turn_on
+#       data:
+#         entity_id: switch.0x00124b001b797251_switch
+#     - service: timer.start
+#       entity_id: timer.backyardlightswitch_45s
+
+- alias: backyardlightswitch_on_manual
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: switch.0x00124b001b797251_switch
+      to: "on"
+  action:
+    - service: timer.start
+      entity_id: timer.backyardlightswitch_30off
+- alias: backyardlightswitch_off_sleep_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyardlightswitch_45s
+  condition:
+    - condition: state
+      entity_id: switch.0x00124b001b797251_switch
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.0x00124b001b797251_switch
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_45s
+- alias: backyardlightswitch_off_night_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyardlightswitch_5m
+  condition:
+    - condition: state
+      entity_id: switch.0x00124b001b797251_switch
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.0x00124b001b797251_switch
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_5m
+- alias: backyardlightswitch_off_timer30m
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.backyardlightswitch_30off
+  condition:
+    - condition: state
+      entity_id: switch.0x00124b001b797251_switch
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.0x00124b001b797251_switch
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_30off
+- alias: backyardlightswitch_timer_cancel
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: switch.0x00124b001b797251_switch
+      to: "off"
+  action:
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_5m
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_45s
+    - service: timer.cancel
+      entity_id: timer.backyardlightswitch_30off

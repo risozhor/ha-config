@@ -1,0 +1,5 @@
+- platform: tod
+  name: Day_tod
+  after: sunrise
+  before: sunset
+

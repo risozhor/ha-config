@@ -1,0 +1,10 @@
+device_tracker.note20:
+  entity_picture: "/local/risozhor.jpg"
+# device_tracker.g_j730fm:
+#   entity_picture: '/local/vitaliy.jpg'
+device_tracker.sm_m315f:
+  entity_picture: "/local/vitaliy.jpg"
+device_tracker.a50_maryna:
+  entity_picture: "/local/marina.jpg"
+device_tracker.yaroslava:
+  entity_picture: "/local/yaroslava.jpg"

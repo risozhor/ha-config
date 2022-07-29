@@ -1,0 +1,262 @@
+- alias: hallwaylight_on_night
+  initial_state: true
+  trigger:
+    #   - platform: state
+    #     entity_id: binary_sensor.0x286d9700010450de_occupancy
+    #     to: 'on'
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_detector_ring
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "off"
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "nightmode"
+  action:
+    # - service: light.turn_on
+    #   data:
+    # entity_id: light.0x00178801030318a1
+    # brightness_pct: 100
+    # kelvin: 3700
+    # transition: 1
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "ON","transition": 1,"brightness": 45,"color_temp": 270,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.start
+      entity_id: timer.hallwaylamps_5m
+
+- alias: hallwaylight_on_sleep
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_detector_ring
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "off"
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "sleepingmode"
+  action:
+    # - service: light.turn_on
+    #   data:
+    # entity_id: light.0x00178801030318a1
+    # brightness_pct: 20
+    # transition: 1
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "ON","transition": 1,"brightness": 45,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.start
+      entity_id: timer.hallwaylamps_2m
+- alias: hallwaylight_on_night_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hallwaylamps_5m
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "on"
+  action:
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.0x00178801030318a1
+    #     transition: 1
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_5m
+- alias: hallwaylight_on_sleep_timer
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hallwaylamps_2m
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "on"
+  action:
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.hallway_lamp
+    #     transition: 1
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_2m
+- alias: hallwaylight_timer_cancel
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: light.0x00178801030318a1
+      to: "off"
+  action:
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_2m
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_5m
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_off
+
+- alias: hallway_light_on_manual
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.hallway_switch_action
+      to: "button_1_single"
+    - platform: state
+      entity_id: sensor.hallway_btn_action
+      to: "single"
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "off"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "ON","transition": 1,"brightness": 254,"color_temp": 270,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.start
+      entity_id: timer.hallwaylamps_off
+
+- alias: hallway_light_on_manual5000k
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.hallway_switch_action
+      to: "button_1_single"
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "on"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "ON","transition": 1,"brightness": 254,"color_temp": 400,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.start
+      entity_id: timer.hallwaylamps_off
+
+- alias: hallway_light_on20_manual
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.hallway_switch_action
+      to: "button_2_single"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "ON","transition": 1,"brightness": 40,"color_temp": 270,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: timer.start
+      entity_id: timer.hallwaylamps_off
+
+- alias: hallway_light_off_manual
+  initial_state: true
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "on"
+  trigger:
+    - platform: state
+      entity_id: sensor.hallway_switch_action
+      to: "button_3_single"
+    - platform: state
+      entity_id: sensor.hallway_switch_action
+      to: "button_4_single"
+    - platform: state
+      entity_id: sensor.hallway_btn_action
+      to: "double"
+    - platform: state
+      entity_id: sensor.hallway_btn_action
+      to: "single"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"brightness": 0,"hue_power_on_behavior": "recover"}'
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_off
+
+# - alias: decrease_hallway_brightness
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.hallway_switch_action
+#       to: "down-press"
+#     - platform: state
+#       entity_id: sensor.hallway_switch_action
+#       to: "down-hold"
+#   condition:
+#     - condition: state
+#       entity_id: light.0x00178801030318a1
+#       state: "on"
+#   action:
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.0x00178801030318a1
+#         brightness_step_pct: -10
+#         transition: 1
+
+# - alias: increase_hallway_brightness
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.hallway_switch_action
+#       to: "up-press"
+#     - platform: state
+#       entity_id: sensor.hallway_switch_action
+#       to: "up-hold"
+#   condition:
+#     - condition: state
+#       entity_id: light.0x00178801030318a1
+#       state: "on"
+#   action:
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.0x00178801030318a1
+#         brightness_step_pct: 10
+#         transition: 1
+
+- alias: hallwaylight_time_finished
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hallwaylamps_off
+  condition:
+    - condition: state
+      entity_id: light.0x00178801030318a1
+      state: "on"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_2m
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_5m
+    - service: timer.cancel
+      entity_id: timer.hallwaylamps_off

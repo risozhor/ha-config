@@ -1,0 +1,20 @@
+person.risozhor:
+  entity_picture: "/local/risozhor.jpg"
+  track: true
+  device_trackers:
+    - device_tracker.note20
+person.vitaliy:
+  entity_picture: "/local/vitaliy.jpg"
+  track: true
+  device_trackers:
+    - device_tracker.sm_m315f
+person.maryna:
+  entity_picture: "/local/marina.jpg"
+  track: true
+  device_trackers:
+    - device_tracker.a50_maryna
+person.yaroslava:
+  entity_picture: "/local/yaroslava.jpg"
+  track: true
+  device_trackers:
+    - device_tracker.yaroslava

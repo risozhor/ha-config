@@ -1,0 +1,476 @@
+# - id: run night light
+#   alias: run night light
+#   trigger:
+#     platform: state
+#     entity_id: switch.virtual_gyver
+#     # from: 'off'
+#     to: 'on'
+#   action:
+#     service: script.turn_on
+#     data:
+#       entity_id: script.slippinggyver
+# - id: off gyver light
+#   alias: off gyver light
+#   trigger:
+#     platform: state
+#     entity_id: switch.virtual_gyver
+#     # from: 'on'
+#     to: 'off'
+#   action:
+#     service: mqtt.publish
+#     data_template:
+#         topic: "homeassistant/light/ESP-6b956e/switch"
+#         retain: true
+#         payload_template: 'OFF'
+# - id: window_open_ch
+#   alias: window_openn_ch
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.0x00158d0003d0badf_contact
+#     to: 'on'
+#   action:
+#     service: notify.telegram
+#     data:
+#       message: 'Відкрито вікно дитячої кімнати'
+# - id: window_open_ki
+#   alias: window_openn_ki
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.0x00158d00044ce102_contact
+#     to: 'on'
+#   action:
+#     service: notify.telegram
+#     data:
+#       message: 'Відкрито вікно кухні'
+# - id: window_open_lr
+#   alias: window_openn_lr
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.0x00158d0002e21a7b_contact
+#     to: 'on'
+#   action:
+#     service: notify.telegram
+#     data:
+#       message: 'Відкрито вікно залу'
+# - id: open_frontdoor
+#   alias: open_frontdoor
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.front_door_sensor_contact
+#     to: 'on'
+#   action:
+#     service: notify.telegram
+#     data:
+#       message: 'Відкриті вхідні двері'
+- id: notify-kitchenfire
+  alias: Kitchen fire detected
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d0002edf7f8_smoke
+      to: "on"
+  action:
+    - service: notify.telegram
+      data:
+        title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *FIRE* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
+        message: "О {{ states('sensor.time_date') }} на кухні виявлено дим"
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+    - service: notify.mobile_app_sm_a505fm
+      data:
+        title: "The house is on fire! Smoke detected"
+        message: TTS
+        data:
+          ttl: 0
+          color: red
+          priority: high
+          channel: alarm_stream_max
+    - service: notify.mobile_app_sm_a505fm
+      data:
+        title: "Smoke detected"
+        message: The house is on fire! Smoke detected
+        data:
+          ttl: 0
+          color: red
+          priority: high
+          channel: alarm_stream_max
+    - service: notify.mobile_app_sm_j730fm
+      data:
+        title: "The house is on fire! Smoke detected"
+        message: TTS
+        data:
+          ttl: 0
+          color: red
+          priority: high
+          channel: alarm_stream_max
+    - service: notify.mobile_app_sm_j730fm
+      data:
+        title: "The house is on fire! Smoke detected"
+        message: TTS
+        data:
+          ttl: 0
+          color: red
+          priority: high
+          channel: alarm_stream_max
+- id: notify-hass-start
+  alias: Home Assistant Start - Notify
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: notify.telegram
+      data:
+        message: >-
+          {{'\U0001F525'}} Home Assistant Started at {{ states('sensor.time_date') }}
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- id: telegram-control-pannel-start
+  alias: "Telegram Control Pannel Command"
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: telegram_command
+    event_data:
+      command: "/start"
+  action:
+    - service: telegram_bot.send_message
+      data_template:
+        target: "{{ trigger.event.data.user_id }}"
+        message: >
+          {{ [
+          "Пріветікі",
+          "До зірок",
+          "Сер, Да сер!",
+          "Здоровенькі були!",
+          "Вечір в хату!",
+          "Здрасть!",
+          "Шо такоє?",
+          "Паєхалі",
+          "хелло аміго",
+          "Буенос ночес!"
+          ] | random }}
+        data:
+        inline_keyboard:
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
+          - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
+- id: telegram-ik-ping-pong
+  alias: "telegram ping pong"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/ping"
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: >-
+          {{"\U0001F501"}} Callback received from {{ trigger.event.data.from_first }}.
+          Message id: {{ trigger.event.data.message.message_id }}.
+          Data: {{ trigger.event.data.data }}
+          {{now().strftime("%H:%M:%S %Y-%m-%d")}} Pong, Message from {{ trigger.event.data["user_id"] }}.
+        show_alert: true
+- id: telegram-user-location
+  alias: "telegram User location"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/location"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F4CC"}} *Locaton*'
+        message: >-
+          {{"__________________________________ \n"}}
+          {{now().strftime("%H:%M:%S %Y-%m-%d")}}
+          {{"__________________________________ \n"}}
+          {%- for state in states.device_tracker -%}{%- if (state.state_with_unit) == "home" -%}{{'\n'}}*{{ state.name }}* at {{state.state_with_unit}}{%- endif -%}{%- if (state.state_with_unit) != 'home' -%}{{'\n'}}*{{ state.name }}* at {{state.state_with_unit.replace('_','-')}} {%- endif %}{%- endfor %}
+        inline_keyboard:
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- id: telegram-ik-security-alarm
+  alias: "Telegram Alarm"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/security"
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: "Alarm control"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        message: >
+          {% if is_state("alarm_control_panel.ring_alarm", "disarmed") %}Alarm is OFF. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
+        inline_keyboard:
+          - '{{ "\u26D4" }} Alarm ON:/arm_away, {{ "\u2B55" }} Alarm ON at home:/arm_home, {{ "\u2611" }} Disarm:/disarm'
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- id: telegram-ik-set-security-arm_away
+  alias: "Telegram Alarm SET arm_away"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/arm_away"
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      data:
+        entity_id: alarm_control_panel.ring_alarm
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{ "\u26D4" }} *Security*'
+        message: "Поставлено на охорону (не вдома)"
+        inline_keyboard:
+          - "На охорону (вдома):/arm_home, Зняти з охорони:/disarm"
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- id: telegram-ik-set-security-arm_home
+  alias: "Telegram Alarm SET arm_home"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/arm_home"
+  action:
+    - service: alarm_control_panel.alarm_arm_away
+      data:
+        entity_id: alarm_control_panel.ring_alarm
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{ "\u26D4" }}*Security*'
+        message: "Поставлено на охорону (Вдома)"
+        inline_keyboard:
+          - "На охорону (Не вдома):/arm_away, Зняти з охорони:/disarm"
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- id: telegram-ik-set-security-disarm
+  alias: "Telegram Alarm SET disarm"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/disarm"
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.ring_alarm
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: "*Security*"
+        message: "Знято з охорони"
+        inline_keyboard:
+          - "На охорону (Не вдома):/arm_away, На охорону (вдома):/arm_home"
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- id: telegram-ik-to-cp
+  alias: "Telegram Панель керування"
+  trigger:
+    - platform: event
+      event_type: telegram_callback
+      event_data:
+        data: "/to_cp"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: "*Панель керування*"
+        message: >-
+          {{'\n'}}
+          {% set hour_num = now().hour | int %}
+          {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Доброго ранку!
+          {% elif hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Добрий день!
+          {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Добрий вечір!
+          {% else %}{{"\U0001f31a"}} Добрї ночі!{% endif -%}
+          {%- set weekday_list = ["Понеділок","Вівторок","Середа","Четвер","П'ятниця","Субота","Неділя"] %}
+          {%- set month_list = ["Січня","Лютого","Березня","Квітня","Травня","Червня","Липня","Серпня","Вересня","Жовтня","Листопада","Грудня"] %}
+          {%- set date = as_timestamp(now()) -%}
+          {%- set wd_ok = date | timestamp_custom("%w") | int %}
+          {%- set weekday = weekday_list[wd_ok-1] -%}
+          {{'\n'}}Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Оберіть розділ*{{'\n\n'}}
+        inline_keyboard:
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
+          - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
+          # - "Показать Фото :/get_photo"
+          #- Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}.
+# {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}
+
+- alias: "Lights Actions"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/lights"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F4A1"}} *Керування освітленням*'
+        message: "Оберіть кімнату для керування освітленням"
+        inline_keyboard:
+          - '{{"\U0001F39B"}} Кухня:/light_kitchen, {{"\U0001F6AA"}} Коридор:/light_hallway, {{"\U0001F9F8"}} Дитяча :/light_kids'
+          - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
+          - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Надворі:/light_outdoor'
+          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+- alias: "HA System Actions"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/system"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6E0"}} *HA System Actions*'
+        message: "Схоже, ви хочете щось зробити з вашим Home Assistant. Яку дію бажаєте виконати?"
+        inline_keyboard:
+          - '{{"\u2B07\uFE0F"}} Вимкнення хоста:/hashutdown, {{"\U0001F503"}} Перезавантаження хоста:/hassioreboot'
+          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Host Reboot"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/hassioreboot"
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: '{{"\U0001F503"}} Перезавантаження хоста'
+    - service: hassio.host_reboot
+    - service: notify.telegram
+      data:
+        message: '{{"\U0001F503"}} Host - Reboot - Triggered'
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Host Shutdown"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/hashutdown"
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: '{{"\U0001F503"}} Вимкнення хоста'
+    - service: hassio.host_shutdown
+    - service: notify.telegram
+      data:
+        message: '{{"\u2B07\uFE0F"}} Host - Shutdown - Triggered'
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - System status sstatus"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/sstatus"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6E0"}} *Статус системи*'
+        message: >
+          ------------------------------------------------{{'\n'}}
+          {{"\U0001F525"}} *CPU Usage*: {{  states.sensor.processor_use_percent.state }}%{{'\n'}}
+          {{"\U0001F4E6"}} *Db Size*: {{ states.sensor.maria_db_size.state }} Mb{{'\n'}}
+          {{"\u23F0"}} *Last Boot*: {{  states.sensor.last_boot.state }}{{'\n'}}
+          {{"\U0001F4BF"}} *Disk Free*: {{  states.sensor.disk_free.state }}Gb{{'\n'}}
+          {{"\U0001F4C0"}} *HDD Used*: {{  states.sensor.disk_use_percent.state }}%{{'\n'}}
+          {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
+        inline_keyboard:
+          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - status weather"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/weather"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F324"}} *Погода*'
+        message: |
+          {{"\U0001F3E0"}} Погода, звіт на {{ states('sensor.time_date') }}
+          {{"\U0001F321"}} Температура - {{ states('sensor.openweathermap_temperature') }} C
+          {{"\U0001F32B"}} Вологість - {{ states('sensor.openweathermap_humidity') }} %
+          {{"\U0001F4AA"}} Тиск - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} мм рт. ст
+          {{"\U0001f4a8"}} Швидкість вітру {{ states('sensor.wind_speed') }} м/с.
+          {{"\U00002600"}} Погода - {{ states('sensor.openweathermap_weather') }}
+          {{"\U0001f4a7"}} Точка роси {{ states('sensor.dew_point') }} C.
+          ------------------------------------------------
+          {{"\U0001f305"}} Схід сонця {{ states('sensor.next_sunrise') }}
+          {{"\U0001f307"}} Захід сонця {{ states('sensor.next_sunset') }}
+          ------------------------------------------------
+          *Прогноз*
+          {{"\U00002B50"}} Прогноз на сьогодні - {{ states('sensor.openweathermap_forecast_temperature') }} C
+          {{"\U0001F327"}} Прогноз дощу - {{ states('sensor.openweathermap_rain') }}
+          {{"\U0001F328"}} Прогноз снігу - {{ states('sensor.openweathermap_snow') }}
+        inline_keyboard:
+          - "Прогноз на завтра:/weather_tomorrow"
+          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - status weather tomorrow"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/weather_tomorrow"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F324"}} *Погода Прогноз на завтра*'
+        message: |
+          {{'________________ \n'}}
+          {{"\U0001F321"}} Температура: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} C
+          {{"\U0001F324"}} Погода - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }} 
+          {{"\U0001F327"}} Вірогідність опадів - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
+          {{"\U0001f4a8"}} Швидкість вітру {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} м/с.
+        inline_keyboard:
+          - '{{"\U0001F324"}} Повернутись:/weather'
+          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "Telegram - status shopinglist"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/shopinglist"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F4B5"}} *Актуальний список покупок *'
+        message: |
+          {% if (states("sensor.shopping_list") | list | length > 1) %}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}
+        inline_keyboard:
+          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

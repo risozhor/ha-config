@@ -1,0 +1,61 @@
+- id: notify-air-alarm
+  alias: Air alarm
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.teritorialna_gromada_air
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.telegram
+      data:
+        title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *Повітряна тривога* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
+        message: "О {{ states('sensor.time_date') }} оголошено повітряну тривогу"
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+    - service: notify.mobile_app_note20
+      data:
+        title: "Air alert! Go to the shelter immediately!"
+        message: TTS
+        data:
+          channel: alarm_stream
+    - service: notify.mobile_app_note20
+      data:
+        title: Повітряна тривога!
+        message: Негайно прямуйте в укриття
+        data:
+          ttl: 0
+          color: red
+          priority: high
+
+- id: notify-air-alarm-cancel
+  alias: Air alarm cancel
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.teritorialna_gromada_air
+      from: "on"
+      to: "off"
+  action:
+    - service: notify.telegram
+      data:
+        title: "*Відбій тривоги*"
+        message: "О {{ states('sensor.time_date') }} оголошено відбій тривоги"
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+    - service: notify.mobile_app_note20
+      data:
+        title: "Air alert canceled! Get back to your business!"
+        message: TTS
+        data:
+          channel: alarm_stream
+    - service: notify.mobile_app_note20
+      data:
+        title: Відбій тривоги!
+        message: Повертайтесь до своїх справ
+        data:
+          ttl: 0
+          color: green
+          priority: high

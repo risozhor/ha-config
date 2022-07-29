@@ -1,0 +1,70 @@
+- id: telegram_lights_hallway
+  alias: "IK - Telegram - Light hallway"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/light_hallway"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6AA"}} *Коридор*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.hallway_lamp", "on") %}{{"\U0001F4A1"}} Лампу коридору увімкнено{% else %}Лампу коридору вимкнено {% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.hallway_lamp", "on") %}Лампу коридору вимкнути:/hl_off{% else %}Лампу коридору увімкнути:/hl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- id: telegram_light_hl_off
+  alias: "IK - Telegram - Light Hallway hl_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/hl_off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_lamp
+        transition: 1
+    - delay: "00:00:01"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6AA"}} *Коридор*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.hallway_lamp", "on") %}{{"\U0001F4A1"}} Лампу коридору увімкнено{% else %}Лампу коридору вимкнено {% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.hallway_lamp", "on") %}Лампу коридору вимкнути:/hl_off{% else %}Лампу коридору увімкнути:/hl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- id: telegram_light_hl_on
+  alias: "IK - Telegram - Light Hallway hl_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/hl_on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_lamp
+        brightness_pct: 100
+        kelvin: 3700
+        transition: 1
+    - delay: "00:00:01"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6AA"}} *Коридор*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.hallway_lamp", "on") %}{{"\U0001F4A1"}} Лампу коридору увімкнено{% else %}Лампу коридору вимкнено {% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.hallway_lamp", "on") %}Лампу коридору вимкнути:/hl_off{% else %}Лампу коридору увімкнути:/hl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

@@ -1,0 +1,123 @@
+- alias: kitchenlight_on
+  initial_state: true
+  trigger:
+    #   - platform: state
+    #     entity_id: sensor.0x00158d0001644741_click
+    #     to: 'single'
+    ## 2 Aqara Opple
+    - platform: state
+      entity_id: sensor.kitchen_opple_action #sensor.0x04cf8cdf3c791863_action
+      to: "button_3_single"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.kitchen_ceiling_lights
+  #       state: 'off'
+  action:
+    # - service: light.turn_on
+    #   data:
+    #     entity_id: light.kitchen_color_bulb
+    #     brightness: 255
+    #     kelvin: 3500
+    #     transition: 1
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen Color lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5e74/set
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen ceiling lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5e74/set
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen table lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5d0d/set
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        retain: true
+- alias: kitchenlight_off
+  initial_state: true
+  trigger:
+    #   - platform: state
+    #     entity_id: sensor.0x00158d0001644741_click
+    #     to: 'single'
+    ## 2 Aqara Opple
+    - platform: state
+      entity_id: sensor.kitchen_opple_action #sensor.0x04cf8cdf3c791863_action
+      to: "button_4_single"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.kitchen_ceiling_lights
+  #       state: 'on'
+  action:
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.kitchen_color_bulb
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen Color lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5e74/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen ceiling lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5e74/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen table lamp/set
+        # topic: zigbee2mqtt/0x0017880104ff5d0d/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true
+- alias: kitchenstripe_on
+  initial_state: true
+  trigger:
+    #   - platform: state
+    #     entity_id: sensor.0x00158d0001644741_click
+    #     to: 'double'
+    - platform: state
+      entity_id: sensor.kitchen_opple_action #sensor.0x04cf8cdf3c791863_action
+      to: "button_1_single"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.0x00124b001ada540d_light
+  #       state: 'off'
+  action:
+    # - service: light.turn_on
+    #   data:
+    #     entity_id: light.0x00124b001ada540d_light
+    #     brightness: 255
+    #     kelvin: 2300
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen strip/set
+        # topic: zigbee2mqtt/0x00124b001ada540d/set
+        payload: '{"state": "ON","brightness": 254,"color_temp": 270}'
+        retain: true
+- alias: kitchenstripe_off
+  initial_state: true
+  trigger:
+    #   - platform: state
+    #     entity_id: sensor.0x00158d0001644741_click
+    #     to: 'double'
+    - platform: state
+      entity_id: sensor.kitchen_opple_action #sensor.0x04cf8cdf3c791863_action
+      to: "button_2_single"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.0x00124b001ada540d_light
+  #       state: 'on'
+  action:
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.0x00124b001ada540d_light
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Kitchen strip/set
+        # topic: zigbee2mqtt/0x00124b001ada540d/set
+        payload: '{"state": "OFF"}'
+        retain: true

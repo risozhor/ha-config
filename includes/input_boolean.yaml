@@ -1,0 +1,4 @@
+virt_sleepingmode:
+  name: Sleeping Mode
+  initial: off
+  icon: mdi:sleep

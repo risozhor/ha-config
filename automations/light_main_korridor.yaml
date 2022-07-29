@@ -1,0 +1,55 @@
+- alias: main_korridor_light_on_by_switch
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "single"
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "double"
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "hold"
+  condition:
+    - condition: state
+      entity_id: light.main_corridor_light
+      state: "off"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Main Corridor Light/set
+        # topic: zigbee2mqtt_lan/0x0017880104ff5e74/set
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        retain: true
+    # - service: light.turn_on
+    #   data:
+    #     entity_id: light.main_corridor_light
+    #     brightness_pct: 100
+    #     kelvin: 3700
+
+- alias: main_korridor_light_off_by_switch
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "single"
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "double"
+    - platform: state
+      entity_id: sensor.main_corridor_switch_action
+      to: "hold"
+  condition:
+    - condition: state
+      entity_id: light.main_corridor_light
+      state: "on"
+  action:
+    # - service: light.turn_off
+    #   data:
+    #     entity_id: light.main_corridor_light
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/Main Corridor Light/set
+        # topic: zigbee2mqtt_lan/0x0017880104ff5e74/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        retain: true

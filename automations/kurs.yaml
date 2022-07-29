@@ -1,0 +1,18 @@
+# - alias: low_temperature
+#   trigger:
+#     - platform: numeric_state
+#       entity_id: sensor.xiaomi_miio_device_temperature
+#       above: 16
+#       for: "00:00:10"
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *temperature criticaly low* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
+#         message: "The temperature criticaly low, {{states('sensor.room_temperature')}}"
+#     - delay:
+#         seconds: 5
+#     - service: notify.telegram
+#       data:
+#         title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *temperature criticaly low* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
+#         message: "The temperature criticaly low, {{states('sensor.room_temperature')}}"
+[]

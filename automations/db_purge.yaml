@@ -1,0 +1,11 @@
+- id: Сжатие базы
+  alias: DB_purge_everyday
+  initial_state: true
+  trigger:
+    - platform: time
+      at: "02:30:00"
+  action:
+    - service: recorder.purge
+      data:
+        keep_days: 5
+        repack: true

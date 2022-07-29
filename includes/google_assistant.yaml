@@ -1,0 +1,280 @@
+project_id: hassio-3128f
+#   report_state: true
+entity_config:
+  light.livingroom_lights:
+    expose: false
+  # light.livingroom_color_lamp_1:
+  #   expose: false
+  light.livingroom_color_lamp_2:
+    expose: false
+  light.livingroom_color_lamp_3:
+    expose: false
+  light.table_background:
+    expose: false
+  light.kids_color_lamp:
+    expose: false
+  # light.kitchen_ceiling_lamp:
+  #   expose: false
+  # light.kitchen_table_lamp:
+  #   expose: false
+  light.strip:
+    expose: false
+  switch.frontdoor_floodlight:
+    expose: false
+  sensor.motion_sensor_temperature_measurement:
+    expose: false
+  sensor.pogoda_relative_humidity_measurement:
+    expose: false
+  binary_sensor.front_door_sensor_contact:
+    expose: false
+  media_player.hallway_and_kitchen:
+    expose: false
+  media_player.living_and_kitchen:
+    expose: false
+  media_player.mini:
+    expose: false
+  switch.outlet:
+    expose: false
+  switch.virtual_gyver:
+    expose: false
+  binary_sensor.kids_window_sensor_contact:
+    expose: false
+  binary_sensor.kitchen_window_sensor_contact:
+    expose: false
+  binary_sensor.living_room_window_sensor_contact:
+    expose: false
+  media_player.hallway_speaker:
+    expose: false
+  media_player.living_room_speaker:
+    expose: false
+  alarm_control_panel.home_alarm:
+    expose: false
+  switch.gyver_light:
+    expose: false
+  sensor.pogoda_temperature_measurement:
+    expose: false
+  media_player.kitchen_display:
+    expose: false
+
+  scene.away:
+    expose: false
+  scene.day:
+    expose: false
+  scene.smoke_detector_smoke_detector:
+    expose: false
+  scene.night:
+    expose: false
+  scene.sleeping:
+    expose: false
+  switch.sthm_away_armed:
+    expose: false
+  switch.sthm_stay_armed:
+    expose: false
+  sensor.mikrotik_cpu_load:
+    expose: false
+  binary_sensor.mikrotik_firmware_update:
+    expose: false
+  sensor.mikrotik_hdd_usage:
+    expose: false
+  switch.mikrotik_nat_tcp_443:
+    expose: false
+  switch.mikrotik_nat_tcp_80:
+    expose: false
+  switch.mikrotik_nat_tcp_88:
+    expose: false
+  device_tracker.mikrotik_ether1:
+    expose: false
+  device_tracker.mikrotik_ether2:
+    expose: false
+  device_tracker.mikrotik_ether3:
+    expose: false
+  device_tracker.mikrotik_ether4:
+    expose: false
+  device_tracker.mikrotik_ether5:
+    expose: false
+  device_tracker.mikrotik_ether6:
+    expose: false
+  device_tracker.mikrotik_ether7:
+    expose: false
+  device_tracker.mikrotik_ether8:
+    expose: false
+  device_tracker.mikrotik_ether9:
+    expose: false
+  device_tracker.mikrotik_ether10:
+    expose: false
+  device_tracker.mikrotik_sfp_sfpplus1:
+    expose: false
+  sensor.mikrotik_sfp_sfpplus1_rx:
+    expose: false
+  sensor.mikrotik_sfp_sfpplus1_tx:
+    expose: false
+  sensor.mikrotik_ether1_rx:
+    expose: false
+  sensor.mikrotik_ether2_rx:
+    expose: false
+  sensor.mikrotik_ether3_rx:
+    expose: false
+  sensor.mikrotik_ether4_rx:
+    expose: false
+  sensor.mikrotik_ether5_rx:
+    expose: false
+  sensor.mikrotik_ether6_rx:
+    expose: false
+  sensor.mikrotik_ether7_rx:
+    expose: false
+  sensor.mikrotik_ether8_rx:
+    expose: false
+  sensor.mikrotik_ether9_rx:
+    expose: false
+  sensor.mikrotik_ether10_rx:
+    expose: false
+  sensor.mikrotik_ether1_tx:
+    expose: false
+  sensor.mikrotik_ether2_tx:
+    expose: false
+  sensor.mikrotik_ether3_tx:
+    expose: false
+  sensor.mikrotik_ether4_tx:
+    expose: false
+  sensor.mikrotik_ether5_tx:
+    expose: false
+  sensor.mikrotik_ether6_tx:
+    expose: false
+  sensor.mikrotik_ether7_tx:
+    expose: false
+  sensor.mikrotik_ether8_tx:
+    expose: false
+  sensor.mikrotik_ether9_tx:
+    expose: false
+  sensor.mikrotik_ether10_tx:
+    expose: false
+  switch.mikrotik_port_ether1:
+    expose: false
+  switch.mikrotik_port_ether2:
+    expose: false
+  switch.mikrotik_port_ether3:
+    expose: false
+  switch.mikrotik_port_ether4:
+    expose: false
+  switch.mikrotik_port_ether5:
+    expose: false
+  switch.mikrotik_port_ether6:
+    expose: false
+  switch.mikrotik_port_ether7:
+    expose: false
+  switch.mikrotik_port_ether8:
+    expose: false
+  switch.mikrotik_port_ether9:
+    expose: false
+  switch.mikrotik_port_ether10:
+    expose: false
+  switch.mikrotik_port_sfp_sfpplus1:
+    expose: false
+  switch.mikrotik_port_wlan2:
+    expose: false
+  switch.mikrotik_port_wlan1:
+    expose: false
+  sensor.speedtest_ping:
+    expose: false
+  sensor.speedtest_download:
+    expose: false
+  sensor.speedtest_upload:
+    expose: false
+  input_boolean.zigbee_permit_join:
+    expose: false
+  input_select.ledlamp_mode:
+    expose: false
+  light.kitchen_ceiling_lights:
+    expose: false
+  light.zona_rozvag_1:
+    expose: false
+  light.living_room:
+    expose: false
+  light.hallway:
+    expose: false
+  light.kids_room:
+    expose: false
+  sensor.openweathermap_forecast_temperature:
+    expose: false
+  sensor.openweathermap_temperature:
+    expose: false
+  sensor.openweathermap_forecast_temperature_low:
+    expose: false
+  sensor.openweathermap_humidity:
+    expose: false
+  light.entertainment_area_1:
+    expose: false
+  switch.wled_sync_send:
+    expose: false
+  switch.wled_nightlight:
+    expose: false
+  switch.wled_sync_receive:
+    expose: false
+  binary_sensor.0x00158d0002e9dd9b_contact:
+    expose: false
+  sensor.0x286d9700010450de_temperature:
+    expose: false
+  sensor.0x00158d00048370e9_temperature:
+    expose: false
+  sensor.0x00158d00048370e9_humidity:
+    expose: false
+  binary_sensor.0x00158d0003d0badf_contact:
+    expose: false
+  binary_sensor.0x00158d00044ce102_contact:
+    expose: false
+  binary_sensor.0x00158d0002e21a7b_contact:
+    expose: false
+  sensor.livingroom_humidity:
+    expose: false
+  sensor.livingroom_temperature:
+    expose: false
+  binary_sensor.0x00158d00045f73c9_contact:
+    expose: false
+  binary_sensor.0x00158d0005443c2e_contact:
+    expose: false
+  binary_sensor.frontdoor_sensor_contact:
+    expose: false
+  binary_sensor.kidsroom_window_sensor_contact:
+    expose: false
+  binary_sensor.livingroom_window_sensor_contact:
+    expose: false
+  binary_sensor.main_corridor_door_sensor_contact:
+    expose: false
+  binary_sensor.main_corridor_window_sensor_contact:
+    expose: false
+  fan.xiaomi_miio_device:
+    expose: false
+  media_player.spotify_alexander_shityi:
+    expose: false
+  light.kitchen_color_bulb:
+    expose: false
+  sensor.outdoor_motion_sensor_temperature:
+    expose: false
+  sensor.terrace_door_sensor_temperature:
+    expose: false
+  binary_sensor.terrace_door_sensor_contact:
+    expose: false
+  sensor.a50_maryna_battery_temperature:
+    expose: false
+  sensor.openweathermap_dew_point:
+    expose: false
+  sensor.openweathermap_feels_like_temperature:
+    expose: false
+  sensor.sm_a505fm_battery_temperature:
+    expose: false
+  sensor.sm_j730fm_battery_temperature:
+    expose: false
+  sensor.sm_m315f_battery_temperature:
+    expose: false
+  switch.circadian_lighting_circadian_lighting:
+    expose: false
+  sensor.guestroom_plug_temperature:
+    expose: false
+  switch.frontdoor:
+    expose: false
+  binary_sensor.toilet_window_sensor_contact:
+    expose: false
+  sensor.toilet_window_sensor_temperature:
+    expose: false
+#   api_key: AIzaSyAm5hd1zPbumOKAORS0VoesdhhnhmFa4Lo
+#   exposed_domains:

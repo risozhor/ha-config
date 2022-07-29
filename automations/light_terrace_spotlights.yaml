@@ -1,0 +1,39 @@
+- alias: diningroom_light_on_night_terracespot # V
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hallway_contact_sensor_ring
+        - binary_sensor.terrace_door_sensor_contact
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.terrace_spotlights
+      state: "off"
+    - condition: state
+      entity_id: binary_sensor.day_tod
+      state: "off"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.terrace_spotlights
+
+- alias: diningroom_light_off_night_terracespot # V
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.hallway_contact_sensor_ring
+        - binary_sensor.terrace_door_sensor_contact
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.terrace_spotlights
+      state: "on"
+    - condition: state
+      entity_id: binary_sensor.day_tod
+      state: "off"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.terrace_spotlights

@@ -1,0 +1,21 @@
+- alias: doorbell_ring
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.doorbell_button_action
+      to:
+        - "single"
+        - "double"
+        - "long"
+  action:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.kitchen_display
+        media_content_id: https://home.zsayti.com/local/doorbell.mp3
+        media_content_type: "audio/mp3"
+    - delay: "00:00:02"
+    - service: tts.google_say
+      data:
+        entity_id: media_player.kitchen_display
+        message: "Сова, відкриваай! Ведмідь прийшоов."
+        language: "uk"

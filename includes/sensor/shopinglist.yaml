@@ -1,0 +1,10 @@
+- platform: command_line
+  name: shopping_list
+  command: python3 /config/shopping_list.py
+
+- platform: template
+  sensors:
+    shopping_list_contain:
+      friendly_name: "shopping list contain"
+      value_template: '{% if (states("sensor.shopping_list") | list | length > 1) %}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}'
+      icon_template: mdi:shopping-outline

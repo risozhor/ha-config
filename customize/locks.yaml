@@ -1,0 +1,4 @@
+lock.frontdoor:
+    friendly_name: "Frontdoor Lock"
+    entity_id: "frontdoor lock"
+    unique_id: frontdoor_lock

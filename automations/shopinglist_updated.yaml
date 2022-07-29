@@ -1,0 +1,30 @@
+- alias: shopinglist_updated
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.shopping_list_contain
+      from: "Список порожній"
+  action:
+    - service: notify.telegram
+      data:
+        title: '{{"\U0001F4B5"}} *Створено список покупок*'
+        message: |
+          {% if (states("sensor.shopping_list") | list | length > 1) %}Актуальний список покупок:{{" \n"}}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: shopinglist_updated2
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.shopping_list_contain
+  action:
+    - service: notify.telegram
+      data:
+        title: '{{"\U0001F4B5"}} *Було додано/куплено товар*'
+        message: |
+          Актуальний список покупок{{" \n"}}{% if (states("sensor.shopping_list") | list | length > 1) %}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

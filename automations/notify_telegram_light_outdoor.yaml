@@ -1,0 +1,175 @@
+- alias: "IK - Telegram - Light outdoor"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/light_outdoor"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - Light outdoor fdl_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/fdl_off"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.outdoor_floodlight
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light outdoor fdl_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/fdl_on"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.outdoor_floodlight
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - Light outdoor ydl_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/ydl_off"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.yard_light
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light outdoor ydl_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/ydl_on"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.yard_light
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - Light outdoor bydl_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/bydl_off"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.0x00124b001b797251_switch
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - Light outdoor bydl_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/bydl_on"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.0x00124b001b797251_switch
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        message: >
+          {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}} Floodlight увімкнена{{'\n'}}{% else %}Floodlight вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light увімкнена{{'\n'}}{% else %}Yard light вимкнено{{'\n'}}{% endif -%}
+          {%- if is_state("switch.0x00124b001b797251_switch", "on") %}{{"\U0001F4A1"}} Backyard Light увімкнена{{'\n'}}{% else %}Backyard Light вимкнено{{'\n'}}{% endif -%}
+        inline_keyboard:
+          - '{% if is_state("switch.outdoor_floodlight", "on") %}Вимкнути Floodlight:/fdl_off{% else %}Увімкнути Floodlight:/fdl_on{% endif %}'
+          - '{% if is_state("switch.yard_light", "on") %}Вимкнути Yard light:/ydl_off{% else %}Увімкнути Yard light:/ydl_on{% endif %}'
+          - '{% if is_state("switch.0x00124b001b797251_switch", "on") %}Вимкнути Backyard Light:/bydl_off{% else %}Увімкнути Backyard Light:/bydl_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

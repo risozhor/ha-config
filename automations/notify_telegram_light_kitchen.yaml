@@ -1,0 +1,227 @@
+- id: telegram_light_kitchen
+  alias: "IK - Telegram - Light kitchen"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/light_kitchen"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
+- alias: "IK - Telegram - Light kitchen kitchen_table_lamp_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/ktl_off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_table_lamp
+        transition: 1
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen kitchen_table_lamp_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/ktl_on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_table_lamp
+        transition: 1
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen kitchen_ceiling_lamp_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kcl_off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_ceiling_lamp
+        transition: 1
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen kitchen_ceiling_lamp_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kcl_on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_ceiling_lamp
+        transition: 1
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen kitchen_stripe_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kitchen_stripe_off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_strip
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen kitchen_stripe_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kitchen_stripe_on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_strip
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen_color_lamp_off"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kcob_off"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_color_lamp
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+- alias: "IK - Telegram - Light kitchen_color_lamp_on"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/kcob_on"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_color_lamp
+    - delay: "00:00:02"
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "last"
+        chat_id: "{{ trigger.event.data.user_id }}"
+        title: '{{"\U0001F39B"}} *Кухня*'
+        message: >
+          {{"__________________________________ \n"}}
+          {% if is_state("light.kitchen_ceiling_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Сeiling lamp увімкнено{{'\n'}}{% else %}Kitchen Сeiling lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_color_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Color bulb увімкнено{{'\n'}}{% else %}Kitchen color bulb вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_table_lamp", "on") %}{{"\U0001F4A1"}} Kitchen Table lamp увімкнено{{'\n'}}{% else %}Kitchen Table lamp вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.kitchen_strip", "on") %}{{"\U0001F4A1"}} Stripe увімкнено{% else %}Kitchen Stripe вимкнено{% endif %}
+        inline_keyboard:
+          - '{% if is_state("light.kitchen_table_lamp", "on") %}KTL OFF:/ktl_off{% else %}{{"\U0001F4A1"}} KTL ON:/ktl_on{% endif %}, {% if is_state("light.kitchen_ceiling_lamp", "on") %}KCL OFF:/kcl_off{% else %}{{"\U0001F4A1"}} KCL ON:/kcl_on{% endif %}, {% if is_state("light.kitchen_color_lamp", "on") %}KCoB OFF:/kcob_off{% else %}{{"\U0001F4A1"}} KCoB ON:/kcob_on{% endif %}, {% if is_state("light.kitchen_strip", "on") %}Stripe OFF:/kitchen_stripe_off{% else %}{{"\U0001F4A1"}} Stripe ON:/kitchen_stripe_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

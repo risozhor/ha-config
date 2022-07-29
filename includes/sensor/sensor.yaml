@@ -1,0 +1,37 @@
+- platform: template
+  sensors:
+    home_mode:
+      friendly_name: "Housemode"
+      value_template: >-
+        {% if is_state("binary_sensor.day_tod", "on") %}daymode{% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}sleepingmode{% else %}nightmode{% endif %}
+      icon_template: >
+        {% if is_state("binary_sensor.day_tod", "on") %}mdi:white-balance-sunny{% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}mdi:sleep{% else %}mdi:power-sleep{% endif %}
+
+    count_update:
+      friendly_name: "Updates Count"
+      value_template: >-
+        Оновлень {{states.update | selectattr ('state', 'equalto', 'on') | list | length}} з {{''}}
+        {%- set domains = ['update'] -%}
+        {%- for domain in domains -%}
+          {%- for item in states[domain] -%}
+            {% if loop.first %}
+              {{-loop.length}}
+            {% endif %}
+          {%- endfor -%}
+        {%- endfor -%}
+      icon_template: >
+        mdi:update
+
+    livingroom_temperature:
+      friendly_name: "Livingroom temperature"
+      unit_of_measurement: "°C"
+      value_template: "{{ states.sensor.xiaomi_miio_device_temperature.state }}"
+      device_class: temperature
+    livingroom_humidity:
+      friendly_name: "Livingroom humidity"
+      unit_of_measurement: "%"
+      value_template: "{{  states.sensor.xiaomi_miio_device_humidity.state }}"
+      device_class: humidity
+    livingroom_aqi:
+      friendly_name: "Livingroom aqi"
+      value_template: "{{ states.sensor.xiaomi_miio_device_pm2_5.state }}"

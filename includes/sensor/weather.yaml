@@ -1,0 +1,38 @@
+# - platform: pirateweather
+#   api_key: !secret pirateweather_api_key
+#   scan_interval: 00:30:00
+#   # mode: daily
+#   monitored_conditions:
+#     - temperature
+#     - precip_probability
+#     - humidity
+#     - pressure
+
+- platform: template
+  sensors:
+    weather_temperature:
+      friendly_name: "Weather Temperature"
+      unit_of_measurement: "degrees"
+      value_template: "{{ state_attr('weather.openweathermap', 'temperature') }}"
+    weather_precipitation_probability:
+      friendly_name: "Precipitation probability"
+      unit_of_measurement: "%"
+      value_template: "{{ state_attr('weather.openweathermap', 'forecast')[0].precipitation_probability }}"
+      icon_template: >
+        mdi:water-percent-alert
+      unique_id: precipitation_probability
+    pressure:
+      friendly_name: "Air Pressure hPa openweather"
+      unit_of_measurement: "hPa"
+      value_template: "{{ state_attr('weather.openweathermap', 'pressure') }}"
+      icon_template: >
+        mdi:gauge-full
+      unique_id: pressureopenweather
+    wind_speed:
+      friendly_name: "wind speed"
+      unit_of_measurement: "m/s"
+      value_template: "{{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6) | round(2) }}"
+    wind_bearing:
+      friendly_name: "wind bearing"
+      unit_of_measurement: "degrees"
+      value_template: "{{ state_attr('weather.openweathermap', 'wind_bearing') }}"

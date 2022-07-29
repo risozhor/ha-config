@@ -1,0 +1,20 @@
+- id: telegram_light_dining_room
+  alias: "IK - Telegram - Light Dining Room"
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: "/light_dining_room"
+  action:
+    - service: telegram_bot.edit_message
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
+        title: '{{"\U0001F6AA"}} *Dining Room*'
+        message: >
+          {{"__________________________________ \n"}}
+          {{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{"\u2757"}}{{" \n"}}
+          {{" \n"-}}Ця кімната ще в процесі створення автоматизацій{{" \n"-}}
+          {{"\u2B50"}} Посля додавання пристроїв, вони з'являться тут{{" \n"}}
+        inline_keyboard:
+          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

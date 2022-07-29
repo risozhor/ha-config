@@ -1,0 +1,11 @@
+- id: Выключить sleepingmode
+  alias: disable_sleepingmode
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.day_tod
+    to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.virt_sleepingmode

@@ -1,0 +1,48 @@
+gyverlamp_1h_off:
+  duration: "01:00:00"
+gyverlamp_30m_off:
+  duration: "00:30:00"
+
+timer_2m:
+  duration: "00:02:00"
+timer_3m:
+  duration: "00:03:00"
+timer_10m:
+  duration: "00:10:00"
+timer_30m:
+  duration: "00:30:00"
+timer_1h:
+  duration: "01:00:00"
+timer_2h:
+  duration: "02:00:00"
+zigbee_permit_join:
+  name: Time remaining
+  duration: 600
+hallwaylamps_2m:
+  duration: "00:02:00"
+hallwaylamps_5m:
+  duration: "00:05:00"
+hallwaylamps_off:
+  duration: "00:30:00"
+floodlight_off_timer_2m:
+  duration: "00:02:00"
+yardlightswitch_2m:
+  duration: "00:02:00"
+yardlightswitch_30off:
+  duration: "00:30:00"
+backyardlightswitch_45s:
+  duration: "00:00:45"
+backyardlightswitch_5m:
+  duration: "00:05:00"
+backyardlightswitch_30off:
+  duration: "00:30:00"
+
+diningroom_wled:
+  duration: "00:00:30"
+diningroom_wled_from_guestroom:
+  duration: "00:00:30"
+diningroom_wled_from_diningroom:
+  duration: "00:00:30"
+
+bathroom_bulb:
+  duration: "00:00:30"

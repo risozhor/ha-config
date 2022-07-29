@@ -1,0 +1,3 @@
+fan.xiaomi_miio_device:
+  friendly_name: Livingroom purifier
+  icon: mdi:air-purifier
