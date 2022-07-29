@@ -11,7 +11,7 @@
     - service: media_player.play_media
       data:
         entity_id: media_player.kitchen_display
-        media_content_id: https://home.zsayti.com/local/doorbell.mp3
+        media_content_id: !secret siteaddres # https://yourhome.com/local/doorbell.mp3
         media_content_type: "audio/mp3"
     - delay: "00:00:02"
     - service: tts.google_say
