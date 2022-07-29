@@ -42,7 +42,6 @@
       payload_template: "{{ states('input_select.ledlamp_mode')}}"
       #payload_template: EFF{{ states.input_select.ledlamp_mode.state }}
   id: Set_Gyver_Mode
-
 #   Вимикаємо gyverlamp після спрацювання таймера на годину
 - alias: Gyverlamp_off_1h_timer
   initial_state: true

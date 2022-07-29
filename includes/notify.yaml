@@ -1,12 +1,12 @@
 - name: telegram
   platform: telegram
-  chat_id: 66507631
+  chat_id: !secret allowed_chat_id1
 - name: telegram_v
   platform: telegram
-  chat_id: 1065413821
+  chat_id: !secret allowed_chat_id2
 - name: telegram_yaroslava
   platform: telegram
-  chat_id: 92494773
+  chat_id: !secret allowed_chat_id3
 - platform: html5
   vapid_pub_key: !secret vapid_pub_key
   vapid_prv_key: !secret vapid_prv_key
