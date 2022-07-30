@@ -1,0 +1,33 @@
+title: doors
+path: doors
+icon: mdi:door-open
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-lock-card
+        entity: lock.frontdoor
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.main_corridor_door_sensor_contact
+        name: Frontdoor
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.terrace_door_sensor_contact
+        name: Terrace Entrance
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.hallway_contact_sensor_ring
+        name: Hallway Door
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.kitchen_window_sensor_contact
+        name: Kitchen Window
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.livingroom_window_sensor_contact
+        name: Livingroom Window
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.kidsroom_window_sensor_contact
+        name: Kidsroom Window
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.main_corridor_window_sensor_contact
+        name: Main Corridor Window
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.toilet_window_sensor_contact
+        name: Toilet Window

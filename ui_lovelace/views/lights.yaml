@@ -1,0 +1,79 @@
+title: lights
+path: lights
+icon: mdi:lightbulb-multiple-outline
+badges: []
+cards:
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: light.gyver_lamp_esp_74e9c8
+      - entity: input_number.brightness
+      - entity: input_number.speed
+      - entity: input_number.scale
+      - entity: input_select.ledlamp_mode
+  - type: custom:mushroom-light-card
+    entity: light.livingroom_lights
+    use_light_color: true
+    show_brightness_control: true
+    show_color_temp_control: true
+    show_color_control: true
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.kitchen_ceiling_lights
+    show_brightness_control: true
+    show_color_temp_control: true
+    show_color_control: true
+    collapsible_controls: true
+    use_light_color: true
+  - type: custom:mushroom-light-card
+    entity: light.0x00178801030318a1
+    show_brightness_control: true
+    show_color_temp_control: true
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.wled
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: true
+    show_color_temp_control: false
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.0x0017880103aa4b71
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: true
+    show_color_temp_control: false
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.guestroom_color_bulb
+    show_brightness_control: true
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.main_corridor_light
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: false
+    show_color_temp_control: false
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.livingroom_table_background
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: true
+    show_color_temp_control: true
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.kitchen_strip
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: true
+    show_color_temp_control: true
+    collapsible_controls: true
+  - type: custom:mushroom-light-card
+    entity: light.shelly1
+    use_light_color: false
+    show_brightness_control: true
+    show_color_control: false
+    show_color_temp_control: false
+    collapsible_controls: false
+    fill_container: false

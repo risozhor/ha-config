@@ -1,0 +1,40 @@
+title: security
+path: security
+panel: false
+visible:
+  - user: ca6b753fa3864510837d851649a752d3
+icon: mdi:shield-check
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.ring_alarm
+        states:
+          - armed_home
+          - armed_away
+        layout: horizontal
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.kitchen_smoke_detector_smoke
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.teritorialna_gromada_air
+        fill_container: false
+        use_entity_picture: false
+        hide_icon: false
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.teritorialna_gromada_artillery
+        fill_container: false
+        use_entity_picture: false
+        hide_icon: false
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.teritorialna_gromada_urban_fights
+        fill_container: false
+        use_entity_picture: false
+        hide_icon: false
+      - type: custom:mushroom-entity-card
+        entity: binary_sensor.teritorialna_gromada_unknown
+        fill_container: false
+        use_entity_picture: false
+        hide_icon: false

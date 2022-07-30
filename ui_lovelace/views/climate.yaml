@@ -1,0 +1,102 @@
+title: climate
+path: climate
+icon: mdi:cloud-outline
+visible:
+  - user: 7566199fd6d149c3b5c24289e0648010
+  - user: 15ccfedd899848cc96c6b54e001d58a7
+  - user: 56f783f152d34acea9df8664a49e58c9
+  - user: c552615abbe24d96a3594cd254d5d37e
+  - user: ca6b753fa3864510837d851649a752d3
+badges: []
+cards:
+  - type: entities
+    entities:
+      - entity: sensor.weather_precipitation_probability
+      - entity: sensor.absolute_humidity
+      - entity: sensor.dew_point
+      - entity: sensor.weather_station_gas_resistance
+      - entity: sensor.weather_station_iaq
+      - entity: sensor.weather_station_co2_equivalent
+      - entity: sensor.weather_station_breath_voc_equivalent
+      - entity: sensor.weather_station_wind_direction
+      - entity: sensor.wind_sensor
+    state_color: true
+    show_header_toggle: false
+  - type: custom:mini-graph-card
+    color_thresholds:
+      - value: 0
+        color: "#001eff"
+      - value: 20
+        color: "#00b50f"
+      - value: 25
+        color: "#ddff00"
+      - value: 30
+        color: "#ff0000"
+    entities:
+      - entity: sensor.weather_station_temperature
+        name: Weather-Station Temperature
+    font_size": 70
+    height: 50
+    hours_to_show: 48
+    line_width: 2
+    points_per_hour: 48
+    show:
+      fill: false
+      icon: false
+  - type: custom:mini-graph-card
+    color_thresholds:
+      - value: 720
+        color: "#3498db"
+      - value: 750
+        color: "#f39c12"
+      - value: 760
+        color: "#E45E65"
+    entities:
+      - entity: sensor.pressure_mmhg
+        name: Weather-Station Pressure
+    font_size": 70
+    height: 50
+    hours_to_show: 48
+    line_width: 2
+    points_per_hour: 48
+    show:
+      fill: false
+      icon: false
+  - type: custom:mini-graph-card
+    color_thresholds:
+      - value: 0
+        color: "#3498db"
+      - value: 50
+        color: "#f39c12"
+      - value: 100
+        color: "#E45E65"
+    entities:
+      - entity: sensor.weather_station_humidity
+        name: Weather-Station Humidity
+    font_size": 70
+    height: 50
+    hours_to_show: 48
+    line_width: 2
+    points_per_hour: 48
+    show:
+      fill: false
+      icon: false
+  - type: custom:mini-graph-card
+    color_thresholds:
+      - value: 0
+        color: "#00ba1c"
+      - value: 10
+        color: "#f39c12"
+      - value: 20
+        color: "#E45E65"
+    entities:
+      - entity: sensor.wind_sensor
+        name: Weather-Station Wind Speed
+    font_size": 70
+    height: 50
+    hours_to_show: 48
+    line_width: 2
+    points_per_hour: 48
+    show:
+      fill: false
+      icon: false

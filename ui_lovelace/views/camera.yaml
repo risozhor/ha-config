@@ -1,0 +1,61 @@
+title: Camera
+theme: Backend-selected
+path: camera
+icon: mdi:camera-outline
+type: panel
+badges: []
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: col
+            class: col-xs-12 col-md-2
+            cards:
+              - type: markdown
+                content: " "
+                style: |
+                  ha-markdown {
+                    padding: 0!important;
+                    padding-top: 0!important;
+                  }
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.wyze
+            class: col-xs-12 col-md-4
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.front_door
+            class: col-xs-12 col-md-4
+          - type: col
+            class: col-xs-12 col-md-2
+            cards:
+              - type: markdown
+                content: " "
+                style: |
+                  ha-markdown {
+                    padding: 0!important;
+                    padding-top: 0!important;
+                  }
+      - type: row
+        cards:
+          - type: col
+            class: col-xs-12 col-md-2
+            cards:
+              - type: markdown
+                content: " "
+                style: |
+                  ha-markdown {
+                    padding: 0!important;
+                    padding-top: 0!important;
+                  }
+          - type: picture-entity
+            show_state: true
+            show_name: true
+            camera_view: auto
+            entity: camera.livingroom_prof0_name
+            class: col-xs-12 col-md-4

@@ -1,0 +1,384 @@
+title: floorplan
+path: floorplan
+icon: mdi:floor-plan
+panel: true
+badges: []
+cards:
+  - type: picture-elements
+    image: /local/images/plan/plan.jpg
+    elements:
+      - entity: alarm_control_panel.ring_alarm
+        style:
+          left: 95%
+          top: 8%
+        type: state-icon
+      - entity: camera.front_door
+        style:
+          left: 80%
+          top: 28%
+          color: "#777"
+        type: icon
+        icon: mdi:doorbell-video
+      - entity: camera.wyze
+        style:
+          left: 90%
+          top: 88%
+          rotate: 90degree
+          color: "#777"
+          transform: rotate(45deg)
+        type: icon
+        icon: mdi:video
+      - entity: sensor.home_mode
+        style:
+          left: 6%
+          top: 94%
+        type: state-icon
+      - entity: binary_sensor.hallway_contact_sensor_ring
+        style:
+          left: 38%
+          margin: 0px
+          padding: 0px
+          top: 32%
+        type: state-icon
+      - entity: binary_sensor.guestroom_motion_sensor_occupancy
+        style:
+          left: 61%
+          margin: 0px
+          padding: 0px
+          top: 40%
+        type: state-icon
+      - entity: binary_sensor.dining_room_motion_sensor_occupancy
+        style:
+          left: 77%
+          margin: 0px
+          padding: 0px
+          top: 61%
+        type: state-icon
+      - entity: binary_sensor.terrace_door_sensor_contact
+        style:
+          left: 38%
+          margin: 0px
+          padding: 0px
+          top: 14%
+        type: state-icon
+      - entity: binary_sensor.main_corridor_window_sensor_contact
+        style:
+          left: 85%
+          margin: 0px
+          padding: 0px
+          top: 41%
+        type: state-icon
+      - entity: binary_sensor.dining_room_window_sensor_contact
+        style:
+          left: 85%
+          margin: 0px
+          padding: 0px
+          top: 64%
+        type: state-icon
+      - entity: binary_sensor.main_corridor_door_sensor_contact
+        style:
+          left: 78%
+          margin: 0px
+          padding: 0px
+          top: 33%
+        type: state-icon
+      - entity: binary_sensor.toilet_window_sensor_contact
+        style:
+          left: 64%
+          margin: 0px
+          padding: 0px
+          top: 92%
+        type: state-icon
+      - entity: fan.xiaomi_miio_device
+        style:
+          left: 15%
+          margin: 0px
+          padding: 0px
+          top: 38%
+        type: state-icon
+      - entity: binary_sensor.kitchen_smoke_detector_smoke
+        style:
+          left: 46%
+          margin: 0px
+          padding: 0px
+          top: 66%
+        type: state-icon
+      - entity: switch.outlet
+        style:
+          left: 33%
+          margin: 0px
+          padding: 0px
+          top: 74%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: switch.guestroom_plug_2
+        style:
+          left: 67%
+          margin: 0px
+          padding: 0px
+          top: 32%
+        tap_action:
+          action: toggle
+        type: state-icon
+        icon: hue:socket-eu
+      - entity: binary_sensor.kidsroom_window_sensor_contact
+        style:
+          left: 7%
+          margin: 0px
+          padding: 0px
+          top: 64%
+          width: 3.2%
+        type: state-icon
+      - entity: binary_sensor.kitchen_window_sensor_contact
+        style:
+          left: 40%
+          margin: 0px
+          padding: 0px
+          top: 73%
+          width: 8.2%
+        type: state-icon
+      - entity: binary_sensor.livingroom_window_sensor_contact
+        style:
+          left: 25%
+          margin: 0px
+          padding: 0px
+          top: 29%
+          width: 8.2%
+        type: state-icon
+      - entity: binary_sensor.outdoor_motion_sensor_occupancy
+        style:
+          left: 50%
+          margin: 0px
+          padding: 0px
+          top: 13%
+        type: state-icon
+      - entity: binary_sensor.hallway_motion_detector_ring
+        style:
+          left: 42%
+          margin: 0px
+          padding: 0px
+          top: 45%
+        type: state-icon
+      - entity: sensor.hallway_temperature_humidity_sensor_temperature
+        style:
+          align-items: center
+          background: center / contain no-repeat url("/local/nest_thermostat1.png")
+          color: white
+          display: flex
+          font-size: 12px
+          height: 13%
+          justify-content: center
+          left: 9%
+          top: 9%
+          width: 14%
+        type: state-label
+      - entity: light.kitchen_strip
+        icon: hue:lightstrip
+        style:
+          left: 32%
+          margin: 0px
+          padding: 0px
+          top: 57%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.kitchen_table_lamp
+        style:
+          left: 40%
+          margin: 0px
+          padding: 10px
+          top: 56%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: light.shelly1
+        style:
+          left: 77%
+          margin: 0px
+          padding: 10px
+          top: 80%
+          width: 7%
+        tap_action:
+          action: toggle
+        image: /local/images/light_bulb_off.png
+        state_image:
+          "on": /local/images/light_bulb_on.png
+        type: image
+      - entity: light.kitchen_color_lamp
+        style:
+          left: 40%
+          margin: 0px
+          padding: 0px
+          top: 62%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: light.kitchen_ceiling_lamp
+        style:
+          left: 40%
+          margin: 0px
+          padding: 0px
+          top: 68%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: light.kitchen_ceiling_lights
+        style:
+          left: 40%
+          margin: 0px
+          padding: 0px
+          top: 80%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:pendant-devote-three-solid
+        type: state-icon
+      - entity: light.wled
+        style:
+          left: 32%
+          margin: 0px
+          padding: 0px
+          top: 39%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:gradient-lightstrip
+        type: state-icon
+      - entity: light.livingroom_lights
+        icon: hue:pendant-round
+        style:
+          left: 20%
+          margin: 0px
+          padding: 0px
+          top: 42%
+          background: none;
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.0x00178801030318a1
+        style:
+          left: 39%
+          margin: 0px
+          padding: 0px
+          top: 42%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: light.guestroom_color_bulb
+        style:
+          left: 55%
+          margin: 0px
+          padding: 0px
+          top: 42%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: light.main_corridor_light
+        style:
+          left: 77%
+          margin: 0px
+          padding: 0px
+          top: 42%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        image: /local/images/light_bulb_off.png
+        state_image:
+          "on": /local/images/light_bulb_on.png
+        type: image
+      - entity: light.0x0017880103aa4b71
+        style:
+          left: 19%
+          margin: 0px
+          padding: 0px
+          top: 61%
+          width: 7%
+        tap_action:
+          action: toggle
+        icon: hue:bulb-sultan
+        type: state-icon
+      - entity: switch.outdoor_floodlight
+        icon: hue:lightstrip
+        style:
+          left: 40%
+          top: 7%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: switch.terrace_spotlights
+        name: terrace spotlights1
+        icon: hue:centura-round
+        style:
+          left: 40%
+          top: 20%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: switch.terrace_spotlights
+        icon: hue:centura-round
+        style:
+          left: 40%
+          top: 25%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: switch.backyard_light
+        style:
+          left: 53%
+          top: 90%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: switch.yard_light
+        icon: hue:wall-spot
+        style:
+          left: 75%
+          top: 20%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.livingroom_table_background
+        style:
+          left: 27%
+          margin: 0px
+          padding: 0px
+          top: 36%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.dining_room_stripe_3
+        icon: hue:lightstrip-wrap
+        style:
+          left: 78%
+          margin: 0px
+          padding: 0px
+          top: 52%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: binary_sensor.0x00158d000457e83c_occupancy
+        style:
+          left: 72%
+          margin: 0px
+          padding: 0px
+          top: 13%
+        type: state-icon
+      - entity: binary_sensor.backyard_motion_sensor_occupancy
+        style:
+          left: 44%
+          margin: 0px
+          padding: 0px
+          top: 93%
+        type: state-icon

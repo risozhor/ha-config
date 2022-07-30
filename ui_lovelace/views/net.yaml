@@ -1,0 +1,166 @@
+title: Net
+path: net
+type: panel
+icon: mdi:server-network
+theme: Backend-selected
+badges: []
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    color_thresholds:
+                      - value: 4
+                        color: "#3498db"
+                      - value: 4.5
+                        color: "#f39c12"
+                      - value: 5
+                        color: "#E45E65"
+                    entities:
+                      - entity: sensor.speedtest_ping
+                        name: SPEEDTEST
+                    font_size": 70
+                    height: 50
+                    hours_to_show: 3
+                    line_width: 2
+                    points_per_hour: 12
+                    show:
+                      fill: false
+                      icon: false
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        color_thresholds:
+                          - value: 50
+                            color: "#E45E65"
+                          - value: 90
+                            color: "#f39c12"
+                          - value: 100
+                            color: "#3498db"
+                        entities:
+                          - entity: sensor.speedtest_download
+                            name: Download
+                        font_size: 70
+                        height: 50
+                        hours_to_show: 24
+                        points_per_hour: 4
+                        show:
+                          fill: false
+                          icon: false
+                      - type: custom:mini-graph-card
+                        color_thresholds:
+                          - value: 50
+                            color: "#E45E65"
+                          - value: 90
+                            color: "#f39c12"
+                          - value: 100
+                            color: "#3498db"
+                        entities:
+                          - entity: sensor.speedtest_upload
+                            name: Upload
+                        font_size: 70
+                        height: 50
+                        hours_to_show: 24
+                        points_per_hour: 4
+                        show:
+                          fill: false
+                          icon: false
+            class: col-xs-12 col-md-6 col-lg-4
+          - type: vertical-stack
+            cards:
+              - type: custom:hui-entities-card
+                entities:
+                  - type: custom:hui-vertical-stack-card
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: picture
+                            style: |
+                              ha-card { 
+                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                                --ha-card-box-shadow: 'none';
+                              }
+                            image: /local/images/devices/rpi4.png
+                          - type: custom:button-card
+                            layout: icon_name_state2nd
+                            show_icon: true
+                            show_state: true
+                            show_name: false
+                            styles:
+                              grid:
+                                - grid-template-columns: 1fr 5fr
+                              icon:
+                                - top: 10px
+                                - height: 25px
+                                - width: 25px
+                              card:
+                                - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                - "--ha-card-box-shadow": none
+                              state:
+                                - justify-self: start
+                              name:
+                                - justify-self: start
+                            entity: sensor.raspberry_c_temp
+                            icon: mdi:thermometer
+                          - type: custom:button-card
+                            layout: icon_name_state2nd
+                            name: PW
+                            show_icon: true
+                            show_state: true
+                            show_name: true
+                            styles:
+                              grid:
+                                - grid-template-columns: 1fr 5fr
+                              icon:
+                                - top: 10px
+                                - height: 25px
+                                - width: 25px
+                              card:
+                                - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                - "--ha-card-box-shadow": none
+                              state:
+                                - left: 15px
+                                - position: relative
+                              name:
+                                - justify-self: start
+                                - top: 20px
+                                - left: 5px
+                                - position: relative
+                            entity: binary_sensor.rpi_power_status
+              - type: entities
+                entities:
+                  - entity: sensor.maria_db_size
+                    name: DB
+              - entities:
+                  - entity: sensor.disk_use_percent
+                  - entity: sensor.memory_use_percent
+                  - entity: sensor.processor_use_percent
+                    name: Processor
+                max: 100
+                positions:
+                  icon: "off"
+                  indicator: inside
+                style: |-
+                  bar-card-currentbar, bar-card-backgroundbar  {
+                      border-radius: 0!important;
+                  }
+                type: custom:bar-card
+                unit_of_measurement: "%"
+            class: col-xs-12 col-md-6 col-lg-4
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.cpu_temperature
+              - type: custom:mushroom-entity-card
+                entity: sensor.ip
+              - type: custom:mushroom-entity-card
+                entity: sensor.socket_connections
+              - type: custom:mushroom-entity-card
+                entity: sensor.uptime
+            class: col-xs-12 col-md-6 col-lg-4

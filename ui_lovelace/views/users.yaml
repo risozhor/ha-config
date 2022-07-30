@@ -1,0 +1,43 @@
+title: users
+path: users
+icon: mdi:account
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-person-card
+            entity: person.risozhor
+            use_entity_picture: true
+          - type: custom:mushroom-person-card
+            entity: person.yaroslava
+            use_entity_picture: true
+          - type: custom:mushroom-person-card
+            entity: person.vitaliy
+            use_entity_picture: true
+          - type: custom:mushroom-person-card
+            entity: person.maryna
+            use_entity_picture: true
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            graph: line
+            entity: sensor.note20_battery_level
+            name: Батарея (Aleksandr)
+          - hours_to_show: 24
+            graph: line
+            type: sensor
+            entity: sensor.sm_m315f_battery_level
+            name: Батарея (Vitaliy)
+            detail: 1
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            graph: line
+            entity: sensor.yaroslava_battery_level
+            name: Батарея (Yaroslava)
+          - type: sensor
+            graph: line
+            entity: sensor.a50_maryna_battery_level
+            name: Батарея (Marina)

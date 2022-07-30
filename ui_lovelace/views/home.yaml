@@ -1,0 +1,83 @@
+title: home
+path: home
+icon: mdi:home
+visible:
+  - user: 7566199fd6d149c3b5c24289e0648010
+  - user: 15ccfedd899848cc96c6b54e001d58a7
+  - user: 56f783f152d34acea9df8664a49e58c9
+  - user: c552615abbe24d96a3594cd254d5d37e
+  - user: cc02bdd155af4d6ca21f2f96d8aadbac
+  - user: ca6b753fa3864510837d851649a752d3
+badges: []
+cards:
+  - type: markdown
+    content: >-
+      {% set hour_num = now().hour | int %} {% if hour_num >=6 and hour_num
+      <12 %}{{"\U00002600"}} **Доброго ранку!** {% elif hour_num>=12 and
+      hour_num<17 %}{{"\U0001f31e"}} **Добрий день!** {% elif hour_num>=17
+      and hour_num<22 %} {{"\U0001f31d"}} **Добрий вечір!** {% else
+      %}{{"\U0001f31a"}} Добрї ночі! {% endif %} {%- set weekday_list =
+      ["Понеділок","Вівторок","Середа","Четвер","П'ятниця","Субота","Неділя"]
+      %} {%- set month_list =
+      ['Січня','Лютого','Березня','Квітня','Травня','Червня','Липня','Серпня','Вересня','Жовтня','Листопада','Грудня']
+      %} {%- set date = as_timestamp(now()) -%} {%- set wd_ok = date |
+      timestamp_custom("%w") | int %} {%- set weekday =
+      weekday_list[wd_ok-1] %}
+
+      # Сьогодні `{{ weekday }}`, {{ now().day|int }} {{
+      month_list[now().month-1] }}.
+
+      ## Зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if
+      now().minute <10 %}0{% endif -%}{{now().minute}}
+  - type: custom:weather-card
+    entity: weather.openweathermap
+    number_of_forecasts: "5"
+    hourly_forecast: false
+    forecast: true
+    details: true
+    current: true
+  - type: custom:sun-card
+    darkMode: true
+    timeFormat: 24h
+    //showElevation: true
+    //showAzimuth: true
+    //language: ru
+  - type: shopping-list
+    title: Список покупок
+    style: |
+      ha-card { 
+        --ha-card-box-shadow: 'none';
+      }
+      .item {height: 30px;}
+      .mdc-checkbox {height: 8px!important;}
+      ha-checkbox {height: 21px; margin-top: -14px;}
+  - type: custom:mini-graph-card
+    color_thresholds:
+      - color: "#FF0000"
+        value: 300
+      - color: "#FF9B00"
+        value: 200
+      - color: "#FFC900"
+        value: 150
+      - color: "#E8FF00"
+        value: 100
+      - color: "#08FF00"
+        value: 50
+    entities:
+      - sensor.u_s_air_quality_index
+    hours_to_show: 168
+    line_width: 2
+    name: Air Quality Index
+    points_per_hour: 1
+    show:
+      icon: false
+  - type: custom:compass-card
+    indicator_sensors:
+      - sensor: sensor.wind_bearing
+        indicator:
+          type: arrow_inward
+    value_sensors:
+      - sensor: sensor.wind_speed
+    compass:
+      north:
+        show: true

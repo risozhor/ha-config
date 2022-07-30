@@ -1,0 +1,99 @@
+switch:
+  aspect_ratio: 1/1
+  show_state: true
+  show_icon: false
+  styles:
+    custom_fields:
+      loading:
+        - filter: "[[[ return entity.state === 'off' ? 'invert(1)' : 'none'; ]]]"
+        - top: 3%
+        - left: 60%
+        - width: 3.7vw
+        - position: absolute
+        - opacity: 0.6
+  tap_action:
+    haptic: light
+  icon_action:
+    color: "#9da0a2"
+    styles:
+      card:
+        - background: "#FFFFFF10"
+        - border-radius: 0.6em
+        - box-shadow: none
+        - transition: none
+        - width: 4em
+        - height: 3.7em
+  name_action:
+    styles:
+      name:
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - margin-top: 0.5px
+      card:
+        - background: "#FFFFFF10"
+        - color: "#9da0a2"
+        - border-radius: 0.6em
+        - box-shadow: none
+        - transition: none
+        - width: 100%
+        - padding: 1em 1.4em 1em 1.2em
+        - font-size: 1.06em
+        - font-weight: 500
+        - letter-spacing: 0.015em
+    style: "#name > ha-icon {width: 1.4em; margin-right: 0.3em; }"
+windowicon:
+  name: false
+  show_icon: false
+  show_state: false
+  styles:
+    custom_fields:
+      icon_window:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      name:
+        - place-self: end
+        - margin: 10px
+light:
+  name: false
+  show_icon: false
+  show_state: false
+  styles:
+    custom_fields:
+      icon_closet:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_kitchen:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_bathroom:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_fan:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_hue:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_lamp:
+        - top: 11%
+        - left: 6.5%
+        - width: 10%
+        - position: absolute
+      icon_spot:
+        display: contents
+      name:
+        - place-self: end
+        - margin: 10px

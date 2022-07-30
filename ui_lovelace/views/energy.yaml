@@ -1,0 +1,11 @@
+title: energy
+path: energy
+icon: mdi:lightning-bolt
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: energy-distribution
+      - type: energy-date-selection
+      - type: energy-usage-graph
+      - type: energy-devices-graph

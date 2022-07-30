@@ -1,0 +1,82 @@
+title: Batteries
+path: batteries
+icon: mdi:battery-charging
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:battery-state-card
+        color_gradient:
+          - "#ff0000"
+          - "#ffff00"
+          - "#00ff00"
+        sort_by_level: asc
+        tap_action: more-info
+        collapse:
+          - name: "Door sensors (min: {min}%, count: {count})"
+            secondary_info: Battery levels {range}%
+            icon: mdi:door
+            entities:
+              - sensor.main_corridor_door_sensor_battery
+              - sensor.terrace_door_sensor_battery
+      - type: custom:battery-state-card
+        color_gradient:
+          - "#ff0000"
+          - "#ffff00"
+          - "#00ff00"
+        sort_by_level: asc
+        tap_action: more-info
+        collapse:
+          - name: "Window sensors (min: {min}%, count: {count})"
+            secondary_info: Battery levels {range}%
+            icon: mdi:window-closed-variant
+            entities:
+              - sensor.kidsroom_window_sensor_battery
+              - sensor.kitchen_window_sensor_battery
+              - sensor.dining_room_window_sensor_battery
+              - sensor.livingroom_window_sensor_battery
+              - sensor.main_corridor_window_sensor_battery
+              - sensor.toilet_window_sensor_battery
+      - type: custom:battery-state-card
+        color_gradient:
+          - "#ff0000"
+          - "#ffff00"
+          - "#00ff00"
+        sort_by_level: asc
+        tap_action: more-info
+        collapse:
+          - name: "Switches sensors (min: {min}%, count: {count})"
+            secondary_info: Battery levels {range}%
+            icon: mdi:electric-switch
+            entities:
+              - sensor.guestroom_switch_battery
+              - sensor.hallway_switch_battery
+              - sensor.kids_room_switch_battery
+              - sensor.hallway_btn_battery
+              - sensor.doorbell_button_battery
+              - sensor.kitchen_opple_battery
+              - sensor.livingroom_switch_battery
+              - sensor.main_corridor_switch_battery
+              - sensor.livingroom_switch_battery
+              - sensor.livingroom_switch_battery
+      - type: custom:battery-state-card
+        color_gradient:
+          - "#ff0000"
+          - "#ffff00"
+          - "#00ff00"
+        sort_by_level: asc
+        tap_action: more-info
+        collapse:
+          - name: "Other sensors (min: {min}%, count: {count})"
+            secondary_info: Battery levels {range}%
+            icon: mdi:card-search
+            entities:
+              - sensor.hallway_temperature_humidity_sensor_battery
+              - sensor.keypad_battery
+              - sensor.hallway_motion_detector_battery
+              - sensor.0x00158d000457e83c_battery
+              - sensor.outdoor_motion_sensor_battery_2
+              - sensor.kitchen_smoke_detector_battery
+              - sensor.dining_room_motion_sensor_battery
+              - sensor.backyard_motion_sensor_battery
+              - sensor.sweet_home_range_extender_battery
