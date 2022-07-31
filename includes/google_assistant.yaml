@@ -276,5 +276,3 @@ entity_config:
     expose: false
   sensor.toilet_window_sensor_temperature:
     expose: false
-#   api_key: AIzaSyAm5hd1zPbumOKAORS0VoesdhhnhmFa4Lo
-#   exposed_domains:

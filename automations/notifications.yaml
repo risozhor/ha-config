@@ -77,7 +77,7 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
-    - service: notify.mobile_app_sm_a505fm
+    - service: notify.mobile_app_note20
       data:
         title: "The house is on fire! Smoke detected"
         message: TTS
@@ -86,7 +86,7 @@
           color: red
           priority: high
           channel: alarm_stream_max
-    - service: notify.mobile_app_sm_a505fm
+    - service: notify.mobile_app_note20
       data:
         title: "Smoke detected"
         message: The house is on fire! Smoke detected
