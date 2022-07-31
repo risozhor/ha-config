@@ -1,6 +1,11 @@
 # ha-config
 Welcome to my Home Assistant configuration
 
+[![bage][last-commit]][goto]
+
+[last-commit]: https://img.shields.io/github/last-commit/risozhor/ha-config?style=for-the-badge
+[goto]: https://www.smarty.ninja/
+
 main screen
 <img src="git/screen 1.png"  />
 
