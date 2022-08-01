@@ -46,6 +46,29 @@ You can support me:
 | - | - |
 
 ---
+## Devices I use (table is not yet complete)
+| Description | Picture |
+|:---|---:|
+| **Zigbee devices** |
+| Hue white and color ambiance E26/E27/E14 | <img src="git/devices/9290012573A.jpg"/> |
+| Hue white ambiance E26/E27 | <img src="git/devices/9290022169.jpg"/> |
+| - | <img src="git/devices/9290022169.jpg"/> |
+| - | <img src="git/devices/Aqara door & window contact sensor.jpg"/> |
+| - | <img src="git/devices/Aqara Opple switch 2 bands.jpg"/> |
+| - | <img src="git/devices/Aqara single key wireless wall switch.jpg"/> |
+| - | <img src="git/devices/BASICZBR3.jpg"/> |
+| - | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
+| - | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
+| - | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
+| - | <img src="git/devices/RTCGQ01LM.jpg"/> |
+| - | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
+| - | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
+| - | <img src="git/devices/WXKG01LM.jpg"/> |
+| - | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
+| - | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
+
+
+
 
 # Welcome to my Home Assistant configuration
 
