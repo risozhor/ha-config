@@ -53,7 +53,7 @@ You can support me:
 
 | Description | Picture |
 |:---|---:|
-| **Zigbee devices** ||
+| *Zigbee devices* ||
 | Hue white and color ambiance E26/E27/E14 | <img src="git/devices/9290012573A.jpg"/> |
 | Hue white ambiance E26/E27 | <img src="git/devices/9290022169.jpg"/> |
 | - | <img src="git/devices/9290022169.jpg"/> |
