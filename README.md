@@ -12,7 +12,6 @@
 
 
 # ha-config
-Welcome to my Home Assistant configuration
 
 [![bage][last-commit]][goto]
 
@@ -22,7 +21,10 @@ Welcome to my Home Assistant configuration
 - 👋 Hi, I’m Oleksandr
 - 👀 I’m interested in Web development and Smart Home building ;)
 - How to reach me: [![badges](https://badges.aleen42.com/src/telegram.svg)](https://t.me/risozhor) 
-- I run my blog about smart home technologies (in Ukrainian)
+- I run my blog about smart home technologies (in Ukrainian)[<img src="git/favicon.ico" style="margin-top: -18px;" />][goto]
+<br>
+
+[<img src="git/sn_logo.png"  />][goto]
 
  
 <br>
@@ -30,13 +32,20 @@ You can support me:
 <a href="https://www.buymeacoffee.com/Smarty.Ninja" target="_blank"><img align="center" src="https://badges.aleen42.com/src/buymeacoffee.svg" /></a> <a href="https://www.paypal.com/donate/?hosted_button_id=VWMGGY5S8LNCW" target="_blank"><img align="center" src="https://badges.aleen42.com/src/paypal.svg" /></a>
 <br><br>
 
+---
+## My current configuration (table is not yet complete)
 
 | Title | Shield |
 |:---:|:---:|
 | Current Home Assistant that I use | [![HA Version][ha-version-shield]][home-assistant] |
 | Current Zigbee2MQTT that I use | [![z2m Version][z2m-shield]][z2m-link] |
+| - | - |
+| - | - |
+| - | - |
 
+---
 
+# Welcome to my Home Assistant configuration
 
 ### main screen
 <img src="git/screen 1.png"  />
