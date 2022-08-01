@@ -2,6 +2,8 @@
 [ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2022.7.7-blue.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
 [z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.26.0_1-yellow.svg
+[ring-alarm-shield]: https://img.shields.io/badge/Security%20Kit-Ring-blue.svg
+[zgw-shield]: https://img.shields.io/badge/ZigStar%20GW-green.svg
 
 <!-- Links -->
 
@@ -39,8 +41,8 @@ You can support me:
 |:---:|:---:|
 | Current Home Assistant that I use | [![HA Version][ha-version-shield]][home-assistant] |
 | Current Zigbee2MQTT that I use | [![z2m Version][z2m-shield]][z2m-link] |
-| - | - |
-| - | - |
+| - | ![alarmkit][ring-alarm-shield] |
+| - | ![zgw][zgw-shield] |
 | - | - |
 
 ---
