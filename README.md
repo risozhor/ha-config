@@ -47,6 +47,10 @@ You can support me:
 
 ---
 ## Devices I use (table is not yet complete)
+
+<details>
+  <summary>Show table</summary>
+
 | Description | Picture |
 |:---|---:|
 | **Zigbee devices** |
@@ -66,6 +70,8 @@ You can support me:
 | - | <img src="git/devices/WXKG01LM.jpg"/> |
 | - | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
 | - | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
+</details>
+</br>
 
 
 
