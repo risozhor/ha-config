@@ -20,10 +20,10 @@
 [last-commit]: https://img.shields.io/github/last-commit/risozhor/ha-config?style=for-the-badge
 [goto]: https://www.smarty.ninja/
 
-- 👋 Hi, I’m Oleksandr
+- 👋 Hi, my name Oleksandr, I'm from Ukraine
 - 👀 I’m interested in Web development and Smart Home building ;)
 - How to reach me: [![badges](https://badges.aleen42.com/src/telegram.svg)](https://t.me/risozhor) 
-- I run my blog about smart home technologies (in Ukrainian)[<img src="git/favicon.ico" style="margin-top: -18px;" />][goto]
+- [<img src="git/favicon.ico" style="margin-top: -18px;" />][goto] I run my blog about smart home technologies (Ukrainian)
 <br>
 
 [<img src="git/sn_logo.png"  />][goto]
