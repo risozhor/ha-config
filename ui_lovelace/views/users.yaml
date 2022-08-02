@@ -1,43 +1,96 @@
 title: users
 path: users
 icon: mdi:account
+type: panel
 badges: []
 cards:
-  - type: vertical-stack
+  - type: custom:bootstrap-grid-card
     cards:
-      - type: vertical-stack
+      - type: row
         cards:
-          - type: custom:mushroom-person-card
-            entity: person.risozhor
-            use_entity_picture: true
-          - type: custom:mushroom-person-card
-            entity: person.yaroslava
-            use_entity_picture: true
-          - type: custom:mushroom-person-card
-            entity: person.vitaliy
-            use_entity_picture: true
-          - type: custom:mushroom-person-card
-            entity: person.maryna
-            use_entity_picture: true
-      - type: horizontal-stack
-        cards:
-          - type: sensor
-            graph: line
-            entity: sensor.note20_battery_level
-            name: Батарея (Aleksandr)
-          - hours_to_show: 24
-            graph: line
-            type: sensor
-            entity: sensor.sm_m315f_battery_level
-            name: Батарея (Vitaliy)
-            detail: 1
-      - type: horizontal-stack
-        cards:
-          - type: sensor
-            graph: line
-            entity: sensor.yaroslava_battery_level
-            name: Батарея (Yaroslava)
-          - type: sensor
-            graph: line
-            entity: sensor.a50_maryna_battery_level
-            name: Батарея (Marina)
+          - type: vertical-stack
+            class: col-xs-12 col-md-6 col-lg-3
+            cards:
+              - type: custom:mushroom-person-card
+                entity: person.risozhor
+                use_entity_picture: true
+              - type: sensor
+                graph: line
+                entity: sensor.note20_battery_level
+                name: Батарея (Aleksandr)
+                hours_to_show: 24
+
+          - type: vertical-stack
+            class: col-xs-12 col-md-6 col-lg-3
+            cards:
+              - type: custom:mushroom-person-card
+                entity: person.maryna
+                use_entity_picture: true
+              - type: sensor
+                graph: line
+                entity: sensor.a50_maryna_battery_level
+                name: Батарея (Marina)
+                hours_to_show: 24
+
+          - type: vertical-stack
+            class: col-xs-12 col-md-6 col-lg-3
+            cards:
+              - type: custom:mushroom-person-card
+                entity: person.yaroslava
+                use_entity_picture: true
+              - type: sensor
+                graph: line
+                entity: sensor.yaroslava_battery_level
+                name: Батарея (Yaroslava)
+                hours_to_show: 24
+
+          - type: vertical-stack
+            class: col-xs-12 col-md-6 col-lg-3
+            cards:
+              - type: custom:mushroom-person-card
+                entity: person.vitaliy
+                use_entity_picture: true
+              - type: sensor
+                graph: line
+                entity: sensor.sm_m315f_battery_level
+                name: Батарея (Vitaliy)
+                hours_to_show: 24
+# cards:
+#   - type: vertical-stack
+#     cards:
+#       - type: vertical-stack
+#         cards:
+#           - type: custom:mushroom-person-card
+#             entity: person.risozhor
+#             use_entity_picture: true
+#           - type: custom:mushroom-person-card
+#             entity: person.yaroslava
+#             use_entity_picture: true
+#           - type: custom:mushroom-person-card
+#             entity: person.vitaliy
+#             use_entity_picture: true
+#           - type: custom:mushroom-person-card
+#             entity: person.maryna
+#             use_entity_picture: true
+#       - type: horizontal-stack
+#         cards:
+#           - type: sensor
+#             graph: line
+#             entity: sensor.note20_battery_level
+#             name: Батарея (Aleksandr)
+#           - hours_to_show: 24
+#             graph: line
+#             type: sensor
+#             entity: sensor.sm_m315f_battery_level
+#             name: Батарея (Vitaliy)
+#             detail: 1
+#       - type: horizontal-stack
+#         cards:
+#           - type: sensor
+#             graph: line
+#             entity: sensor.yaroslava_battery_level
+#             name: Батарея (Yaroslava)
+#           - type: sensor
+#             graph: line
+#             entity: sensor.a50_maryna_battery_level
+#             name: Батарея (Marina)
