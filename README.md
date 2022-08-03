@@ -63,6 +63,7 @@ You can support me:
 | Gledopto GL-C-007-1ID | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
 | Mi power plug ZigBee EU | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
 | MiJia door & window contact sensor | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
+| MiJia temperature & humidity sensor | <img src="git/devices/MiJia temperature & humidity sensor.jpg"/> |
 | Xiaomi Mijia Human Body Sensor  | <img src="git/devices/RTCGQ01LM.jpg"/> |
 | SmartThings Motion sensor | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
 | Tuya smart zigbee 2ch relay module | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
