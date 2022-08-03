@@ -56,20 +56,19 @@ You can support me:
 | *Zigbee devices* ||
 | Hue white and color ambiance E26/E27/E14 | <img src="git/devices/9290012573A.jpg"/> |
 | Hue white ambiance E26/E27 | <img src="git/devices/9290022169.jpg"/> |
-| - | <img src="git/devices/9290022169.jpg"/> |
-| - | <img src="git/devices/Aqara door & window contact sensor.jpg"/> |
-| - | <img src="git/devices/Aqara Opple switch 2 bands.jpg"/> |
-| - | <img src="git/devices/Aqara single key wireless wall switch.jpg"/> |
-| - | <img src="git/devices/BASICZBR3.jpg"/> |
-| - | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
-| - | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
-| - | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
-| - | <img src="git/devices/RTCGQ01LM.jpg"/> |
-| - | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
-| - | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
-| - | <img src="git/devices/WXKG01LM.jpg"/> |
-| - | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
-| - | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
+| Aqara door & window contact sensor | <img src="git/devices/Aqara door & window contact sensor.jpg"/> |
+| Aqara Opple switch 2 bands | <img src="git/devices/Aqara Opple switch 2 bands.jpg"/> |
+| Aqara single key wireless wall switch | <img src="git/devices/Aqara single key wireless wall switch.jpg"/> |
+| SONOFF BASIC ZBR3 Zigbee DIY Smart Switch | <img src="git/devices/BASICZBR3.jpg"/> |
+| Gledopto GL-C-007-1ID | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
+| Mi power plug ZigBee EU | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
+| MiJia door & window contact sensor | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
+| Xiaomi Mijia Human Body Sensor  | <img src="git/devices/RTCGQ01LM.jpg"/> |
+| SmartThings Motion sensor | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
+| Tuya smart zigbee 2ch relay module | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
+| Xiaomi Smart Wireless Switch | <img src="git/devices/WXKG01LM.jpg"/> |
+| Xiaomi Honeywell fire detector | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
+| Zigbee smart energy meter DDS238-2 | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
 </details>
 </br>
 
