@@ -1,5 +1,6 @@
 <!-- Shield -->
 [ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2022.7.7-blue.svg
+[ha-server]: https://img.shields.io/badge/Raspberry%20PI%204-RAM%204%20Gb-red.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
 [z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.27.0.1-yellow.svg
 [ring-alarm-shield]: https://img.shields.io/badge/Security%20Kit-Ring-blue.svg
@@ -14,7 +15,7 @@
 
 
 # ha-config
-
+ 
 [![bage][last-commit]][goto]
 
 [last-commit]: https://img.shields.io/github/last-commit/risozhor/ha-config?style=for-the-badge
@@ -28,7 +29,7 @@
 
 [<img src="git/sn_logo.png"  />][goto]
 
- 
+  
 <br>
 You can support me:
 <a href="https://www.buymeacoffee.com/Smarty.Ninja" target="_blank"><img align="center" src="https://badges.aleen42.com/src/buymeacoffee.svg" /></a> <a href="https://www.paypal.com/donate/?hosted_button_id=VWMGGY5S8LNCW" target="_blank"><img align="center" src="https://badges.aleen42.com/src/paypal.svg" /></a>
@@ -40,6 +41,7 @@ You can support me:
 | Title | Shield |
 |:---|:---|
 | Current Home Assistant that I use | [![HA Version][ha-version-shield]][home-assistant] |
+| Current server based on | [![HA server][ha-server]][home-assistant] |
 | Current Zigbee2MQTT that I use | [![z2m Version][z2m-shield]][z2m-link] |
 | Alarm kit | ![alarmkit][ring-alarm-shield] |
 | Zigbee gateway | ![zgw][zgw-shield] |
