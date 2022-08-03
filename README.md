@@ -38,11 +38,11 @@ You can support me:
 ## My current configuration (table is not yet complete)
 
 | Title | Shield |
-|:---:|:---:|
+|:---|:---|
 | Current Home Assistant that I use | [![HA Version][ha-version-shield]][home-assistant] |
 | Current Zigbee2MQTT that I use | [![z2m Version][z2m-shield]][z2m-link] |
-| - | ![alarmkit][ring-alarm-shield] |
-| - | ![zgw][zgw-shield] |
+| Alarm kit | ![alarmkit][ring-alarm-shield] |
+| Zigbee gateway | ![zgw][zgw-shield] |
 | - | - |
 
 ---
@@ -76,7 +76,7 @@ You can support me:
 | Aqara door & window contact sensor | <img src="git/devices/Foscam-C2.jpg"/> |
 | Aqara Opple switch 2 bands | <img src="git/devices/Google-Home-Mini.jpg"/> |
 | Aqara single key wireless wall switch | <img src="git/devices/Google-Nest-Hub-(1st-Gen).jpg"/> |
-| Gyver lamp | <img src="git/devices/gyver-lamp.jpg"/> |
+| Gyver lamp </br>[Rewiev](https://www.smarty.ninja/settings/%d0%b4%d0%be%d0%b4%d0%b0%d1%94%d0%bc%d0%be-gyver-lamp-%d0%b2-home-assistant-%d1%82%d0%b0-google-home) | <img src="git/devices/gyver-lamp.jpg"/> |
 | Nest Learning Thermostat 3rd-Generation | <img src="git/devices/Nest-Learning-Thermostat-3rd-Generation.jpg"/> |
 | Alarm Security Kit, 5 piece (2nd Gen) | <img src="git/devices/Alarm-Security-Kit,-5-piece-(2nd-Gen).jpg"/> |
 | Ring-Chime | <img src="git/devices/Ring-Chime.jpg"/> |
@@ -85,9 +85,10 @@ You can support me:
 | Wyze cam v3 | <img src="git/devices/Wyze-cam-v3.jpg"/> |
 | Xiaomi mi air purifier 3h | <img src="git/devices/xiaomi_mi_air_purifier_3h.jpg"/> |
 | *not so smart but important devices* ||
-| Argon One M.2 Case | <img src="git/devices/Argon-One-M.2-Case.jpg"/> |
-| ATIS Lock SS | <img src="git/devices/ATIS-Lock-SS.jpg"/> |
+| Argon One M.2 Case for Raspberry 4 and m2 SSD| <img src="git/devices/Argon-One-M.2-Case.jpg"/> |
+| ATIS Lock SS </br>[Rewiev](https://www.smarty.ninja/hard/access-control/%d0%b5%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%bc%d0%b5%d1%85%d0%b0%d0%bd%d1%96%d1%87%d0%bd%d0%b8%d0%b9-%d0%b7%d0%b0%d0%bc%d0%be%d0%ba-atis-lock-ss/) and [How to integrate an electromechanical lock into Home Assistant](https://www.smarty.ninja/hard/access-control/atis-lock-into-home-assistant/) | <img src="git/devices/ATIS-Lock-SS.jpg"/> |
 | MikroTik RB4011iGS+5HacQ2HnD-IN router  | <img src="git/devices/rb4011.jpg"/> |
+| Tecsar Trek SA TS21 controller </br>[Rewiev](https://www.smarty.ninja/hard/access-control/tecsar-trek-sa-ts21/) | <img src="git/devices/Tecsar-Trek-SA-TS21.jpg"/> |
 
 
 
