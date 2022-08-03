@@ -70,6 +70,27 @@ You can support me:
 | Xiaomi Smart Wireless Switch | <img src="git/devices/WXKG01LM.jpg"/> |
 | Xiaomi Honeywell fire detector | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
 | Zigbee smart energy meter DDS238-2 | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
+| *WiFi devices* ||
+| Hue white and color ambiance E26/E27/E14 | <img src="git/devices/amazon_echo_dot_4th_gen.jpg"/> |
+| Hue white ambiance E26/E27 | <img src="git/devices/Amazon-Echo-Show-8-(2nd-Gen).jpg"/> |
+| Aqara door & window contact sensor | <img src="git/devices/Foscam-C2.jpg"/> |
+| Aqara Opple switch 2 bands | <img src="git/devices/Google-Home-Mini.jpg"/> |
+| Aqara single key wireless wall switch | <img src="git/devices/Google-Nest-Hub-(1st-Gen).jpg"/> |
+| Gyver lamp | <img src="git/devices/gyver-lamp.jpg"/> |
+| Nest Learning Thermostat 3rd-Generation | <img src="git/devices/Nest-Learning-Thermostat-3rd-Generation.jpg"/> |
+| Alarm Security Kit, 5 piece (2nd Gen) | <img src="git/devices/Alarm-Security-Kit,-5-piece-(2nd-Gen).jpg"/> |
+| Ring-Chime | <img src="git/devices/Ring-Chime.jpg"/> |
+| Ring doorbell wired | <img src="git/devices/ring-doorbell-wired.jpg"/> |
+| shelly 1 | <img src="git/devices/shelly-1.jpg"/> |
+| Wyze cam v3 | <img src="git/devices/Wyze-cam-v3.jpg"/> |
+| Xiaomi mi air purifier 3h | <img src="git/devices/xiaomi_mi_air_purifier_3h.jpg"/> |
+| *not so smart but important devices* ||
+| Argon One M.2 Case | <img src="git/devices/Argon-One-M.2-Case.jpg"/> |
+| ATIS Lock SS | <img src="git/devices/ATIS-Lock-SS.jpg"/> |
+| MikroTik RB4011iGS+5HacQ2HnD-IN router  | <img src="git/devices/rb4011.jpg"/> |
+
+
+
 </details>
 </br>
 
