@@ -48,10 +48,10 @@ You can support me:
 | - | - |
 
 ---
-## Devices I use (table is not yet complete)
+## Below is a list of hardware in-house (table in spoiler)
 
 <details>
-  <summary>Show table</summary>
+  <summary>Show list in table</summary>
 
 | Description | Picture |
 |:---|---:|
