@@ -2,10 +2,25 @@ title: energy
 path: energy
 icon: mdi:lightning-bolt
 badges: []
+type: panel
 cards:
-  - type: vertical-stack
+  - type: custom:bootstrap-grid-card
     cards:
-      - type: energy-distribution
-      - type: energy-date-selection
-      - type: energy-usage-graph
-      - type: energy-devices-graph
+
+      - type: row
+        cards:
+          - type: custom:mushroom-title-card
+            title: Energy monitoring
+            class: col-xs-12
+      - type: row
+        cards:
+          - type: energy-date-selection
+            class: col-xs-12 pt-3
+      - type: row
+        cards:
+          - type: energy-distribution
+            class: col-xs-12 col-md-4 pt-2
+          - type: energy-usage-graph
+            class: col-xs-12 col-md-4 pt-2
+          - type: energy-devices-graph
+            class: col-xs-12 col-md-4 pt-2

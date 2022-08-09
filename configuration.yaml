@@ -10,7 +10,6 @@ http:
     - 10.0.0.0/16
     - 172.30.33.0/24
 cloud:
-#stream:
 recorder: !include includes/recorder.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
@@ -28,7 +27,6 @@ homeassistant:
 frontend:
   themes: !include_dir_merge_named themes
 stream:
-# camera: !include includes/camera.yaml
 tts: !include includes/tts.yaml
 map:
 # weather:
@@ -45,16 +43,13 @@ mobile_app:
 history: !include includes/history.yaml
 shopping_list:
 system_health:
-#updater:
 zeroconf:
 light: !include includes/light.yaml
 discovery:
-# upnp:
 timer: !include includes/timer.yaml
 input_number: !include includes/input_number.yaml
 input_select: !include includes/input_select.yaml
 input_boolean: !include includes/input_boolean.yaml
-# lock: !include includes/lock.yaml
 sensor: !include_dir_merge_list includes/sensor
 binary_sensor: !include includes/binary_sensors.yaml
 switch: !include includes/switch.yaml
@@ -74,11 +69,19 @@ mqtt:
       state_unlocked: "ON"
       qos: 1
       value_template: "{{ value_json.state_right }}"
-# nest:
-#   client_id: !secret nest_client_id
-#   client_secret: !secret nest_client_secret
-#   project_id: !secret nest_project_id
 lovelace:
   mode: yaml
-  resources:
-    !include ui_lovelace/resources.yaml
+  resources: !include ui_lovelace/resources.yaml
+  dashboards:
+    # lovelace-generated:
+    #   mode: yaml
+    #   filename: ui-lovelace.yaml
+    #   title: Overview
+    #   show_in_sidebar: true
+    #   require_admin: true
+    lovelace-hidden:
+      mode: yaml
+      title: hidden
+      show_in_sidebar: false
+      filename: hidden.yaml # not yet created
+

@@ -1,11 +1,9 @@
-
-# - alias: Set overcost tariff
-#   trigger:
-#     - platform: template
-#       value_template: 'true'
-#   action:
-#     - service: utility_meter.select_tariff
-#       entity_id: utility_meter.monthly_energy
-#       data:
-#         tariff: normal
-
+- alias: Set overcost tariff
+  trigger:
+    - platform: template
+      value_template: "true"
+  action:
+    - service: utility_meter.select_tariff
+      entity_id: utility_meter.monthly_energy
+      data:
+        tariff: normal

@@ -9,53 +9,21 @@ cards:
     cards:
       - type: row
         cards:
-          - type: col
-            class: col-xs-12 col-md-2
-            cards:
-              - type: markdown
-                content: " "
-                style: |
-                  ha-markdown {
-                    padding: 0!important;
-                    padding-top: 0!important;
-                  }
           - type: picture-entity
+            class: col-xs-12 col-md-4 pt-5
             show_state: true
             show_name: true
             camera_view: auto
             entity: camera.wyze
-            class: col-xs-12 col-md-4
           - type: picture-entity
+            class: col-xs-12 col-md-4 pt-5
             show_state: true
             show_name: true
             camera_view: auto
             entity: camera.front_door
-            class: col-xs-12 col-md-4
-          - type: col
-            class: col-xs-12 col-md-2
-            cards:
-              - type: markdown
-                content: " "
-                style: |
-                  ha-markdown {
-                    padding: 0!important;
-                    padding-top: 0!important;
-                  }
-      - type: row
-        cards:
-          - type: col
-            class: col-xs-12 col-md-2
-            cards:
-              - type: markdown
-                content: " "
-                style: |
-                  ha-markdown {
-                    padding: 0!important;
-                    padding-top: 0!important;
-                  }
           - type: picture-entity
+            class: col-xs-12 col-md-4 pt-5
             show_state: true
             show_name: true
             camera_view: auto
             entity: camera.livingroom_prof0_name
-            class: col-xs-12 col-md-4

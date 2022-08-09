@@ -1,7 +1,7 @@
-# - platform: template
-#   sensors:
-#     energy_cost:
-#       device_class: monetary
-#       friendly_name: "Energy Cost"
-#       unit_of_measurement: "UAH"
-#       value_template: "{% set energyprice = 1.68 %}{{ energyprice | float | round(2) }}"
+- platform: template
+  sensors:
+    energy_cost:
+      device_class: monetary
+      friendly_name: "Energy Cost"
+      unit_of_measurement: "UAH"
+      value_template: "{% set energyprice = 1.68 %}{{ energyprice | float | round(2) }}"
