@@ -35,3 +35,31 @@
     livingroom_aqi:
       friendly_name: "Livingroom aqi"
       value_template: "{{ states.sensor.xiaomi_miio_device_pm2_5.state }}"
+
+    ligts_on:
+      friendly_name: "Ligts turned on"
+      value_template: >
+        {%- set reject = ['dining_room_stripe_master', 
+        'kitchen_table_lamp', 
+        'kitchen_ceiling_lamp',
+        'kitchen_color_lamp', 
+        'livingroom_color_lamp_1', 
+        'livingroom_color_lamp_2', 
+        'livingroom_color_lamp_3', 
+        ] -%}
+        {{- states.light | rejectattr('object_id', 'in', reject) | selectattr('state','eq','on') | list | length -}}
+
+    switches_on:
+      friendly_name: "Switches (as a light) turned on"
+      value_template: >
+        {%- set reject = ['guestroom_plug_2', 
+        'guestroom_plug', 
+        'guest_room_plug_power_outage_memory', 
+        'outlet',
+        'power_meter', 
+        'smart_plug_led', 
+        'enable_bsl', 
+        'restart_esp', 
+        'restart_zigbee', 
+        ] -%}
+        {{- states.switch | rejectattr('object_id', 'in', reject) | selectattr('state','eq','on') | list | length }}

@@ -293,7 +293,6 @@ cards:
           width: 7%
         tap_action:
           action: toggle
-        icon: hue:bulb-sultan
         image: /local/images/light_bulb_off.png
         state_image:
           "on": /local/images/light_bulb_on.png
@@ -318,7 +317,6 @@ cards:
           action: toggle
         type: state-icon
       - entity: switch.terrace_spotlights
-        name: terrace spotlights1
         icon: hue:centura-round
         style:
           left: 40%

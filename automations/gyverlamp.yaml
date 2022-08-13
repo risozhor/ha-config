@@ -52,13 +52,13 @@
         entity_id: timer.gyverlamp_1h_off
   condition:
     - condition: state
-      entity_id: light.gyver_bulb
+      entity_id: light.gyver_lamp_esp_74e9c8
       state: "on"
   action:
     - service: light.turn_off
       data: {}
       target:
-        entity_id: light.gyver_bulb
+        entity_id: light.gyver_lamp_esp_74e9c8
     - service: timer.cancel
       entity_id: timer.gyverlamp_1h_off
 
@@ -75,7 +75,7 @@
     #     brightness_pct: 5
     #     effect: Fire
     #   target:
-    #     entity_id: light.gyver_bulb
+    #     entity_id: light.gyver_lamp_esp_74e9c8
     - service: mqtt.publish
       data_template:
         # topic: homeassistant/light/ESP-74e9c8/cmnd

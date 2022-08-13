@@ -6,16 +6,13 @@ type: panel
 cards:
   - type: custom:bootstrap-grid-card
     cards:
-
       - type: row
         cards:
           - type: custom:mushroom-title-card
             title: Energy monitoring
-            class: col-xs-12
-      - type: row
-        cards:
+            class: col-xs-12 col-md-4
           - type: energy-date-selection
-            class: col-xs-12 pt-3
+            class: col-xs-12 col-md-8
       - type: row
         cards:
           - type: energy-distribution

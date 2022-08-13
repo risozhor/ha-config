@@ -2,78 +2,403 @@ title: lights
 path: lights
 icon: mdi:lightbulb-multiple-outline
 badges: []
+
+type: panel
 cards:
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: light.gyver_lamp_esp_74e9c8
-      - entity: input_number.brightness
-      - entity: input_number.speed
-      - entity: input_number.scale
-      - entity: input_select.ledlamp_mode
-  - type: custom:mushroom-light-card
-    entity: light.livingroom_lights
-    use_light_color: true
-    show_brightness_control: true
-    show_color_temp_control: true
-    show_color_control: true
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.kitchen_ceiling_lights
-    show_brightness_control: true
-    show_color_temp_control: true
-    show_color_control: true
-    collapsible_controls: true
-    use_light_color: true
-  - type: custom:mushroom-light-card
-    entity: light.0x00178801030318a1
-    show_brightness_control: true
-    show_color_temp_control: true
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.wled
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: true
-    show_color_temp_control: false
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.0x0017880103aa4b71
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: true
-    show_color_temp_control: false
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.guestroom_color_bulb
-    show_brightness_control: true
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.main_corridor_light
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: false
-    show_color_temp_control: false
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.livingroom_table_background
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: true
-    show_color_temp_control: true
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.kitchen_strip
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: true
-    show_color_temp_control: true
-    collapsible_controls: true
-  - type: custom:mushroom-light-card
-    entity: light.shelly1
-    use_light_color: false
-    show_brightness_control: true
-    show_color_control: false
-    show_color_temp_control: false
-    collapsible_controls: false
-    fill_container: false
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+              - type: template
+                content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
+                icon: mdi:lightbulb-multiple-outline
+              - type: weather
+                entity: weather.home
+                show_conditions: true
+                show_temperature: true
+
+      - type: row
+        cards:
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: horizontal-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: |-
+                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
+                  Ligts turned on {{count}}
+                icon: |-
+                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
+                  {%- if count > 0 -%}
+                    {%- if count < 10 -%}
+                      mdi:numeric-{{ count }}-circle
+                    {%- else -%}
+                      mdi:numeric-9-plus-circle
+                    {%- endif %}
+                  {%- else -%}
+                  mdi:numeric-0-circle
+                  {%- endif -%}
+                badge_icon: mdi:lightbulb
+                badge_color: red
+                secondary: ""
+                icon_color: |-
+                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
+                  {%- if count > 0 -%}
+                  #c8a600
+                  {%- else -%}
+                  #ddd
+                  {%- endif -%}
+                layout: vertical
+              - type: custom:mushroom-template-card
+                primary: |-
+                  {%- set count =  states('sensor.switches_on') | int(0) -%}
+                  Switches turned on {{count}}
+                icon: |-
+                  {%- set count =  states('sensor.switches_on') | int(0) -%}
+                  {%- if count > 0 -%}
+                    {%- if count < 10 -%}
+                      mdi:numeric-{{ count }}-circle
+                    {%- else -%}
+                      mdi:numeric-9-plus-circle
+                    {%- endif %}
+                  {%- else -%}
+                  mdi:numeric-0-circle
+                  {%- endif -%}
+                badge_icon: mdi:light-switch
+                badge_color: red
+                secondary: ""
+                icon_color: |-
+                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
+                  {%- if count > 0 -%}
+                  #c8a600
+                  {%- else -%}
+                  #ddd
+                  {%- endif -%}
+                layout: vertical
+
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.livingroom_lights
+                name: Livingroom
+                icon: mdi:sofa
+                show_state: false
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.livingroom_lights
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                  - entity: light.livingroom_table_background
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                  - entity: light.gyver_lamp_esp_74e9c8
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.kitchen_ceiling_lights
+                name: Kitchen
+                show_state: false
+                icon: mdi:faucet-variant
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.kitchen_ceiling_lights
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                  - entity: light.kitchen_strip
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.0x0017880103aa4b71
+                name: Kidsroom
+                icon: mdi:teddy-bear
+                show_state: false
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.0x0017880103aa4b71
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.0x00178801030318a1
+                name: Hallway
+                icon: mdi:coat-rack
+                show_state: false
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.0x00178801030318a1
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: more-info
+
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.guestroom_color_bulb
+                name: Guestroom
+                show_state: false
+                icon: mdi:walk
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.guestroom_color_bulb
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.main_corridor_light
+                name: Main corridor
+                show_state: false
+                icon: mdi:door-sliding
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.main_corridor_light
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.dining_room_stripe_3
+                name: Dining Room
+                show_state: false
+                icon: mdi:table-chair
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.dining_room_stripe_3
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: light.shelly1
+                name: Bathroom
+                show_state: false
+                icon: mdi:shower-head
+                tap_action:
+                  action: none
+                hold_action:
+                  action: more-info
+                entities:
+                  - entity: light.shelly1
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+            show_header_toggle: false
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: switch.backyard_light
+                name: Outdoor
+                show_state: false
+                icon: mdi:pine-tree
+                tap_action:
+                  action: none
+                entities:
+                  - entity: switch.backyard_light
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                  - entity: switch.yard_light
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+                  - entity: switch.outdoor_floodlight
+                    icon: true
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+            show_header_toggle: false
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: switch.terrace_spotlights
+                name: Terrace
+                show_state: false
+                icon: mdi:balcony
+                tap_action:
+                  action: none
+                entities:
+                  - entity: switch.terrace_spotlights
+                    icon: hue:centura-round
+                    state_color: true
+                    show_state: false
+                    name: false
+                    tap_action:
+                      action: toggle
+            show_header_toggle: false
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - entity: light.gyver_lamp_esp_74e9c8
+              - entity: input_number.brightness
+              - entity: input_number.speed
+              - entity: input_number.scale
+              - entity: input_select.ledlamp_mode
+            show_header_toggle: false
+
+  # - type: entities
+  #   show_header_toggle: false
+  #   entities:
+  #     - entity: light.gyver_lamp_esp_74e9c8
+  #     - entity: input_number.brightness
+  #     - entity: input_number.speed
+  #     - entity: input_number.scale
+  #     - entity: input_select.ledlamp_mode
+
+  # - type: custom:mushroom-light-card
+  #   entity: light.livingroom_lights
+  #   use_light_color: true
+  #   show_brightness_control: true
+  #   show_color_temp_control: true
+  #   show_color_control: true
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.kitchen_ceiling_lights
+  #   show_brightness_control: true
+  #   show_color_temp_control: true
+  #   show_color_control: true
+  #   collapsible_controls: true
+  #   use_light_color: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.0x00178801030318a1
+  #   show_brightness_control: true
+  #   show_color_temp_control: true
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.wled
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: true
+  #   show_color_temp_control: false
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.0x0017880103aa4b71
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: true
+  #   show_color_temp_control: false
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.guestroom_color_bulb
+  #   show_brightness_control: true
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.main_corridor_light
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: false
+  #   show_color_temp_control: false
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.livingroom_table_background
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: true
+  #   show_color_temp_control: true
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.kitchen_strip
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: true
+  #   show_color_temp_control: true
+  #   collapsible_controls: true
+  # - type: custom:mushroom-light-card
+  #   entity: light.shelly1
+  #   use_light_color: false
+  #   show_brightness_control: true
+  #   show_color_control: false
+  #   show_color_temp_control: false
+  #   collapsible_controls: false
+  #   fill_container: false
