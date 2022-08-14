@@ -2,32 +2,79 @@ title: doors
 path: doors
 icon: mdi:door-open
 badges: []
+type: panel
 cards:
-  - type: vertical-stack
+  - type: custom:bootstrap-grid-card
     cards:
-      - type: custom:mushroom-lock-card
-        entity: lock.frontdoor
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.main_corridor_door_sensor_contact
-        name: Frontdoor
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.terrace_door_sensor_contact
-        name: Terrace Entrance
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.hallway_contact_sensor_ring
-        name: Hallway Door
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.kitchen_window_sensor_contact
-        name: Kitchen Window
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.livingroom_window_sensor_contact
-        name: Livingroom Window
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.kidsroom_window_sensor_contact
-        name: Kidsroom Window
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.main_corridor_window_sensor_contact
-        name: Main Corridor Window
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.toilet_window_sensor_contact
-        name: Toilet Window
+      - type: row
+        cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+              - type: template
+                content: "{{int(states.sensor.opened_doors.state)}}"
+                icon: mdi:door-open
+              - type: template
+                content: "{{int(states.sensor.opened_windows.state)}}"
+                icon: mdi:window-open-variant
+
+              - type: weather
+                entity: weather.home
+                show_conditions: true
+                show_temperature: true
+      - type: row
+        cards:
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: lock.frontdoor
+                layout: vertical
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.main_corridor_door_sensor_contact
+                name: Frontdoor
+                layout: vertical
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.terrace_door_sensor_contact
+                name: Terrace Entrance
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.hallway_contact_sensor_ring
+                name: Hallway Door
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.kitchen_window_sensor_contact
+                name: Kitchen Window
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.livingroom_window_sensor_contact
+                name: Livingroom Window
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.kidsroom_window_sensor_contact
+                name: Kidsroom Window
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.main_corridor_window_sensor_contact
+                name: Main Corridor Window
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.toilet_window_sensor_contact
+                name: Toilet Window

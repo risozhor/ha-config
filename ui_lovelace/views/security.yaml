@@ -1,40 +1,100 @@
 title: security
 path: security
-panel: false
-visible:
-  - user: ca6b753fa3864510837d851649a752d3
+type: panel
 icon: mdi:shield-check
-badges: []
 cards:
-  - type: vertical-stack
+  - type: custom:bootstrap-grid-card
     cards:
-      - type: custom:mushroom-alarm-control-panel-card
-        entity: alarm_control_panel.ring_alarm
-        states:
-          - armed_home
-          - armed_away
-        layout: horizontal
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.kitchen_smoke_detector_smoke
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.teritorialna_gromada_air
-        fill_container: false
-        use_entity_picture: false
-        hide_icon: false
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.teritorialna_gromada_artillery
-        fill_container: false
-        use_entity_picture: false
-        hide_icon: false
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.teritorialna_gromada_urban_fights
-        fill_container: false
-        use_entity_picture: false
-        hide_icon: false
-      - type: custom:mushroom-entity-card
-        entity: binary_sensor.teritorialna_gromada_unknown
-        fill_container: false
-        use_entity_picture: false
-        hide_icon: false
+      - type: row
+        cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+              - type: template
+                content: "{{int(states.sensor.opened_doors.state)}}"
+                icon: mdi:door-open
+              - type: template
+                content: "{{int(states.sensor.opened_windows.state)}}"
+                icon: mdi:window-open-variant
+
+              - type: weather
+                entity: weather.home
+                show_conditions: true
+                show_temperature: true
+
+      - type: row
+        cards:
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: custom:mushroom-alarm-control-panel-card
+            entity: alarm_control_panel.ring_alarm
+            layout: vertical
+            states:
+              - armed_home
+              - armed_away
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: entities
+            entities:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.kitchen_smoke_detector_smoke
+                name: Smoke Detector
+                layout: vertical
+                style: |
+                  ha-card { 
+                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                    --ha-card-box-shadow: 'none';
+                  }
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: entities
+            entities:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.teritorialna_gromada_air
+                name: Air Alarm
+                layout: vertical
+                style: |
+                  ha-card { 
+                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                    --ha-card-box-shadow: 'none';
+                  }
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: entities
+            entities:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.teritorialna_gromada_artillery
+                name: Artillery Alert
+                layout: vertical
+                style: |
+                  ha-card { 
+                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                    --ha-card-box-shadow: 'none';
+                  }
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: entities
+            entities:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.teritorialna_gromada_urban_fights
+                name: Urban Fights Alert
+                layout: vertical
+                style: |
+                  ha-card { 
+                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                    --ha-card-box-shadow: 'none';
+                  }
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-2 pt-2
+            type: entities
+            entities:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.teritorialna_gromada_unknown
+                name: Unknown Alert
+                layout: vertical
+                style: |
+                  ha-card { 
+                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                    --ha-card-box-shadow: 'none';
+                  }

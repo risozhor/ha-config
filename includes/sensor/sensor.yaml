@@ -39,27 +39,51 @@
     ligts_on:
       friendly_name: "Ligts turned on"
       value_template: >
-        {%- set reject = ['dining_room_stripe_master', 
-        'kitchen_table_lamp', 
-        'kitchen_ceiling_lamp',
-        'kitchen_color_lamp', 
-        'livingroom_color_lamp_1', 
-        'livingroom_color_lamp_2', 
-        'livingroom_color_lamp_3', 
+        {%- set sel = [
+        '0x0017880103aa4b71',
+        'livingroom_lights', 
+        'livingroom_table_background',
+        'wled',
+        'gyver_lamp_esp_74e9c8',
+        '0x00178801030318a1',
+        'guestroom_color_bulb',
+        'main_corridor_light',
+        'shelly1',
+        'kitchen_ceiling_lights',
+        'kitchen_strip',  
         ] -%}
-        {{- states.light | rejectattr('object_id', 'in', reject) | selectattr('state','eq','on') | list | length -}}
+        {{- states.light | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length -}}
 
     switches_on:
       friendly_name: "Switches (as a light) turned on"
       value_template: >
-        {%- set reject = ['guestroom_plug_2', 
-        'guestroom_plug', 
-        'guest_room_plug_power_outage_memory', 
-        'outlet',
-        'power_meter', 
-        'smart_plug_led', 
-        'enable_bsl', 
-        'restart_esp', 
-        'restart_zigbee', 
+        {%- set sel = [
+        'outdoor_floodlight', 
+        'yard_light', 
+        'backyard_light',
+        'terrace_spotlights',
         ] -%}
-        {{- states.switch | rejectattr('object_id', 'in', reject) | selectattr('state','eq','on') | list | length }}
+        {{- states.switch | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+
+    opened_windows:
+      friendly_name: "Opened Windows"
+      value_template: >
+        {%- set sel = [
+        'toilet_window_sensor_contact',
+        'dining_room_window_sensor_contact',
+        'livingroom_window_sensor_contact',
+        'main_corridor_window_sensor_contact',
+        'kitchen_window_sensor_contact',
+        'kidsroom_window_sensor_contact', 
+        ] -%}
+        {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+
+    opened_doors:
+      friendly_name: "Opened Doors"
+      value_template: >
+        {%- set sel = [
+        'terrace_door_sensor_contact',
+        'hallway_contact_sensor_ring',
+        'main_corridor_door_sensor_contact',
+        ] -%}
+        {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
