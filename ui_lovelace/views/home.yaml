@@ -1,14 +1,6 @@
 title: home
 path: home
 icon: mdi:home
-visible:
-  - user: 7566199fd6d149c3b5c24289e0648010
-  - user: 15ccfedd899848cc96c6b54e001d58a7
-  - user: 56f783f152d34acea9df8664a49e58c9
-  - user: c552615abbe24d96a3594cd254d5d37e
-  - user: cc02bdd155af4d6ca21f2f96d8aadbac
-  - user: ca6b753fa3864510837d851649a752d3
-badges: []
 cards:
   - type: markdown
     content: >-

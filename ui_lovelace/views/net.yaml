@@ -9,7 +9,136 @@ cards:
     cards:
       - type: row
         cards:
-          - type: vertical-stack
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+              - type: weather
+                entity: weather.home
+                show_conditions: true
+                show_temperature: true
+              - type: entity
+                entity: sensor.socket_connections
+              - type: conditional
+                conditions:
+                  - entity: sensor.mikrotik_temperature
+                    state_not: "0"
+                chip:
+                  type: entity
+                  entity: sensor.mikrotik_temperature
+                  content_info: state
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_sfp_sfpplus1
+                    state: "on"
+                chip:
+                  type: entity
+                  name: SFP +
+                  entity: sensor.mikrotik_sfp_sfpplus1_rx
+              - type: conditional
+                conditions:
+                  - entity: sensor.mikrotik_wireless_clients
+                    state_not: "0"
+                chip:
+                  type: entity
+                  entity: sensor.mikrotik_wireless_clients
+                  content_info: state
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether1
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 1
+                  entity: binary_sensor.mikrotik_ether1
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether2
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 2
+                  entity: binary_sensor.mikrotik_ether2
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether3
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 3
+                  entity: binary_sensor.mikrotik_ether3
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether4
+                    state: "on"
+                chip:
+                  type: entity
+                  entity: binary_sensor.mikrotik_ether4
+                  content_info: name
+                  name: ETH 4
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether5
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 5
+                  entity: binary_sensor.mikrotik_ether5
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether6
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 6
+                  entity: binary_sensor.mikrotik_ether6
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether7
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 7
+                  entity: binary_sensor.mikrotik_ether7
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether8
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 8
+                  entity: binary_sensor.mikrotik_ether8
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether9
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 9
+                  entity: binary_sensor.mikrotik_ether9
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.mikrotik_ether10
+                    state: "on"
+                chip:
+                  type: entity
+                  content_info: name
+                  name: ETH 10
+                  entity: binary_sensor.mikrotik_ether10
+
+      - type: row
+        cards:
+          - class: col-xs-12 col-md-6 col-lg-4 order-2 order-lg-0
+            type: vertical-stack
             cards:
               - type: vertical-stack
                 cards:
@@ -24,7 +153,7 @@ cards:
                     entities:
                       - entity: sensor.speedtest_ping
                         name: SPEEDTEST
-                    font_size": 70
+                    font_size: 70
                     height: 50
                     hours_to_show: 3
                     line_width: 2
@@ -32,6 +161,81 @@ cards:
                     show:
                       fill: false
                       icon: false
+          - class: col-xs-12 col-md-6 col-lg-4 order-3 order-lg-1
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    color_thresholds:
+                      - value: 0
+                        color: "#007700"
+                      - value: 50
+                        color: "#ffff00"
+                      - value: 80
+                        color: "#ff0000"
+                    entities:
+                      - entity: sensor.disk_use_percent
+                    font_size: 70
+                    height: 50
+                    hours_to_show: 96
+                    line_width: 2
+                    points_per_hour: 1
+                    show:
+                      fill: false
+                      icon: false
+          - class: col-xs-12 col-md-6 col-lg-4 order-0 order-lg-2
+            type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - type: custom:hui-element
+                    card_type: custom:mod-card
+                    card:
+                      type: horizontal-stack
+                      cards:
+                        - type: picture
+                          style: |
+                            ha-card { 
+                              --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                              --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                              --ha-card-box-shadow: 'none';
+                            }
+                          image: /local/images/devices/rpi4.png
+                        - type: vertical-stack
+                          cards:
+                            - type: custom:button-card
+                              layout: icon_name_state2nd
+                              show_state: true
+                              icon: mdi:thermometer
+                              name: Server Temperature.
+                              styles:
+                                icon:
+                                  - width: 40px
+                                card:
+                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                  - "--ha-card-box-shadow": none
+                              entity: sensor.raspberry_c_temp
+                              style: |
+                                ha-card.button-card-main {padding:0!important;}
+                            - type: custom:button-card
+                              entity: binary_sensor.rpi_power_status
+                              layout: icon_name_state2nd
+                              name: Power Ststus
+                              show_state: true
+                              styles:
+                                icon:
+                                  - width: 40px
+                                card:
+                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                  - "--ha-card-box-shadow": none
+          # - type: row
+          #   cards:
+          - class: col-xs-12 col-md-6 col-lg-4 order-4 order-lg-3
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
                   - type: horizontal-stack
                     cards:
                       - type: custom:mini-graph-card
@@ -70,97 +274,90 @@ cards:
                         show:
                           fill: false
                           icon: false
-            class: col-xs-12 col-md-6 col-lg-4
-          - type: vertical-stack
+          - class: col-xs-12 col-md-6 col-lg-4 order-5 order-lg-4
+            type: vertical-stack
             cards:
-              - type: custom:hui-entities-card
-                entities:
-                  - type: custom:hui-vertical-stack-card
+              - type: vertical-stack
+                cards:
+                  - type: horizontal-stack
                     cards:
-                      - type: horizontal-stack
-                        cards:
-                          - type: picture
-                            style: |
-                              ha-card { 
-                                --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                                --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                                --ha-card-box-shadow: 'none';
-                              }
-                            image: /local/images/devices/rpi4.png
-                          - type: custom:button-card
-                            layout: icon_name_state2nd
-                            show_icon: true
-                            show_state: true
-                            show_name: false
-                            styles:
-                              grid:
-                                - grid-template-columns: 1fr 5fr
-                              icon:
-                                - top: 10px
-                                - height: 25px
-                                - width: 25px
-                              card:
-                                - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                - "--ha-card-box-shadow": none
-                              state:
-                                - justify-self: start
-                              name:
-                                - justify-self: start
-                            entity: sensor.raspberry_c_temp
-                            icon: mdi:thermometer
-                          - type: custom:button-card
-                            layout: icon_name_state2nd
-                            name: PW
-                            show_icon: true
-                            show_state: true
-                            show_name: true
-                            styles:
-                              grid:
-                                - grid-template-columns: 1fr 5fr
-                              icon:
-                                - top: 10px
-                                - height: 25px
-                                - width: 25px
-                              card:
-                                - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                - "--ha-card-box-shadow": none
-                              state:
-                                - left: 15px
-                                - position: relative
-                              name:
-                                - justify-self: start
-                                - top: 20px
-                                - left: 5px
-                                - position: relative
-                            entity: binary_sensor.rpi_power_status
+                      - type: custom:mini-graph-card
+                        color_thresholds:
+                          - value: 0
+                            color: "#007700"
+                          - value: 50
+                            color: "#ffff00"
+                          - value: 70
+                            color: "#ff0000"
+                        entities:
+                          - entity: sensor.memory_use_percent
+                        font_size: 70
+                        height: 50
+                        hours_to_show: 1
+                        line_width: 2
+                        points_per_hour: 60
+                        show:
+                          fill: false
+                          icon: false
+                      - type: custom:mini-graph-card
+                        color_thresholds:
+                          - value: 0
+                            color: "#007700"
+                          - value: 40
+                            color: "#ffff00"
+                          - value: 70
+                            color: "#ff0000"
+                        entities:
+                          - entity: sensor.processor_use_percent
+                        font_size: 70
+                        height: 50
+                        hours_to_show: 1
+                        line_width: 2
+                        points_per_hour: 60
+                        show:
+                          fill: false
+                          icon: false
+          - class: col-xs-12 col-md-6 col-lg-4 order-1 order-lg-5
+            type: vertical-stack
+            cards:
               - type: entities
                 entities:
-                  - entity: sensor.maria_db_size
-                    name: DB
-              - entities:
-                  - entity: sensor.disk_use_percent
-                  - entity: sensor.memory_use_percent
-                  - entity: sensor.processor_use_percent
-                    name: Processor
-                max: 100
-                positions:
-                  icon: "off"
-                  indicator: inside
-                style: |-
-                  bar-card-currentbar, bar-card-backgroundbar  {
-                      border-radius: 0!important;
-                  }
-                type: custom:bar-card
-                unit_of_measurement: "%"
-            class: col-xs-12 col-md-6 col-lg-4
-          - type: vertical-stack
-            cards:
-              - type: custom:mushroom-entity-card
-                entity: sensor.cpu_temperature
-              - type: custom:mushroom-entity-card
-                entity: sensor.ip
-              - type: custom:mushroom-entity-card
-                entity: sensor.socket_connections
-              - type: custom:mushroom-entity-card
-                entity: sensor.uptime
-            class: col-xs-12 col-md-6 col-lg-4
+                  - type: custom:hui-element
+                    card_type: custom:mod-card
+                    card:
+                      type: horizontal-stack
+                      cards:
+                        - type: picture
+                          style: |
+                            ha-card { 
+                              --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                              --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                              --ha-card-box-shadow: 'none';
+                            }
+                          image: /local/images/devices/zsgw.png
+                        - type: vertical-stack
+                          cards:
+                            - type: custom:button-card
+                              layout: icon_name_state2nd
+                              show_state: true
+                              name: Zigbee GW
+                              styles:
+                                icon:
+                                  - width: 40px
+                                card:
+                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                  - "--ha-card-box-shadow": none
+                              entity: sensor.cpu_temperature
+                              style: |
+                                ha-card.button-card-main {padding:0!important;}
+                            - type: custom:button-card
+                              entity: sensor.uptime
+                              layout: icon_name_state2nd
+                              name: Uptime
+                              show_state: true
+                              styles:
+                                icon:
+                                  - width: 40px
+                                card:
+                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
+                                  - "--ha-card-box-shadow": none
