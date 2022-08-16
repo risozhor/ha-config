@@ -102,6 +102,13 @@ You can support me:
 
 # Welcome to my Home Assistant configuration
 
+## Mobile view
+
+https://user-images.githubusercontent.com/12980782/184926349-f83677e8-0cd5-4c81-a311-43a512391418.mp4
+
+
+
+
 ### main screen
 <img src="git/screen 1.png"  />
 
