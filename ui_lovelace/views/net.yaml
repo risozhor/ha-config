@@ -3,7 +3,6 @@ path: net
 type: panel
 icon: mdi:server-network
 theme: Backend-selected
-badges: []
 cards:
   - type: custom:bootstrap-grid-card
     cards:
@@ -137,7 +136,7 @@ cards:
 
       - type: row
         cards:
-          - class: col-xs-12 col-md-6 col-lg-4 order-2 order-lg-0
+          - class: col-xs-12 col-md-6 col-lg-4 order-2 order-md-2 order-lg-0 # speedtest_ping
             type: vertical-stack
             cards:
               - type: vertical-stack
@@ -161,8 +160,10 @@ cards:
                     show:
                       fill: false
                       icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-3 order-lg-1
+          - class: col-xs-12 col-md-6 col-lg-4 order-4 order-md-3 order-lg-1 # disk_use_percent
             type: vertical-stack
+            style: |
+              order-6 {order: 6 !important;}
             cards:
               - type: vertical-stack
                 cards:
@@ -184,7 +185,7 @@ cards:
                     show:
                       fill: false
                       icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-0 order-lg-2
+          - class: col-xs-12 col-md-6 col-lg-4 order-0 order-md-0 order-lg-2 # rpi4
             type: vertical-stack
             cards:
               - type: entities
@@ -229,9 +230,7 @@ cards:
                                 card:
                                   - "--ha-card-background": rgba(0, 0, 0, 0.0)
                                   - "--ha-card-box-shadow": none
-          # - type: row
-          #   cards:
-          - class: col-xs-12 col-md-6 col-lg-4 order-4 order-lg-3
+          - class: col-xs-12 col-md-6 col-lg-4 order-3 order-md-4 order-lg-3 # speedtest_download speedtest_upload
             type: vertical-stack
             cards:
               - type: vertical-stack
@@ -274,7 +273,7 @@ cards:
                         show:
                           fill: false
                           icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-5 order-lg-4
+          - class: col-xs-12 col-md-6 col-lg-4 order-5 order-md-5 order-lg-4 # memory_use_percentz processor_use_percent
             type: vertical-stack
             cards:
               - type: vertical-stack
@@ -317,7 +316,7 @@ cards:
                         show:
                           fill: false
                           icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-1 order-lg-5
+          - class: col-xs-12 col-md-6 col-lg-4 order-1 order-md-1 order-lg-5 # z GW
             type: vertical-stack
             cards:
               - type: entities

@@ -3,7 +3,6 @@ theme: Backend-selected
 path: camera
 icon: mdi:camera-outline
 type: panel
-badges: []
 cards:
   - type: custom:bootstrap-grid-card
     cards:
@@ -15,12 +14,12 @@ cards:
             # show_name: true
             # camera_view: auto
             entity: camera.wyze
-          - type: picture-entity
-            class: col-xs-12 col-md-4 pt-5
-            # show_state: true
-            # show_name: true
-            # camera_view: auto
-            entity: camera.front_door
+          # - type: picture-entity
+          #   class: col-xs-12 col-md-4 pt-5
+          #   # show_state: true
+          #   # show_name: true
+          #   # camera_view: auto
+          #   entity: camera.wyze
           - type: picture-entity
             class: col-xs-12 col-md-4 pt-5
             # show_state: true

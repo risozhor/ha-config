@@ -2,7 +2,6 @@ title: users
 path: users
 icon: mdi:account
 type: panel
-badges: []
 cards:
   - type: custom:bootstrap-grid-card
     cards:

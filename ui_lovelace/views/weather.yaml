@@ -1,7 +1,6 @@
-title: climate
-path: climate
-icon: mdi:cloud-outline
-badges: []
+title: Weather
+path: weather
+icon: mdi:weather-partly-cloudy
 type: panel
 cards:
   - type: custom:bootstrap-grid-card
@@ -43,7 +42,7 @@ cards:
                 name: Temperature
           - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
             type: custom:mini-graph-card
-            font_size": 70
+            font_size: 70
             height: 50
             hours_to_show: 48
             line_width: 2
@@ -65,7 +64,7 @@ cards:
                 name: Pressure
           - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
             type: custom:mini-graph-card
-            font_size": 70
+            font_size: 70
             height: 50
             hours_to_show: 48
             line_width: 2
@@ -87,7 +86,7 @@ cards:
                 name: Humidity
           - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
             type: custom:mini-graph-card
-            font_size": 70
+            font_size: 70
             height: 50
             hours_to_show: 48
             line_width: 2
@@ -196,18 +195,6 @@ cards:
             entities:
               - type: custom:mushroom-entity-card
                 entity: sensor.weather_station_wind_direction
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.wind_sensor
                 layout: vertical
                 style: |
                   ha-card { 

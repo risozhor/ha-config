@@ -1,7 +1,6 @@
 title: doors
 path: doors
 icon: mdi:door-open
-badges: []
 type: panel
 cards:
   - type: custom:bootstrap-grid-card

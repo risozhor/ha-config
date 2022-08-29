@@ -1,8 +1,6 @@
 title: lights
 path: lights
 icon: mdi:lightbulb-multiple-outline
-badges: []
-
 type: panel
 cards:
   - type: custom:bootstrap-grid-card

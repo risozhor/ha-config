@@ -3,9 +3,8 @@ preload_cards:
   - custom:mini-graph-card
   - custom:weather-card
   - custom:button-card
-  - custom:mini-graph-card
-preload_rows:
-  - divider
+# preload_rows:
+#   - divider
 button_card_templates: !include ui_lovelace/button_card_templates.yaml
 swipe_nav:
   swipe_amount: 30
@@ -22,7 +21,7 @@ views:
   - !include ui_lovelace/views/energy.yaml
   - !include ui_lovelace/views/net.yaml
   - !include ui_lovelace/views/sensors.yaml
-  - !include ui_lovelace/views/climate.yaml
+  - !include ui_lovelace/views/weather.yaml
   - !include ui_lovelace/views/floorplan.yaml
   - !include ui_lovelace/views/batteries.yaml
   - !include ui_lovelace/views/control.yaml

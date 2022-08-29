@@ -1,7 +1,6 @@
 title: Sensors
 path: sensors
 icon: mdi:thermometer
-badges: []
 cards:
   - type: custom:mini-graph-card
     hours_to_show: 96

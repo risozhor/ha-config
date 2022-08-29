@@ -1,7 +1,6 @@
 title: energy
 path: energy
 icon: mdi:lightning-bolt
-badges: []
 type: panel
 cards:
   - type: custom:bootstrap-grid-card

@@ -14,12 +14,18 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
     - service: notify.mobile_app_note20
       data:
-        title: "Air alert! Go to the shelter immediately!"
         message: TTS
         data:
+          tts_text: Air alert! Go to the shelter immediately!
           channel: alarm_stream
+    - service: tts.google_say
+      data:
+        entity_id: all
+        message: Увага! Повітряна тривога! Негайно прямуйте в укриття.
+        language: uk
     - service: notify.mobile_app_note20
       data:
         title: Повітряна тривога!
@@ -47,10 +53,15 @@
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
     - service: notify.mobile_app_note20
       data:
-        title: "Air alert canceled! Get back to your business!"
         message: TTS
         data:
+          tts_text: "Air alert canceled! Get back to your business!"
           channel: alarm_stream
+    - service: tts.google_say
+      data:
+        entity_id: all
+        message: Відбій тривоги!, мої котики! Повертайтесь до своїх справ.
+        language: uk
     - service: notify.mobile_app_note20
       data:
         title: Відбій тривоги!
