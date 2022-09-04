@@ -40,6 +40,8 @@ external_components:
   - source: github://pr#2702
     components: ["nspanel"]
     refresh: 0s
+
+
 interval:
   - interval: 1min
     then:

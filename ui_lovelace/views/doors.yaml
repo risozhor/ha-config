@@ -18,7 +18,6 @@ cards:
               - type: template
                 content: "{{int(states.sensor.opened_windows.state)}}"
                 icon: mdi:window-open-variant
-
               - type: weather
                 entity: weather.home
                 show_conditions: true
