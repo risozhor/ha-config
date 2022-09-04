@@ -19,19 +19,40 @@ nspanel-1:
         supportedModes:
           - arm_home
           - arm_away
+      - type: cardThermo
+        title: Thermostat
+        entity: climate.living_room
       - type: cardMedia
         entity: media_player.living_room_speaker
       - type: cardGrid
         title: Livingroom
         entities:
           - entity: fan.xiaomi_miio_device
-            icon: mdi:fan
+            icon:
+              "on": mdi:fan
+              "off": mdi:fan-off
+            color:
+              "on": [20, 60, 255]
+              "off": [126, 126, 126]
           - entity: light.livingroom_lights
-            icon: mdi:vanity-light
+            icon:
+              "on": mdi:lightbulb-group
+              "off": mdi:lightbulb-group-off
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: light.gyver_lamp_esp_74e9c8
             icon: mdi:lava-lamp
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: light.livingroom_table_background
-            icon: mdi:led-strip-variant
+            icon:
+              "on": mdi:led-strip-variant
+              "off": mdi:led-strip-variant-off
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
       - type: cardEntities
         title: Doors & Windows 1/2
         entities:
