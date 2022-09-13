@@ -30,49 +30,82 @@ cards:
               - type: custom:mushroom-entity-card
                 entity: lock.frontdoor
                 layout: vertical
+                icon_color: #1a73e8
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.main_corridor_door_sensor_contact
+                entity: binary_sensor.terrace_door_sensor_contact
                 name: Frontdoor
                 layout: vertical
+                icon_color: #1a73e8
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.terrace_door_sensor_contact
-                name: Terrace Entrance
+            type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.main_corridor_door_sensor_contact
+                layout: vertical
+                icon_color: #1a73e8
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.main_corridor_window_sensor_contact
+                # name: Frontdoor
+                layout: vertical
+                icon_color: #1a73e8
+          # - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+          #   type: entities
+          #   entities:
+          #     - type: custom:multiple-entity-row
+          #       entity: binary_sensor.terrace_door_sensor_contact
+          #       name: Terrace Entrance
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
             entities:
               - type: custom:multiple-entity-row
                 entity: binary_sensor.hallway_contact_sensor_ring
                 name: Hallway Door
+                state_color: true
+          # - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+          #   type: entities
+          #   entities:
+          #     - type: custom:multiple-entity-row
+          #       entity: binary_sensor.main_corridor_door_sensor_contact
+          #       name: Main Frontdoor
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
             entities:
               - type: custom:multiple-entity-row
                 entity: binary_sensor.kitchen_window_sensor_contact
                 name: Kitchen Window
+                state_color: true
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
             entities:
               - type: custom:multiple-entity-row
                 entity: binary_sensor.livingroom_window_sensor_contact
                 name: Livingroom Window
+                state_color: true
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
             entities:
               - type: custom:multiple-entity-row
                 entity: binary_sensor.kidsroom_window_sensor_contact
                 name: Kidsroom Window
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.main_corridor_window_sensor_contact
-                name: Main Corridor Window
+                state_color: true
+          # - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+          #   type: entities
+          #   entities:
+          #     - type: custom:multiple-entity-row
+          #       entity: binary_sensor.main_corridor_window_sensor_contact
+          #       name: Main Corridor Window
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
             entities:
               - type: custom:multiple-entity-row
                 entity: binary_sensor.toilet_window_sensor_contact
                 name: Toilet Window
+                state_color: true
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.dining_room_window_sensor_contact
+                name: Dining Room Window
+                state_color: true

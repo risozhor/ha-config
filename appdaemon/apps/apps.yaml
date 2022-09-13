@@ -7,12 +7,38 @@ nspanel-1:
     sleepTimeout: 20
     sleepBrightness:
       - time: "7:00:00"
-        value: 10
+        value: 30
       - time: "23:00:00"
         value: 5
     locale: "uk_UA"
     screensaver:
+      statusIcon1:
+        entity: switch.tasmota
+      statusIcon2:
+        entity: switch.tasmota_4417937dfc18_switch_relay_1
       entity: weather.home
+      theme:
+        time: [255, 255, 255]
+        date: [255, 175, 0]
+        tMainIcon: [57, 169, 255]
+        bar: [57, 169, 0]
+        autoWeather: true
+        # Нижче задаємо колір піктограмам погоди (лише тоді, коли - autoWeather: true)
+        clear-night: [150, 150, 100]
+        cloudy: [75, 75, 75]
+        exceptional: [255, 50, 50]
+        fog: [150, 150, 150]
+        hail: [200, 200, 200]
+        lightning: [200, 200, 0]
+        lightning-rainy: [200, 200, 150]
+        partlycloudy: [150, 150, 150]
+        pouring: [50, 50, 255]
+        rainy: [100, 100, 255]
+        snowy: [150, 150, 150]
+        snowy-rainy: [150, 150, 255]
+        sunny: [255, 255, 0]
+        windy: [150, 150, 150]
+        windy-variant: [255, 125, 125]
     cards:
       - type: cardAlarm
         entity: alarm_control_panel.ring_alarm
@@ -64,6 +90,7 @@ nspanel-1:
             icon: mdi:door-open
           - entity: binary_sensor.kitchen_window_sensor_contact
             icon: mdi:window-open
+            name: Kitchen Window
       - type: cardEntities
         title: Doors & Windows 2/2
         entities:
@@ -76,12 +103,12 @@ nspanel-1:
           - entity: binary_sensor.toilet_window_sensor_contact
             icon: mdi:window-open
       - type: cardQR
-        title: Wifi
-        qrCode: "WIFI:S:SmartHome;T:WPA;P:12kreditor;;"
-        entities:
-          - entity: iText.SmartHome
+        title: Guest Wifi Network
+        qrCode: "WIFI:S:SmartHome Guests;T:WPA;P:1qaz2wsx;;" # SSID та ПАРОЛЬ в QR
+        entities: # Вкажіть SSID та ПАРОЛЬ якщо немає змоги сканувати QR
+          - entity: iText.SmartHome Guests
             name: Name
             icon: mdi:wifi
-          - entity: iText.12kreditor
+          - entity: iText. 1qaz2wsx
             name: Password
             icon: mdi:key

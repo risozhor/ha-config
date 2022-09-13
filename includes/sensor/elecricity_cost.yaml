@@ -2,6 +2,6 @@
   sensors:
     energy_cost:
       device_class: monetary
-      friendly_name: "Energy Cost"
+      friendly_name: "Monthly Energy Cost"
       unit_of_measurement: "UAH"
-      value_template: "{% set energyprice = 1.68 %}{{ energyprice | float | round(2) }}"
+      value_template: "{{((states.sensor.monthly_energy_normal.state) | float * 1.68) | round(2)}}"

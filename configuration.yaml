@@ -1,7 +1,6 @@
-#default_config:
 config:
 energy:
-# logbook:
+logbook:
 my:
 http:
   ip_ban_enabled: false
@@ -86,4 +85,3 @@ lovelace:
       title: hidden
       show_in_sidebar: false
       filename: hidden.yaml # not yet created
-

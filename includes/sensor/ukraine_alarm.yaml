@@ -1,0 +1,21 @@
+- platform: template
+  sensors:
+    ua_alarms:
+      friendly_name: "Ukraine Alarm"
+      value_template: >-
+        {% if is_state("binary_sensor.teritorialna_gromada_air", "on") %}Air alert!
+        {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on") %}Artillery alert!
+        {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on") %}Unknown alert!
+        {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on") %}Urban fights alert!
+        {% elif is_state("binary_sensor.chemical", "on") %}Chemical alert!
+        {% elif is_state("binary_sensor.nuclear", "on") %}Nuclear alert!
+        {% else %}Safe{% endif %}
+      icon_template: >
+        {% if is_state("binary_sensor.teritorialna_gromada_air", "on") %}mdi:cloud
+        {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on") %}mdi:tank
+        {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on") %}mdi:check-circle
+        {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on") %}mdi:pistol
+        {% elif is_state("binary_sensor.chemical", "on") %}mdi:chemical-weapon
+        {% elif is_state("binary_sensor.nuclear", "on") %}mdi:nuke
+        {% else %}mdi:shield-home{% endif %}
+      unique_id: ua_alarm

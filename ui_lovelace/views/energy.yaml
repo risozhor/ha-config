@@ -8,8 +8,8 @@ cards:
       - type: row
         cards:
           - type: custom:mushroom-title-card
-            title: Energy monitoring
             class: col-xs-12 col-md-4
+            title: "Energy monitoring"
           - type: energy-date-selection
             class: col-xs-12 col-md-8
       - type: row
@@ -18,5 +18,12 @@ cards:
             class: col-xs-12 col-md-4 pt-2
           - type: energy-usage-graph
             class: col-xs-12 col-md-4 pt-2
-          - type: energy-devices-graph
+          # - type: energy-devices-graph
+          #   class: col-xs-12 col-md-4 pt-2
+          - type: vertical-stack
             class: col-xs-12 col-md-4 pt-2
+            cards:
+              - type: energy-devices-graph
+              - type: custom:mushroom-entity-card
+                entity: sensor.energy_cost
+                layout: vertical
