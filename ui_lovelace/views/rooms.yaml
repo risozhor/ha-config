@@ -1,0 +1,243 @@
+title: Rooms
+path: rooms
+icon: mdi:home-switch
+type: panel
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+              - type: template
+                content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
+                icon: mdi:lightbulb-multiple-outline
+              - type: template
+                content: "{{int(states.sensor.opened_doors.state)}}"
+                icon: mdi:door-open
+              - type: template
+                content: "{{int(states.sensor.opened_windows.state)}}"
+                icon: mdi:window-open-variant
+      - type: row
+        cards:
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Livingroom
+            entity: light.livingroom_lights
+            tap_action:
+              action: none
+            icon: mdi:lightbulb-outline
+            entities:
+              - entity: light.livingroom_lights
+                name: Ceiling
+                icon: hue:pendant-round
+                tap_action:
+                  action: more-info
+              - entity: light.gyver_lamp_esp_74e9c8
+                name: Gyver bulb
+                tap_action:
+                  action: more-info
+              - entity: light.livingroom_table_background
+                name: Table
+                tap_action:
+                  action: more-info
+              - entity: media_player.living_room_speaker
+                name: Nest mini
+            info_entities:
+              - entity: binary_sensor.livingroom_window_sensor_contact
+                show_icon: true
+              - entity: fan.xiaomi_miio_device
+                name: Purier
+                show_icon: true
+                tap_action:
+                  action: more-info
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Kids Room
+            entity: light.0x0017880103aa4b71
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.0x0017880103aa4b71
+                name: Ceiling
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+              - entity: media_player.googlehome4736
+                name: Nest mini
+            info_entities:
+              - entity: binary_sensor.kidsroom_window_sensor_contact
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Hallway
+            entity: light.0x00178801030318a1
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.0x00178801030318a1
+                name: Ceiling
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+              - entity: light.wled
+                name: wled
+                tap_action:
+                  action: more-info
+            info_entities:
+              - entity: binary_sensor.hallway_motion_detector_ring
+                show_icon: true
+              - entity: binary_sensor.hallway_contact_sensor_ring
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Kitchen
+            entity: light.kitchen_ceiling_lights
+            tap_action:
+              action: toggle
+            icon: hue:pendant-devote-three-solid
+            entities:
+              - entity: light.kitchen_table_lamp
+                name: Table lamp
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+              - entity: light.kitchen_color_lamp
+                name: Color lamp
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+              - entity: light.kitchen_ceiling_lamp
+                name: Ceiling lamp
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+              - entity: light.kitchen_strip
+                tap_action:
+                  action: more-info
+                double_tap_action:
+                  action: more-info
+                hold_action:
+                  action: more-info
+            info_entities:
+              - entity: binary_sensor.kitchen_window_sensor_contact
+                show_icon: true
+              - entity: binary_sensor.kitchen_smoke_detector_smoke
+                show_icon: true
+              - entity: switch.outlet
+                show_icon: true
+              - entity: media_player.kitchen_display
+                show_icon: true
+                icon: mdi:monitor-speaker
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Guest Room
+            entity: light.guestroom_color_bulb
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.guestroom_color_bulb
+                name: Guest Room
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+            info_entities:
+              - entity: binary_sensor.guestroom_motion_sensor_occupancy
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Dining Room
+            entity: light.dining_room_stripe_3
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.dining_room_stripe_3
+                name: Stripe
+                tap_action:
+                  action: more-info
+            info_entities:
+              - entity: binary_sensor.dining_room_motion_sensor_occupancy
+                show_icon: true
+              - entity: binary_sensor.dining_room_window_sensor_contact
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Bathroom
+            entity: light.shelly1
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.shelly1
+                name: Bulb
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Main Corridor
+            entity: light.main_corridor_light
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: light.main_corridor_light
+                name: Ceiling
+                tap_action:
+                  action: more-info
+                icon: hue:bulb-sultan
+            info_entities:
+              - entity: binary_sensor.main_corridor_window_sensor_contact
+                show_icon: true
+              - entity: binary_sensor.main_corridor_door_sensor_contact
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Terrace
+            entity: switch.terrace_spotlights
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: switch.terrace_spotlights
+                name: Ceiling
+                tap_action:
+                  action: more-info
+                icon: hue:centura-round
+            info_entities:
+              - entity: binary_sensor.terrace_door_sensor_contact
+                show_icon: true
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:room-card
+            title: Outdoor
+            entity: switch.outdoor_floodlight
+            tap_action:
+              action: none
+            icon: hue:bulb-sultan
+            entities:
+              - entity: switch.outdoor_floodlight
+                name: Floodlight
+                tap_action:
+                  action: more-info
+              - entity: switch.yard_light
+                name: Yard
+                tap_action:
+                  action: more-info
+              - entity: switch.backyard_light
+                name: Backyard
+                tap_action:
+                  action: more-info
+            info_entities:
+              - entity: binary_sensor.outdoor_motion_sensor_occupancy
+                show_icon: true
+              - entity: binary_sensor.0x00158d000457e83c_occupancy
+                show_icon: true
+              - entity: binary_sensor.backyard_motion_sensor_occupancy
+                show_icon: true
