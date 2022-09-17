@@ -1,28 +1,30 @@
-# - alias: yardlightswitch_sleepingmode_on #освітлення в дворі вночі
-#   initial_state: true
-#   trigger:
-#     - platform: state
-#       entity_id: binary_sensor.0x00158d000457e83c_occupancy
-#       to: "on"
-#   condition:
-#     - condition: state
-#       entity_id: switch.yard_light
-#       state: "off"
-#     - condition: state
-#       entity_id: sensor.home_mode
-#       state: "sleepingmode"
-#   action:
-#     - service: switch.turn_on
-#       data:
-#         entity_id: switch.yard_light
-#     - service: timer.start
-#       entity_id: timer.yardlightswitch_2m
+- alias: yardlightswitch_sleepingmode_on #освітлення в дворі вночі
+  initial_state: true
+  trigger:
+    - platform: state
+      # entity_id: binary_sensor.0x00158d000457e83c_occupancy
+      entity_id: binary_sensor.front_door_motion_2
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.yard_light
+      state: "off"
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "sleepingmode"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.yard_light
+    - service: timer.start
+      entity_id: timer.yardlightswitch_1m
 
 # - alias: yardlightswitch_nightmode_on #освітлення в дворі ввечері
 #   initial_state: true
 #   trigger:
 #     - platform: state
 #       entity_id: binary_sensor.0x00158d000457e83c_occupancy
+#       binary_sensor.front_door_motion_2
 #       to: "on"
 #   condition:
 #     - condition: state
@@ -72,7 +74,8 @@
     - service: switch.turn_off
       data:
         entity_id: switch.yard_light
-- alias: yardlightswitch_off_timer
+
+- alias: yardlightswitch_off_timer_2m
   initial_state: true
   trigger:
     - platform: event
@@ -89,6 +92,25 @@
         entity_id: switch.yard_light
     - service: timer.cancel
       entity_id: timer.yardlightswitch_2m
+
+- alias: yardlightswitch_off_timer_1m
+  initial_state: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.yardlightswitch_1m
+  condition:
+    - condition: state
+      entity_id: switch.yard_light
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.yard_light
+    - service: timer.cancel
+      entity_id: timer.yardlightswitch_1m
+
 - alias: yardlightswitch_timer_cancel
   initial_state: true
   trigger:
@@ -97,4 +119,6 @@
       to: "off"
   action:
     - service: timer.cancel
-      entity_id: timer.yardlightswitch_2m
+      entity_id:
+        - timer.yardlightswitch_2m
+        - timer.yardlightswitch_1m

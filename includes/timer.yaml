@@ -26,6 +26,8 @@ hallwaylamps_off:
   duration: "00:30:00"
 floodlight_off_timer_2m:
   duration: "00:02:00"
+yardlightswitch_1m:
+  duration: "00:01:00"
 yardlightswitch_2m:
   duration: "00:02:00"
 yardlightswitch_30off:

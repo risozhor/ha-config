@@ -17,6 +17,7 @@ views:
   - !include ui_lovelace/views/security.yaml
   - !include ui_lovelace/views/doors.yaml
   - !include ui_lovelace/views/lights.yaml
+  - !include ui_lovelace/views/rooms.yaml
   - !include ui_lovelace/views/camera.yaml
   - !include ui_lovelace/views/users.yaml
   - !include ui_lovelace/views/energy.yaml
@@ -25,4 +26,4 @@ views:
   - !include ui_lovelace/views/weather.yaml
   - !include ui_lovelace/views/floorplan.yaml
   - !include ui_lovelace/views/batteries.yaml
-  - !include ui_lovelace/views/control.yaml
+  # - !include ui_lovelace/views/animatedicons.yaml

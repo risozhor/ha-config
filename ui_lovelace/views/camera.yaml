@@ -8,6 +8,13 @@ cards:
     cards:
       - type: row
         cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+      - type: row
+        cards:
           - type: picture-entity
             class: col-xs-12 col-md-4 pt-5
             # show_state: true

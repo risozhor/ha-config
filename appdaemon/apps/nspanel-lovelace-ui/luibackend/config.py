@@ -1,4 +1,5 @@
 import uuid
+import apis
 
 class Entity(object):
     def __init__(self, entity_input_config):
@@ -15,6 +16,7 @@ class Entity(object):
         self.condState     = entity_input_config.get("state")
         self.condStateNot  = entity_input_config.get("state_not")
         self.assumedState  = entity_input_config.get("assumed_state", False)
+        self.data  = entity_input_config.get("data", {})
 
 class Card(object):
     def __init__(self, card_input_config, pos=None):
@@ -75,7 +77,7 @@ class LuiBackendConfig(object):
         return target
 
     def __init__(self, ha_api, config_in):
-        self._ha_api = ha_api
+        apis.ha_api = ha_api
         self._config = {}
         self._config_cards = []
         self._config_screensaver = None
@@ -141,9 +143,9 @@ class LuiBackendConfig(object):
         self.load(config_in)
 
     def load(self, inconfig):
-        self._ha_api.log("Input config: %s", inconfig)
+        apis.ha_api.log("Input config: %s", inconfig)
         self._config = self.dict_recursive_update(inconfig, self._DEFAULT_CONFIG)
-        self._ha_api.log("Loaded config: %s", self._config)
+        apis.ha_api.log("Loaded config: %s", self._config)
         
         # parse cards displayed on panel
         pos = 0

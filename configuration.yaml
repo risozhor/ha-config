@@ -58,30 +58,7 @@ automation: !include_dir_merge_list automations
 # script: !include scripts.yaml
 utility_meter: !include includes/utility_meter.yaml
 climate: !include includes/climate/climate.yaml
-mqtt:
-  lock:
-    - name: "Frontdoor"
-      unique_id: "frontdoor_lock"
-      state_topic: "zigbee2mqtt_lan/Relay"
-      command_topic: "zigbee2mqtt_lan/Relay/right/set"
-      payload_lock: "OFF"
-      payload_unlock: "ON"
-      state_locked: "OFF"
-      state_unlocked: "ON"
-      qos: 1
-      value_template: "{{ value_json.state_right }}"
+mqtt: !include includes/lock.yaml
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml
-  dashboards:
-    # lovelace-generated:
-    #   mode: yaml
-    #   filename: ui-lovelace.yaml
-    #   title: Overview
-    #   show_in_sidebar: true
-    #   require_admin: true
-    lovelace-hidden:
-      mode: yaml
-      title: hidden
-      show_in_sidebar: false
-      filename: hidden.yaml # not yet created

@@ -1,9 +1,6 @@
 - alias: hallwaylight_on_night
   initial_state: true
   trigger:
-    #   - platform: state
-    #     entity_id: binary_sensor.0x286d9700010450de_occupancy
-    #     to: 'on'
     - platform: state
       entity_id: binary_sensor.hallway_motion_detector_ring
       to: "on"
@@ -15,16 +12,10 @@
       entity_id: sensor.home_mode
       state: "nightmode"
   action:
-    # - service: light.turn_on
-    #   data:
-    # entity_id: light.0x00178801030318a1
-    # brightness_pct: 100
-    # kelvin: 3700
-    # transition: 1
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x00178801030318a1/set
-        payload: '{"state": "ON","transition": 1,"brightness": 45,"color_temp": 270,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","transition": 1,"brightness": 255,"color_temp": 270,"hue_power_on_behavior": "recover"}'
         retain: true
     - service: timer.start
       entity_id: timer.hallwaylamps_5m
@@ -43,11 +34,6 @@
       entity_id: sensor.home_mode
       state: "sleepingmode"
   action:
-    # - service: light.turn_on
-    #   data:
-    # entity_id: light.0x00178801030318a1
-    # brightness_pct: 20
-    # transition: 1
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x00178801030318a1/set
@@ -67,10 +53,6 @@
       entity_id: light.0x00178801030318a1
       state: "on"
   action:
-    # - service: light.turn_off
-    #   data:
-    #     entity_id: light.0x00178801030318a1
-    #     transition: 1
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x00178801030318a1/set
@@ -90,10 +72,6 @@
       entity_id: light.0x00178801030318a1
       state: "on"
   action:
-    # - service: light.turn_off
-    #   data:
-    #     entity_id: light.hallway_lamp
-    #     transition: 1
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x00178801030318a1/set

@@ -2,27 +2,27 @@ db_url: !secret db_url
 purge_keep_days: 5
 exclude:
   domains:
-    - automation
+    # - automation
     - camera
     - media_player
     - timer
   entities:
     - sensor.shopping_list
     - sensor.shopping_list_contain
-    - sensor.raspberry_c_temp
-    - binary_sensor.backups_stale
+    # - sensor.raspberry_c_temp
+    # - binary_sensor.backups_stale
     - binary_sensor.remote_ui
     - sensor.last_boot
-    - input_number.scale
-    - input_number.brightness
-    - input_number.speed
-    - sensor.uptime_esp_6b956e
-    - sensor.xiaomi_miio_device_motor_speed
-    - number.keypad_volume
-    - number.base_station_volume
+    # - input_number.scale
+    # - input_number.brightness
+    # - input_number.speed
+    # - sensor.uptime_esp_6b956e
+    # - sensor.xiaomi_miio_device_motor_speed
+    # - number.keypad_volume
+    # - number.base_station_volume
   entity_globs:
-    - sensor.*_charger_type
-    - binary_sensor.*_is_charging
+    # - sensor.*_charger_type
+    # - binary_sensor.*_is_charging
     - sensor.*_battery_state
     - sensor.*_alexa_*
     - switch.*_alexa_*
@@ -30,4 +30,4 @@ exclude:
     - switch.*_echo_*
     - sensor.*_battery_temperature
     - switch.mikrotik_port_*
-    - sensor.*_linkquality
+    # - sensor.*_linkquality

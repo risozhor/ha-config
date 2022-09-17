@@ -7,6 +7,13 @@ cards:
     cards:
       - type: row
         cards:
+          - type: custom:mushroom-chips-card
+            class: col-xs-12
+            chips:
+              - type: back
+              - type: menu
+      - type: row
+        cards:
           - type: vertical-stack
             class: col-xs-12 col-md-6 col-lg-3 pt-5
             cards:
