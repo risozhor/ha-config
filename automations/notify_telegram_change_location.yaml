@@ -1,0 +1,18 @@
+- id: notify-change-country
+  alias: Change country
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: 
+        - sensor.note20_geocoded_location
+        - sensor.sm_m315f_geocoded_location
+      attribute: Country
+      to: ~
+  action:
+    - service: notify.telegram
+      data:
+        title: '{{"\U0001F341"}}{{"\U0001F341"}}{{"\U0001F341"}} *Country changed* {{"\U0001F341"}}{{"\U0001F341"}}{{"\U0001F341"}}'
+        message: "{{ trigger.event.data.name }}, Country changed from {{ trigger.from_state.attributes.Country}} to {{ trigger.to_state.attributes.Country}} "
+        data:
+          inline_keyboard:
+            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'

@@ -2,8 +2,8 @@ nspanel-1:
   module: nspanel-lovelace-ui
   class: NsPanelLovelaceUIManager
   config:
-    panelRecvTopic: "tele/tasmota/RESULT"
-    panelSendTopic: "cmnd/tasmota/CustomSend"
+    panelRecvTopic: "tele/nspanel/RESULT"
+    panelSendTopic: "cmnd/nspanel/CustomSend"
     sleepTimeout: 20
     sleepBrightness:
       - time: "7:00:00"
@@ -13,9 +13,9 @@ nspanel-1:
     locale: "uk_UA"
     screensaver:
       statusIcon1:
-        entity: switch.tasmota
+        entity: switch.nspanel_relay_1_2
       statusIcon2:
-        entity: switch.tasmota_4417937dfc18_switch_relay_1
+        entity: switch.nspanel_relay_2_2
       entity: weather.home
       theme:
         time: [255, 255, 255]

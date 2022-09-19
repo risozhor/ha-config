@@ -1,10 +1,6 @@
 light.wled:
   friendly_name: "Hallway stripe"
 
-# light.gyver_bulb:
-# light.gyver_lamp_esp_6b956e:
-# friendly_name: "Gyver bulb"
-# icon: mdi:lava-lamp
 light.gyver_lamp_esp_74e9c8:
   friendly_name: "Gyver Bulb"
   entity_id: "gyver bulb"

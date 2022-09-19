@@ -34,7 +34,7 @@ cards:
                 use_entity_picture: true
               - type: sensor
                 graph: line
-                entity: sensor.a50_maryna_battery_level
+                entity: sensor.sm_a505fn_battery_level
                 name: Батарея (Marina)
                 hours_to_show: 24
 

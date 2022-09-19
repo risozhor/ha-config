@@ -30,7 +30,7 @@ binary_sensor.frontdoor_sensor_contact:
   #binary_sensor.0x00158d0002e9dd9b_contact:
   friendly_name: FrontDoor Sensor #Вхід наш
   icon: mdi:door-closed
-  device_class: window
+  device_class: door
   retain: true
 #binary_sensor.guestroom_motion_sensor:
 #  friendly_name: Hallway Motion Sensor 

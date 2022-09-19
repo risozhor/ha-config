@@ -4,7 +4,7 @@ device_tracker.note20:
 #   entity_picture: '/local/vitaliy.jpg'
 device_tracker.sm_m315f:
   entity_picture: "/local/vitaliy.jpg"
-device_tracker.a50_maryna:
+device_tracker.sm_a505fn:
   entity_picture: "/local/marina.jpg"
 device_tracker.yaroslava:
   entity_picture: "/local/yaroslava.jpg"
