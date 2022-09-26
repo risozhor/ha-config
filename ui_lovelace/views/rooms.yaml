@@ -30,10 +30,12 @@ cards:
             tap_action:
               action: none
             icon: mdi:lightbulb-outline
+            show_icon: true
             entities:
               - entity: light.livingroom_lights
                 name: Ceiling
                 icon: hue:pendant-round
+                show_icon: true
                 tap_action:
                   action: more-info
               - entity: light.gyver_lamp_esp_74e9c8
@@ -61,12 +63,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.0x0017880103aa4b71
                 name: Ceiling
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
               - entity: media_player.googlehome4736
                 name: Nest mini
             info_entities:
@@ -79,12 +83,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.0x00178801030318a1
                 name: Ceiling
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
               - entity: light.wled
                 name: wled
                 tap_action:
@@ -101,22 +107,26 @@ cards:
             tap_action:
               action: toggle
             icon: hue:pendant-devote-three-solid
+            show_icon: true
             entities:
               - entity: light.kitchen_table_lamp
                 name: Table lamp
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
               - entity: light.kitchen_color_lamp
                 name: Color lamp
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
               - entity: light.kitchen_ceiling_lamp
                 name: Ceiling lamp
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
               - entity: light.kitchen_strip
                 tap_action:
                   action: more-info
@@ -141,12 +151,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.guestroom_color_bulb
                 name: Guest Room
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
             info_entities:
               - entity: binary_sensor.guestroom_motion_sensor_occupancy
                 show_icon: true
@@ -157,6 +169,7 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.dining_room_stripe_3
                 name: Stripe
@@ -174,12 +187,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.shelly1
                 name: Bulb
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
           - class: col-xs-12 col-md-6 col-lg-4 pt-2
             type: custom:room-card
             title: Main Corridor
@@ -187,12 +202,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: light.main_corridor_light
                 name: Ceiling
                 tap_action:
                   action: more-info
                 icon: hue:bulb-sultan
+                show_icon: true
             info_entities:
               - entity: binary_sensor.main_corridor_window_sensor_contact
                 show_icon: true
@@ -205,12 +222,14 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: switch.terrace_spotlights
                 name: Ceiling
                 tap_action:
                   action: more-info
                 icon: hue:centura-round
+                show_icon: true
             info_entities:
               - entity: binary_sensor.terrace_door_sensor_contact
                 show_icon: true
@@ -221,6 +240,7 @@ cards:
             tap_action:
               action: none
             icon: hue:bulb-sultan
+            show_icon: true
             entities:
               - entity: switch.outdoor_floodlight
                 name: Floodlight

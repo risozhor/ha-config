@@ -13,6 +13,7 @@ person.maryna:
   track: true
   device_trackers:
     - device_tracker.sm_a505fn
+    - device_tracker.a50_maryna
 person.yaroslava:
   entity_picture: "/local/yaroslava.jpg"
   track: true
