@@ -18,7 +18,7 @@ views:
   - !include ui_lovelace/views/doors.yaml
   - !include ui_lovelace/views/lights.yaml
   # - !include ui_lovelace/views/rooms.yaml
-  # - !include ui_lovelace/views/camera.yaml
+  - !include ui_lovelace/views/camera.yaml
   - !include ui_lovelace/views/users.yaml
   - !include ui_lovelace/views/energy.yaml
   - !include ui_lovelace/views/net.yaml

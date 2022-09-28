@@ -88,6 +88,10 @@ cards:
                   action: none
                 hold_action:
                   action: more-info
+                style: |
+                  :host {
+                    color: green;
+                  }
                 entities:
                   - entity: light.livingroom_lights
                     icon: true
@@ -116,6 +120,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.kitchen_ceiling_lights
                 name: Kitchen
+                style: |
+                  :host {
+                    color: yellow;
+                  }
                 show_state: false
                 icon: mdi:faucet-variant
                 tap_action:
@@ -143,6 +151,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.0x0017880103aa4b71
                 name: Kidsroom
+                style: |
+                  :host {
+                    color: green;
+                  }
                 icon: mdi:teddy-bear
                 show_state: false
                 tap_action:
@@ -163,6 +175,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.0x00178801030318a1
                 name: Hallway
+                style: |
+                  :host {
+                    color: yellow;
+                  }
                 icon: mdi:coat-rack
                 show_state: false
                 tap_action:
@@ -194,6 +210,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.guestroom_color_bulb
                 name: Guestroom
+                style: |
+                  :host {
+                    color: green;
+                  }
                 show_state: false
                 icon: mdi:walk
                 tap_action:
@@ -214,6 +234,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.main_corridor_light
                 name: Main corridor
+                style: |
+                  :host {
+                    color: lightblue;
+                  }
                 show_state: false
                 icon: mdi:door-sliding
                 tap_action:
@@ -234,6 +258,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.dining_room_stripe_3
                 name: Dining Room
+                style: |
+                  :host {
+                    color: yellow;
+                  }
                 show_state: false
                 icon: mdi:table-chair
                 tap_action:
@@ -254,6 +282,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: light.shelly1
                 name: Bathroom
+                style: |
+                  :host {
+                    color: blue;
+                  }
                 show_state: false
                 icon: mdi:shower-head
                 tap_action:
@@ -275,6 +307,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: switch.backyard_light
                 name: Outdoor
+                style: |
+                  :host {
+                    color: orange;
+                  }
                 show_state: false
                 icon: mdi:pine-tree
                 tap_action:
@@ -308,6 +344,10 @@ cards:
               - type: custom:multiple-entity-row
                 entity: switch.terrace_spotlights
                 name: Terrace
+                style: |
+                  :host {
+                    color: lightblue;
+                  }
                 show_state: false
                 icon: mdi:balcony
                 tap_action:
@@ -323,6 +363,10 @@ cards:
             show_header_toggle: false
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: entities
+            style: |
+              :host {
+                color: brown;
+              }
             entities:
               - entity: light.gyver_lamp_esp_74e9c8
               - entity: input_number.brightness
