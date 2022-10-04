@@ -21,7 +21,7 @@
         data:
           tts_text: Air alert! Go to the shelter immediately!
           channel: alarm_stream
-    - service: tts.google_say
+    - service: tts.google_say # an existing "media_source:" directive is required in configuration.yaml
       data:
         entity_id: all
         message: Увага! Повітряна тривога! Негайно прямуйте в укриття.
@@ -57,11 +57,14 @@
         data:
           tts_text: "Air alert canceled! Get back to your business!"
           channel: alarm_stream
-    - service: tts.google_say
+    # - service: tts.google_say # an existing "media_source:" directive is required in configuration.yaml
+    - service: tts.cloud_say # an existing "media_source:" directive is required in configuration.yaml
       data:
         entity_id: all
-        message: Відбій тривоги!, мої котики! Повертайтесь до своїх справ.
-        language: uk
+        message: Відбій тривоги!, мої котики! Повертайтесь, до своїх справ!
+        # language: uk
+        language: uk-UA
+        cache: true
     - service: notify.mobile_app_note20
       data:
         title: Відбій тривоги!

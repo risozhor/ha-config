@@ -27,7 +27,7 @@ cards:
               - type: custom:mushroom-template-card
                 primary: |-
                   {%- set count =  states('sensor.ligts_on') | int(0) -%}
-                  Ligts turned on {{count}}
+                  Lights turned on {{count}}
                 icon: |-
                   {%- set count =  states('sensor.ligts_on') | int(0) -%}
                   {%- if count > 0 -%}

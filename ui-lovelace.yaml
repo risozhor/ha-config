@@ -3,7 +3,6 @@ preload_cards:
   - custom:mini-graph-card
   # - custom:weather-card
   # - custom:button-card
-  - custom:mini-graph-card
 preload_rows:
   - divider
 button_card_templates: !include ui_lovelace/button_card_templates.yaml

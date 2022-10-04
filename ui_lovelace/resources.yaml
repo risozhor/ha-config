@@ -10,8 +10,8 @@
   type: module
 - url: /local/community/home-assistant-sun-card/home-assistant-sun-card.js
   type: module
-- url: /local/community/lovelace-auto-entities/auto-entities.js
-  type: module
+# - url: /local/community/lovelace-auto-entities/auto-entities.js
+#   type: module
 - url: /local/community/lovelace-card-mod/card-mod.js
   type: module
 - url: /local/community/lovelace-card-preloader/lovelace-card-preloader.js
@@ -26,17 +26,11 @@
   type: module
 - url: /local/community/mini-graph-card/mini-graph-card-bundle.js
   type: module
-- url: /local/community/power-flow-card/power-flow-card.js
-  type: module
 - url: /local/community/vertical-stack-in-card/vertical-stack-in-card.js
   type: module
 - url: /local/community/weather-card/weather-card.js
   type: module
 - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
-  type: module
-- url: /local/community/room-card/room-card.js
-  type: module
-- url: /local/community/mini-media-player/mini-media-player-bundle.js
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
