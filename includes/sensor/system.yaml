@@ -1,6 +1,5 @@
 - platform: cert_expiry
   host: !secret host
-
 - platform: time_date
   display_options:
     - "time"
@@ -15,11 +14,7 @@
     - type: last_boot
     - type: disk_free
       arg: /
-- platform: uptime
-  name: online
-  # unit_of_measurement: minutes
 - platform: command_line
   name: Raspberry C Temp
   command: "cat /sys/class/thermal/thermal_zone0/temp"
-  # unit_of_measurement: "°C"
   value_template: "{{ value | multiply(0.001) | round(2) }}"
