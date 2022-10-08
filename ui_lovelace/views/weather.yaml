@@ -16,189 +16,124 @@ cards:
                 entity: weather.home
                 show_conditions: true
                 show_temperature: true
+              - type: template
+                content: "Dew point: {{int(states.sensor.dew_point.state)}} °C"
+                icon: mdi:thermometer-alert
       - type: row
         cards:
-          - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            font_size: 70
-            height: 50
-            hours_to_show: 48
-            line_width: 2
-            points_per_hour: 48
-            show:
-              fill: false
-              icon: false
-            color_thresholds:
-              - value: 0
-                color: "#0000ff"
-              - value: 20
-                color: "#00ff00"
-              - value: 25
-                color: "#ffff00"
-              - value: 30
-                color: "#ff0000"
-            entities:
-              - entity: sensor.weather_station_temperature
-                name: Temperature
-          - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            font_size: 70
-            height: 50
-            hours_to_show: 48
-            line_width: 2
-            points_per_hour: 48
-            show:
-              fill: false
-              icon: false
-            color_thresholds:
-              - value: 730
-                color: "#0000ff"
-              - value: 740
-                color: "#00ff00"
-              - value: 750
-                color: "#ffff00"
-              - value: 760
-                color: "#ff0000"
-            entities:
-              - entity: sensor.pressure_mmhg
-                name: Pressure
-          - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            font_size: 70
-            height: 50
-            hours_to_show: 48
-            line_width: 2
-            points_per_hour: 48
-            show:
-              fill: false
-              icon: false
-            color_thresholds:
-              - value: 0
-                color: "#0000ff"
-              - value: 50
-                color: "#00ff00"
-              - value: 75
-                color: "#ffff00"
-              - value: 100
-                color: "#ff0000"
-            entities:
-              - entity: sensor.weather_station_humidity
-                name: Humidity
-          - class: col-xs-12 col-sm-6 col-md-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            font_size: 70
-            height: 50
-            hours_to_show: 48
-            line_width: 2
-            points_per_hour: 48
-            show:
-              fill: false
-              icon: false
-            color_thresholds:
-              - value: 0
-                color: "#00ff00"
-              - value: 10
-                color: "#ffff00"
-              - value: 20
-                color: "#ff0000"
-            entities:
-              - entity: sensor.wind_sensor
-                name: Wind Speed
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            type: custom:weather-card
+            entity: weather.openweathermap
+            number_of_forecasts: "5"
+            hourly_forecast: false
+            forecast: false
+            details: true
+            current: true
+            card_mod:
+              style: |
+                ha-card {
+                  height: calc( 100% - 2.6em);
+                }
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            type: custom:stack-in-card
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+            cards:
+              - type: custom:stack-in-card
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: binary_sensor.status_weather_station_2
+                    primary: >-
+                      Weather station {% if
+                      is_state("binary_sensor.status_weather_station_2", "on")
+                      -%}conected{%- else -%}disconected{%- endif %}
+                    secondary: >-
+                      Breath VOC Equivalent outside - {{
+                      states('sensor.weather_station_breath_voc_equivalent')}}
+                    fill_container: truese
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    card_mod:
+                      style: |
+                        :host {
+                          height: 150px;
+                          background: url('/local/images/bg_card/weatherstation.png') center;
+                          background-size: cover;
+                          background-blend-mode: overlay;
+                          background-color: rgba(var(--rgb-card-background-color), 0.5);
+                          --primary-text-color: #fff;
+                          --secondary-text-color: #fff;
+                        }
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: sensor.weather_station_temperature
+                  - type: entity
+                    entity: sensor.weather_station_humidity
+                  - type: entity
+                    entity: sensor.pressure_mmhg
+                  - type: entity
+                    entity: sensor.wind_sensor
+                card_mod:
+                  style: |
+                    :host {
+                      padding: 5px;
+                    }
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            show_current: false
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.openweathermap
       - type: row
         cards:
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            type: custom:mini-graph-card
+            color_thresholds:
+              - color: "#FF0000"
+                value: 300
+              - color: "#FF9B00"
+                value: 200
+              - color: "#FFC900"
+                value: 150
+              - color: "#E8FF00"
+                value: 100
+              - color: "#08FF00"
+                value: 50
             entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_precipitation_probability
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.absolute_humidity
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.dew_point
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_station_gas_resistance
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_station_iaq
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_station_co2_equivalent
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_station_breath_voc_equivalent
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: sensor.weather_station_wind_direction
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
+              - sensor.u_s_air_quality_index
+            hours_to_show: 168
+            line_width: 2
+            name: Air Quality Index
+            points_per_hour: 1
+            show:
+              icon: false
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            type: custom:compass-card
+            indicator_sensors:
+              - sensor: sensor.wind_bearing
+                indicator:
+                  type: arrow_inward
+            value_sensors:
+              - sensor: sensor.wind_speed
+            compass:
+              north:
+                show: true
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+                compass-card,ha-card,.content{height: 100%!important;}
+          - class: col-xs-12 col-sm-9 col-md-6 col-lg-4
+            type: custom:sun-card
+            darkMode: true
+            timeFormat: 24h
