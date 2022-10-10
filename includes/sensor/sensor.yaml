@@ -88,3 +88,30 @@
         'main_corridor_door_sensor_contact',
         ] -%}
         {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+
+- platform: template
+  sensors:
+    moon_phase_image:
+      #entity_id: sensor.moon
+      friendly_name: "Moon Phase image"
+      value_template: "{{ states.sensor.moon_phase.state }}"
+      icon_template: >
+        moon:{{ states.sensor.moon.state }}
+      entity_picture_template: >-
+        {% if is_state('sensor.moon_phase', 'new_moon') -%}
+        /local/images/MoonPhases/new_moon.png
+        {% elif is_state('sensor.moon_phase', 'waxing_crescent') -%}
+        /local/images/MoonPhases/waxing_crescent.png
+        {% elif is_state('sensor.moon_phase', 'first_quarter') -%}
+        /local/images/MoonPhases/first_quarter.png
+        {% elif is_state('sensor.moon_phase', 'waxing_gibbous') -%}
+        /local/images/MoonPhases/waxing_gibbous.png
+        {% elif is_state('sensor.moon_phase', 'full_moon') -%}
+        /local/images/MoonPhases/full_moon.png
+        {% elif is_state('sensor.moon_phase', 'waning_gibbous') -%}
+        /local/images/MoonPhases/waning_gibbous.png
+        {% elif is_state('sensor.moon_phase', 'last_quarter') -%}
+        /local/images/MoonPhases/last_quarter.png
+        {% elif is_state('sensor.moon_phase', 'waning_crescent') -%}
+        /local/images/MoonPhases/waning_crescent.png
+        {%- endif %}

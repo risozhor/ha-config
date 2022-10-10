@@ -13,7 +13,7 @@ swipe_nav:
   prevent_default: true
 views:
   - !include ui_lovelace/views/home.yaml
-  - !include ui_lovelace/views/security.yaml
+  # - !include ui_lovelace/views/security.yaml
   - !include ui_lovelace/views/doors.yaml
   - !include ui_lovelace/views/lights.yaml
   # - !include ui_lovelace/views/rooms.yaml
@@ -25,4 +25,5 @@ views:
   - !include ui_lovelace/views/weather.yaml
   - !include ui_lovelace/views/floorplan.yaml
   - !include ui_lovelace/views/batteries.yaml
+  - !include ui_lovelace/views/shopping-list.yaml
   # - !include ui_lovelace/views/animatedicons.yaml
