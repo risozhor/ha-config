@@ -1,0 +1,8 @@
+title: Shopping List
+path: shopping-list
+icon: mdi:list-status
+subview: true
+badges: []
+cards:
+  - type: shopping-list
+    title: Shopping List
