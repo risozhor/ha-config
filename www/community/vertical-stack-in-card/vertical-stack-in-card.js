@@ -1,4 +1,4 @@
-console.log(`%cvertical-stack-in-card\n%cVersion: ${'0.4.1'}`, 'color: #1976d2; font-weight: bold;', '');
+console.log(`%cvertical-stack-in-card\n%cVersion: ${'0.4.2'}`, 'color: #1976d2; font-weight: bold;', '');
 
 class VerticalStackInCard extends HTMLElement {
   constructor() {
@@ -176,7 +176,7 @@ class VerticalStackInCard extends HTMLElement {
   async getCardSize() {
     await this._cardSize.promise;
     const sizes = await Promise.all(this._refCards.map(this._computeCardSize));
-    return sizes.reduce((a, b) => a + b);
+    return sizes.reduce((a, b) => a + b, 0);
   }
 }
 

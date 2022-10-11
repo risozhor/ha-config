@@ -1,6 +1,9 @@
 background: var(--background-image)
 preload_cards:
   - custom:mini-graph-card
+  - custom:stack-in-card
+  - vertical-stack
+  - custom:mushroom-template-card
   # - custom:weather-card
   # - custom:button-card
 preload_rows:
