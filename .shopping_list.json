@@ -1,5 +1,10 @@
 [
   {
+    "name": "Сир",
+    "id": "15dfbd4308e7492680126710a75de786",
+    "complete": false
+  },
+  {
     "name": "Биток",
     "id": "8c1873cc8a2b4a28907addec1346ed92",
     "complete": false
@@ -7,26 +12,6 @@
   {
     "name": "Ковбаса",
     "id": "8ffc1ca0be694b478442ad40dce5c37f",
-    "complete": false
-  },
-  {
-    "name": "Сир",
-    "id": "15dfbd4308e7492680126710a75de786",
-    "complete": false
-  },
-  {
-    "name": "Вода",
-    "id": "d55d25b2f3ab4e0a80ef7b3c8bacb886",
-    "complete": false
-  },
-  {
-    "name": "фанта",
-    "id": "745d0104300544ba9a132ca7dab8fd6d",
-    "complete": false
-  },
-  {
-    "name": "Сірники бабі",
-    "id": "9feeed7b925541fb9851fcec1d2b12c6",
     "complete": false
   }
 ]
