@@ -1,17 +1,12 @@
 [
   {
-    "name": "Сир",
-    "id": "15dfbd4308e7492680126710a75de786",
+    "name": "Сухий корм їжаку",
+    "id": "75f8aba1bb804df3ba7a995049a2e596",
     "complete": false
   },
   {
-    "name": "Биток",
-    "id": "8c1873cc8a2b4a28907addec1346ed92",
-    "complete": false
-  },
-  {
-    "name": "Ковбаса",
-    "id": "8ffc1ca0be694b478442ad40dce5c37f",
+    "name": "Гранули для їжака",
+    "id": "45047259f98d4950a09cc66a5aa4cd1f",
     "complete": false
   }
 ]
