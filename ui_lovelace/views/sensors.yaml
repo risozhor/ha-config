@@ -107,15 +107,15 @@ cards:
                         show:
                           fill: false
                           icon: false
-          - class: col-xs-12 col-md-4 pt-2
-            type: custom:mushroom-climate-card
-            entity: climate.living_room
-            fill_container: true
-            show_temperature_control: true
-            hvac_modes:
-              - "off"
-              - heat
-            collapsible_controls: false
+          # - class: col-xs-12 col-md-4 pt-2
+          #   type: custom:mushroom-climate-card
+          #   entity: climate.living_room
+          #   fill_container: true
+          #   show_temperature_control: true
+          #   hvac_modes:
+          #     - "off"
+          #     - heat
+          #   collapsible_controls: false
           - class: col-xs-12 col-md-4 pt-2
             type: custom:mushroom-fan-card
             entity: fan.xiaomi_miio_device

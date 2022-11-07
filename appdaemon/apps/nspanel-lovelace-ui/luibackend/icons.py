@@ -187,6 +187,19 @@ def map_to_mdi_name(ha_type, state=None, device_class="_", cardType=None):
             return "weather-night"
         if state == "armed_vacation":
             return "shield-airplane"
+    elif ha_type == "climate":
+        if state in ["auto", "heat_cool"]:
+            return "calendar-sync"
+        if state == "heat":
+            return "fire"
+        if state == "off":
+            return "power"
+        if state == "cool":
+            return "snowflake"
+        if state == "dry":
+            return "water-percent"
+        if state == "fan_only":
+            return "fan"
     elif ha_type == "sun":
         if state == "above_horizon":
             return "weather-sunset-up"
@@ -195,7 +208,7 @@ def map_to_mdi_name(ha_type, state=None, device_class="_", cardType=None):
     else:
         return "alert-circle-outline"
 
-def get_icon_id_ha(ha_type, state=None, device_class=None, overwrite=None):
+def get_icon(ha_type, state=None, device_class=None, overwrite=None):
     if overwrite is not None:
         if type(overwrite) is str:
             return get_icon_id(overwrite)
@@ -203,10 +216,9 @@ def get_icon_id_ha(ha_type, state=None, device_class=None, overwrite=None):
             for overwrite_state, overwrite_icon in overwrite.items():
                 if overwrite_state == state:
                     return get_icon_id(overwrite_icon)
-                
     return get_icon_id(map_to_mdi_name(ha_type, state, device_class))
 
-def get_action_id_ha(ha_type, action, device_class=None, overwrite=None):
+def get_action_icon(ha_type, action, device_class=None, overwrite=None):
     if overwrite is not None:
         return get_icon_id(overwrite)
     if ha_type == "cover":

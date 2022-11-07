@@ -28,10 +28,21 @@ ota:
   safe_mode: true
 web_server:
 api:
+  # services:
+  #   - service: upload_tft
+  #     then:
+  #       - lambda: 'id(nextion1)->upload_tft();'
 uart:
+  # id: uart_1
   tx_pin: 16
   rx_pin: 17
   baud_rate: 115200
+
+# display:
+#   - platform: nextion
+#     id: nextion1
+#     uart_id: uart_1
+#     tft_url: http://nspanel.pky.eu/lovelace-ui/github/nspanel-v3.5.0.tft
 external_components:
   - source:
       type: git
