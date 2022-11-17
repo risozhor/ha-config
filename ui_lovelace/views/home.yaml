@@ -18,12 +18,28 @@ cards:
               - type: template
                 content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
                 icon: mdi:lightbulb-multiple-outline
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/lights
               - type: template
                 content: "{{int(states.sensor.opened_doors.state)}}"
                 icon: mdi:door-open
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/doors
               - type: template
                 content: "{{int(states.sensor.opened_windows.state)}}"
                 icon: mdi:window-open-variant
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/doors
+              - type: weather
+                entity: weather.home
+                show_conditions: true
+                show_temperature: true
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/weather
       - type: row
         cards:
           - class: col-xs-12 col-md-4 pt-2
