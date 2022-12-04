@@ -41,13 +41,9 @@ class LuiPagesGen(object):
         if ha_type == "alarm_control_panel":
             if entity.state == "disarmed":
                 icon_color = rgb_dec565([13,160,53])
-            if entity.state == "armed_home":
-                icon_color = rgb_dec565([223,76,30])
-            if entity.state == "armed_away":
-                icon_color = rgb_dec565([223,76,30])
-            if entity.state == "armed_night":
-                icon_color = rgb_dec565([223,76,30])
-            if entity.state == "armed_vacation":
+            if entity.state == "arming":
+                icon_color = rgb_dec565([244,180,0])
+            if entity.state in ["armed_home", "armed_away", "armed_night", "armed_vacation", "pending", "triggered"]:
                 icon_color = rgb_dec565([223,76,30])
 
         if ha_type == "climate":
@@ -185,7 +181,7 @@ class LuiPagesGen(object):
         status_res = ""
         for i in range(1,3):
             statusIcon = self._config._config_screensaver.raw_config.get(f"statusIcon{i}")
-            if statusIcon is not None:
+            if statusIcon is not None and apis.ha_api.entity_exists(statusIcon.get("entity","")):
                 icon = statusIcon.get("icon")
                 entity = apis.ha_api.get_entity(statusIcon.get("entity"))
                 entityType = statusIcon.get("entity").split(".")[0]
@@ -237,12 +233,13 @@ class LuiPagesGen(object):
         if entityType == "iText":
             value   = entityId.split(".", 2)[1]
             name = name if name is not None else "conf name missing"
+            icon_color = icon_color = rgb_dec565(colorOverride) if colorOverride is not None and type(colorOverride) is list else 17299
             icon_res = get_icon_id(icon) if icon is not None else get_icon_id("alert-circle-outline")
-            return f"~text~{entityId}~{icon_res}~17299~{name}~{value}"
+            return f"~text~{entityId}~{icon_res}~{icon_color}~{name}~{value}"
         if entityType == "service":
             icon_id = get_icon("script", overwrite=icon)
             text = get_translation(self._locale, "frontend.ui.card.script.run")
-            icon_color = 17299
+            icon_color = icon_color = rgb_dec565(colorOverride) if colorOverride is not None and type(colorOverride) is list else 17299
             if item.status is not None and apis.ha_api.entity_exists(item.status):
                 status_entity = apis.ha_api.get_entity(item.status)
                 icon_id = get_icon(item.status.split(".")[0], state=status_entity.state, device_class=status_entity.attributes.get("device_class", "_"), overwrite=icon)
@@ -330,6 +327,9 @@ class LuiPagesGen(object):
         elif entityType == "script":
             entityTypePanel = "button"
             value = get_translation(self._locale, "frontend.ui.card.script.run")
+            override = item.entity_input_config.get("action_name")
+            if override is not None:
+                value = override
         elif entityType == "lock":
             entityTypePanel = "button"
             value = get_translation(self._locale, "frontend.ui.card.lock.lock") if entity.state == "unlocked" else get_translation(self._locale, "frontend.ui.card.lock.unlock")
@@ -342,7 +342,7 @@ class LuiPagesGen(object):
             entityTypePanel = "text"
             value = entity.state
         elif entityType == "input_select":
-            entityTypePanel = "button"
+            entityTypePanel = "input_sel"
             value = entity.state
         elif entityType == "vacuum":
             entityTypePanel = "button"
@@ -462,8 +462,12 @@ class LuiPagesGen(object):
             currently_translation = get_translation(self._locale, "frontend.ui.card.climate.currently")
             state_translation = get_translation(self._locale, "frontend.ui.panel.config.devices.entities.state")
             action_translation = get_translation(self._locale, "frontend.ui.card.climate.operation").replace(' ','\r\n')
+            
+            detailPage = ""
+            if any(x in ["preset_modes", "swing_modes", "fan_modes"] for x in entity.attributes):
+                detailPage = "1"
 
-            command = f"entityUpd~{heading}~{navigation}~{item}~{current_temp} {temperature_unit}~{dest_temp}~{state_value}~{min_temp}~{max_temp}~{step_temp}{icon_res}~{currently_translation}~{state_translation}~{action_translation}~{temperature_unit_icon}~{dest_temp2}"
+            command = f"entityUpd~{heading}~{navigation}~{item}~{current_temp} {temperature_unit}~{dest_temp}~{state_value}~{min_temp}~{max_temp}~{step_temp}{icon_res}~{currently_translation}~{state_translation}~{action_translation}~{temperature_unit_icon}~{dest_temp2}~{detailPage}"
         self._send_mqtt_msg(command)
 
     def generate_media_page(self, navigation, title, entity, mediaBtn):
@@ -497,7 +501,7 @@ class LuiPagesGen(object):
                     onoffbutton = 1374
                 else:
                     onoffbutton = rgb_dec565([255,152,0])
-            command = f"entityUpd~{heading}~{navigation}~{item}~{icon}~{title}~{author}~{volume}~{iconplaypause}~{source}~{speakerlist[:200]}~{onoffbutton}~{mediaBtn}"
+            command = f"entityUpd~{heading}~{navigation}~{item}~{icon}~~{title}~~{author}~~{volume}~{iconplaypause}~{source}~{speakerlist[:200]}~{onoffbutton}~{mediaBtn}"
         self._send_mqtt_msg(command)
         
     def generate_alarm_page(self, navigation, entity, overwrite_supported_modes, alarmBtn):
@@ -654,6 +658,7 @@ class LuiPagesGen(object):
         brightness = "disable"
         color_temp = "disable"
         color = "disable"
+        effect_supported = "disable"
         
         if "onoff" not in entity.attributes.supported_color_modes:
             brightness = 0
@@ -676,10 +681,12 @@ class LuiPagesGen(object):
                 color = "enable"
             else:
                 color = "disable"
+            if "effect_list" in entity.attributes:
+                effect_supported = "enable"
         color_translation      = "Color"
         brightness_translation = get_translation(self._locale, "frontend.ui.card.light.brightness")
         color_temp_translation = get_translation(self._locale, "frontend.ui.card.light.color_temperature")
-        self._send_mqtt_msg(f"entityUpdateDetail~{entity_id}~~{icon_color}~{switch_val}~{brightness}~{color_temp}~{color}~{color_translation}~{color_temp_translation}~{brightness_translation}")
+        self._send_mqtt_msg(f"entityUpdateDetail~{entity_id}~~{icon_color}~{switch_val}~{brightness}~{color_temp}~{color}~{color_translation}~{color_temp_translation}~{brightness_translation}~{effect_supported}")
     
     def generate_shutter_detail_page(self, entity_id):
         entity = apis.ha_api.get_entity(entity_id)
@@ -775,6 +782,43 @@ class LuiPagesGen(object):
 
         self._send_mqtt_msg(f"entityUpdateDetail~{entity_id}~~{icon_color}~{switch_val}~{speed}~{speedMax}~{speed_translation}~{preset_mode}~{preset_modes}")
 
+    def generate_thermo_detail_page(self, entity_id):
+        entity = apis.ha_api.get_entity(entity_id)
+        icon_id = get_icon("climate", state=entity.state)
+        icon_color = self.get_entity_color(entity, ha_type="climate")
+
+        modes_out = ""
+        for mode in ["preset_modes", "swing_modes", "fan_modes"]:
+            heading = get_translation(self._locale, f"frontend.ui.card.climate.{mode[:-1]}")
+            cur_mode = entity.attributes.get(mode[:-1], "")
+            modes = entity.attributes.get(mode, [])
+            if modes is not None:
+                if mode == "preset_modes":
+                    translated_modes = []
+                    for elem in modes:
+                        translated_modes.append(get_translation(self._locale, f"frontend.state_attributes.climate.preset_mode.{elem}"))
+                    cur_mode = get_translation(self._locale, f"frontend.state_attributes.climate.preset_mode.{cur_mode}")
+                    modes_res = "?".join(translated_modes)
+                else:
+                    modes_res = "?".join(modes)
+                if modes:
+                    modes_out += f"{heading}~{mode}~{cur_mode}~{modes_res}~"
+
+        self._send_mqtt_msg(f"entityUpdateDetail~{entity_id}~{icon_id}~{icon_color}~{modes_out}")  
+
+    def generate_input_select_detail_page(self, entity_id):
+        entity = apis.ha_api.get_entity(entity_id)
+        options = []
+        icon_color = 0
+        ha_type = entity_id.split(".")[0]
+        icon_color = self.get_entity_color(entity, ha_type=ha_type)
+        if ha_type == "input_select":
+            options = entity.attributes.get("options", [])
+        if ha_type == "light":
+            options = entity.attributes.get("effect_list", [])[:15]
+        options = "?".join(options)
+        self._send_mqtt_msg(f"entityUpdateDetail2~{entity_id}~~{icon_color}~{ha_type}~{entity.state}~{options}~")
+        
     def send_message_page(self, ident, heading, msg, b1, b2):
         self._send_mqtt_msg(f"pageType~popupNotify")
         self._send_mqtt_msg(f"entityUpdateDetail~{ident}~{heading}~65535~{b1}~65535~{b2}~65535~{msg}~65535~0")

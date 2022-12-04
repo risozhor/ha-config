@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "name": "М'ясо філе",
+    "id": "43044f78f63e4f4cabbe999d4f8f9697",
+    "complete": false
+  },
+  {
+    "name": "Сметана",
+    "id": "7ade75821b374e18a0ad79e2eb672725",
+    "complete": false
+  },
+  {
+    "name": "М'ясо свинина",
+    "id": "f03d36eedf3a41d68dbb792c7bfd0176",
+    "complete": false
+  },
+  {
+    "name": "Яйця",
+    "id": "0bb492921e174cf79e601ef22a58e1a6",
+    "complete": false
+  },
+  {
+    "name": "Молоко",
+    "id": "fa248e7191dc42e691a3dff85eb5e46f",
+    "complete": false
+  },
+  {
+    "name": "Вода",
+    "id": "35067cbb3d784c5fb5752e821f2e5689",
+    "complete": false
+  }
+]

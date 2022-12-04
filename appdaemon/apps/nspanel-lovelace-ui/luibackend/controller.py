@@ -169,6 +169,11 @@ class LuiController(object):
                     self._pages_gen.generate_shutter_detail_page(entity)
                 if entity.startswith("fan"):
                     self._pages_gen.generate_fan_detail_page(entity)
+                if entity.startswith("input_select"):
+                    self._pages_gen.generate_input_select_detail_page(entity)
+            if self._current_card.cardType == "cardThermo":
+                if entity.startswith("climate"):
+                    self._pages_gen.generate_thermo_detail_page(entity)
 
 
     def detail_open(self, detail_type, entity_id):
@@ -178,7 +183,11 @@ class LuiController(object):
             self._pages_gen.generate_light_detail_page(entity_id)
         if detail_type == "popupFan":
             self._pages_gen.generate_fan_detail_page(entity_id)
-
+        if detail_type == "popupThermo":
+            self._pages_gen.generate_thermo_detail_page(entity_id)
+        if detail_type == "popupInSel":
+            self._pages_gen.generate_input_select_detail_page(entity_id)
+            
     def button_press(self, entity_id, button_type, value):
         apis.ha_api.log(f"Button Press Event; entity_id: {entity_id}; button_type: {button_type}; value: {value} ")
         # internal buttons
@@ -214,7 +223,10 @@ class LuiController(object):
         if button_type == "bExit":
             self._pages_gen.render_card(self._current_card)
         if button_type == "bUp":
-            self._current_card = self._previous_cards.pop()
+            if self._previous_cards:
+                self._current_card = self._previous_cards.pop()
+            else:
+                self._current_card = self._config.getCard(0)
             self._pages_gen.render_card(self._current_card)
 
         if button_type == "bNext":
@@ -362,8 +374,28 @@ class LuiController(object):
                     msg += f"- {apis.ha_api.get_entity(e).attributes.friendly_name}\r\n"
             self._pages_gen.send_message_page("opnSensorNotifyRes", "", msg, "", "")
 
-        # for fan popup / preset selection
-        if button_type == "mode-sel":
+        if button_type == "mode-preset_modes":
             entity = apis.ha_api.get_entity(entity_id)
             preset_mode = entity.attributes.preset_modes[int(value)]
             entity.call_service("set_preset_mode", preset_mode=preset_mode)
+
+        if button_type == "mode-swing_modes":
+            entity = apis.ha_api.get_entity(entity_id)
+            swing_mode = entity.attributes.swing_modes[int(value)]
+            entity.call_service("set_swing_mode", swing_mode=swing_mode)
+
+        if button_type == "mode-fan_modes":
+            entity = apis.ha_api.get_entity(entity_id)
+            fan_mode = entity.attributes.fan_modes[int(value)]
+            entity.call_service("set_fan_mode", fan_mode=fan_mode)
+
+        if button_type == "mode-input_select":
+            entity = apis.ha_api.get_entity(entity_id)
+            option = entity.attributes.options[int(value)]
+            entity.call_service("select_option", option=option)
+
+        if button_type == "mode-light":
+            entity = apis.ha_api.get_entity(entity_id)
+            option = entity.attributes.effect_list[int(value)]
+            entity.call_service("select_effect", option=option)
+            

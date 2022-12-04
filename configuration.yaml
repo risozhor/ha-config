@@ -55,10 +55,9 @@ sensor: !include_dir_merge_list includes/sensor
 binary_sensor: !include includes/binary_sensors.yaml
 switch: !include includes/switch.yaml
 automation: !include_dir_merge_list automations
-# script: !include scripts.yaml
 utility_meter: !include includes/utility_meter.yaml
 climate: !include includes/climate/climate.yaml
-mqtt: !include includes/lock.yaml
+mqtt: !include includes/mqtt_devices.yaml
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml

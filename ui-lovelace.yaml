@@ -4,6 +4,10 @@ preload_cards:
   - custom:stack-in-card
   - vertical-stack
   - custom:mushroom-template-card
+  - custom:mushroom-chips-card
+  - custom:hui-markdown-card
+  - custom:stack-in-card
+  - custom:mushroom-alarm-control-panel-card
   # - custom:weather-card
   # - custom:button-card
 preload_rows:
