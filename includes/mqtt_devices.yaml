@@ -1,0 +1,46 @@
+lock:
+  - name: "Frontdoor"
+    unique_id: "frontdoor_lock"
+    state_topic: "zigbee2mqtt_lan/Relay"
+    command_topic: "zigbee2mqtt_lan/Relay/right/set"
+    payload_lock: "OFF"
+    payload_unlock: "ON"
+    state_locked: "OFF"
+    state_unlocked: "ON"
+    qos: 1
+    value_template: "{{ value_json.state_right }}"
+
+vacuum:
+  - name: "Test vacuum"
+    unique_id: "test_vacuum"
+    supported_features:
+      - turn_on
+      - turn_off
+      - pause
+      - stop
+      - return_home
+      - battery
+      - status
+      - locate
+      - clean_spot
+      - fan_speed
+      - send_command
+    fan_speed_list:
+      - min
+      - medium
+      - high
+      - max
+    command_topic: "zigbee2mqtt_lan/Relay/left/set"
+    battery_level_topic: "zigbee2mqtt_lan/Relay/left/set"
+    battery_level_template: "{{ value_json.state_left }}"
+    charging_topic: "zigbee2mqtt_lan/Relay/left/set"
+    charging_template: "{{ value_json.state_left }}"
+    cleaning_topic: "zigbee2mqtt_lan/Relay/left/set"
+    cleaning_template: "{{ value_json.state_left }}"
+    docked_topic: "zigbee2mqtt_lan/Relay/left/set"
+    docked_template: "{{ value_json.state_left }}"
+    error_topic: "zigbee2mqtt_lan/Relay/left/set"
+    error_template: "{{ value_json.state_left }}"
+    fan_speed_topic: "zigbee2mqtt_lan/Relay/left/set"
+    fan_speed_template: "{{ value_json.state_left }}"
+    set_fan_speed_topic: "zigbee2mqtt_lan/Relay/left/set"
