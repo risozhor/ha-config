@@ -13,6 +13,7 @@ recorder: !include includes/recorder.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
 homeassistant:
+  country: UA
   latitude: !secret latitude
   longitude: !secret longitude
   elevation: !secret elevation

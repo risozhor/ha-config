@@ -40,6 +40,8 @@ cards:
                 tap_action:
                   action: navigate
                   navigation_path: /lovelace/weather
+              - type: entity
+                entity: sensor.count_update
       - type: row
         cards:
           - class: col-xs-12 col-md-4 pt-2
