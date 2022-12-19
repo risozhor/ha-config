@@ -73,11 +73,11 @@ You can support me:
 | Xiaomi Honeywell fire detector | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
 | Zigbee smart energy meter DDS238-2 | <img src="git/devices/Zigbee smart energy meter DDS238-2 Zigbee.jpg"/> |
 | *WiFi devices* ||
-| Hue white and color ambiance E26/E27/E14 | <img src="git/devices/amazon_echo_dot_4th_gen.jpg"/> |
-| Hue white ambiance E26/E27 | <img src="git/devices/Amazon-Echo-Show-8-(2nd-Gen).jpg"/> |
-| Aqara door & window contact sensor | <img src="git/devices/Foscam-C2.jpg"/> |
-| Aqara Opple switch 2 bands | <img src="git/devices/Google-Home-Mini.jpg"/> |
-| Aqara single key wireless wall switch | <img src="git/devices/Google-Nest-Hub-(1st-Gen).jpg"/> |
+| Amazon Echo Dot 4th gen  | <img src="git/devices/amazon_echo_dot_4th_gen.jpg"/> |
+| Amazon Echo Show 8 (2nd Gen) | <img src="git/devices/Amazon-Echo-Show-8-(2nd-Gen).jpg"/> |
+| Foscam-C2 | <img src="git/devices/Foscam-C2.jpg"/> |
+| Google Home Mini | <img src="git/devices/Google-Home-Mini.jpg"/> |
+| Google Nest Hub (1st-Gen) | <img src="git/devices/Google-Nest-Hub-(1st-Gen).jpg"/> |
 | Gyver lamp </br>[Rewiev](https://www.smarty.ninja/settings/%d0%b4%d0%be%d0%b4%d0%b0%d1%94%d0%bc%d0%be-gyver-lamp-%d0%b2-home-assistant-%d1%82%d0%b0-google-home) | <img src="git/devices/gyver-lamp.jpg"/> |
 | Nest Learning Thermostat 3rd-Generation | <img src="git/devices/Nest-Learning-Thermostat-3rd-Generation.jpg"/> |
 | Alarm Security Kit, 5 piece (2nd Gen) | <img src="git/devices/Alarm-Security-Kit,-5-piece-(2nd-Gen).jpg"/> |

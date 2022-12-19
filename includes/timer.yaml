@@ -48,3 +48,6 @@ diningroom_wled_from_diningroom:
 
 bathroom_bulb:
   duration: "00:00:30"
+
+test_presence:
+  duration: "00:00:10"
