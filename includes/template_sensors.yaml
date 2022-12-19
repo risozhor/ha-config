@@ -1,0 +1,6 @@
+# - binary_sensor:
+#     - name: "test_presence fp1"
+#       device_class: motion
+#       unit_of_measurement: "UAH"
+#       state: >
+#         {{not is_state("sensor.0x54ef4410005832db_presence_event", "leave")}}
