@@ -77,7 +77,7 @@ nspanel-1:
             color:
               "on": [225, 226, 20]
               "off": [126, 126, 126]
-          - entity: light.gyver_lamp_esp_74e9c8
+          - entity: light.gyver_lamp2
             icon: mdi:lava-lamp
             color:
               "on": [225, 226, 20]

@@ -110,7 +110,7 @@ cards:
                     name: false
                     tap_action:
                       action: toggle
-                  - entity: light.gyver_lamp_esp_74e9c8
+                  - entity: light.gyver_lamp2
                     icon: true
                     state_color: true
                     show_state: false
@@ -371,9 +371,11 @@ cards:
                 color: brown;
               }
             entities:
-              - entity: light.gyver_lamp_esp_74e9c8
-              - entity: input_number.brightness
-              - entity: input_number.speed
-              - entity: input_number.scale
-              - entity: input_select.ledlamp_mode
+              - entity: light.gyver_lamp2
+              # - entity: input_number.brightness
+              # - entity: input_number.speed
+              - entity: number.wled_speed_2
+              - entity: number.wled_intensity_2
+              # - entity: input_select.ledlamp_mode
+              - entity: select.wled_preset_2
             show_header_toggle: false

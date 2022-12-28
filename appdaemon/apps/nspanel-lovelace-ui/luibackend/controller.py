@@ -162,7 +162,7 @@ class LuiController(object):
             apis.ha_api.log(f"Callback Entity is on current page: {entity}", level="DEBUG")
             self._pages_gen.render_card(self._current_card, send_page_type=False)
             # send detail page update, just in case
-            if self._current_card.cardType in ["cardGrid", "cardEntities"]:
+            if self._current_card.cardType in ["cardGrid", "cardEntities", "cardMedia"]:
                 if entity.startswith("light"):
                     self._pages_gen.generate_light_detail_page(entity)
                 if entity.startswith("cover"):
@@ -171,6 +171,10 @@ class LuiController(object):
                     self._pages_gen.generate_fan_detail_page(entity)
                 if entity.startswith("input_select"):
                     self._pages_gen.generate_input_select_detail_page(entity)
+                if entity.startswith("media_player"):
+                    self._pages_gen.generate_input_select_detail_page(entity)
+                if entity.startswith("timer"):
+                    self._pages_gen.generate_timer_detail_page(entity)
             if self._current_card.cardType == "cardThermo":
                 if entity.startswith("climate"):
                     self._pages_gen.generate_thermo_detail_page(entity)
@@ -187,7 +191,8 @@ class LuiController(object):
             self._pages_gen.generate_thermo_detail_page(entity_id)
         if detail_type == "popupInSel":
             self._pages_gen.generate_input_select_detail_page(entity_id)
-            
+        if detail_type == "popupTimer":
+            self._pages_gen.generate_timer_detail_page(entity_id)   
     def button_press(self, entity_id, button_type, value):
         apis.ha_api.log(f"Button Press Event; entity_id: {entity_id}; button_type: {button_type}; value: {value} ")
         # internal buttons
@@ -228,7 +233,14 @@ class LuiController(object):
             else:
                 self._current_card = self._config.getCard(0)
             self._pages_gen.render_card(self._current_card)
-
+        if button_type == "bHome":
+            if self._previous_cards:
+                self._current_card = self._previous_cards[0]
+                self._previous_cards.clear()
+            else:
+                self._current_card = self._config.getCard(0)
+            self._pages_gen.render_card(self._current_card)
+            
         if button_type == "bNext":
             card = self._config.getCard(self._current_card.pos+1)
             self._current_card = card
@@ -326,6 +338,9 @@ class LuiController(object):
                 apis.ha_api.get_entity(entity_id).call_service("turn_on")
             else:
                 apis.ha_api.get_entity(entity_id).call_service("turn_off")
+        if button_type == "media-shuffle":
+            suffle = not apis.ha_api.get_entity(entity_id).attributes.shuffle
+            apis.ha_api.get_entity(entity_id).call_service("shuffle_set", shuffle=suffle)
         if button_type == "volumeSlider":
             pos = int(value)
             # HA wants this value between 0 and 1 as float
@@ -399,3 +414,20 @@ class LuiController(object):
             option = entity.attributes.effect_list[int(value)]
             entity.call_service("select_effect", option=option)
             
+        if button_type == "mode-media_player":
+            entity = apis.ha_api.get_entity(entity_id)
+            option = entity.attributes.source_list[int(value)]
+            entity.call_service("select_source", source=option)
+            
+        # timer detail page
+        if button_type == "timer-start":
+            if value is not None:
+                apis.ha_api.get_entity(entity_id).call_service("start", duration=value)
+            else:
+                apis.ha_api.get_entity(entity_id).call_service("start")
+        if button_type == "timer-cancel":
+            apis.ha_api.get_entity(entity_id).call_service("cancel")
+        if button_type == "timer-pause":
+            apis.ha_api.get_entity(entity_id).call_service("pause")
+        if button_type == "timer-finish":
+            apis.ha_api.get_entity(entity_id).call_service("finish")

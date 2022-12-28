@@ -20,8 +20,8 @@ class NsPanelLovelaceUIManager(hass.Hass):
 
         controller = LuiController(cfg, mqttsend.send_mqtt_msg)
         
-        desired_display_firmware_version = 45
-        version     = "v3.6.0"
+        desired_display_firmware_version = 46
+        version     = "v3.7.0"
         
         model       = cfg.get("model")
         if model == "us-l":
@@ -34,7 +34,7 @@ class NsPanelLovelaceUIManager(hass.Hass):
             # eu version
             desired_display_firmware_url = f"http://nspanel.pky.eu/lovelace-ui/github/nspanel-{version}.tft"
         
-        desired_tasmota_driver_version   = 4
+        desired_tasmota_driver_version   = 7
         desired_tasmota_driver_url       = "https://raw.githubusercontent.com/joBr99/nspanel-lovelace-ui/main/tasmota/autoexec.be"
         
         mode = cfg.get("updateMode")
