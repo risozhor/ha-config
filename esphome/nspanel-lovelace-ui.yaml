@@ -28,10 +28,48 @@ ota:
   safe_mode: true
 web_server:
 api:
-  # services:
-  #   - service: upload_tft
-  #     then:
-  #       - lambda: 'id(nextion1)->upload_tft();'
+  services:
+    - service: upload_tft
+      variables:
+        url: string
+      then:
+        - lambda: |-
+            id(nspanel).upload_tft(url);
+    - service: play_rtttl
+      variables:
+        song_str: string
+      then:
+        - rtttl.play:
+            rtttl: !lambda "return song_str;"
+    # Service to send a command To show the screen of a specific like
+    - service: notify_on_screensaver
+      variables:
+        line1: string
+        line2: string
+      then:
+        - lambda: 'id(nspanel).send_custom_command("notify~" + line1 + "~" + line2);'
+        - rtttl.play: "short:d=4,o=5,b=100:16e6"
+    # Service to send a command To show the screen of a specific like
+    # interaction of the buttons are on implemented yet
+    - service: notify_fullscreen
+      variables:
+        title: string
+        description: string
+        button1: string
+        button2: string
+        time_secs: string
+      then:
+        # show notification screen
+        - lambda: 'id(nspanel).send_custom_command("pageType~popupNotify");'
+        # set values on notification screen
+        # color defined as number created in binary and converted to decimal (rrrrggggbbbbaaaa)
+        - lambda: 'id(nspanel).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
+        - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"
+
+
+
+
+
 uart:
   # id: uart_1
   tx_pin: 16

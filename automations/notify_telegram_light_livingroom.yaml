@@ -1,4 +1,4 @@
-- alias: "IK - Telegram - Light Living"
+- alias: "telegram_livingroom_light_status"
   trigger:
     platform: event
     event_type: telegram_callback

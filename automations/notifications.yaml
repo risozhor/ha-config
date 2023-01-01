@@ -1,67 +1,4 @@
-# - id: run night light
-#   alias: run night light
-#   trigger:
-#     platform: state
-#     entity_id: switch.virtual_gyver
-#     # from: 'off'
-#     to: 'on'
-#   action:
-#     service: script.turn_on
-#     data:
-#       entity_id: script.slippinggyver
-# - id: off gyver light
-#   alias: off gyver light
-#   trigger:
-#     platform: state
-#     entity_id: switch.virtual_gyver
-#     # from: 'on'
-#     to: 'off'
-#   action:
-#     service: mqtt.publish
-#     data_template:
-#         topic: "homeassistant/light/ESP-6b956e/switch"
-#         retain: true
-#         payload_template: 'OFF'
-# - id: window_open_ch
-#   alias: window_openn_ch
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.0x00158d0003d0badf_contact
-#     to: 'on'
-#   action:
-#     service: notify.telegram
-#     data:
-#       message: 'Відкрито вікно дитячої кімнати'
-# - id: window_open_ki
-#   alias: window_openn_ki
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.0x00158d00044ce102_contact
-#     to: 'on'
-#   action:
-#     service: notify.telegram
-#     data:
-#       message: 'Відкрито вікно кухні'
-# - id: window_open_lr
-#   alias: window_openn_lr
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.0x00158d0002e21a7b_contact
-#     to: 'on'
-#   action:
-#     service: notify.telegram
-#     data:
-#       message: 'Відкрито вікно залу'
-# - id: open_frontdoor
-#   alias: open_frontdoor
-#   trigger:
-#     platform: state
-#     entity_id: binary_sensor.front_door_sensor_contact
-#     to: 'on'
-#   action:
-#     service: notify.telegram
-#     data:
-#       message: 'Відкриті вхідні двері'
+# на кухні виявлено дим
 - id: notify-kitchenfire
   alias: Kitchen fire detected
   initial_state: on
@@ -95,24 +32,8 @@
           color: red
           priority: high
           channel: alarm_stream_max
-    - service: notify.mobile_app_sm_j730fm
-      data:
-        title: "The house is on fire! Smoke detected"
-        message: TTS
-        data:
-          ttl: 0
-          color: red
-          priority: high
-          channel: alarm_stream_max
-    - service: notify.mobile_app_sm_j730fm
-      data:
-        title: "The house is on fire! Smoke detected"
-        message: TTS
-        data:
-          ttl: 0
-          color: red
-          priority: high
-          channel: alarm_stream_max
+
+# Start Home Assistant Notify
 - id: notify-hass-start
   alias: Home Assistant Start - Notify
   initial_state: on
@@ -128,6 +49,7 @@
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
 
+# Press TELEGRAM "/start" Home Assistant Notify
 - id: telegram-control-pannel-start
   alias: "Telegram Control Pannel Command"
   initial_state: on
@@ -158,6 +80,7 @@
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
+
 - id: telegram-ik-ping-pong
   alias: "telegram ping pong"
   trigger:
@@ -175,6 +98,7 @@
           Data: {{ trigger.event.data.data }}
           {{now().strftime("%H:%M:%S %Y-%m-%d")}} Pong, Message from {{ trigger.event.data["user_id"] }}.
         show_alert: true
+
 - id: telegram-user-location
   alias: "telegram User location"
   trigger:
@@ -197,6 +121,7 @@
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - id: telegram-ik-security-alarm
   alias: "Telegram Alarm"
   trigger:
@@ -218,6 +143,7 @@
         inline_keyboard:
           - '{{ "\u26D4" }} Alarm ON:/arm_away, {{ "\u2B55" }} Alarm ON at home:/arm_home, {{ "\u2611" }} Disarm:/disarm'
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - id: telegram-ik-set-security-arm_away
   alias: "Telegram Alarm SET arm_away"
   trigger:
@@ -238,6 +164,7 @@
         inline_keyboard:
           - "На охорону (вдома):/arm_home, Зняти з охорони:/disarm"
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - id: telegram-ik-set-security-arm_home
   alias: "Telegram Alarm SET arm_home"
   trigger:
@@ -258,6 +185,7 @@
         inline_keyboard:
           - "На охорону (Не вдома):/arm_away, Зняти з охорони:/disarm"
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - id: telegram-ik-set-security-disarm
   alias: "Telegram Alarm SET disarm"
   trigger:
@@ -278,6 +206,7 @@
         inline_keyboard:
           - "На охорону (Не вдома):/arm_away, На охорону (вдома):/arm_home"
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - id: telegram-ik-to-cp
   alias: "Telegram Панель керування"
   trigger:
@@ -330,6 +259,7 @@
           - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
           - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Надворі:/light_outdoor'
           - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+
 - alias: "HA System Actions"
   trigger:
     platform: event
@@ -346,6 +276,7 @@
         inline_keyboard:
           - '{{"\u2B07\uFE0F"}} Вимкнення хоста:/hashutdown, {{"\U0001F503"}} Перезавантаження хоста:/hassioreboot'
           - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
 - alias: "IK - Telegram - Host Reboot"
   trigger:
     platform: event
@@ -364,6 +295,7 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
 - alias: "IK - Telegram - Host Shutdown"
   trigger:
     platform: event
@@ -382,6 +314,7 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
 - alias: "IK - Telegram - System status sstatus"
   trigger:
     platform: event
@@ -404,6 +337,7 @@
           {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
         inline_keyboard:
           - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+
 - alias: "IK - Telegram - status weather"
   trigger:
     platform: event

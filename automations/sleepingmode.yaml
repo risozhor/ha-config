@@ -1,4 +1,4 @@
-- id: Выключить sleepingmode
+- id: sleepingmode off
   alias: disable_sleepingmode
   initial_state: true
   trigger:

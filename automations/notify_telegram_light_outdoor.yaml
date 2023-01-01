@@ -1,4 +1,4 @@
-- alias: "IK - Telegram - Light outdoor"
+- alias: telegram_outdoor_lights_status
   trigger:
     platform: event
     event_type: telegram_callback

@@ -1,4 +1,4 @@
-- id: telegram_light_dining_room
+- id: telegram_dining_room_light_status
   alias: "IK - Telegram - Light Dining Room"
   trigger:
     platform: event

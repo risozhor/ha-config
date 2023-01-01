@@ -1,4 +1,4 @@
-- id: telegram_light_kitchen
+- id: telegram_kitchen_light_status
   alias: "IK - Telegram - Light kitchen"
   trigger:
     platform: event

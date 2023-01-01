@@ -23,7 +23,7 @@ nspanel-1:
         tMainIcon: [57, 169, 255]
         bar: [57, 169, 0]
         autoWeather: true
-        # Нижче задаємо колір піктограмам погоди (лише тоді, коли - autoWeather: true)
+        # Below we set the color of the weather icons ( when - autoWeather: true only)
         clear-night: [150, 150, 100]
         cloudy: [75, 75, 75]
         exceptional: [255, 50, 50]
@@ -43,23 +43,13 @@ nspanel-1:
       - type: cardQR
         title: Guest Wifi Network
         qrCode: "WIFI:S:SmartHome Guests;T:WPA;P:1qaz2wsx;;" # SSID та ПАРОЛЬ в QR
-        entities: # Вкажіть SSID та ПАРОЛЬ якщо немає змоги сканувати QR
+        entities: # Enter SSID and Passford if unable to scan QR
           - entity: iText.SmartHome Guests
             name: Name
             icon: mdi:wifi
           - entity: iText. 1qaz2wsx
             name: Password
             icon: mdi:key
-      # - type: cardAlarm
-      #   entity: alarm_control_panel.ring_alarm
-      #   supportedModes:
-      #     - arm_home
-      #     - arm_away
-      # - type: cardThermo
-      #   title: Thermostat
-      #   entity: climate.living_room
-      # - type: cardMedia
-      #   entity: media_player.living_room_speaker
       - type: cardGrid
         title: Livingroom
         entities:

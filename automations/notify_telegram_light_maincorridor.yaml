@@ -1,4 +1,4 @@
-- id: telegram_lights_main_corridor
+- id: telegram_main_corridor_lights_status
   alias: "IK - Telegram - Light main_corridor"
   trigger:
     platform: event
