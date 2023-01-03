@@ -1,1 +1,9 @@
-[]
+- platform: generic_thermostat
+  name: Underfloor Heating Kitchen
+  heater: switch.shellyplus1_0cdc7ef56b40_switch_0
+  target_sensor: sensor.shellyplus1_0cdc7ef56b40_temperature
+  unique_id: uht_Kitchen
+  target_temp_step: 1.0
+  min_temp: 16
+  max_temp: 28
+  away_temp: 16
