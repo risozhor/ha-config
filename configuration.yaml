@@ -2,16 +2,24 @@ config:
 energy:
 logbook:
 my:
+cloud:
+map:
+media_source:
+ssdp:
+stream:
+shopping_list:
+system_health:
+zeroconf:
+sun:
+mobile_app:
+discovery:
 http:
   ip_ban_enabled: false
   use_x_forwarded_for: true
   trusted_proxies:
     - 10.0.0.0/16
     - 172.30.33.0/24
-cloud:
 recorder: !include includes/recorder.yaml
-# google_assistant: !include includes/google_assistant.yaml
-# google: !include includes/google_calendars.yaml
 homeassistant:
   country: UA
   latitude: !secret latitude
@@ -28,29 +36,12 @@ frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
     - /local/community/lovelace-card-mod/card-mod.js
-stream:
 tts: !include includes/tts.yaml
-map:
-# weather:
-#   - platform: pirateweather
-#     api_key: !secret pirateweather_api_key
-#     mode: "daily"
-#calendar:
-media_source:
-ssdp:
 notify: !include includes/notify.yaml
 telegram_bot: !include includes/telegram.yaml
-sun:
-mobile_app:
 history: !include includes/history.yaml
-shopping_list:
-system_health:
-zeroconf:
 light: !include includes/light.yaml
-discovery:
 timer: !include includes/timer.yaml
-input_number: !include includes/input_number.yaml
-input_select: !include includes/input_select.yaml
 input_boolean: !include includes/input_boolean.yaml
 sensor: !include_dir_merge_list includes/sensor
 binary_sensor: !include includes/binary_sensors.yaml
@@ -62,3 +53,8 @@ mqtt: !include includes/mqtt_devices.yaml
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml
+  
+# input_number: !include includes/input_number.yaml
+# input_select: !include includes/input_select.yaml
+# google_assistant: !include includes/google_assistant.yaml
+# google: !include includes/google_calendars.yaml
