@@ -1,24 +1,3 @@
-# - alias: livingroom_light_on_manual # №1 включиться тільки коли влючена №2
-#   trigger:
-#   - platform: state
-#     entity_id: light.living_room_lamp_2
-#     to: 'on'
-#   action:
-#     - service: mqtt.publish
-#       data_template:
-#         topic: zigbee2mqtt_lan/livingroom_color_lamp_1/set
-#         payload: '{"state": "ON","transition": 1,"brightness": 254,"color_temp": 270,"hue_power_on_behavior": "recover"}'
-# - alias: livingroom_light_off_manual # №1 виключиться тільки коли вилючена №2
-#   trigger:
-#   - platform: state
-#     entity_id: light.living_room_lamp_2
-#     to: 'off'
-#   action:
-#     - service: mqtt.publish
-#       data_template:
-#         topic: zigbee2mqtt_lan/livingroom_color_lamp_1/set
-#         payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
-
 - alias: livingroom_light_on_by_sw
   initial_state: true
   trigger:
@@ -36,27 +15,20 @@
       entity_id: light.livingroom_lights
       state: "off"
   action:
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: light.livingroom_lights
-    #     brightness: 255
-    #     kelvin: 2700
-    #     transition: 1
-
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
 
 - alias: livingroom_light_on20_by_sw
@@ -73,26 +45,20 @@
       entity_id: light.livingroom_lights
       state: "off"
   action:
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: light.livingroom_lights
-    #     brightness: 50
-    #     kelvin: 2700
-    #     transition: 1
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
         retain: true
 
 - alias: livingroom_light_off_by_sw
@@ -128,78 +94,15 @@
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
         retain: true
-# - alias: livingroom_light_off_by_hueswitch
-#   initial_state: true
-#   trigger:
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'off-press'
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'off-hold'
-#   action:
-#     - service: mqtt.publish
-#       data_template:
-#         topic: zigbee2mqtt_lan/0x001788010383c41f/set
-#         payload: '{"state": "OFF","hue_power_on_behavior": "recover"}'
-#         retain: true
-#     - service: mqtt.publish
-#       data_template:
-#         topic: zigbee2mqtt_lan/0x0017880103b01125/set
-#         payload: '{"state": "OFF","hue_power_on_behavior": "recover"}'
-#         retain: true
-#     - service: mqtt.publish
-#       data_template:
-#         topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-#         payload: '{"state": "OFF","hue_power_on_behavior": "recover"}'
-#         retain: true
-# - alias: decrease_livingroomy_brightness
-#   initial_state: true
-#   trigger:
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'down-press'
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'down-hold'
-#   condition:
-#     - condition: state
-#       entity_id: light.livingroom_lights
-#       state: 'on'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.livingroom_lights
-#         brightness_step_pct: -10
-#         transition: 1
-# - alias: increase_livingroom_brightness
-#   initial_state: true
-#   trigger:
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'up-press'
-#   - platform: state
-#     entity_id: sensor.0x0017880103c978a9_action
-#     to: 'up-hold'
-#   condition:
-#     - condition: state
-#       entity_id: light.livingroom_lights
-#       state: 'on'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.livingroom_lights
-#         brightness_step_pct: 10
-#         transition: 1

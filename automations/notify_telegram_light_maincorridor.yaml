@@ -29,7 +29,7 @@
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt/Main Corridor Light/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
         retain: true
     - delay: "00:00:02"
     - service: telegram_bot.edit_message
@@ -54,7 +54,7 @@
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt/Main Corridor Light/set
-        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
         retain: true
     - delay: "00:00:02"
     - service: telegram_bot.edit_message

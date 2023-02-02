@@ -53,8 +53,9 @@ mqtt: !include includes/mqtt_devices.yaml
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml
-  
+
 # input_number: !include includes/input_number.yaml
 # input_select: !include includes/input_select.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
+conversation: !include_dir_merge_named includes/conversation

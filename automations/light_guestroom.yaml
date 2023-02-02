@@ -11,7 +11,7 @@
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/Guestroom Color Bulb/set
-        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "recover","brightness": 254,"color_temp": 270}'
+        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
         retain: true
 
 - alias: guestroom_light_off_by_switch
@@ -27,5 +27,5 @@
     - service: mqtt.publish
       data_template:
         topic: zigbee2mqtt_lan/Guestroom Color Bulb/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "recover"}'
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
         retain: true

@@ -1,5 +1,6 @@
 - platform: group
   name: Livingroom Lights
+  unique_id: livingroom_lights
   entities:
     - light.livingroom_color_lamp_1
     - light.livingroom_color_lamp_2
@@ -7,6 +8,7 @@
 
 - platform: group
   name: Kitchen Ceiling Lights
+  unique_id: kitchen_lights
   entities:
     - light.kitchen_table_lamp
     - light.kitchen_ceiling_lamp

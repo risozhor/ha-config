@@ -13,7 +13,7 @@ wifi:
     - ssid: !secret ssid
       password: !secret password
       manual_ip:
-        static_ip: 192.168.10.200
+        static_ip: 192.168.10.18
         gateway: 192.168.10.1
         subnet: 255.255.255.0
   ap:
@@ -26,6 +26,7 @@ logger:
   level: ERROR
 ota:
   safe_mode: true
+  password: !secret password
 web_server:
 api:
   services:
@@ -41,7 +42,6 @@ api:
       then:
         - rtttl.play:
             rtttl: !lambda "return song_str;"
-    # Service to send a command To show the screen of a specific like
     - service: notify_on_screensaver
       variables:
         line1: string
@@ -49,8 +49,6 @@ api:
       then:
         - lambda: 'id(nspanel).send_custom_command("notify~" + line1 + "~" + line2);'
         - rtttl.play: "short:d=4,o=5,b=100:16e6"
-    # Service to send a command To show the screen of a specific like
-    # interaction of the buttons are on implemented yet
     - service: notify_fullscreen
       variables:
         title: string
@@ -59,34 +57,21 @@ api:
         button2: string
         time_secs: string
       then:
-        # show notification screen
         - lambda: 'id(nspanel).send_custom_command("pageType~popupNotify");'
-        # set values on notification screen
-        # color defined as number created in binary and converted to decimal (rrrrggggbbbbaaaa)
         - lambda: 'id(nspanel).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
         - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"
-
-
-
-
-
 uart:
-  # id: uart_1
   tx_pin: 16
   rx_pin: 17
   baud_rate: 115200
-
-# display:
-#   - platform: nextion
-#     id: nextion1
-#     uart_id: uart_1
-#     tft_url: http://nspanel.pky.eu/lovelace-ui/github/nspanel-v3.5.0.tft
+  id: tf_uart
 external_components:
   - source:
       type: git
       url: https://github.com/sairon/esphome-nspanel-lovelace-ui
       ref: dev
     components: [nspanel_lovelace]
+
 mqtt:
   id: mqtt_client
   broker: !secret mqtt_ip
@@ -135,7 +120,6 @@ switch:
     pin:
       number: 19
   - platform: gpio
-    # name: Screen Power
     id: screen_power
     entity_category: config
     pin:
@@ -144,7 +128,6 @@ switch:
     restore_mode: ALWAYS_ON
 binary_sensor:
   - platform: gpio
-    # name: $friendly_devicename Left Button
     pin:
       number: GPIO14
       inverted: true
@@ -153,7 +136,6 @@ binary_sensor:
       then:
         - switch.toggle: relay_1
   - platform: gpio
-    # name: $friendly_devicename Right Button
     pin:
       number: GPIO27
       inverted: true

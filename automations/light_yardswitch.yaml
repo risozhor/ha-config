@@ -2,7 +2,6 @@
   initial_state: true
   trigger:
     - platform: state
-      # entity_id: binary_sensor.0x00158d000457e83c_occupancy
       entity_id: binary_sensor.front_door_motion_2
       to: "on"
   condition:

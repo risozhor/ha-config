@@ -4,19 +4,20 @@ nspanel-1:
   config:
     panelRecvTopic: "tele/nspanel/RESULT"
     panelSendTopic: "cmnd/nspanel/CustomSend"
+    model: eu
     sleepTimeout: 20
     sleepBrightness:
       - time: "7:00:00"
         value: 30
       - time: "23:00:00"
-        value: 5
-    locale: "uk_UA"
+        value: 1
+    # locale: "uk_UA"
     screensaver:
       statusIcon1:
         entity: switch.nspanel_relay_1_2
       statusIcon2:
         entity: switch.nspanel_relay_2_2
-      entity: weather.home
+      entity: weather.openweathermap
       theme:
         time: [255, 255, 255]
         date: [255, 175, 0]
@@ -41,13 +42,13 @@ nspanel-1:
         windy-variant: [255, 125, 125]
     cards:
       - type: cardQR
-        title: Guest Wifi Network
-        qrCode: "WIFI:S:SmartHome Guests;T:WPA;P:1qaz2wsx;;" # SSID та ПАРОЛЬ в QR
-        entities: # Enter SSID and Passford if unable to scan QR
-          - entity: iText.SmartHome Guests
+        title: Wifi Network
+        qrCode: "WIFI:S:Guests;T:WPA;P:1qaz2wsx;;"
+        entities:
+          - entity: iText.Guests
             name: Name
             icon: mdi:wifi
-          - entity: iText. 1qaz2wsx
+          - entity: iText.1qaz2wsx
             name: Password
             icon: mdi:key
       - type: cardGrid
