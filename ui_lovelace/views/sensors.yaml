@@ -119,27 +119,15 @@ cards:
           - class: col-xs-12 col-md-4 pt-2
             type: custom:mushroom-fan-card
             entity: fan.xiaomi_miio_device
-            fill_container: false
             icon_animation: true
-            show_percentage_control: true
-            show_oscillate_control: false
-            collapsible_controls: false
-            hold_action:
-              action: more-info
-            double_tap_action:
-              action: none
             icon: mdi:fan
+            tap_action:
+              action: more-info
 
           - class: col-xs-12 col-md-4 pt-2
-            type: entities
-            entities:
-              - type: custom:mushroom-entity-card
-                entity: binary_sensor.kitchen_smoke_detector_smoke
-                name: Smoke Detector
-                layout: vertical
-                style: |
-                  ha-card { 
-                    --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                    --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                    --ha-card-box-shadow: 'none';
-                  }
+            type: custom:mushroom-entity-card
+            entity: binary_sensor.kitchen_smoke_detector_smoke
+            icon_type: icon
+            name: Smoke Detector
+            fill_container: false
+            icon: mdi:smoke-detector-variant

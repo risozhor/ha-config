@@ -92,11 +92,11 @@
 - platform: template
   sensors:
     moon_phase_image:
-      #entity_id: sensor.moon
-      friendly_name: "Moon Phase image"
-      value_template: "{{ states.sensor.moon_phase.state }}"
+      unique_id: moon_phase_img
+      friendly_name: "Moon Phase"
+      value_template: "{{ states.sensor.moon_phase.state | replace('_', ' ')| capitalize }}"
       icon_template: >
-        moon:{{ states.sensor.moon.state }}
+        mdi:moon-{{states.sensor.moon_phase.state | replace("_", "-")}}
       entity_picture_template: >-
         {% if is_state('sensor.moon_phase', 'new_moon') -%}
         /local/images/MoonPhases/new_moon.png
@@ -115,3 +115,16 @@
         {% elif is_state('sensor.moon_phase', 'waning_crescent') -%}
         /local/images/MoonPhases/waning_crescent.png
         {%- endif %}
+
+- platform: template
+  sensors:
+    server_status:
+      unique_id: server_status
+      friendly_name: "Server Status Info"
+      value_template: >
+        Server temperature: {{states.sensor.raspberry_c_temp.state| round}}°C, 
+        Power status: {% if is_state("binary_sensor.rpi_power_status", "off")  %}OK{%- else -%}ERROR{%- endif %}
+      icon_template: >
+        mdi:raspberry-pi
+      entity_picture_template: >-
+        /local/images/bg_card/bg_rpi.png

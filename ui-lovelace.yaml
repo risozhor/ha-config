@@ -1,18 +1,4 @@
 background: var(--background-image)
-preload_cards:
-  - custom:mini-graph-card
-  - custom:stack-in-card
-  - vertical-stack
-  - custom:mushroom-template-card
-  - custom:mushroom-chips-card
-  - custom:hui-markdown-card
-  - custom:stack-in-card
-  - custom:mushroom-alarm-control-panel-card
-  # - custom:weather-card
-  # - custom:button-card
-preload_rows:
-  - divider
-button_card_templates: !include ui_lovelace/button_card_templates.yaml
 swipe_nav:
   swipe_amount: 30
   wrap: true
@@ -26,7 +12,7 @@ views:
   # - !include ui_lovelace/views/rooms.yaml
   - !include ui_lovelace/views/camera.yaml
   - !include ui_lovelace/views/users.yaml
-  - !include ui_lovelace/views/energy.yaml
+  # - !include ui_lovelace/views/energy.yaml
   - !include ui_lovelace/views/net.yaml
   - !include ui_lovelace/views/sensors.yaml
   - !include ui_lovelace/views/weather.yaml

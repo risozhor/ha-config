@@ -40,29 +40,10 @@ cards:
                     layout: horizontal
                     tap_action:
                       action: more-info
-                    card_mod:
-                      style: |
-                        :host {
-                          --mush-icon-size: 60px;
-                          height: 80px;
-                          background: url('/local/images/staticmap.png') center;
-                          background-size: cover;
-                          background-blend-mode: overlay;
-                          background-color: rgba(var(--rgb-card-background-color), 0.5);
-                          --primary-text-color: #fff;
-                          --secondary-text-color: #fff;
-                        }
               - type: custom:mushroom-chips-card
                 chips:
                   - type: entity
                     entity: sensor.note20_battery_level
-                  # - type: entity
-                  #   entity: sensor.note20_steps_sensor
-                card_mod:
-                  style: |
-                    :host {
-                      padding: 5px;
-                    }
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -90,29 +71,10 @@ cards:
                     layout: horizontal
                     tap_action:
                       action: more-info
-                    card_mod:
-                      style: |
-                        :host {
-                          --mush-icon-size: 60px;
-                          height: 80px;
-                          background: url('/local/images/staticmap.png') center;
-                          background-size: cover;
-                          background-blend-mode: overlay;
-                          background-color: rgba(var(--rgb-card-background-color), 0.5);
-                          --primary-text-color: #fff;
-                          --secondary-text-color: #fff;
-                        }
               - type: custom:mushroom-chips-card
                 chips:
                   - type: entity
                     entity: sensor.sm_a505fn_battery_level
-                  # - type: entity
-                  #   entity: sensor.sm_a505fn_steps_sensor
-                card_mod:
-                  style: |
-                    :host {
-                      padding: 5px;
-                    }
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -140,29 +102,10 @@ cards:
                     layout: horizontal
                     tap_action:
                       action: more-info
-                    card_mod:
-                      style: |
-                        :host {
-                          --mush-icon-size: 60px;
-                          height: 80px;
-                          background: url('/local/images/staticmap.png') center;
-                          background-size: cover;
-                          background-blend-mode: overlay;
-                          background-color: rgba(var(--rgb-card-background-color), 0.5);
-                          --primary-text-color: #fff;
-                          --secondary-text-color: #fff;
-                        }
               - type: custom:mushroom-chips-card
                 chips:
                   - type: entity
                     entity: sensor.sm_m315f_battery_level
-                  # - type: entity
-                  #   entity: sensor.sm_m315f_steps_sensor
-                card_mod:
-                  style: |
-                    :host {
-                      padding: 5px;
-                    }
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -190,26 +133,7 @@ cards:
                     layout: horizontal
                     tap_action:
                       action: more-info
-                    card_mod:
-                      style: |
-                        :host {
-                          --mush-icon-size: 60px;
-                          height: 80px;
-                          background: url('/local/images/staticmap.png') center;
-                          background-size: cover;
-                          background-blend-mode: overlay;
-                          background-color: rgba(var(--rgb-card-background-color), 0.5);
-                          --primary-text-color: #fff;
-                          --secondary-text-color: #fff;
-                        }
               - type: custom:mushroom-chips-card
                 chips:
                   - type: entity
                     entity: sensor.yaroslava_battery_level
-                  # - type: entity
-                  #   entity: sensor.yaroslava_steps_sensor
-                card_mod:
-                  style: |
-                    :host {
-                      padding: 5px;
-                    }

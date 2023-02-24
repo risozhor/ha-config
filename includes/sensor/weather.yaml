@@ -36,3 +36,66 @@
       friendly_name: "wind bearing"
       unit_of_measurement: "degrees"
       value_template: "{{ state_attr('weather.openweathermap', 'wind_bearing') }}"
+
+- platform: template
+  sensors:
+    weather_station_info:
+      unique_id: weather_station_info
+      friendly_name: "Weather Station Info"
+      value_template: >-
+        {{states.sensor.weather_station_temperature.state| round}}°C, {{states.sensor.weather_station_humidity.state| round }}%, {{states.sensor.pressure_mmhg.state| round}} mmHg, {{states.sensor.wind_sensor.state| round}} m/s
+      icon_template: >
+        mdi:windsock
+      entity_picture_template: >-
+        /local/images/bg_card/wst.png
+
+- platform: template
+  sensors:
+    wind_direction:
+      unique_id: wind_direction
+      friendly_name: "Wind Direction"
+      value_template: >-
+        {%- set wind_bearing = states('sensor.openweathermap_wind_bearing') | int %}
+        {%- if wind_bearing <= 11 %}N
+        {% elif wind_bearing > 11 and wind_bearing < 34 %}NNE
+        {% elif wind_bearing >= 34 and wind_bearing < 57 %}NE
+        {% elif wind_bearing >= 57 and wind_bearing < 79 %}ENE
+        {% elif wind_bearing >= 79 and wind_bearing < 102 %}E
+        {% elif wind_bearing >= 102 and wind_bearing < 124 %}ESE
+        {% elif wind_bearing >= 124 and wind_bearing < 147 %}SE
+        {% elif wind_bearing >= 147 and wind_bearing < 169 %}SEE
+        {% elif wind_bearing >= 169 and wind_bearing < 192 %}S
+        {% elif wind_bearing >= 192 and wind_bearing < 214 %}SSW
+        {% elif wind_bearing >= 214 and wind_bearing < 236 %}SW
+        {% elif wind_bearing >= 236 and wind_bearing < 259 %}SWW
+        {% elif wind_bearing >= 259 and wind_bearing < 281 %}W
+        {% elif wind_bearing >= 281 and wind_bearing < 304 %}WWN
+        {% elif wind_bearing >= 304 and wind_bearing < 326 %}NW
+        {% elif wind_bearing >= 326 and wind_bearing < 349 %}WNN
+        {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
+        {% else %}Not available
+        {%- endif %}
+
+      icon_template: >
+        mdi:kubernetes
+      entity_picture_template: >-
+        {%- set wind_bearing = states('sensor.openweathermap_wind_bearing') | int %}
+        {%- if wind_bearing <= 11 %}/local/images/compas/N.png
+        {% elif wind_bearing > 11 and wind_bearing < 34 %}/local/images/compas/NNE.png
+        {% elif wind_bearing >= 34 and wind_bearing < 57 %}/local/images/compas/NE.png
+        {% elif wind_bearing >= 57 and wind_bearing < 79 %}/local/images/compas/ENE.png
+        {% elif wind_bearing >= 79 and wind_bearing < 102 %}/local/images/compas/E.png
+        {% elif wind_bearing >= 102 and wind_bearing < 124 %}/local/images/compas/ESE.png
+        {% elif wind_bearing >= 124 and wind_bearing < 147 %}/local/images/compas/SE.png
+        {% elif wind_bearing >= 147 and wind_bearing < 169 %}/local/images/compas/SEE.png
+        {% elif wind_bearing >= 169 and wind_bearing < 192 %}/local/images/compas/S.png
+        {% elif wind_bearing >= 192 and wind_bearing < 214 %}/local/images/compas/SSW.png
+        {% elif wind_bearing >= 214 and wind_bearing < 236 %}/local/images/compas/SW.png
+        {% elif wind_bearing >= 236 and wind_bearing < 259 %}/local/images/compas/SWW.png
+        {% elif wind_bearing >= 259 and wind_bearing < 281 %}/local/images/compas/W.png
+        {% elif wind_bearing >= 281 and wind_bearing < 304 %}/local/images/compas/WWN.png
+        {% elif wind_bearing >= 304 and wind_bearing < 326 %}/local/images/compas/NW.png
+        {% elif wind_bearing >= 326 and wind_bearing < 349 %}/local/images/compas/WNN.png
+        {% elif wind_bearing >= 349 and wind_bearing <= 360 %}/local/images/compas/N.png
+        {% else %}/local/images/compas/NA.png
+        {%- endif %}

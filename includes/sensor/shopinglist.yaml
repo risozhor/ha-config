@@ -1,16 +1,8 @@
 - platform: command_line
   name: shopping_list
-  command: python3 /config/shopping_list.py
+  json_attributes:
+    - complete
+    - incomplete
+  command: "jq -r '{complete: [.[] | select(.complete==true)], incomplete: [.[] | select(.complete==false)]}' /config/.shopping_list.json"
+  value_template: "{{ value_json.incomplete | length }}"
 
-- platform: template
-  sensors:
-    shopping_list_contain:
-      friendly_name: "shopping list contain"
-      value_template: '{% if (states("sensor.shopping_list") | list | length > 1) %}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}'
-      icon_template: mdi:shopping-outline
-      entity_picture_template: >-
-        {% if (states("sensor.shopping_list") | list | length > 1) -%}
-        /local/images/ShopingList/fool.png
-        {% else -%}
-        /local/images/ShopingList/empty.png
-        {%- endif %}

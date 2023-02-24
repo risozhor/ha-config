@@ -28,93 +28,181 @@ cards:
       - type: row
         cards:
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: horizontal-stack
-            cards:
-              - type: custom:mushroom-entity-card
-                entity: lock.frontdoor
-                layout: vertical
-                icon_color: #1a73e8
-              - type: custom:mushroom-entity-card
-                entity: binary_sensor.terrace_door_sensor_contact
-                name: Frontdoor
-                layout: vertical
-                icon_color: #1a73e8
+            type: custom:mushroom-template-card
+            primary: Terrace Entrance
+            icon: >-
+              {%set state = states('binary_sensor.terrace_door_sensor_contact')%}{%if state
+              == "off"%}mdi:door{%else%}mdi:door-open{%endif%}
+            entity: binary_sensor.terrace_door_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set icon_color = states('binary_sensor.terrace_door_sensor_contact')%}
+              {%if icon_color
+              == "off"%}grey{%else%}blue{%endif%}
+            badge_icon: |-
+              {%set badge_icon = states('lock.frontdoor')%}
+              {%if badge_icon == "locked"%}mdi:lock{%endif%}
+            badge_color: |-
+              {%set badge_color = states('lock.frontdoor')%}
+              {%if badge_color == "locked"%}purple{%endif%}
 
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: horizontal-stack
-            cards:
-              - type: custom:mushroom-entity-card
-                entity: binary_sensor.main_corridor_door_sensor_contact
-                layout: vertical
-                icon_color: #1a73e8
-              - type: custom:mushroom-entity-card
-                entity: binary_sensor.main_corridor_window_sensor_contact
-                layout: vertical
-                icon_color: #1a73e8
+            type: custom:mushroom-template-card
+            primary: Main Frontdoor
+            icon: >-
+              {%set state = states('binary_sensor.main_corridor_door_sensor_contact')%}{%if
+              state == "off"%}mdi:door{%else%}mdi:door-open{%endif%}
+            entity: binary_sensor.main_corridor_door_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.main_corridor_door_sensor_contact')%}{%if
+              state == "off"%}grey{%else%}blue{%endif%}
 
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.hallway_contact_sensor_ring
-                name: Hallway Door
-                state_color: true
-                style: |
-                  :host {
-                    color: yellow;
-                  }
+            type: custom:mushroom-template-card
+            primary: Hallway Door
+            icon: >-
+              {%set state = states('binary_sensor.hallway_contact_sensor_ring')%}{%if state
+              == "off"%}mdi:door{%else%}mdi:door-open{%endif%}
+            entity: binary_sensor.hallway_contact_sensor_ring
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.hallway_contact_sensor_ring')%}
+              {%if state == "off"%}grey{%else%}blue{%endif%}
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.kitchen_window_sensor_contact
-                name: Kitchen Window
-                state_color: true
-                style: |
-                  :host {
-                    color: yellow;
-                  }
+            type: custom:mushroom-template-card
+            primary: Livingroom Window
+            icon: >-
+              {%set state = states('binary_sensor.livingroom_window_sensor_contact')%}{%if
+              state == "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.livingroom_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.livingroom_window_sensor_contact')%}{%if
+              state == "off"%}grey{%else%}blue{%endif%}
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.livingroom_window_sensor_contact
-                name: Livingroom Window
-                state_color: true
-                style: |
-                  :host {
-                    color: green;
-                  }
+            type: custom:mushroom-template-card
+            primary: Kitchen Window
+            icon: >-
+              {%set state = states('binary_sensor.kitchen_window_sensor_contact')%}{%if
+              state == "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.kitchen_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.kitchen_window_sensor_contact')%}{%if
+              state == "off"%}grey{%else%}blue{%endif%}
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.kidsroom_window_sensor_contact
-                name: Kidsroom Window
-                state_color: true
-                style: |
-                  :host {
-                    color: green;
-                  }
+            type: custom:mushroom-template-card
+            primary: Main Corridor Window
+            icon: >-
+              {%set state =
+              states('binary_sensor.main_corridor_window_sensor_contact')%}{%if state ==
+              "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.main_corridor_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state =
+              states('binary_sensor.main_corridor_window_sensor_contact')%}{%if state ==
+              "off"%}grey{%else%}blue{%endif%}
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.toilet_window_sensor_contact
-                name: Toilet Window
-                state_color: true
-                style: |
-                  :host {
-                    color: blue;
-                  }
+            type: custom:mushroom-template-card
+            primary: Dining Room Window
+            icon: >-
+              {%set state = states('binary_sensor.dining_room_window_sensor_contact')%}{%if
+              state == "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.dining_room_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.dining_room_window_sensor_contact')%}{%if
+              state == "off"%}grey{%else%}blue{%endif%}
+
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
-            entities:
-              - type: custom:multiple-entity-row
-                entity: binary_sensor.dining_room_window_sensor_contact
-                name: Dining Room Window
-                state_color: true
-                style: |
-                  :host {
-                    color: yellow;
-                  }
+            type: custom:mushroom-template-card
+            primary: Toilet Room Window
+            icon: >-
+              {%set state = states('binary_sensor.toilet_window_sensor_contact')%}{%if state
+              == "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.toilet_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.toilet_window_sensor_contact')%}{%if state
+              == "off"%}grey{%else%}blue{%endif%}
+
+          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
+            type: custom:mushroom-template-card
+            primary: Kids Room Window
+            icon: >-
+              {%set state = states('binary_sensor.kidsroom_window_sensor_contact')%}{%if
+              state == "off"%}mdi:window-closed-variant{%else%}mdi:window-open-variant{%endif%}
+            entity: binary_sensor.kidsroom_window_sensor_contact
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+            icon_color: >-
+              {%set state = states('binary_sensor.kidsroom_window_sensor_contact')%}{%if
+              state == "off"%}grey{%else%}blue{%endif%}

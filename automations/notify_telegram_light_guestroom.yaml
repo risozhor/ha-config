@@ -13,10 +13,10 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу Guestroom увімкнено{% else %}Лампу Guestroom вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу Guestroom вимкнути:/guestrooml_off{% else %}Лампу Guestroom увімкнути:/guestrooml_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_guestroom_off
   alias: "IK - Telegram - Light guestroom hl_off"
@@ -28,7 +28,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: zigbee2mqtt/Guestroom Color Bulb/set
+        topic: zigbee2mqtt_lan/Guestroom Color Bulb/set
         payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
         retain: true
     - delay: "00:00:01"
@@ -39,10 +39,10 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу Guestroom увімкнено{% else %}Лампу Guestroom вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу Guestroom вимкнути:/guestrooml_off{% else %}Лампу Guestroom увімкнути:/guestrooml_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram_light_guestroom_on
   alias: "IK - Telegram - Light guestroom hl_on"
   trigger:
@@ -53,7 +53,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: zigbee2mqtt/Guestroom Color Bulb/set
+        topic: zigbee2mqtt_lan/Guestroom Color Bulb/set
         payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
         retain: true
     - delay: "00:00:01"
@@ -64,7 +64,7 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу Guestroom увімкнено{% else %}Лампу Guestroom вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу Guestroom вимкнути:/guestrooml_off{% else %}Лампу Guestroom увімкнути:/guestrooml_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

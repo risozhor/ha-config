@@ -13,7 +13,7 @@
         message: "Aleksander: Country changed to {{state_attr('sensor.note20_geocoded_location', 'country')}}"
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: notify-change-country-v
   alias: Change country (V)
@@ -30,7 +30,7 @@
         message: "Vitalii: Country changed to {{state_attr('sensor.sm_m315f_geocoded_location', 'country')}} "
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: notify-change-country-y
   alias: Change country (Y)
@@ -47,4 +47,4 @@
         message: "Yaroslava: Country changed to {{state_attr('sensor.yaroslava_geocoded_location', 'country')}}"
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

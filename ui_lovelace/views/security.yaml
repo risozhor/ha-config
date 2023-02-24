@@ -22,38 +22,4 @@ cards:
                 entity: weather.home
                 show_conditions: true
                 show_temperature: true
-      - type: row
-        cards:
-          # - class: col-xs-12 col-md-4 pt-2
-          #   type: custom:mushroom-alarm-control-panel-card
-          #   entity: alarm_control_panel.ring_alarm
-          #   layout: vertical
-          #   states:
-          #     - armed_home
-          #     - armed_away
-          # - class: col-xs-12 col-md-4 pt-2
-          #   type: entities
-          #   entities:
-          #     - type: custom:mushroom-entity-card
-          #       entity: binary_sensor.kitchen_smoke_detector_smoke
-          #       name: Smoke Detector
-          #       layout: vertical
-          #       style: |
-          #         ha-card {
-          #           --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-          #           --ha-card-background: "rgba(0, 0, 0, 0.0)";
-          #           --ha-card-box-shadow: 'none';
-          #         }
-          # - class: col-xs-12 col-md-4 pt-2
-          #   type: entities
-          #   entities:
-          #     - type: custom:mushroom-entity-card
-          #       entity: sensor.ua_alarms
-          #       # name: Alarm
-          #       layout: vertical
-          #       style: |
-          #         ha-card {
-          #           --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-          #           --ha-card-background: "rgba(0, 0, 0, 0.0)";
-          #           --ha-card-box-shadow: 'none';
-          #         }
+

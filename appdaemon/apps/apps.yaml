@@ -15,8 +15,14 @@ nspanel-1:
     screensaver:
       statusIcon1:
         entity: switch.nspanel_relay_1_2
+        icon:
+            "on": mdi:lightbulb-on
+            "off": mdi:lightbulb-off
       statusIcon2:
         entity: switch.nspanel_relay_2_2
+        icon:
+            "on": mdi:lightbulb-on
+            "off": mdi:lightbulb-off
       entity: weather.openweathermap
       theme:
         time: [255, 255, 255]
@@ -80,26 +86,54 @@ nspanel-1:
             color:
               "on": [225, 226, 20]
               "off": [126, 126, 126]
-      - type: cardEntities
-        title: Doors & Windows 1/2
+      - type: cardGrid
+        title: Doors
         entities:
           - entity: binary_sensor.main_corridor_door_sensor_contact
-            icon: mdi:door-open
+            name: Main Corridor
+            color:
+              "on": [20, 60, 255]
+              "off": [126, 126, 126]
           - entity: binary_sensor.terrace_door_sensor_contact
-            icon: mdi:door-open
+            name: Terrace
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: binary_sensor.hallway_contact_sensor_ring
-            icon: mdi:door-open
-          - entity: binary_sensor.kitchen_window_sensor_contact
-            icon: mdi:window-open
-            name: Kitchen Window
-      - type: cardEntities
-        title: Doors & Windows 2/2
+            name: Hallway
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
+      - type: cardGrid
+        title: Windows
         entities:
+          - entity: binary_sensor.kitchen_window_sensor_contact
+            name: Kitchen
+            color:
+              "on": [20, 60, 255]
+              "off": [126, 126, 126]
           - entity: binary_sensor.livingroom_window_sensor_contact
-            icon: mdi:window-open
+            name: Livingroom
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: binary_sensor.kidsroom_window_sensor_contact
-            icon: mdi:window-open
+            name: Kidsroom
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: binary_sensor.main_corridor_window_sensor_contact
-            icon: mdi:window-open
+            name: Main Corridor
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
           - entity: binary_sensor.toilet_window_sensor_contact
-            icon: mdi:window-open
+            name: WC
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]
+          - entity: binary_sensor.dining_room_window_sensor_contact
+            name: Dining Room
+            color:
+              "on": [225, 226, 20]
+              "off": [126, 126, 126]

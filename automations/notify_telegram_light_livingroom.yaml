@@ -9,7 +9,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -22,8 +22,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
-
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Light Living room lcl1_off"
   trigger:
@@ -41,7 +40,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -54,7 +53,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Light Living room lcl1_on"
   trigger:
@@ -74,7 +73,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -87,7 +86,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl2_off"
   trigger:
     platform: event
@@ -104,7 +103,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -117,7 +116,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl2_on"
   trigger:
     platform: event
@@ -136,7 +135,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Кімната LivingRoom*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -149,7 +148,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl3_off"
   trigger:
     platform: event
@@ -166,7 +165,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Кімната LivingRoom*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -179,7 +178,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl3_on"
   trigger:
     platform: event
@@ -198,7 +197,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Кімната LivingRoom*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -211,7 +210,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcls_off"
   trigger:
     platform: event
@@ -228,7 +227,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -241,7 +240,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcls_on"
   trigger:
     platform: event
@@ -260,7 +259,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -273,7 +272,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room tbl_off"
   trigger:
     platform: event
@@ -289,7 +288,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -302,7 +301,7 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room tbl_on"
   trigger:
     platform: event
@@ -320,7 +319,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6CB"}} *Living room*'
+        title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
@@ -333,4 +332,4 @@
           - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
           - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
           - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

@@ -16,7 +16,7 @@
           {% if is_state("light.main_corridor_light", "on") %}{{"\U0001F4A1"}} Main Corridor лампу увімкнено{% else %}Main Corridor лампу вимкнено{% endif %}
         inline_keyboard:
           - '{% if is_state("light.main_corridor_light", "on") %}Main Corridor лампу вимкнути:/mcloff{% else %}Main Corridor лампу увімкнути:/mclon{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_main_corridor_off
   alias: "IK - Telegram - Light main_corridor hl_off"
@@ -28,7 +28,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: zigbee2mqtt/Main Corridor Light/set
+        topic: zigbee2mqtt_lan/Main Corridor Light/set
         payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
         retain: true
     - delay: "00:00:02"
@@ -42,7 +42,7 @@
           {% if is_state("light.main_corridor_light", "on") %}{{"\U0001F4A1"}} Main Corridor лампу увімкнено{% else %}Main Corridor лампу вимкнено{% endif %}
         inline_keyboard:
           - '{% if is_state("light.main_corridor_light", "on") %}Main Corridor лампу вимкнути:/mcloff{% else %}Main Corridor лампу увімкнути:/mclon{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram_light_main_corridor_on
   alias: "IK - Telegram - Light main_corridor hl_on"
   trigger:
@@ -53,7 +53,7 @@
   action:
     - service: mqtt.publish
       data_template:
-        topic: zigbee2mqtt/Main Corridor Light/set
+        topic: zigbee2mqtt_lan/Main Corridor Light/set
         payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
         retain: true
     - delay: "00:00:02"
@@ -67,4 +67,4 @@
           {% if is_state("light.main_corridor_light", "on") %}{{"\U0001F4A1"}} Main Corridor лампу увімкнено{% else %}Main Corridor лампу вимкнено{% endif %}
         inline_keyboard:
           - '{% if is_state("light.main_corridor_light", "on") %}Main Corridor лампу вимкнути:/mcloff{% else %}Main Corridor лампу увімкнути:/mclon{% endif %}'
-          - '{{ "\u21a9\ufe0f" }} Вибір кімнат:/lights, {{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

@@ -1,0 +1,14 @@
+- intents:
+    - HassOnLight:
+        - "activate [the] {name}"
+        - "(turn|switch) on [the] {name}"
+    - HassOffLight:
+        - "deactivate [the] {name}"
+        - "(turn|switch) off [the] {name}"
+    - HassLightSet:
+        - "(set | change) {name} brightnes[s] to {brightness} [percent]"
+        - "(set | change) [the] brightnes[s] of {name} to {brightness} [percent]"
+        - "(set | change) [the] {name} to [the] {brightness} [percent] [brightness]"
+    - HassColorSet:
+        - "(set | change) color {name} to {color} [color]"
+        - "(set | change) {name} [to] [color] {color} [color]"

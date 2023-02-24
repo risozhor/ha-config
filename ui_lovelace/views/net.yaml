@@ -23,227 +23,68 @@ cards:
                 entity: sensor.maria_db_size
       - type: row
         cards:
-          - class: col-xs-12 col-md-6 col-lg-4 order-2 order-md-2 order-lg-0 # speedtest_ping
-            type: vertical-stack
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: custom:mini-graph-card
-                    color_thresholds:
-                      - value: 4
-                        color: "#3498db"
-                      - value: 4.5
-                        color: "#f39c12"
-                      - value: 5
-                        color: "#E45E65"
-                    entities:
-                      - entity: sensor.speedtest_ping
-                        name: SPEEDTEST
-                    font_size: 70
-                    height: 50
-                    hours_to_show: 3
-                    line_width: 2
-                    points_per_hour: 12
-                    show:
-                      fill: false
-                      icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-4 order-md-3 order-lg-1 # disk_use_percent
-            type: vertical-stack
-            style: |
-              order-6 {order: 6 !important;}
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: custom:mini-graph-card
-                    color_thresholds:
-                      - value: 0
-                        color: "#007700"
-                      - value: 50
-                        color: "#ffff00"
-                      - value: 80
-                        color: "#ff0000"
-                    entities:
-                      - entity: sensor.disk_use_percent
-                    font_size: 70
-                    height: 50
-                    hours_to_show: 96
-                    line_width: 2
-                    points_per_hour: 1
-                    show:
-                      fill: false
-                      icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-0 order-md-0 order-lg-2 # rpi4
-            type: vertical-stack
-            cards:
-              - type: entities
-                entities:
-                  - type: custom:hui-element
-                    card_type: custom:mod-card
-                    card:
-                      type: horizontal-stack
-                      cards:
-                        - type: picture
-                          style: |
-                            ha-card { 
-                              --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                              --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                              --ha-card-box-shadow: 'none';
-                            }
-                          image: /local/images/devices/rpi4.png
-                        - type: vertical-stack
-                          cards:
-                            - type: custom:button-card
-                              layout: icon_name_state2nd
-                              show_state: true
-                              icon: mdi:thermometer
-                              name: Server Temperature.
-                              styles:
-                                icon:
-                                  - width: 40px
-                                card:
-                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                  - "--ha-card-box-shadow": none
-                              entity: sensor.raspberry_c_temp
-                              style: |
-                                ha-card.button-card-main {padding:0!important;}
-                            - type: custom:button-card
-                              entity: binary_sensor.rpi_power_status
-                              layout: icon_name_state2nd
-                              name: Power Ststus
-                              show_state: true
-                              styles:
-                                icon:
-                                  - width: 40px
-                                card:
-                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                  - "--ha-card-box-shadow": none
-          - class: col-xs-12 col-md-6 col-lg-4 order-3 order-md-4 order-lg-3 # speedtest_download speedtest_upload
-            type: vertical-stack
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: horizontal-stack
-                    cards:
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 50
-                            color: "#E45E65"
-                          - value: 90
-                            color: "#f39c12"
-                          - value: 100
-                            color: "#3498db"
-                        entities:
-                          - entity: sensor.speedtest_download
-                            name: Download
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 50
-                            color: "#E45E65"
-                          - value: 90
-                            color: "#f39c12"
-                          - value: 100
-                            color: "#3498db"
-                        entities:
-                          - entity: sensor.speedtest_upload
-                            name: Upload
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-5 order-md-5 order-lg-4 # memory_use_percentz processor_use_percent
-            type: vertical-stack
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: horizontal-stack
-                    cards:
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 0
-                            color: "#007700"
-                          - value: 50
-                            color: "#ffff00"
-                          - value: 70
-                            color: "#ff0000"
-                        entities:
-                          - entity: sensor.memory_use_percent
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 1
-                        line_width: 2
-                        points_per_hour: 60
-                        show:
-                          fill: false
-                          icon: false
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 0
-                            color: "#007700"
-                          - value: 40
-                            color: "#ffff00"
-                          - value: 70
-                            color: "#ff0000"
-                        entities:
-                          - entity: sensor.processor_use_percent
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 1
-                        line_width: 2
-                        points_per_hour: 60
-                        show:
-                          fill: false
-                          icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 order-1 order-md-1 order-lg-5 # z GW
-            type: vertical-stack
-            cards:
-              - type: entities
-                entities:
-                  - type: custom:hui-element
-                    card_type: custom:mod-card
-                    card:
-                      type: horizontal-stack
-                      cards:
-                        - type: picture
-                          style: |
-                            ha-card { 
-                              --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
-                              --ha-card-background: "rgba(0, 0, 0, 0.0)";
-                              --ha-card-box-shadow: 'none';
-                            }
-                          image: /local/images/devices/zsgw.png
-                        - type: vertical-stack
-                          cards:
-                            - type: custom:button-card
-                              layout: icon_name_state2nd
-                              show_state: true
-                              name: Zigbee GW
-                              styles:
-                                icon:
-                                  - width: 40px
-                                card:
-                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                  - "--ha-card-box-shadow": none
-                              entity: sensor.cpu_temperature
-                              style: |
-                                ha-card.button-card-main {padding:0!important;}
-                            - type: custom:button-card
-                              entity: sensor.uptime
-                              layout: icon_name_state2nd
-                              name: Uptime
-                              show_state: true
-                              styles:
-                                icon:
-                                  - width: 40px
-                                card:
-                                  - "--ha-card-background": rgba(0, 0, 0, 0.0)
-                                  - "--ha-card-box-shadow": none
+          - class: col-xs-12 col-md-6 col-lg-3 # speedtest_ping
+            type: custom:mushroom-template-card
+            primary: Speedtest
+            secondary: |-
+              Ping {{states.sensor.speedtest_ping.state}}ms, 
+              Download: {{states.sensor.speedtest_download.state | round}} Mbit/s, 
+              Upload: {{states.sensor.speedtest_upload.state}} Mbit/s
+            icon: mdi:speedometer
+            entity: sensor.server_status
+            tap_action:
+              action: none
+            layout: horizontal
+            multiline_secondary: false
+            picture: ""
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_color: green
+          - class: col-xs-12 col-md-6 col-lg-3 # disk_use_percent
+            type: custom:mushroom-template-card
+            primary: Hardware
+            secondary: |-
+              HDD {{states.sensor.disk_use_percent.state}}%, 
+              RAM: {{states.sensor.memory_use_percent.state | round}}%, 
+              Processor: {{states.sensor.processor_use_percent.state}}%
+            icon: mdi:harddisk
+            entity: sensor.server_status
+            tap_action:
+              action: none
+            layout: horizontal
+            multiline_secondary: false
+            picture: ""
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_color: |-
+              {% set processor_use_percent = states('sensor.processor_use_percent')| int %}
+              {% if processor_use_percent >= 50 %}red
+              {% else %}pink{% endif %}
+          - class: col-xs-12 col-md-6 col-lg-3 # rpi4
+            type: custom:mushroom-template-card
+            primary: Server status
+            secondary: "{{states.sensor.server_status.state}}"
+            icon: mdi:raspberry-pi
+            entity: sensor.server_status
+            tap_action:
+              action: more-info
+            layout: horizontal
+            multiline_secondary: false
+            picture: /local/images/bg_card/bg_rpi.png
+          - class: col-xs-12 col-md-6 col-lg-3 # z GW
+            type: custom:mushroom-template-card
+            primary: Zigbee Gateway
+            secondary: >-
+              ESP temperature: {{states.sensor.cpu_temperature.state | round}}°C, Uptime:
+              {{states.sensor.uptime.state}}
+            icon: mdi:raspberry-pi
+            entity: sensor.server_status
+            tap_action:
+              action: more-info
+            layout: horizontal
+            multiline_secondary: false
+            picture: /local/images/bg_card/bg_zsgw.png

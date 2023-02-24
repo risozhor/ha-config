@@ -13,7 +13,7 @@
         message: "О {{ states('sensor.time_date') }} на кухні виявлено дим"
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
     - service: notify.mobile_app_note20
       data:
         title: "The house is on fire! Smoke detected"
@@ -47,7 +47,7 @@
           {{'\U0001F525'}} Home Assistant Started at {{ states('sensor.time_date') }}
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 # Press TELEGRAM "/start" Home Assistant Notify
 - id: telegram-control-pannel-start
@@ -120,7 +120,7 @@
         inline_keyboard:
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-security-alarm
   alias: "Telegram Alarm"
@@ -142,7 +142,7 @@
           {% if is_state("alarm_control_panel.ring_alarm", "disarmed") %}Alarm is OFF. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
         inline_keyboard:
           - '{{ "\u26D4" }} Alarm ON:/arm_away, {{ "\u2B55" }} Alarm ON at home:/arm_home, {{ "\u2611" }} Disarm:/disarm'
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-arm_away
   alias: "Telegram Alarm SET arm_away"
@@ -163,7 +163,7 @@
         message: "Поставлено на охорону (не вдома)"
         inline_keyboard:
           - "На охорону (вдома):/arm_home, Зняти з охорони:/disarm"
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-arm_home
   alias: "Telegram Alarm SET arm_home"
@@ -184,7 +184,7 @@
         message: "Поставлено на охорону (Вдома)"
         inline_keyboard:
           - "На охорону (Не вдома):/arm_away, Зняти з охорони:/disarm"
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-disarm
   alias: "Telegram Alarm SET disarm"
@@ -205,10 +205,10 @@
         message: "Знято з охорони"
         inline_keyboard:
           - "На охорону (Не вдома):/arm_away, На охорону (вдома):/arm_home"
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-to-cp
-  alias: "Telegram Панель керування"
+  alias: "Telegram Control Panel"
   trigger:
     - platform: event
       event_type: telegram_callback
@@ -219,7 +219,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: "*Панель керування*"
+        title: "*Control Panel*"
         message: >-
           {{'\n'}}
           {% set hour_num = now().hour | int %}
@@ -258,7 +258,7 @@
           - '{{"\U0001F39B"}} Кухня:/light_kitchen, {{"\U0001F6AA"}} Коридор:/light_hallway, {{"\U0001F9F8"}} Дитяча :/light_kids'
           - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
           - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Надворі:/light_outdoor'
-          - '{{ "\u21a9\ufe0f" }} до панелі керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "HA System Actions"
   trigger:
@@ -274,8 +274,8 @@
         title: '{{"\U0001F6E0"}} *HA System Actions*'
         message: "Схоже, ви хочете щось зробити з вашим Home Assistant. Яку дію бажаєте виконати?"
         inline_keyboard:
-          - '{{"\u2B07\uFE0F"}} Вимкнення хоста:/hashutdown, {{"\U0001F503"}} Перезавантаження хоста:/hassioreboot'
-          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{"\u2B07\uFE0F"}} Shut down:/hashutdown, {{"\U0001F503"}} Restart:/hassioreboot'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Host Reboot"
   trigger:
@@ -287,14 +287,14 @@
     - service: telegram_bot.answer_callback_query
       data_template:
         callback_query_id: "{{ trigger.event.data.id }}"
-        message: '{{"\U0001F503"}} Перезавантаження хоста'
+        message: '{{"\U0001F503"}} Restart'
     - service: hassio.host_reboot
     - service: notify.telegram
       data:
         message: '{{"\U0001F503"}} Host - Reboot - Triggered'
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Host Shutdown"
   trigger:
@@ -306,14 +306,14 @@
     - service: telegram_bot.answer_callback_query
       data_template:
         callback_query_id: "{{ trigger.event.data.id }}"
-        message: '{{"\U0001F503"}} Вимкнення хоста'
+        message: '{{"\U0001F503"}} Shut down'
     - service: hassio.host_shutdown
     - service: notify.telegram
       data:
         message: '{{"\u2B07\uFE0F"}} Host - Shutdown - Triggered'
         data:
           inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - System status sstatus"
   trigger:
@@ -336,7 +336,7 @@
           {{"\U0001F4C0"}} *HDD Used*: {{  states.sensor.disk_use_percent.state }}%{{'\n'}}
           {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
         inline_keyboard:
-          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - status weather"
   trigger:
@@ -368,7 +368,7 @@
           {{"\U0001F328"}} Прогноз снігу - {{ states('sensor.openweathermap_snow') }}
         inline_keyboard:
           - "Прогноз на завтра:/weather_tomorrow"
-          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - status weather tomorrow"
   trigger:
@@ -390,7 +390,7 @@
           {{"\U0001f4a8"}} Швидкість вітру {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} м/с.
         inline_keyboard:
           - '{{"\U0001F324"}} Повернутись:/weather'
-          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "Telegram - status shopinglist"
   trigger:
@@ -403,8 +403,10 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F4B5"}} *Актуальний список покупок *'
+        title: '{{"\U0001F4B5"}} *Shopping list *'
         message: |
-          {% if (states("sensor.shopping_list") | list | length > 1) %}{%for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%}{%else%}Список порожній{%- endif %}
+          {% if ((states.sensor.shopping_list.state)  | count > 0) %}
+          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s)
+          {%else%}List is empty{%- endif %}
         inline_keyboard:
-          - '{{ "\u21a9\ufe0f" }} Панель керування:/to_cp'
+          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

@@ -11,19 +11,12 @@ cards:
           left: 95%
           top: 8%
         type: state-icon
-      # - entity: camera.ring
-      #   style:
-      #     left: 80%
-      #     top: 28%
-      #     color: "#777"
-      #   type: icon
-      #   icon: mdi:doorbell-video
       - entity: camera.wyze
         style:
           left: 90%
           top: 88%
           rotate: 90degree
-          color: "#777"
+          color: '#777'
           transform: rotate(45deg)
         type: icon
         icon: mdi:video
@@ -204,7 +197,7 @@ cards:
           action: toggle
         image: /local/images/light_bulb_off.png
         state_image:
-          "on": /local/images/light_bulb_on.png
+          'on': /local/images/light_bulb_on.png
         type: image
       - entity: light.kitchen_color_lamp
         style:
@@ -270,8 +263,10 @@ cards:
           width: 7%
         tap_action:
           action: toggle
-        icon: hue:bulb-sultan
-        type: state-icon
+        image: /local/images/light_bulb_off.png
+        state_image:
+          'on': /local/images/light_bulb_on.png
+        type: image
       - entity: light.guestroom_color_bulb
         style:
           left: 55%
@@ -281,8 +276,10 @@ cards:
           width: 7%
         tap_action:
           action: toggle
-        icon: hue:bulb-sultan
-        type: state-icon
+        image: /local/images/light_bulb_off.png
+        state_image:
+          'on': /local/images/light_bulb_on.png
+        type: image
       - entity: light.main_corridor_light
         style:
           left: 77%
@@ -294,7 +291,7 @@ cards:
           action: toggle
         image: /local/images/light_bulb_off.png
         state_image:
-          "on": /local/images/light_bulb_on.png
+          'on': /local/images/light_bulb_on.png
         type: image
       - entity: light.0x0017880103aa4b71
         style:
@@ -305,8 +302,10 @@ cards:
           width: 7%
         tap_action:
           action: toggle
-        icon: hue:bulb-sultan
-        type: state-icon
+        image: /local/images/light_bulb_off.png
+        state_image:
+          'on': /local/images/light_bulb_on.png
+        type: image
       - entity: switch.outdoor_floodlight
         icon: hue:lightstrip
         style:
@@ -379,3 +378,4 @@ cards:
           padding: 0px
           top: 93%
         type: state-icon
+    
