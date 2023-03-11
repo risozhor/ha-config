@@ -1,0 +1,33 @@
+substitutions:
+  devicename: waterheater
+  upper_devicename: Water Heater
+esphome:
+  name: ${devicename}
+  friendly_name: ${upper_devicename}
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+logger:
+api:
+ota:
+  password: !secret ota_password
+wifi:
+  networks:
+  - ssid: !secret ssid
+    password: !secret password
+    manual_ip:
+      static_ip: 192.168.10.16
+      gateway: 192.168.10.1
+      subnet: 255.255.255.0
+  ap:
+    ssid: "${devicename} Fallback Hotspot"
+    password: !secret ap_password
+captive_portal:
+web_server:
+dallas:
+  - pin: 23
+sensor:
+  - platform: dallas
+    address: 0x3b3c01d60756cf28
+    name: ${upper_devicename} Temperature
