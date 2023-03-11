@@ -25,6 +25,7 @@
         entity_id: media_player.kitchen_display
         message: Увага! Повітряна тривога! Негайно прямуйте в укриття.
         language: uk-UA
+        cache: true
     - service: notify.mobile_app_note20
       data:
         title: Повітряна тривога!

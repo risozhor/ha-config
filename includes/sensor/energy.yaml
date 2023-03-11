@@ -1,29 +1,23 @@
-# #mqtt потребление за месяц
-# - platform: mqtt
-#   state_topic: "power/158d0001291d12/month"
-#   name: 'mqtt_power_month_158d0001291d12'
-#   unit_of_measurement: 'кВт⋅ч'
+- platform: template
+  sensors:
+    current:
+      friendly_name: "Current"
+      unit_of_measurement: 'A'
+      value_template: "{{ state_attr('sensor.energy_meter_energy', 'current') }}"
+      icon_template: mdi:current-ac
 
-# #mqtt потребление за прошлый месяц
-# - platform: mqtt
-#   state_topic: "power/158d0001291d12/lastmonth"
-#   name: 'mqtt_power_lastmonth_158d0001291d12'
-#   unit_of_measurement: 'кВт⋅ч'
+- platform: template
+  sensors:
+    voltage:
+      friendly_name: "Voltage"
+      unit_of_measurement: 'V'
+      value_template: "{{ state_attr('sensor.energy_meter_energy', 'voltage') }}"
+      icon_template: mdi:flash-triangle
 
-# - platform: template
-#   sensors:
-#     money_month:
-#       friendly_name: "Стоимость за текущий месяц"
-#       unit_of_measurement: 'грн'
-#       value_template: "{{ (states.sensor.power_meter_energy.state | float * 1.68)|round(2) }}"
-#       icon_template: mdi:square-inc-cash
-
-# # Стоимость за прошлый месяц
-# - platform: template
-#   sensors:
-#     money_lastmonth:
-#       friendly_name: "Стоимость за прошлый месяц"
-#       unit_of_measurement: 'грн'
-#       value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d0001291d12.state | float * 1.68)|round(2) }}"
-#       icon_template: mdi:square-inc-cash
-[]
+- platform: template
+  sensors:
+    power:
+      friendly_name: "Power"
+      unit_of_measurement: 'W'
+      value_template: "{{ state_attr('sensor.energy_meter_energy', 'power') }}"
+      icon_template: mdi:file-powerpoint-box

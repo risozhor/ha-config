@@ -185,7 +185,6 @@
         inline_keyboard:
           - "На охорону (Не вдома):/arm_away, Зняти з охорони:/disarm"
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - id: telegram-ik-set-security-disarm
   alias: "Telegram Alarm SET disarm"
   trigger:
@@ -237,10 +236,6 @@
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
-          # - "Показать Фото :/get_photo"
-          #- Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}.
-# {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}
-
 - alias: "Lights Actions"
   trigger:
     platform: event
@@ -259,7 +254,6 @@
           - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
           - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Надворі:/light_outdoor'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "HA System Actions"
   trigger:
     platform: event
@@ -276,7 +270,6 @@
         inline_keyboard:
           - '{{"\u2B07\uFE0F"}} Shut down:/hashutdown, {{"\U0001F503"}} Restart:/hassioreboot'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "IK - Telegram - Host Reboot"
   trigger:
     platform: event
@@ -295,7 +288,6 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "IK - Telegram - Host Shutdown"
   trigger:
     platform: event
@@ -314,7 +306,6 @@
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "IK - Telegram - System status sstatus"
   trigger:
     platform: event
@@ -337,7 +328,6 @@
           {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
         inline_keyboard:
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "IK - Telegram - status weather"
   trigger:
     platform: event
@@ -369,7 +359,6 @@
         inline_keyboard:
           - "Прогноз на завтра:/weather_tomorrow"
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "IK - Telegram - status weather tomorrow"
   trigger:
     platform: event
@@ -391,7 +380,6 @@
         inline_keyboard:
           - '{{"\U0001F324"}} Повернутись:/weather'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-
 - alias: "Telegram - status shopinglist"
   trigger:
     platform: event
@@ -406,7 +394,7 @@
         title: '{{"\U0001F4B5"}} *Shopping list *'
         message: |
           {% if ((states.sensor.shopping_list.state)  | count > 0) %}
-          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s)
+          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s): {{states.sensor.shopping_list_items.state|replace("[", "")|replace("]", "")|replace("\n", "")-}}
           {%else%}List is empty{%- endif %}
         inline_keyboard:
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

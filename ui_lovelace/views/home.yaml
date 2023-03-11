@@ -18,6 +18,9 @@ cards:
               - type: template
                 content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
                 icon: mdi:lightbulb-multiple-outline
+                icon_color: >-
+                  {%set state = int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)%}
+                  {%if state == 0%}grey{%else%}yellow{%endif%}
                 tap_action:
                   action: navigate
                   navigation_path: /lovelace/lights
@@ -42,6 +45,9 @@ cards:
                   navigation_path: /lovelace/weather
               - type: entity
                 entity: sensor.count_update
+                tap_action:
+                  action: navigate
+                  navigation_path: /config/updates
               - type: conditional
                 conditions:
                   - entity: sensor.ua_alarms
@@ -49,56 +55,37 @@ cards:
                 chip:
                   type: template
                   entity: sensor.ua_alarms
-                  icon: |-
-                    {% if is_state("binary_sensor.teritorialna_gromada_air", "on")
-                    %}mdi:cloud
-                    {% elif
-                    is_state("binary_sensor.teritorialna_gromada_artillery", "on")
-                    %}mdi:tank
-                    {% elif is_state("binary_sensor.teritorialna_gromada_unknown",
-                    "on") %}mdi:check-circle
-                    {% elif
-                    is_state("binary_sensor.teritorialna_gromada_urban_fights",
-                    "on") %}mdi:pistol
-                    {% elif is_state("binary_sensor.chemical", "on")
-                    %}mdi:chemical-weapon
-                    {% elif is_state("binary_sensor.nuclear", "on") %}mdi:nuke
-                    {% else %}mdi:shield-home{% endif %}
+                  card_mod:
+                    style: |
+                      ha-card {animation:pulse 1500ms infinite;!important;}
+                      @keyframes pulse{
+                        0%{box-shadow:red 0 0 0 0;}
+                        70%{box-shadow:#ff69b400 0 0 0 10px;}
+                        100%{box-shadow:none;}
+                      }
+                  icon: >-
+                    {%- if is_state("binary_sensor.teritorialna_gromada_air", "on")%}mdi:cloud
+                    {%- elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}mdi:tank
+                    {%- elif is_state("binary_sensor.teritorialna_gromada_unknown","on") %}mdi:check-circle
+                    {%- elif is_state("binary_sensor.teritorialna_gromada_urban_fights","on") %}mdi:pistol
+                    {%- elif is_state("binary_sensor.chemical", "on")%}mdi:chemical-weapon
+                    {%- elif is_state("binary_sensor.nuclear", "on") %}mdi:nuke
+                    {%- else %}mdi:shield-home{%- endif -%}
                   icon_color: >-
                     {% if is_state("binary_sensor.teritorialna_gromada_air", "on") %}red
-
-                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")
-                    %}red
-
+                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}red
                     {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on") %}red
-
-                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")
-                    %}red
-
+                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")%}red
                     {% elif is_state("binary_sensor.chemical", "on") %}red
-
                     {% elif is_state("binary_sensor.nuclear", "on") %}red
-
                     {% else %}green{% endif %}
                   content: >-
-                    {% if is_state("binary_sensor.teritorialna_gromada_air", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
-                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
-                    {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
-                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
-                    {% elif is_state("binary_sensor.chemical", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
-                    {% elif is_state("binary_sensor.nuclear", "on")
-                    %}{{states.sensor.ua_alarms.state}}
-
+                    {% if is_state("binary_sensor.teritorialna_gromada_air", "on")%}{{states.sensor.ua_alarms.state}}
+                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}{{states.sensor.ua_alarms.state}}
+                    {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on")%}{{states.sensor.ua_alarms.state}}
+                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")%}{{states.sensor.ua_alarms.state}}
+                    {% elif is_state("binary_sensor.chemical", "on")%}{{states.sensor.ua_alarms.state}}
+                    {% elif is_state("binary_sensor.nuclear", "on")%}{{states.sensor.ua_alarms.state}}
                     {% else %}{% endif %}
                   double_tap_action:
                     action: none
@@ -293,3 +280,13 @@ cards:
           - class: col-xs-12 col-md-3 pt-2
             type: custom:mushroom-alarm-control-panel-card
             entity: alarm_control_panel.ring_alarm
+
+          - class: col-xs-12 col-md-3 pt-2
+            type: custom:energy-overview-card
+            entities:
+              - power: sensor.power_meter_energy
+                label_leading: P
+                label_trailing: L1
+                voltage: sensor.voltage
+                current: sensor.current
+            order_by: ""

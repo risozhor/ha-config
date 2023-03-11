@@ -16,7 +16,6 @@
       arg: /
 - platform: command_line
   name: Raspberry C Temp
-  # icon: mdi:thermometer
   unique_id: raspberry_c_temp
   unit_of_measurement: "°C"
   command: "cat /sys/class/thermal/thermal_zone0/temp"

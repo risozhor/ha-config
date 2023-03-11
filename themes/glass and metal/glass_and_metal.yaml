@@ -1,4 +1,77 @@
 Glass and Metal:
+  card-mod-theme: Glass and Metal
+  card-mod-root: |
+    app-header {background: var(--theme-card-background) !important;}
+    app-toolbar {
+      background: none !important;
+      border-bottom: var(--theme-thin-border)
+      }
+    app-toolbar div[main-title] {
+      font-variant: small-caps;
+      }
+    paper-tab ha-icon:after {
+        content: "";
+        left: calc(var(--mdc-icon-size,24px) / 2);
+        top: calc(var(--mdc-icon-size,24px) / 2);
+        width: calc(var(--mdc-icon-size,14px));
+        height: calc(var(--mdc-icon-size,14px));
+        position: absolute;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        text-align: center;
+        font-family: sans-serif;
+        font-weight: normal;
+        display: none;
+      }
+    paper-tab[aria-label='lights'] ha-icon:after {
+      {%set LIGHTS_ON = int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)%}
+      {% if LIGHTS_ON > 0 %}
+        content: "{{LIGHTS_ON|round(0)}}";
+        display: block;
+        {% if LIGHTS_ON < 10 %}
+          font-size: 12px;
+          line-height: 15px;
+        {% elif LIGHTS_ON >= 10 and LIGHTS_ON < 100 %}
+          font-size: 10px;
+          line-height: 14px;
+        {% elif LIGHTS_ON >= 100 and LIGHTS_ON < 1000 %}
+          font-size: 10px;
+          line-height: 20px
+          left: calc(var(--mdc-icon-size,20px) / 2);
+          top: calc(var(--mdc-icon-size,14px) / 2);
+          width: calc(var(--mdc-icon-size,20px));
+          height: calc(var(--mdc-icon-size,20px));
+        {% else %}
+          content: "hi";
+          font-size: 12px;
+          line-height: 15px;
+        {% endif %}
+      {% endif %}
+      }
+    paper-tab[aria-label='doors'] ha-icon:after {
+      {%set OPENED = int(states.sensor.opened_doors.state)+int(states.sensor.opened_windows.state)%}
+      {% if OPENED > 0 %}
+        content: "{{OPENED|round(0)}}";
+        {% if OPENED < 10 %}
+          font-size: 12px;
+          line-height: 15px;
+        {% elif OPENED >= 10 and OPENED < 100 %}
+          font-size: 10px;
+          line-height: 14px;
+        {% elif OPENED >= 100 and OPENED < 1000 %}
+          font-size: 10px;
+          line-height: 20px
+          left: calc(var(--mdc-icon-size,20px) / 2);
+          top: calc(var(--mdc-icon-size,14px) / 2);
+          width: calc(var(--mdc-icon-size,20px));
+          height: calc(var(--mdc-icon-size,20px));
+        {% else %}
+          content: "hi";
+          font-size: 12px;
+          line-height: 15px;
+        {% endif %}
+      {% endif %}
+      }
   primary-font-family: "Raleway,sans-serif"
   paper-font-common-base_-_font-family: "var(--primary-font-family)"
   paper-font-common-code_-_font-family: "var(--primary-font-family)"

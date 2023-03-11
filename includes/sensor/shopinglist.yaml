@@ -6,3 +6,8 @@
   command: "jq -r '{complete: [.[] | select(.complete==true)], incomplete: [.[] | select(.complete==false)]}' /config/.shopping_list.json"
   value_template: "{{ value_json.incomplete | length }}"
 
+- platform: command_line
+  name: shopping_list_items
+  unique_id: shopping_list_items
+  unit_of_measurement: "items"
+  command: "jq '[.[] | select(.complete==false) | .name]' /config/.shopping_list.json"

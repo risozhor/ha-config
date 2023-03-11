@@ -9,7 +9,7 @@
     - service: notify.telegram
       data:
         title: '{{"\U0001F4B5"}} *Shopping list*'
-        message: "{{ trigger.event.data.item.name }} has been added to the shopping list"
+        message: "'{{ trigger.event.data.item.name }}' has been added to the shopping list"
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

@@ -15,6 +15,9 @@ cards:
               - type: template
                 content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
                 icon: mdi:lightbulb-multiple-outline
+                icon_color: >-
+                  {%set state = int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)%}
+                  {%if state == 0%}grey{%else%}yellow{%endif%}
               - type: weather
                 entity: weather.home
                 show_conditions: true
@@ -25,311 +28,145 @@ cards:
       - type: row
         cards:
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: horizontal-stack
-            cards:
-              - type: custom:mushroom-template-card
-                primary: |-
-                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
-                  Lights turned on {{count}}
-                icon: |-
-                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
-                  {%- if count > 0 -%}
-                    {%- if count < 10 -%}
-                      mdi:numeric-{{ count }}-circle
-                    {%- else -%}
-                      mdi:numeric-9-plus-circle
-                    {%- endif %}
-                  {%- else -%}
-                  mdi:numeric-0-circle
-                  {%- endif -%}
-                badge_icon: mdi:lightbulb
-                badge_color: red
-                secondary: ""
-                icon_color: |-
-                  {%- set count =  states('sensor.ligts_on') | int(0) -%}
-                  {%- if count > 0 -%}
-                  #c8a600
-                  {%- else -%}
-                  #ddd
-                  {%- endif -%}
-                layout: vertical
-              - type: custom:mushroom-template-card
-                primary: |-
-                  {%- set count =  states('sensor.switches_on') | int(0) -%}
-                  Switches turned on {{count}}
-                icon: |-
-                  {%- set count =  states('sensor.switches_on') | int(0) -%}
-                  {%- if count > 0 -%}
-                    {%- if count < 10 -%}
-                      mdi:numeric-{{ count }}-circle
-                    {%- else -%}
-                      mdi:numeric-9-plus-circle
-                    {%- endif %}
-                  {%- else -%}
-                  mdi:numeric-0-circle
-                  {%- endif -%}
-                badge_icon: mdi:light-switch
-                badge_color: red
-                secondary: ""
-                icon_color: |-
-                  {%- set count =  states('sensor.switches_on') | int(0) -%}
-                  {%- if count > 0 -%}
-                  #c8a600
-                  {%- else -%}
-                  #ddd
-                  {%- endif -%}
-                layout: vertical
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Kitchen
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/kitchen.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.livingroom_lights
-                name: Livingroom
-                icon: mdi:sofa
-                show_state: false
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-
-                entities:
-                  - entity: light.livingroom_lights
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                  - entity: light.livingroom_table_background
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                  - entity: light.gyver_lamp2
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: light.kitchen_ceiling_lamp
+              - entity: light.kitchen_color_lamp
+              - entity: light.kitchen_table_lamp
+              - entity: light.kitchen_strip
+            tap_action:
+              action: none
+            hold_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Outdoor
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/outdoor.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.kitchen_ceiling_lights
-                name: Kitchen
-                show_state: false
-                icon: mdi:faucet-variant
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.kitchen_ceiling_lights
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                  - entity: light.kitchen_strip
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: switch.outdoor_floodlight
+              - entity: switch.yard_light
+              - entity: switch.backyard_light
+            tap_action:
+              action: none
+            hold_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Livingroom
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/living.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.0x0017880103aa4b71
-                name: Kidsroom
-                icon: mdi:teddy-bear
-                show_state: false
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.0x0017880103aa4b71
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: light.livingroom_lights
+              - entity: light.gyver_lamp2
+              - entity: light.livingroom_table_background
+            hold_action:
+              action: none
+            tap_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Terrace
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/terrace.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.0x00178801030318a1
-                name: Hallway
-                icon: mdi:coat-rack
-                show_state: false
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.0x00178801030318a1
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                    hold_action:
-                      action: more-info
-                  - entity: light.wled
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                    hold_action:
-                      action: more-info
+              - entity: switch.terrace_spotlights
+            tap_action:
+              action: none
+            hold_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Kids Room
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/kidsroom.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.guestroom_color_bulb
-                name: Guestroom
-                show_state: false
-                icon: mdi:walk
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.guestroom_color_bulb
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: light.0x0017880103aa4b71
+            tap_action:
+              action: none
+            hold_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Bathroom
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.main_corridor_light
-                name: Main corridor
-                show_state: false
-                icon: mdi:door-sliding
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.main_corridor_light
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: light.shelly1
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            image: /local/rooms/bathroom.jpg
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Dining Room
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
+            image: /local/rooms/diningroom.jpg
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.dining_room_stripe_3
-                name: Dining Room
-                show_state: false
-                icon: mdi:table-chair
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.dining_room_stripe_3
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
+              - entity: light.dining_room_stripe_3
+            tap_action:
+              action: none
+            hold_action:
+              action: none
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Hallway
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
             entities:
-              - type: custom:multiple-entity-row
-                entity: light.shelly1
-                name: Bathroom
-                show_state: false
-                icon: mdi:shower-head
-                tap_action:
-                  action: none
-                hold_action:
-                  action: more-info
-                entities:
-                  - entity: light.shelly1
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-            show_header_toggle: false
+              - entity: light.0x00178801030318a1
+              - entity: light.wled
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            image: /local/rooms/hallway.jpg
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Guestroom
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
             entities:
-              - type: custom:multiple-entity-row
-                entity: switch.backyard_light
-                name: Outdoor
-                show_state: false
-                icon: mdi:pine-tree
-                tap_action:
-                  action: none
-                entities:
-                  - entity: switch.backyard_light
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                  - entity: switch.yard_light
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-                  - entity: switch.outdoor_floodlight
-                    icon: true
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-            show_header_toggle: false
+              - entity: light.guestroom_color_bulb
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            image: /local/rooms/guestroom.jpg
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Main Corridor
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
             entities:
-              - type: custom:multiple-entity-row
-                entity: switch.terrace_spotlights
-                name: Terrace
-                show_state: false
-                icon: mdi:balcony
-                tap_action:
-                  action: none
-                entities:
-                  - entity: switch.terrace_spotlights
-                    icon: hue:centura-round
-                    state_color: true
-                    show_state: false
-                    name: false
-                    tap_action:
-                      action: toggle
-            show_header_toggle: false
+              - entity: light.main_corridor_light
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            image: /local/rooms/frontdoor.jpg
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: entities
+            type: picture-glance
+            title: Gyver Lamp
+            card_mod:
+              style: ha-icon-button.state-on {color:#ffd640!important;}
             entities:
               - entity: light.gyver_lamp2
               - entity: number.wled_speed_2
               - entity: number.wled_intensity_2
               - entity: select.wled_preset_2
-            show_header_toggle: false
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            image: /local/rooms/gyver.jpg
