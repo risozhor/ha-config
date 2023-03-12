@@ -122,3 +122,5 @@ You can support me:
 ### Weather
 <img src="git/5.png" />
 
+### Floorplan
+<img src="git/6.png" />
