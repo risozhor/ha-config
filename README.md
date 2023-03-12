@@ -102,9 +102,13 @@ You can support me:
 
 # Welcome to my Home Assistant configuration
 
-## Mobile view
+| Mobile view  | Telegram bot |
+| ------------- | ------------- |
+|<video src="https://user-images.githubusercontent.com/12980782/224554395-f9f35544-1e7a-4dd5-b38d-afa82137f232.mp4">  |<video src="https://user-images.githubusercontent.com/12980782/224554851-c754417a-43d7-44d6-a952-3dc4d0e6fe3b.mp4">  |
 
-https://user-images.githubusercontent.com/12980782/184926349-f83677e8-0cd5-4c81-a311-43a512391418.mp4
+
+
+
 
 
 
