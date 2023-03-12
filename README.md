@@ -107,23 +107,18 @@ You can support me:
 |<video src="https://user-images.githubusercontent.com/12980782/224554395-f9f35544-1e7a-4dd5-b38d-afa82137f232.mp4">  |<video src="https://user-images.githubusercontent.com/12980782/224554851-c754417a-43d7-44d6-a952-3dc4d0e6fe3b.mp4">  |
 
 
-
-
-
-
-
-
 ### main screen
-<img src="git/screen 1.png"  />
-
-### security and air alarms
-<img src="git/screen 2.png" />
+<img src="git/1.png"  />
 
 ### door and windows
-<img src="git/screen 3.png" />
+<img src="git/2.png" />
 
-### lights
-<img src="git/screen 4.png" />
+### rooms (lights)
+<img src="git/3.png" />
 
-### climate
-<img src="git/screen 10.gif" />
+### hardware
+<img src="git/4.png" />
+
+### Weather
+<img src="git/5.png" />
+
