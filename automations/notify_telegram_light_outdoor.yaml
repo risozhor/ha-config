@@ -9,7 +9,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -35,7 +35,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -60,7 +60,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -86,7 +86,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -111,7 +111,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -137,7 +137,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}
@@ -163,7 +163,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F333"}} *Освітлення на вулиці*'
+        title: '{{"\U0001F333"}} *Outdoor lighting*'
         message: >
           {%- if is_state("switch.outdoor_floodlight", "on") %}{{"\U0001F4A1"}}Deck floodlight is ON{{'\n'}}{% else %}Deck floodlight is ON{{'\n'}}{% endif -%}
           {%- if is_state("switch.yard_light", "on") %}{{"\U0001F4A1"}} Yard light is ON{{'\n'}}{% else %}Yard light is OFF{{'\n'}}{% endif -%}

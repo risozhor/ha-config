@@ -10,12 +10,12 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F9F8"}} *Дитяча кімната* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
+        title: '{{"\U0001F9F8"}} *Children room* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} Лампа кімнати увімкнена{% else %}Лампу кімнати вимкнено{% endif %}
+          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Лампу вимкнути:/kidcl_off{% else %}Лампу увімкнути:/kidcl_on{% endif %}'
+          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Turn off the lamp:/kidcl_off{% else %}Turn on the lamp:/kidcl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_kidsroom_off
@@ -35,12 +35,12 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F9F8"}} *Дитяча кімната* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
+        title: '{{"\U0001F9F8"}} *Children room* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} Лампа кімнати увімкнена{% else %}Лампу кімнати вимкнено{% endif %}
+          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Лампу вимкнути:/kidcl_off{% else %}Лампу увімкнути:/kidcl_on{% endif %}'
+          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Turn off the lamp:/kidcl_off{% else %}Turn on the lamp:/kidcl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_kidsroom_on
@@ -62,10 +62,10 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F9F8"}} *Дитяча кімната* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
+        title: '{{"\U0001F9F8"}} *Children room* {% if is_state("binary_sensor.kidsroom_window_sensor_contact", "on") -%}{{"\U0001FA9F"}} Opened{%- endif %}'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} Лампа кімнати увімкнена{% else %}Лампу кімнати вимкнено{% endif %}
+          {% if is_state("light.0x0017880103aa4b71", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Лампу вимкнути:/kidcl_off{% else %}Лампу увімкнути:/kidcl_on{% endif %}'
+          - '{% if is_state("light.0x0017880103aa4b71", "on") %}Turn off the lamp:/kidcl_off{% else %}Turn on the lamp:/kidcl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

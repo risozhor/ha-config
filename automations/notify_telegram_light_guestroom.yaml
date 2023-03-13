@@ -13,9 +13,9 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Turn off the lamp:/guestrooml_off{% else %}Turn on the lamp:/guestrooml_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_guestroom_off
@@ -39,9 +39,9 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Turn off the lamp:/guestrooml_off{% else %}Turn on the lamp:/guestrooml_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram_light_guestroom_on
   alias: "IK - Telegram - Light guestroom hl_on"
@@ -64,7 +64,7 @@
         title: '{{"\U0001F6AA"}} *Guestroom*'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} Лампу увімкнено{% else %}Лампу вимкнено {% endif %}
+          {% if is_state("light.guestroom_color_bulb", "on") %}{{"\U0001F4A1"}} The lamp is on{% else %}The lamp is turned off {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.guestroom_color_bulb", "on") %}Лампу вимкнути:/guestrooml_off{% else %}Лампу увімкнути:/guestrooml_on{% endif %}'
+          - '{% if is_state("light.guestroom_color_bulb", "on") %}Turn off the lamp:/guestrooml_off{% else %}Turn on the lamp:/guestrooml_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

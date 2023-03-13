@@ -1,17 +1,22 @@
 [
   {
-    "name": "Утьонок?",
-    "id": "dd425d54638441bbac57dc41d07f6a6a",
+    "name": "Bread",
+    "id": "1d26d2a0529248c5a107a9fa0f73a2d8",
     "complete": false
   },
   {
-    "name": "Рушнички",
-    "id": "89b9caef70864d13864584d05a0b864d",
+    "name": "Milk",
+    "id": "dc304eb5588749068d3d8edef507c359",
     "complete": false
   },
   {
-    "name": "Мішки для сміття",
-    "id": "9e97e378901940b0b53d9adac43c9d4b",
+    "name": "Підчеревина!",
+    "id": "53fac6d0a708434ab80a384b7120b256",
+    "complete": false
+  },
+  {
+    "name": "Chicken meat",
+    "id": "bb60eef53e9a412cb980d32c9af49d85",
     "complete": false
   }
 ]

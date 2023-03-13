@@ -1,4 +1,4 @@
-- alias: diningroom_light_on_night_terracespot # V
+- alias: diningroom_light_on_night_terracespot
   initial_state: true
   trigger:
     - platform: state
@@ -18,7 +18,7 @@
       data:
         entity_id: switch.terrace_spotlights
 
-- alias: diningroom_light_off_night_terracespot # V
+- alias: diningroom_light_off_night_terracespot
   initial_state: true
   trigger:
     - platform: state

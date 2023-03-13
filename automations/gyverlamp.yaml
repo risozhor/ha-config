@@ -29,7 +29,6 @@
       state: "on"
   action:
     - service: light.turn_off
-      data: {}
       target:
         entity_id: light.gyver_lamp2
     - service: timer.cancel

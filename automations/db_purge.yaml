@@ -1,4 +1,4 @@
-- id: Сжатие базы
+- id: DB_purge
   alias: DB_purge_everyday
   initial_state: true
   trigger:

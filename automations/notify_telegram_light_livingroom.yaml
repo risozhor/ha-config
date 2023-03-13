@@ -12,16 +12,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено{% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned off{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Light Living room lcl1_off"
@@ -43,16 +43,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "IK - Telegram - Light Living room lcl1_on"
@@ -76,16 +76,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl2_off"
   trigger:
@@ -106,16 +106,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl2_on"
   trigger:
@@ -138,16 +138,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl3_off"
   trigger:
@@ -168,16 +168,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcl3_on"
   trigger:
@@ -200,16 +200,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcls_off"
   trigger:
@@ -230,16 +230,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room lcls_on"
   trigger:
@@ -262,16 +262,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{% else %}Table background вимкнено {% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{% else %}Table background is turned of {% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room tbl_off"
   trigger:
@@ -291,16 +291,16 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{{'\n'}}{% else %}Table background вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{{'\n'}}{% else %}Table background is turned off{{'\n'}}{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - Light Living room tbl_on"
   trigger:
@@ -322,14 +322,14 @@
         title: '{{"\U0001F6AA"}} *Living room* {{"\U0001F321"}}{{ (states.sensor.livingroom_temperature.state) }}°C, {{"\U0001F4A7"}}{{ (states.sensor.livingroom_humidity.state) }}%, {{"\U0001F4A8"}} {{ (states.sensor.livingroom_aqi.state) }} aqi'
         message: >
           {{"__________________________________ \n"}}
-          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} Перша лампа увімкнена{{'\n'}}{% else %}Першу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} Друга лампа увімкнена{{'\n'}}{% else %}Другу лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} Третя лампа увімкнена{{'\n'}}{% else %}Третю лампу вимкнено{{'\n'}}{% endif %}
-          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background увімкнена{{'\n'}}{% else %}Table background вимкнено{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_1", "on") %}{{"\U0001F4A1"}} The first lamp is turned on{{'\n'}}{% else %}The first lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_2", "on") %}{{"\U0001F4A1"}} The second lamp is turned on{{'\n'}}{% else %}The second lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_color_lamp_3", "on") %}{{"\U0001F4A1"}} The third lamp is turned on{{'\n'}}{% else %}The third lamp is turned off{{'\n'}}{% endif %}
+          {% if is_state("light.livingroom_table_background", "on") %}{{"\U0001F4A1"}} Table background is turned on{{'\n'}}{% else %}Table background is turned off{{'\n'}}{% endif %}
         inline_keyboard:
-          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Перша лампа OFF:/lcl1_off{% else %}Перша лампа ON:/lcl1_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Друга лампа OFF:/lcl2_off{% else %}Друга лампа ON:/lcl2_on{% endif %}'
-          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Третя лампа OFF:/lcl3_off{% else %}Третя лампа ON:/lcl3_on{% endif %}'
-          - '{% if is_state("light.livingroom_lights", "on") %}Люстра OFF:/lcls_off{% else %}Люстра ON:/lcls_on{% endif %}'
-          - '{% if is_state("light.livingroom_table_background", "on") %}Table background OFF:/tbl_off{% else %}Table background ON:/tbl_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_1", "on") %}Turn off the first lamp:/lcl1_off{% else %}Turn on the first lamp:/lcl1_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_2", "on") %}Turn off the second lamp:/lcl2_off{% else %}Turn on the second lamp:/lcl2_on{% endif %}'
+          - '{% if is_state("light.livingroom_color_lamp_3", "on") %}Turn off the third lamp:/lcl3_off{% else %}Turn on the third lamp:/lcl3_on{% endif %}'
+          - '{% if is_state("light.livingroom_lights", "on") %}Turn off the chandelier:/lcls_off{% else %}Turn on the chandelier:/lcls_on{% endif %}'
+          - '{% if is_state("light.livingroom_table_background", "on") %}Turn the table background off:/tbl_off{% else %}Turn the table background on:/tbl_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

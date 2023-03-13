@@ -75,7 +75,6 @@
       state: "on"
   action:
     - service: light.turn_off
-      data: {}
       target:
         entity_id: light.dining_room_stripe_3
     - service: timer.cancel

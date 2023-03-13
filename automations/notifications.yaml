@@ -1,4 +1,3 @@
-# на кухні виявлено дим
 - id: notify-kitchenfire
   alias: Kitchen fire detected
   initial_state: on
@@ -10,7 +9,7 @@
     - service: notify.telegram
       data:
         title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *FIRE* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
-        message: "О {{ states('sensor.time_date') }} на кухні виявлено дим"
+        message: "О {{ states('sensor.time_date') }} smoke was detected in the kitchen"
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
@@ -64,16 +63,16 @@
         target: "{{ trigger.event.data.user_id }}"
         message: >
           {{ [
-          "Пріветікі",
-          "До зірок",
-          "Сер, Да сер!",
-          "Здоровенькі були!",
-          "Вечір в хату!",
-          "Здрасть!",
-          "Шо такоє?",
-          "Паєхалі",
-          "хелло аміго",
-          "Буенос ночес!"
+          "Greetings",
+          "To the stars",
+          "Sir, Yes sir!",
+          "Well, well, well!",
+          "Me alegro!",
+          "Hello!",
+          "What up",
+          "Let's go!",
+          "Hello, amigo",
+          "Buenos noches!"
           ] | random }}
         data:
         inline_keyboard:
@@ -139,9 +138,9 @@
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         message: >
-          {% if is_state("alarm_control_panel.ring_alarm", "disarmed") %}Alarm is OFF. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
+          {% if is_state("alarm_control_panel.ring_alarm", "disarmed") %}Disarmed. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
         inline_keyboard:
-          - '{{ "\u26D4" }} Alarm ON:/arm_away, {{ "\u2B55" }} Alarm ON at home:/arm_home, {{ "\u2611" }} Disarm:/disarm'
+          - '{{ "\u26D4" }} Arm (away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-arm_away
@@ -160,9 +159,9 @@
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         title: '{{ "\u26D4" }} *Security*'
-        message: "Поставлено на охорону (не вдома)"
+        message: "Armed (Away)"
         inline_keyboard:
-          - "На охорону (вдома):/arm_home, Зняти з охорони:/disarm"
+          - '{{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-arm_home
@@ -181,9 +180,9 @@
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         title: '{{ "\u26D4" }}*Security*'
-        message: "Поставлено на охорону (Вдома)"
+        message: "Armed (Home)"
         inline_keyboard:
-          - "На охорону (Не вдома):/arm_away, Зняти з охорони:/disarm"
+          - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2611" }} Disarm:/disarm'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram-ik-set-security-disarm
   alias: "Telegram Alarm SET disarm"
@@ -201,9 +200,9 @@
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         title: "*Security*"
-        message: "Знято з охорони"
+        message: "Disarmed"
         inline_keyboard:
-          - "На охорону (Не вдома):/arm_away, На охорону (вдома):/arm_home"
+          - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-to-cp
@@ -222,12 +221,12 @@
         message: >-
           {{'\n'}}
           {% set hour_num = now().hour | int %}
-          {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Доброго ранку!
-          {% elif hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Добрий день!
-          {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Добрий вечір!
-          {% else %}{{"\U0001f31a"}} Добрї ночі!{% endif -%}
-          {%- set weekday_list = ["Понеділок","Вівторок","Середа","Четвер","П'ятниця","Субота","Неділя"] %}
-          {%- set month_list = ["Січня","Лютого","Березня","Квітня","Травня","Червня","Липня","Серпня","Вересня","Жовтня","Листопада","Грудня"] %}
+          {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Good morning!
+          {% elif hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good day!
+          {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening!
+          {% else %}{{"\U0001f31a"}} Good night!{% endif -%}
+          {%- set weekday_list = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+          {%- set month_list = ["January","February","March","April","May","June","July","August","September","October","November","December"] %}
           {%- set date = as_timestamp(now()) -%}
           {%- set wd_ok = date | timestamp_custom("%w") | int %}
           {%- set weekday = weekday_list[wd_ok-1] -%}
@@ -247,12 +246,12 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F4A1"}} *Керування освітленням*'
-        message: "Оберіть кімнату для керування освітленням"
+        title: '{{"\U0001F4A1"}} *Lighting control*'
+        message: "Choose a room to control the lighting"
         inline_keyboard:
-          - '{{"\U0001F39B"}} Кухня:/light_kitchen, {{"\U0001F6AA"}} Коридор:/light_hallway, {{"\U0001F9F8"}} Дитяча :/light_kids'
+          - '{{"\U0001F39B"}} Kitchen:/light_kitchen, {{"\U0001F6AA"}} Hallway:/light_hallway, {{"\U0001F9F8"}} Children room :/light_kids'
           - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
-          - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Надворі:/light_outdoor'
+          - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Outside:/light_outdoor'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "HA System Actions"
   trigger:
@@ -266,7 +265,7 @@
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
         title: '{{"\U0001F6E0"}} *HA System Actions*'
-        message: "Схоже, ви хочете щось зробити з вашим Home Assistant. Яку дію бажаєте виконати?"
+        message: "It sounds like you want to do something with your Home Assistant. What action do you want to perform?"
         inline_keyboard:
           - '{{"\u2B07\uFE0F"}} Shut down:/hashutdown, {{"\U0001F503"}} Restart:/hassioreboot'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
@@ -317,7 +316,7 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6E0"}} *Статус системи*'
+        title: '{{"\U0001F6E0"}} *System status*'
         message: >
           ------------------------------------------------{{'\n'}}
           {{"\U0001F525"}} *CPU Usage*: {{  states.sensor.processor_use_percent.state }}%{{'\n'}}
@@ -339,25 +338,25 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F324"}} *Погода*'
+        title: '{{"\U0001F324"}} *Weather*'
         message: |
-          {{"\U0001F3E0"}} Погода, звіт на {{ states('sensor.time_date') }}
-          {{"\U0001F321"}} Температура - {{ states('sensor.openweathermap_temperature') }} C
-          {{"\U0001F32B"}} Вологість - {{ states('sensor.openweathermap_humidity') }} %
-          {{"\U0001F4AA"}} Тиск - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} мм рт. ст
-          {{"\U0001f4a8"}} Швидкість вітру {{ states('sensor.wind_speed') }} м/с.
-          {{"\U00002600"}} Погода - {{ states('sensor.openweathermap_weather') }}
-          {{"\U0001f4a7"}} Точка роси {{ states('sensor.dew_point') }} C.
+          {{"\U0001F3E0"}} Weather, report on {{ states('sensor.time_date') }}
+          {{"\U0001F321"}} Temperature - {{ states('sensor.openweathermap_temperature') }} C
+          {{"\U0001F32B"}} Humidity - {{ states('sensor.openweathermap_humidity') }} %
+          {{"\U0001F4AA"}} Pressure - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} мм рт. ст
+          {{"\U0001f4a8"}} Wind speed {{ states('sensor.wind_speed') }} м/с.
+          {{"\U00002600"}} Weather - {{ states('sensor.openweathermap_weather') }}
+          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.dew_point') }} C.
           ------------------------------------------------
-          {{"\U0001f305"}} Схід сонця {{ states('sensor.next_sunrise') }}
-          {{"\U0001f307"}} Захід сонця {{ states('sensor.next_sunset') }}
+          {{"\U0001f305"}} Sunrise {{ states('sensor.next_sunrise') }}
+          {{"\U0001f307"}} Sunset {{ states('sensor.next_sunset') }}
           ------------------------------------------------
-          *Прогноз*
-          {{"\U00002B50"}} Прогноз на сьогодні - {{ states('sensor.openweathermap_forecast_temperature') }} C
-          {{"\U0001F327"}} Прогноз дощу - {{ states('sensor.openweathermap_rain') }}
-          {{"\U0001F328"}} Прогноз снігу - {{ states('sensor.openweathermap_snow') }}
+          *Forecast *
+          {{"\U00002B50"}} Forecast for today - {{ states('sensor.openweathermap_forecast_temperature') }} C
+          {{"\U0001F327"}} Rain forecast - {{ states('sensor.openweathermap_rain') }}
+          {{"\U0001F328"}} Snow forecast - {{ states('sensor.openweathermap_snow') }}
         inline_keyboard:
-          - "Прогноз на завтра:/weather_tomorrow"
+          - "Forecast for tomorrow:/weather_tomorrow"
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "IK - Telegram - status weather tomorrow"
   trigger:
@@ -370,15 +369,15 @@
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
         chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F324"}} *Погода Прогноз на завтра*'
+        title: '{{"\U0001F324"}} *Weather Forecast for tomorrow*'
         message: |
           {{'________________ \n'}}
-          {{"\U0001F321"}} Температура: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} C
-          {{"\U0001F324"}} Погода - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }} 
-          {{"\U0001F327"}} Вірогідність опадів - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
-          {{"\U0001f4a8"}} Швидкість вітру {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} м/с.
+          {{"\U0001F321"}} Temperature: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} C
+          {{"\U0001F324"}} Weather - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }} 
+          {{"\U0001F327"}} Precipitation - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
+          {{"\U0001f4a8"}} Wind speed {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} м/с.
         inline_keyboard:
-          - '{{"\U0001F324"}} Повернутись:/weather'
+          - '{{"\U0001F324"}} Back:/weather'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - alias: "Telegram - status shopinglist"
   trigger:
