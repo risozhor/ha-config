@@ -1,22 +1,67 @@
 [
   {
+    "name": "Apples",
+    "id": "ae8490b8eba24ca691a9d62750cec6f8",
+    "complete": false
+  },
+  {
+    "name": "Shampoo",
+    "id": "d2d933d0ded84c6cb7c48dcda0f421da",
+    "complete": false
+  },
+  {
+    "name": "Shower gel",
+    "id": "b1cacebc7c204729b06816da9a103218",
+    "complete": false
+  },
+  {
+    "name": "Milck",
+    "id": "a4824c382c6c48339ff82aa377bfca97",
+    "complete": false
+  },
+  {
+    "name": "Butter",
+    "id": "8f75ecf3722d41b58838665914b30422",
+    "complete": false
+  },
+  {
     "name": "Bread",
-    "id": "1d26d2a0529248c5a107a9fa0f73a2d8",
+    "id": "0cfd63e223a340deb736ea316e4f07e1",
     "complete": false
   },
   {
-    "name": "Milk",
-    "id": "dc304eb5588749068d3d8edef507c359",
+    "name": "Corn",
+    "id": "5a7ef3588a834b478e844064d8e222e9",
     "complete": false
   },
   {
-    "name": "Підчеревина!",
-    "id": "53fac6d0a708434ab80a384b7120b256",
+    "name": "Cheese",
+    "id": "a5a637c8da394399b872c927fd358d7b",
     "complete": false
   },
   {
-    "name": "Chicken meat",
-    "id": "bb60eef53e9a412cb980d32c9af49d85",
+    "name": "Oil",
+    "id": "903f468a1aed4d13bc830eaab97b1cc3",
+    "complete": false
+  },
+  {
+    "name": "Гігієнічний наповнювач",
+    "id": "5d760a3454fc44ad944df3ec85a06f60",
+    "complete": false
+  },
+  {
+    "name": "Mayonaise",
+    "id": "7d011518c9d7499f971f3e91d079d336",
+    "complete": false
+  },
+  {
+    "name": "Ketchup",
+    "id": "5ed115aff21f4f85971cb60ce9b84bdd",
+    "complete": false
+  },
+  {
+    "name": "Apetizer",
+    "id": "7261846775b8482ca6842718b1905d59",
     "complete": false
   }
 ]

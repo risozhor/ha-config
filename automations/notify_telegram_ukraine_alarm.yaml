@@ -9,27 +9,27 @@
   action:
     - service: notify.telegram
       data:
-        title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *Повітряна тривога* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
-        message: "О {{ states('sensor.time_date') }} оголошено повітряну тривогу"
+        title: '{{"\U0001F525"}} *Air alert* {{"\U0001F525"}}'
+        message: "Air alert has been announced at {{ states('sensor.time') }}! Go to the shelter immediately!"
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.kitchen_display
+        language: en-CA
+        message: "Air alert has been announced at {{ states('sensor.time') }}! Go to the shelter immediately!"
+        cache: true
     - service: notify.mobile_app_note20
       data:
         message: TTS
         data:
           tts_text: Air alert! Go to the shelter immediately!
-          channel: alarm_stream
-    - service: tts.google_say
-      data:
-        entity_id: media_player.kitchen_display
-        message: Увага! Повітряна тривога! Негайно прямуйте в укриття.
-        language: uk-UA
-        cache: true
+          # channel: alarm_stream
     - service: notify.mobile_app_note20
       data:
-        title: Повітряна тривога!
-        message: Негайно прямуйте в укриття
+        title: Air alert has been announced at {{ states('sensor.time') }}!
+        message: Go to the shelter immediately!
         data:
           ttl: 0
           color: red
@@ -46,27 +46,27 @@
   action:
     - service: notify.telegram
       data:
-        title: "*Відбій тривоги*"
-        message: "О {{ states('sensor.time_date') }} оголошено відбій тривоги"
+        title: "*Air alert canceled*"
+        message: "Air alert canceled at {{ states('sensor.time') }}. Get back to your business."
         data:
           inline_keyboard:
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.kitchen_display
+        message: "Air alert canceled at {{ states('sensor.time') }}. Get back to your business."
+        language: en-CA
+        cache: true
     - service: notify.mobile_app_note20
       data:
         message: TTS
         data:
           tts_text: "Air alert canceled! Get back to your business!"
-          channel: alarm_stream
-    - service: tts.cloud_say
-      data:
-        entity_id: media_player.kitchen_display
-        message: Відбій тривоги!, мої котики! Повертайтесь, до своїх справ!
-        language: uk-UA
-        cache: true
+          # channel: alarm_stream
     - service: notify.mobile_app_note20
       data:
-        title: Відбій тривоги!
-        message: Повертайтесь до своїх справ
+        title: Air alert canceled at {{ states('sensor.time') }}!
+        message: Get back to your business!
         data:
           ttl: 0
           color: green

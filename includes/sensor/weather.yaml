@@ -53,7 +53,7 @@
   sensors:
     wind_direction:
       unique_id: wind_direction
-      friendly_name: "Wind Direction"
+      friendly_name: "Wind"
       value_template: >-
         {%- set wind_bearing = states('sensor.openweathermap_wind_bearing') | int %}
         {%- if wind_bearing <= 11 %}N
@@ -75,6 +75,7 @@
         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
         {% else %}Not available
         {%- endif %}
+        {%- if wind_bearing >= 0 and wind_bearing <= 360 %}, {{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6) | round(2) }} m/s{%- endif %}
 
       icon_template: >
         mdi:kubernetes

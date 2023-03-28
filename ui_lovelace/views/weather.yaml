@@ -46,14 +46,9 @@ cards:
             double_tap_action:
               action: none
             primary: >-
-              Weather:
-              {{state_attr('weather.openweathermap','temperature')|round}}°C, 
-              {{(states.weather.openweathermap.state)|capitalize}},
-              Wind speed {{ (state_attr('weather.openweathermap',
-              'wind_speed')|float()/3.6) | round(2) }} m/s
+              Weather: {{(states.weather.openweathermap.state)|capitalize}}
             secondary: >-
-              Precipitation {{ state_attr('weather.openweathermap',
-              'forecast')[0].precipitation_probability }}%
+              {{state_attr('weather.openweathermap','temperature')|round}}°C, Precipitation {{ state_attr('weather.openweathermap', 'forecast')[0].precipitation_probability }}%
             icon: >-
               {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny
               {% elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny
