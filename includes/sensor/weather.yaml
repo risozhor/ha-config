@@ -70,7 +70,7 @@
         {% elif wind_bearing >= 236 and wind_bearing < 259 %}SWW
         {% elif wind_bearing >= 259 and wind_bearing < 281 %}W
         {% elif wind_bearing >= 281 and wind_bearing < 304 %}WWN
-        {% elif wind_bearing >= 304 and wind_bearing < 326 %}NW
+        {% elif wind_bearing >= 304 and wind_bearing < 326 %}WN
         {% elif wind_bearing >= 326 and wind_bearing < 349 %}WNN
         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
         {% else %}Not available
@@ -95,7 +95,7 @@
         {% elif wind_bearing >= 236 and wind_bearing < 259 %}/local/images/compas/SWW.png
         {% elif wind_bearing >= 259 and wind_bearing < 281 %}/local/images/compas/W.png
         {% elif wind_bearing >= 281 and wind_bearing < 304 %}/local/images/compas/WWN.png
-        {% elif wind_bearing >= 304 and wind_bearing < 326 %}/local/images/compas/NW.png
+        {% elif wind_bearing >= 304 and wind_bearing < 326 %}/local/images/compas/WN.png
         {% elif wind_bearing >= 326 and wind_bearing < 349 %}/local/images/compas/WNN.png
         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}/local/images/compas/N.png
         {% else %}/local/images/compas/NA.png
