@@ -44,6 +44,10 @@ cards:
                 chips:
                   - type: entity
                     entity: sensor.note20_battery_level
+                card_mod:
+                  style: |
+                    .chip-container * {padding-bottom: 4px;}
+                    .chip-container *:first-child {margin-left: 4px;}
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -75,6 +79,10 @@ cards:
                 chips:
                   - type: entity
                     entity: sensor.sm_a505fn_battery_level
+                card_mod:
+                  style: |
+                    .chip-container * {padding-bottom: 4px;}
+                    .chip-container *:first-child {margin-left: 4px;}
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -106,6 +114,10 @@ cards:
                 chips:
                   - type: entity
                     entity: sensor.sm_m315f_battery_level
+                card_mod:
+                  style: |
+                    .chip-container * {padding-bottom: 4px;}
+                    .chip-container *:first-child {margin-left: 4px;}
 
           - type: custom:stack-in-card
             class: col-xs-12 col-md-6 col-lg-3 pt-2
@@ -137,3 +149,7 @@ cards:
                 chips:
                   - type: entity
                     entity: sensor.yaroslava_battery_level
+                card_mod:
+                  style: |
+                    .chip-container * {padding-bottom: 4px;}
+                    .chip-container *:first-child {margin-left: 4px;}

@@ -1,0 +1,11 @@
+title: Alerts
+theme: Backend-selected
+path: alerts
+icon: mdi:alert-box-outline
+subview: true
+type: panel
+badges: []
+cards:
+  - type: iframe
+    url: https://alerts.in.ua/
+    aspect_ratio: 100%
