@@ -39,8 +39,9 @@ captive_portal:
 i2c:
   sda: 21
   scl: 22
-bme680_bsec:
-    address: 0x77  
+
+# bme680_bsec:
+#     address: 0x77  
 
 binary_sensor:
   - platform: status
@@ -59,7 +60,9 @@ text_sensor:
     name: "${devicename} wind direction"
     id: wind_dir_card
 sensor:
-  - platform: bme680_bsec
+  - platform: bme680
+    address: 0x77
+  # - platform: bme680_bsec
     temperature:
       name: "${upper_devicename} Temperature"
       id: esp_temperature
@@ -71,24 +74,24 @@ sensor:
     humidity:
       name: "${upper_devicename} Humidity"
       id: esp_humidity
-    gas_resistance:
-      name: "${upper_devicename} Gas Resistance"
-      filters:
-        - median
-    iaq:
-      name: "${upper_devicename} IAQ"
-      filters:
-        - median
+    # gas_resistance:
+    #   name: "${upper_devicename} Gas Resistance"
+    #   filters:
+    #     - median
+    # iaq:
+    #   name: "${upper_devicename} IAQ"
+    #   filters:
+    #     - median
     # iaq_accuracy:
     #   name: "${upper_devicename} Numeric IAQ Accuracy"
-    co2_equivalent:
-      name: "${upper_devicename} CO2 Equivalent"
-      filters:
-        - median
-    breath_voc_equivalent:
-      name: "${upper_devicename} Breath VOC Equivalent"
-      filters:
-        - median
+    # co2_equivalent:
+    #   name: "${upper_devicename} CO2 Equivalent"
+    #   filters:
+    #     - median
+    # breath_voc_equivalent:
+    #   name: "${upper_devicename} Breath VOC Equivalent"
+    #   filters:
+    #     - median
   - platform: template
     name: "Pressure mmHg"
     lambda: |-

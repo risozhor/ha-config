@@ -1,40 +1,41 @@
-alias: Notification Alert That Batteries Are Low (dynamic)
-description: "Notification Alert That Batteries Are Low"
-trigger:
-  - at: "19:50:00"
-    platform: time
-condition: []
-action:
-  - service: group.set
-    data_template:
-      object_id: dyn_all_batteries
-      entities: >-
-        {{ states.sensor | selectattr("attributes.device_class", "eq", "battery") | map(attribute="entity_id") | join(",") }}
-  - choose:
-      - conditions:
-          - condition: template
-            value_template: >-
-              {% set min_battery_level = 98 -%} 
-              {% set ns = namespace(found=false) -%} 
-              {% for entity_id in
-              states.group.dyn_all_batteries.attributes.entity_id -%}
-                {% set parts = entity_id.split('.') -%}
-                {% if (states(entity_id) | replace("%","") | int) < min_battery_level -%}
-                  {% set ns.found = true -%}
-                {% endif -%}
-              {% endfor -%} {{ ns.found }}
-        sequence:
-          - data_template:
-              message: >
-                {%- set ns = namespace(message = "The battery level of the following device(s) is low:\n") -%} 
-                {%- set threshold = 98 -%}
-                {%- for item in states.sensor if ((is_state_attr(item.entity_id, 'device_class', 'battery'))) -%} 
-                  {%- if "battery" in item.name  | lower and item.state | int < threshold and item.state|int != 0  -%}
-                    {%- set ns.message = ns.message + " - " + item.name + " (" + item.state + ")\n" -%}
-                    - {{  item.name  }}{{ " (" +item.state + "%)\n"}}
-                  {%- endif -%}
-                {%- endfor %}
-            service: notify.telegram
-    default: []
-mode: single
-initial_state: true
+# alias: Notification Alert That Batteries Are Low (dynamic)
+# description: "Notification Alert That Batteries Are Low"
+# trigger:
+#   - at: "19:50:00"
+#     platform: time
+# condition: []
+# action:
+#   - service: group.set
+#     data_template:
+#       object_id: dyn_all_batteries
+#       entities: >-
+#         {{ states.sensor | selectattr("attributes.device_class", "eq", "battery") | map(attribute="entity_id") | join(",") }}
+#   - choose:
+#       - conditions:
+#           - condition: template
+#             value_template: >-
+#               {% set min_battery_level = 98 -%}
+#               {% set ns = namespace(found=false) -%}
+#               {% for entity_id in
+#               states.group.dyn_all_batteries.attributes.entity_id -%}
+#                 {% set parts = entity_id.split('.') -%}
+#                 {% if (states(entity_id) | replace("%","") | int) < min_battery_level -%}
+#                   {% set ns.found = true -%}
+#                 {% endif -%}
+#               {% endfor -%} {{ ns.found }}
+#         sequence:
+#           - data_template:
+#               message: >
+#                 {%- set ns = namespace(message = "The battery level of the following device(s) is low:\n") -%}
+#                 {%- set threshold = 98 -%}
+#                 {%- for item in states.sensor if ((is_state_attr(item.entity_id, 'device_class', 'battery'))) -%}
+#                   {%- if "battery" in item.name  | lower and item.state | int < threshold and item.state|int != 0  -%}
+#                     {%- set ns.message = ns.message + " - " + item.name + " (" + item.state + ")\n" -%}
+#                     - {{  item.name  }}{{ " (" +item.state + "%)\n"}}
+#                   {%- endif -%}
+#                 {%- endfor %}
+#             service: notify.telegram
+#     default: []
+# mode: single
+# initial_state: true
+[]

@@ -341,18 +341,18 @@
         title: '{{"\U0001F324"}} *Weather*'
         message: |
           {{"\U0001F3E0"}} Weather, report on {{ states('sensor.time_date') }}
-          {{"\U0001F321"}} Temperature - {{ states('sensor.openweathermap_temperature') }} C
+          {{"\U0001F321"}} Temperature - {{ states('sensor.openweathermap_temperature') }} °C
           {{"\U0001F32B"}} Humidity - {{ states('sensor.openweathermap_humidity') }} %
-          {{"\U0001F4AA"}} Pressure - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} мм рт. ст
-          {{"\U0001f4a8"}} Wind speed {{ states('sensor.wind_speed') }} м/с.
+          {{"\U0001F4AA"}} Pressure - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} mm Hg
+          {{"\U0001f4a8"}} Wind speed {{ states('sensor.wind_speed') }} m/s.
           {{"\U00002600"}} Weather - {{ states('sensor.openweathermap_weather') }}
-          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.dew_point') }} C.
+          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.dew_point') }} °C.
           ------------------------------------------------
           {{"\U0001f305"}} Sunrise {{ states('sensor.next_sunrise') }}
           {{"\U0001f307"}} Sunset {{ states('sensor.next_sunset') }}
           ------------------------------------------------
           *Forecast *
-          {{"\U00002B50"}} Forecast for today - {{ states('sensor.openweathermap_forecast_temperature') }} C
+          {{"\U00002B50"}} Forecast for today - {{ states('sensor.openweathermap_forecast_temperature') }} °C
           {{"\U0001F327"}} Rain forecast - {{ states('sensor.openweathermap_rain') }}
           {{"\U0001F328"}} Snow forecast - {{ states('sensor.openweathermap_snow') }}
         inline_keyboard:
@@ -372,10 +372,10 @@
         title: '{{"\U0001F324"}} *Weather Forecast for tomorrow*'
         message: |
           {{'________________ \n'}}
-          {{"\U0001F321"}} Temperature: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} C
+          {{"\U0001F321"}} Temperature: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} °C
           {{"\U0001F324"}} Weather - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }} 
           {{"\U0001F327"}} Precipitation - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
-          {{"\U0001f4a8"}} Wind speed {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} м/с.
+          {{"\U0001f4a8"}} Wind speed {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} m/s.
         inline_keyboard:
           - '{{"\U0001F324"}} Back:/weather'
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

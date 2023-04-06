@@ -10,7 +10,7 @@
     count_update:
       friendly_name: "Updates Count"
       value_template: >-
-        Оновлень {{states.update | selectattr ('state', 'equalto', 'on') | list | length}} з {{''}}
+        Updates {{states.update | selectattr ('state', 'equalto', 'on') | list | length}} out of {{''}}
         {%- set domains = ['update'] -%}
         {%- for domain in domains -%}
           {%- for item in states[domain] -%}

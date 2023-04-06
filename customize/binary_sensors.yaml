@@ -1,56 +1,44 @@
-# binary_sensor.0x00158d00045f73c9_contact: #Вікно коридору бабусі
 binary_sensor.main_corridor_window_sensor_contact:
   icon: mdi:window-closed-variant
   device_class: window
   retain: true
-# binary_sensor.0x00158d00044ce102_contact:
 binary_sensor.kitchen_window_sensor_contact:
-  friendly_name: Kitchen Window Sensor #Вікно кухні
+  friendly_name: Kitchen Window Sensor
   icon: mdi:window-closed-variant
   device_class: window
   retain: true
-# binary_sensor.0x00158d0003d0badf_contact:
 binary_sensor.kidsroom_window_sensor_contact:
-  friendly_name: Kidsroom Window Sensor #Вікно дитячої
+  friendly_name: Kidsroom Window Sensor 
   icon: mdi:window-closed-variant
   device_class: window
   retain: true
-# binary_sensor.0x00158d0002e21a7b_contact:
 binary_sensor.livingroom_window_sensor_contact:
-  friendly_name: LivingRoom Window Sensor #Вікно LivingRoom
+  friendly_name: LivingRoom Window Sensor 
   icon: mdi:window-closed-variant
   device_class: window
   retain: true
 binary_sensor.toilet_window_sensor_contact:
-  friendly_name: Toilet Window Sensor #Вікно LivingRoom
+  friendly_name: Toilet Window Sensor
   icon: mdi:window-closed-variant
   device_class: window
   retain: true
 binary_sensor.frontdoor_sensor_contact:
-  #binary_sensor.0x00158d0002e9dd9b_contact:
-  friendly_name: FrontDoor Sensor #Вхід наш
+  friendly_name: FrontDoor Sensor 
   icon: mdi:door-closed
   device_class: door
   retain: true
-#binary_sensor.guestroom_motion_sensor:
-#  friendly_name: Hallway Motion Sensor 
-#     entity_id: Hallway Motion Sensor
-#     # icon: mdi:door-closed
-#     # device_class: motion
 binary_sensor.0x00158d000462e8d4_occupancy:
   friendly_name: Backyard Motion sensor
   entity_id: Garden_motion_detector
   device_class: motion
-binary_sensor.0x00158d000457e83c_occupancy: #Вхід біля бабусиних дверей
+binary_sensor.0x00158d000457e83c_occupancy:
   friendly_name: Yard motion detector
   entity_id: Yard_motion_detector
   device_class: motion
-# binary_sensor.0x00158d0002edf7f8_smoke: #Датчик диму на кухні
 binary_sensor.kitchen_smoke_detector_smoke:
   icon: mdi:smoke-detector
   friendly_name: Smoke detector
-#binary_sensor.0x00158d0005443c2e_contact: #Двері бабусі
-binary_sensor.main_corridor_door_sensor_contact: #Двері бабусі
+binary_sensor.main_corridor_door_sensor_contact:
   friendly_name: Main Corridor Door Sensor
   device_class: door
   retain: true

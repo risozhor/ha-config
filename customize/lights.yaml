@@ -1,36 +1,29 @@
 light.wled:
   friendly_name: "Hallway stripe"
-
 light.gyver_lamp2:
   friendly_name: "Gyver Bulb"
   entity_id: "gyver bulb"
   unique_id: gyver_bulb
   icon: mdi:lava-lamp
-
 light.shelly1:
   friendly_name: "Bathroom Bulb"
   entity_id: "bathroom bulb"
   unique_id: bathroom_bulb
   icon: mdi:shower
-
 light.livingroom_lights:
   friendly_name: "Livingroom Lights"
   icon: mdi:vanity-light
 light.ceiling_lights:
   friendly_name: "Kitchen Ceiling Lights"
   icon: mdi:vanity-light
-# light.0x00124b001d3ac5d0_light:
 light.livingroom_table_background:
   friendly_name: "Table background"
   entity_id: "Table background"
   icon: mdi:television-ambient-light
-
-# light.0x00124b001ada540d_light:
 light.kitchen_strip:
   friendly_name: "Kitchen Strip"
   entity_id: Kitchen Strip
   icon: mdi:led-strip-variant
-
 light.wled_3:
   friendly_name: "Dining Room Stripe"
   icon: mdi:led-strip-variant
