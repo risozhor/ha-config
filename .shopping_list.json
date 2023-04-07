@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "name": "Ketchup",
+    "id": "b778e24e23644725b9ffd507cd5aeac7",
+    "complete": false
+  },
+  {
+    "name": "Mayonaise",
+    "id": "a0ab1bc5a9e543b5a5b934fd10b96b9d",
+    "complete": false
+  }
+]

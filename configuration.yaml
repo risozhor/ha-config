@@ -59,3 +59,4 @@ lovelace:
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
 conversation: !include_dir_merge_named includes/conversation
+alarm_control_panel: !include includes/alarm_control_panel.yaml

@@ -280,7 +280,7 @@ cards:
 
           - class: col-xs-12 col-md-3 pt-2
             type: custom:mushroom-alarm-control-panel-card
-            entity: alarm_control_panel.ring_alarm
+            entity: alarm_control_panel.alarm_panel
 
           - class: col-xs-12 col-md-3 pt-2
             type: custom:energy-overview-card
