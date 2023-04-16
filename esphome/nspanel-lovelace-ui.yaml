@@ -143,3 +143,9 @@ binary_sensor:
     on_press:
       then:
         - switch.toggle: relay_2
+button:
+  - platform: restart
+    name: "Restart $friendly_devicename"
+    icon: "mdi:reload"
+    on_press:
+      - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"

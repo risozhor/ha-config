@@ -23,8 +23,7 @@ cards:
                     entity: person.risozhor
                     primary: Oleksandr
                     secondary: >-
-                      {{ iif(states(entity) == 'not_home', 'away', states(entity)) | title
-                      }} | {{ states('sensor.note20_geocoded_location') }}
+                      {{ state_attr('sensor.osmap_note20', 'formatted_place') }}
                     picture: "{{ state_attr(entity, 'entity_picture') }}"
                     badge_icon: >-
                       {% set zone = iif(states(entity) == 'not_home', 'away',
@@ -58,8 +57,7 @@ cards:
                     entity: person.maryna
                     primary: Maryna
                     secondary: >-
-                      {{ iif(states(entity) == 'not_home', 'away', states(entity)) | title 
-                      }} | {{ states('sensor.sm_a505fn_geocoded_location') }}
+                      {{ state_attr('sensor.osmap_maryna', 'formatted_place') }}
                     picture: "{{ state_attr(entity, 'entity_picture') }}"
                     badge_icon: >-
                       {% set zone = iif(states(entity) == 'not_home', 'away',
@@ -128,8 +126,7 @@ cards:
                     entity: person.yaroslava
                     primary: Yaroslava
                     secondary: >-
-                      {{ iif(states(entity) == 'not_home', 'away', states(entity)) | title
-                      }} | {{ states('sensor.yaroslava_geocoded_location') }}
+                      {{ state_attr('sensor.osmap_yaroslava', 'formatted_place') }}
                     picture: "{{ state_attr(entity, 'entity_picture') }}"
                     badge_icon: >-
                       {% set zone = iif(states(entity) == 'not_home', 'away',

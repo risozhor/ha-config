@@ -230,7 +230,7 @@
           {%- set date = as_timestamp(now()) -%}
           {%- set wd_ok = date | timestamp_custom("%w") | int %}
           {%- set weekday = weekday_list[wd_ok-1] -%}
-          {{'\n'}}Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Оберіть розділ*{{'\n\n'}}
+          {{'\n'}}Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Select a section*{{'\n\n'}}
         inline_keyboard:
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '

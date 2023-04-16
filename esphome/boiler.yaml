@@ -30,4 +30,20 @@ dallas:
 sensor:
   - platform: dallas
     address: 0x3b3c01d60756cf28
+    id: my_sensor
     name: ${upper_devicename} Temperature
+font:
+  - file: "gfonts://Roboto"
+    id: roboto
+    size: 46
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 128x64"
+    address: 0x3C
+    lambda: |-
+      it.printf(0, 10, id(roboto), "%.1f°C", id(my_sensor).state);

@@ -10,7 +10,5 @@
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
-# - url: /local/community/lovelace-card-mod/card-mod.js
-#   type: module
 - url: /local/community/ha-energy-overview-card/energy-overview-card.js
   type: module
