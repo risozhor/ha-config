@@ -18,3 +18,6 @@ exclude:
     - switch.*_echo_*
     - sensor.*_battery_temperature
     - switch.mikrotik_port_*
+include:
+  entities:
+    - sensor.u_s_air_quality_index

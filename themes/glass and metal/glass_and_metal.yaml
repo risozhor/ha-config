@@ -9,6 +9,7 @@ Glass and Metal:
     app-toolbar div[main-title] {
       font-variant: small-caps;
       }
+    div.edit-mode hui-panel-view{height: auto;}
     paper-tab ha-icon:after {
         content: "";
         left: calc(var(--mdc-icon-size,24px) / 2);

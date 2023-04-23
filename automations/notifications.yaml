@@ -115,7 +115,9 @@
           {{"__________________________________ \n"}}
           {{now().strftime("%H:%M:%S %Y-%m-%d")}}
           {{"__________________________________ \n"}}
-          {%- for state in states.device_tracker -%}{%- if (state.state_with_unit) == "home" -%}{{'\n'}}*{{ state.name }}* at {{state.state_with_unit}}{%- endif -%}{%- if (state.state_with_unit) != 'home' -%}{{'\n'}}*{{ state.name }}* at {{state.state_with_unit.replace('_','-')}} {%- endif %}{%- endfor %}
+          {%- for value in range(integration_entities('places') | length) -%}
+          *{{- state_attr((integration_entities('places')[value]), 'friendly_name')}}*: {{ states(integration_entities('places')[value])}}{{"\n"}}
+          {%- endfor -%}
         inline_keyboard:
           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
