@@ -13,29 +13,71 @@ cards:
               - type: back
               - type: menu
               - type: template
-                content: "AQI - {{int(states.sensor.livingroom_aqi.state)}}"
+                content: "AQI - {%- if is_state('sensor.livingroom_aqi', 'unavailable') -%}?{%- else -%}{{states.sensor.livingroom_aqi.state-}}{%- endif -%}"
                 icon: mdi:air-filter
-              - type: template
-                content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
-                icon: mdi:lightbulb-multiple-outline
-                icon_color: >-
-                  {%set state = int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)%}
-                  {%if state == 0%}grey{%else%}yellow{%endif%}
+                double_tap_action:
+                  action: none
                 tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/lights
-              - type: template
-                content: "{{int(states.sensor.opened_doors.state)}}"
-                icon: mdi:door-open
-                tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/doors
-              - type: template
-                content: "{{int(states.sensor.opened_windows.state)}}"
-                icon: mdi:window-open-variant
-                tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/doors
+                  action: none
+                hold_action:
+                  action: non
+              - type: conditional
+                conditions:
+                  - entity: sensor.turned_on_lights
+                    state_not: "0"
+                chip:
+                  type: template
+                  icon_color: |-
+                    {%set state = int(states.sensor.turned_on_lights.state)%}
+                    {%if state == 0%}grey{%else%}yellow{%endif%}
+                  icon: mdi:lightbulb-multiple-outline
+                  double_tap_action:
+                    action: none
+                  tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/lights
+                  hold_action:
+                    action: none
+                  content: "{{int(states.sensor.turned_on_lights.state)}}"
+                  entity: sensor.turned_on_light
+              - type: conditional
+                conditions:
+                  - entity: sensor.opened_doors
+                    state_not: "0"
+                chip:
+                  type: template
+                  icon_color: |-
+                    {%set state = int(states.sensor.opened_doors.state)%}
+                    {%if state == 0%}grey{%else%}yellow{%endif%}
+                  icon: mdi:door-open
+                  double_tap_action:
+                    action: none
+                  tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/doors
+                  hold_action:
+                    action: none
+                  content: "{{int(states.sensor.opened_doors.state)}}"
+                  entity: sensor.opened_doors
+              - type: conditional
+                conditions:
+                  - entity: sensor.opened_windows
+                    state_not: "0"
+                chip:
+                  type: template
+                  icon_color: |-
+                    {%set state = int(states.sensor.opened_windows.state)%}
+                    {%if state == 0%}grey{%else%}yellow{%endif%}
+                  icon: mdi:window-open-variant
+                  double_tap_action:
+                    action: none
+                  tap_action:
+                    action: navigate
+                    navigation_path: /lovelace/doors
+                  hold_action:
+                    action: none
+                  content: "{{int(states.sensor.opened_windows.state)}}"
+                  entity: sensor.opened_windows
               - type: weather
                 entity: weather.home
                 show_conditions: true
@@ -43,11 +85,23 @@ cards:
                 tap_action:
                   action: navigate
                   navigation_path: /lovelace/weather
-              - type: entity
-                entity: sensor.count_update
-                tap_action:
-                  action: navigate
-                  navigation_path: /config/updates
+              - type: conditional
+                conditions:
+                  - entity: sensor.update_val
+                    state_not: "0"
+                chip:
+                  type: template
+                  icon_color: green
+                  icon: mdi:cellphone-arrow-down
+                  double_tap_action:
+                    action: none
+                  tap_action:
+                    action: navigate
+                    navigation_path: /config/updates
+                  hold_action:
+                    action: none
+                  content: "{{int(states.sensor.update_val.state)}}"
+                  entity: sensor.update_val
               - type: conditional
                 conditions:
                   - entity: sensor.ua_alarms
@@ -57,36 +111,25 @@ cards:
                   entity: sensor.ua_alarms
                   card_mod:
                     style: |
-                      ha-card {animation:pulse 1500ms infinite;!important;}
+                      ha-card {animation:pulse 1500ms infinite!important;}
                       @keyframes pulse{
                         0%{box-shadow:red 0 0 0 0;}
                         70%{box-shadow:#ff69b400 0 0 0 10px;}
                         100%{box-shadow:none;}
                       }
                   icon: >-
-                    {%- if is_state("binary_sensor.teritorialna_gromada_air", "on")%}mdi:cloud
-                    {%- elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}mdi:tank
-                    {%- elif is_state("binary_sensor.teritorialna_gromada_unknown","on") %}mdi:check-circle
-                    {%- elif is_state("binary_sensor.teritorialna_gromada_urban_fights","on") %}mdi:pistol
-                    {%- elif is_state("binary_sensor.chemical", "on")%}mdi:chemical-weapon
-                    {%- elif is_state("binary_sensor.nuclear", "on") %}mdi:nuke
-                    {%- else %}mdi:shield-home{%- endif -%}
-                  icon_color: >-
-                    {% if is_state("binary_sensor.teritorialna_gromada_air", "on") %}red
-                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}red
-                    {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on") %}red
-                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")%}red
-                    {% elif is_state("binary_sensor.chemical", "on") %}red
-                    {% elif is_state("binary_sensor.nuclear", "on") %}red
-                    {% else %}green{% endif %}
-                  content: >-
-                    {% if is_state("binary_sensor.teritorialna_gromada_air", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% elif is_state("binary_sensor.teritorialna_gromada_artillery", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% elif is_state("binary_sensor.teritorialna_gromada_unknown", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% elif is_state("binary_sensor.teritorialna_gromada_urban_fights", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% elif is_state("binary_sensor.chemical", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% elif is_state("binary_sensor.nuclear", "on")%}{{states.sensor.ua_alarms.state}}
-                    {% else %}{% endif %}
+                    {%- if is_state("binary_sensor.teritorialna_gromada_air",
+                    "on")%}mdi:cloud{%- elif
+                    is_state("binary_sensor.teritorialna_gromada_artillery",
+                    "on")%}mdi:tank{%- elif
+                    is_state("binary_sensor.teritorialna_gromada_unknown","on")
+                    %}mdi:check-circle{%- elif
+                    is_state("binary_sensor.teritorialna_gromada_urban_fights","on")
+                    %}mdi:pistol{%- elif is_state("binary_sensor.chemical",
+                    "on")%}mdi:chemical-weapon{%- elif is_state("binary_sensor.nuclear",
+                    "on") %}mdi:nuke{%- else %}mdi:shield-home{%- endif -%}
+                  icon_color: red
+                  content: "{{states.sensor.ua_alarms.state}} "
                   double_tap_action:
                     action: none
                   tap_action:
@@ -94,6 +137,42 @@ cards:
                     navigation_path: /lovelace/alerts
                   hold_action:
                     action: none
+              # - type: template
+              #   tap_action:
+              #     action: assist
+              #     pipeline_id: 01gzhqm91046hxn59enav6rjg1
+              #   icon: mdi:message-processing-outline
+              #   content: ""
+              #   icon_color: blue
+              # - type: template
+              #   tap_action:
+              #     action: assist
+              #     pipeline_id: 01hbpcwmqehq65h12b2nq119m1
+              #   icon: mdi:message-processing-outline
+              #   content: ""
+              #   icon_color: "#d2691e"
+
+              - type: conditional
+                conditions:
+                  - condition: and
+                    conditions:
+                      - condition: numeric_state
+                        entity: sensor.imap_hitweb_gmail_com
+                        above: 0
+                      - condition: user
+                        users:
+                          - ca6b753fa3864510837d851649a752d3
+                chip:
+                  type: entity
+                  entity: sensor.imap_hitweb_gmail_com
+                  tap_action:
+                    action: url
+                    url_path: https://mail.google.com/
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+
       - type: row
         cards:
           - class: col-xs-12 col-md-3 pt-2
@@ -189,10 +268,11 @@ cards:
               or is_state("person.maryna", "home") 
               or is_state("person.yaroslava", "home") -%}green
               {%- else -%}grey{%- endif -%}
-
           - class: col-xs-12 col-md-3 pt-2
             type: custom:mushroom-template-card
             entity: weather.openweathermap
+            layout: horizontal
+            fill_container: true
             tap_action:
               action: more-info
             hold_action:
@@ -210,7 +290,7 @@ cards:
               'forecast')[0].precipitation_probability }}%
             icon: >-
               {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny
-              {% elif is_state("weather.openweathermap","sunny") %}mdi:weather-night
+              {% elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny
               {% elif is_state("weather.openweathermap","clear-night") %}mdi:weather-night
               {% elif is_state("weather.openweathermap","Clear,night") %}mdi:weather-night 
               {% elif is_state("weather.openweathermap","rainy") %}mdi:weather-rainy
@@ -248,10 +328,38 @@ cards:
               {% elif is_state("weather.openweathermap","lightning") %}#f09400
               {% elif is_state("weather.openweathermap","thunderstorm") %}#e60000
               {% endif %}
-
           - class: col-xs-12 col-md-3 pt-2
             type: custom:mushroom-template-card
             primary: Shopping List
+            secondary: |-
+              {% set count = states(entity) | int(default=0) %}
+              {%- if count > 0 -%}
+              Click to see items
+              {%- endif -%}
+            icon: mdi:basket
+            badge_icon: |-
+              {% set count = states(entity) | int(default=0) %}
+              {%- if count > 0 -%}
+              {%- if count < 10 -%}
+              mdi:numeric-{{ count }}-circle
+              {%- else -%}
+              mdi:numeric-9-plus-circle
+              {%- endif -%}
+              {%- endif -%}
+            entity: sensor.shopping_list
+            badge_color: |-
+              {% set count = states(entity) | int(default=0) %}
+              {%- if count > 0 -%}
+              pink
+              {%- endif -%}
+            icon_color: "#ffb300"
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/shopping-list
+
+          - class: col-xs-12 col-md-3 pt-2
+            type: custom:mushroom-template-card
+            primary: Todo List
             secondary: |-
               {% set count = states(entity) | int(default=0) %}
               {%- if count > 0 -%}
@@ -267,27 +375,34 @@ cards:
               numeric-9-plus-circle
               {%- endif -%}
               {%- endif -%}
-            entity: sensor.shopping_list
+            entity: sensor.todo_list_items_2
             badge_color: |-
               {% set count = states(entity) | int(default=0) %}
               {%- if count > 0 -%}
-              pink
+              black
               {%- endif -%}
-            icon_color: "#ffb300"
+            icon_color: |-
+              {% set count = states(entity) | int(default=0) %}
+              {%- if count > 0 -%}
+              blue
+              {%- endif -%}
+
             tap_action:
               action: navigate
-              navigation_path: /lovelace/shopping-list
+              navigation_path: /lovelace/todo
 
-          - class: col-xs-12 col-md-3 pt-2
-            type: custom:mushroom-alarm-control-panel-card
-            entity: alarm_control_panel.alarm_panel
-
-          - class: col-xs-12 col-md-3 pt-2
-            type: custom:energy-overview-card
-            entities:
-              - power: sensor.power_meter_energy
-                label_leading: P
-                label_trailing: L1
-                voltage: sensor.voltage
-                current: sensor.current
-            order_by: ""
+          # - class: col-xs-12 col-md-3 pt-2
+          #   type: custom:mushroom-alarm-control-panel-card
+          #   entity: alarm_control_panel.alarm_panel
+          #   name: Alarm
+          #   fill_container: false
+          #   layout: horizontal
+          # - class: col-xs-12 col-md-3 pt-2
+          #   type: custom:energy-overview-card
+          #   entities:
+          #     - power: sensor.energy_cost
+          #       voltage: sensor.voltage
+          #       current: sensor.current
+          #   card_mod:
+          #     style: |
+          #       ha-card {height: 100%;}

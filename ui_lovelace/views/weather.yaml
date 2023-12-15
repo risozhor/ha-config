@@ -17,13 +17,80 @@ cards:
                 show_conditions: true
                 show_temperature: true
               - type: template
-                content: "Dew point: {{int(states.sensor.dew_point.state)}} °C"
+                content: >-
+                  Dew point:
+                  {{int(states.sensor.weather_station_weather_station_dew_point.state)}} °C
                 icon: mdi:thermometer-alert
+                tap_action:
+                  action: more-info
+                entity: sensor.weather_station_weather_station_dew_point
+
       - type: row
         cards:
+          #aq
           - class: col-xs-12 col-md-6 col-lg-3
             type: custom:mushroom-entity-card
-            entity: sensor.weather_station_info
+            entity: sensor.u_s_air_quality_index
+            name: Air quality index
+          #uv
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mushroom-template-card
+            entity: sensor.home_uv_index
+            primary: UV Index
+            secondary: "{{int(states.sensor.home_uv_index.state)}} "
+            icon: mdi:sunglasses
+            icon_color: |
+              {%set uv = int(states.sensor.home_uv_index.state)%}
+              {%if uv == 0 %}green
+              {%elif uv <= 3 and uv > 0 %}yellow
+              {%else%}red{%endif%}
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            multiline_secondary: false
+            layout: horizontal
+          #outdoor temp
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mini-graph-card
+            entities:
+              - sensor.home_temperature
+            hours_to_show: 24
+            points_per_hour: 2
+            height: 54
+            show:
+              labels: true
+              icon: false
+              name: false
+              state: false
+            color_thresholds:
+              - value: 0
+                color: "#0000ff"
+              - value: 16
+                color: "#008f04"
+              - value: 25.5
+                color: "#c0392b"
+            # line_color: var(--accent-color)
+            # color_thresholds:
+            #   - value: -5
+            #     color: blue
+            #   - value: 5
+            #     color: lightgreen
+            #   - value: 18
+            #     color: green
+            #   - value: 24
+            #     color: red
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+          #wind
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mushroom-entity-card
+            entity: sensor.wind_direction
             icon_type: entity-picture
             tap_action:
               action: none
@@ -31,12 +98,20 @@ cards:
               action: none
             double_tap_action:
               action: none
+
+          #ws info
           - class: col-xs-12 col-md-6 col-lg-3
             type: custom:mushroom-entity-card
-            entity: sensor.moon_phase_image
+            entity: sensor.weather_station_info
             icon_type: entity-picture
-            name: Moon Phase
-
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/sub-weather
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+          #weather
           - class: col-xs-12 col-md-6 col-lg-3
             type: custom:mushroom-template-card
             tap_action:
@@ -90,20 +165,7 @@ cards:
               {% elif is_state("weather.openweathermap","lightning") %}#f09400
               {% elif is_state("weather.openweathermap","thunderstorm") %}#e60000
               {% endif %}
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
-            entity: sensor.wind_direction
-            icon_type: entity-picture
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
-            entity: sensor.u_s_air_quality_index
-            name: Air quality index
+          #sun times
           - class: col-xs-12 col-md-6 col-lg-3
             type: custom:mushroom-template-card
             entity: sun.sun
@@ -129,3 +191,9 @@ cards:
               action: none
             multiline_secondary: false
             layout: horizontal
+          #moon phase
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mushroom-entity-card
+            entity: sensor.moon_phase_image
+            icon_type: entity-picture
+            name: Moon Phase

@@ -38,7 +38,7 @@ cards:
                 show_icon: true
                 tap_action:
                   action: more-info
-              - entity: light.gyver_lamp2
+              - entity: light.gyver
                 name: Gyver bulb
                 tap_action:
                   action: more-info

@@ -16,19 +16,19 @@ cards:
       - type: row
         cards:
           - type: picture-entity
-            class: col-xs-12 col-md-4 pt-5
+            class: col-xs-12 col-md-4 pt-3
             # show_state: true
             # show_name: true
             # camera_view: auto
             entity: camera.wyze
           - type: picture-entity
-            class: col-xs-12 col-md-4 pt-5
+            class: col-xs-12 col-md-4 pt-3
           #   # show_state: true
           #   # show_name: true
           #   # camera_view: auto
             entity: camera.front_door
           - type: picture-entity
-            class: col-xs-12 col-md-4 pt-5
+            class: col-xs-12 col-md-4 pt-3
             # show_state: true
             # show_name: true
             # camera_view: auto

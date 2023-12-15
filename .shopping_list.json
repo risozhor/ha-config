@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "name": "Майонез",
+    "id": "9754197065064c139928e219d63dd741",
+    "complete": false
+  },
+  {
+    "name": "Томатний соус",
+    "id": "98ea356f2b2149d391c26a384dde85b6",
+    "complete": false
+  },
+  {
+    "name": "Батон",
+    "id": "3fbec28d08a3436ba5716bda9f9b83a6",
+    "complete": false
+  },
+  {
+    "name": "Клей епоксидний",
+    "id": "853418fa3dd64ddf9d6004b1dc272a81",
+    "complete": false
+  },
+  {
+    "name": "CR2450",
+    "id": "e038f2640d2c4cbd832ddbaa7800330f",
+    "complete": false
+  },
+  {
+    "name": "Коронка для підрозетника",
+    "id": "ab2e2cba29e14dd5b2ba7ff165f3e68e",
+    "complete": false
+  },
+  {
+    "name": "Диск для болгарки",
+    "id": "7119a53f4af24c56a6c2b2816291c579",
+    "complete": false
+  }
+]

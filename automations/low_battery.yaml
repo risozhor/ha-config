@@ -1,0 +1,19 @@
+- id: "Low_battery"
+  alias: Low battery
+  description: ""
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      exclude:
+        entity_id:
+          - sensor.a50_maryna_battery_level
+          - sensor.note20_battery_level
+          - sensor.yaroslava_battery_level
+          - sensor.sm_m315f_battery_level
+          - sensor.sm_a505fn_battery_level
+      threshold: 60
+      actions:
+        - service: telegram_bot.send_message
+          data:
+            target: 66507631
+            message: The battery of the sensor(s) {{sensors}} is low!

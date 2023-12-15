@@ -3,11 +3,11 @@
   after: sunrise
   before: sunset
 
-- platform: template
-  sensors:
-    test_presence_fp1:
-      friendly_name: "test_presence fp1"
-      value_template: >
-        {{not is_state("sensor.0x54ef4410005832db_presence_event", "leave")}}
-      device_class: motion
+# - platform: template
+#   sensors:
+#     test_presence_fp1:
+#       friendly_name: "test_presence fp1"
+#       value_template: >
+#         {{not is_state("sensor.0x54ef4410005832db_presence_event", "leave")}}
+#       device_class: motion
 

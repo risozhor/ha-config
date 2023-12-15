@@ -1,0 +1,8 @@
+title: Todo List
+path: todo
+icon: mdi:clipboard-list-outline
+subview: true
+cards:
+  - type: shopping-list
+    title: To Do
+    entity: todo.todo

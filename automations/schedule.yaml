@@ -1,0 +1,56 @@
+#   Вмикаємо термостат в режмиі "home"
+- id: boiler_controller_boiler_thermostat_home
+  alias: boiler_controller_boiler_thermostat_home
+  initial_state: true
+  trigger:
+    platform: time
+    at: 18:00:00
+  action:
+    service: climate.set_preset_mode
+    data:
+      preset_mode: home
+    target:
+      entity_id: climate.boiler_controller_boiler_thermostat
+
+#   Вмикаємо термостат в режмиі "sleep"
+- id: boiler_controller_boiler_thermostat_sleep
+  alias: boiler_controller_boiler_thermostat_sleep
+  initial_state: true
+  trigger:
+    platform: time
+    at: 00:00:00
+  action:
+    service: climate.set_preset_mode
+    data:
+      preset_mode: sleep
+    target:
+      entity_id: climate.boiler_controller_boiler_thermostat
+
+#   Вмикаємо термостат в режмиі "home"
+- id: boiler_controller_boiler_thermostat_ahome2
+  alias: boiler_controller_boiler_thermostat_home2
+  initial_state: true
+  trigger:
+    platform: time
+    at: 08:00:00
+  action:
+    service: climate.set_preset_mode
+    data:
+      preset_mode: home
+    target:
+      entity_id: climate.boiler_controller_boiler_thermostat
+
+      
+#   Вимикаємо термостат
+# - id: boiler_controller_boiler_thermostat_off
+#   alias: boiler_controller_boiler_thermostat_off
+#   initial_state: true
+#   trigger:
+#     platform: time
+#     at: 01:00:00
+#   action:
+#       service: climate.set_hvac_mode
+#       data:
+#         hvac_mode: "off"
+#       target:
+#         entity_id: climate.boiler_controller_boiler_thermostat

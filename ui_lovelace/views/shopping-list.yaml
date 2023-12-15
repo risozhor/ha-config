@@ -1,6 +1,6 @@
 title: Shopping List
 path: shopping-list
-icon: mdi:list-status
+icon: mdi:basket
 subview: true
 badges: []
 cards:

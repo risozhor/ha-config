@@ -5,7 +5,6 @@ substitutions:
   panel_send_topic: "cmnd/nspanel/CustomSend"
 esphome:
   name: $devicename
-  comment: Sonoff NSPanel
 esp32:
   board: esp32dev
 wifi:
@@ -16,50 +15,20 @@ wifi:
         static_ip: 192.168.10.18
         gateway: 192.168.10.1
         subnet: 255.255.255.0
-  ap:
-    ssid: "Fallback Hotspot"
-    password: !secret ap_password
-time:
-  - platform: homeassistant
-    id: homeassistant_time
 logger:
-  level: ERROR
+  level: NONE
 ota:
   safe_mode: true
   password: !secret password
 web_server:
 api:
-  services:
-    - service: upload_tft
-      variables:
-        url: string
-      then:
-        - lambda: |-
-            id(nspanel).upload_tft(url);
-    - service: play_rtttl
-      variables:
-        song_str: string
-      then:
-        - rtttl.play:
-            rtttl: !lambda "return song_str;"
-    - service: notify_on_screensaver
-      variables:
-        line1: string
-        line2: string
-      then:
-        - lambda: 'id(nspanel).send_custom_command("notify~" + line1 + "~" + line2);'
-        - rtttl.play: "short:d=4,o=5,b=100:16e6"
-    - service: notify_fullscreen
-      variables:
-        title: string
-        description: string
-        button1: string
-        button2: string
-        time_secs: string
-      then:
-        - lambda: 'id(nspanel).send_custom_command("pageType~popupNotify");'
-        - lambda: 'id(nspanel).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
-        - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"
+    services:
+      - service: upload_tft
+        variables:
+          url: string
+        then:
+          - lambda: |-
+                id(nspanel).upload_tft(url);
 uart:
   tx_pin: 16
   rx_pin: 17
@@ -71,7 +40,6 @@ external_components:
       url: https://github.com/sairon/esphome-nspanel-lovelace-ui
       ref: dev
     components: [nspanel_lovelace]
-
 mqtt:
   id: mqtt_client
   broker: !secret mqtt_ip
@@ -81,6 +49,14 @@ nspanel_lovelace:
   id: nspanel
   mqtt_recv_topic: $panel_recv_topic
   mqtt_send_topic: $panel_send_topic
+output:
+  - platform: ledc
+    id: buzzer_out
+    pin:
+      number: 21
+rtttl:
+  id: buzzer
+  output: buzzer_out
 sensor:
   - platform: adc
     id: ntc_source
@@ -100,14 +76,6 @@ sensor:
       reference_temperature: 25°C
       reference_resistance: 10kOhm
     name: $friendly_devicename Temperature
-output:
-  - platform: ledc
-    id: buzzer_out
-    pin:
-      number: 21
-rtttl:
-  id: buzzer
-  output: buzzer_out
 switch:
   - platform: gpio
     name: $friendly_devicename Relay 1
@@ -143,9 +111,3 @@ binary_sensor:
     on_press:
       then:
         - switch.toggle: relay_2
-button:
-  - platform: restart
-    name: "Restart $friendly_devicename"
-    icon: "mdi:reload"
-    on_press:
-      - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"

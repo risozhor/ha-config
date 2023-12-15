@@ -16,124 +16,123 @@ nspanel-1:
       statusIcon1:
         entity: switch.nspanel_relay_1_2
         icon:
-            "on": mdi:lightbulb-on
-            "off": mdi:lightbulb-off
+          "on": mdi:lightbulb-on
+          "off": mdi:lightbulb-off
       statusIcon2:
         entity: switch.nspanel_relay_2_2
         icon:
-            "on": mdi:lightbulb-on
-            "off": mdi:lightbulb-off
+          "on": mdi:lightbulb-on
+          "off": mdi:lightbulb-off
       entity: weather.openweathermap
-      theme:
-        time: [255, 255, 255]
-        date: [255, 175, 0]
-        tMainIcon: [57, 169, 255]
-        bar: [57, 169, 0]
-        autoWeather: true
-        # Below we set the color of the weather icons ( when - autoWeather: true only)
-        clear-night: [150, 150, 100]
-        cloudy: [75, 75, 75]
-        exceptional: [255, 50, 50]
-        fog: [150, 150, 150]
-        hail: [200, 200, 200]
-        lightning: [200, 200, 0]
-        lightning-rainy: [200, 200, 150]
-        partlycloudy: [150, 150, 150]
-        pouring: [50, 50, 255]
-        rainy: [100, 100, 255]
-        snowy: [150, 150, 150]
-        snowy-rainy: [150, 150, 255]
-        sunny: [255, 255, 0]
-        windy: [150, 150, 150]
-        windy-variant: [255, 125, 125]
-    cards:
-      - type: cardQR
-        title: Wifi Network
-        qrCode: "WIFI:S:Guests;T:WPA;P:1qaz2wsx;;"
-        entities:
-          - entity: iText.Guests
-            name: Name
-            icon: mdi:wifi
-          - entity: iText.1qaz2wsx
-            name: Password
-            icon: mdi:key
-      - type: cardGrid
-        title: Livingroom
-        entities:
-          - entity: fan.xiaomi_miio_device
-            icon:
-              "on": mdi:fan
-              "off": mdi:fan-off
-            color:
-              "on": [20, 60, 255]
-              "off": [126, 126, 126]
-          - entity: light.livingroom_lights
-            icon:
-              "on": mdi:lightbulb-group
-              "off": mdi:lightbulb-group-off
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: light.gyver_lamp2
-            icon: mdi:lava-lamp
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: light.livingroom_table_background
-            icon:
-              "on": mdi:led-strip-variant
-              "off": mdi:led-strip-variant-off
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-      - type: cardGrid
-        title: Doors
-        entities:
-          - entity: binary_sensor.main_corridor_door_sensor_contact
-            name: Main Corridor
-            color:
-              "on": [20, 60, 255]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.terrace_door_sensor_contact
-            name: Terrace
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.hallway_contact_sensor_ring
-            name: Hallway
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-      - type: cardGrid
-        title: Windows
-        entities:
-          - entity: binary_sensor.kitchen_window_sensor_contact
-            name: Kitchen
-            color:
-              "on": [20, 60, 255]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.livingroom_window_sensor_contact
-            name: Livingroom
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.kidsroom_window_sensor_contact
-            name: Kidsroom
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.main_corridor_window_sensor_contact
-            name: Main Corridor
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.toilet_window_sensor_contact
-            name: WC
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
-          - entity: binary_sensor.dining_room_window_sensor_contact
-            name: Dining Room
-            color:
-              "on": [225, 226, 20]
-              "off": [126, 126, 126]
+    #   theme:
+    #     time: [255, 255, 255]
+    #     date: [255, 175, 0]
+    #     tMainIcon: [57, 169, 255]
+    #     bar: [57, 169, 0]
+    #     autoWeather: true
+    #     clear-night: [150, 150, 100]
+    #     cloudy: [75, 75, 75]
+    #     exceptional: [255, 50, 50]
+    #     fog: [150, 150, 150]
+    #     hail: [200, 200, 200]
+    #     lightning: [200, 200, 0]
+    #     lightning-rainy: [200, 200, 150]
+    #     partlycloudy: [150, 150, 150]
+    #     pouring: [50, 50, 255]
+    #     rainy: [100, 100, 255]
+    #     snowy: [150, 150, 150]
+    #     snowy-rainy: [150, 150, 255]
+    #     sunny: [255, 255, 0]
+    #     windy: [150, 150, 150]
+    #     windy-variant: [255, 125, 125]
+    # cards:
+    #   - type: cardQR
+    #     title: Wifi Network
+    #     qrCode: "WIFI:S:Guests;T:WPA;P:1qaz2wsx;;"
+    #     entities:
+    #       - entity: iText.Guests
+    #         name: Name
+    #         icon: mdi:wifi
+    #       - entity: iText.1qaz2wsx
+    #         name: Password
+    #         icon: mdi:key
+    #   - type: cardGrid
+    #     title: Livingroom
+    #     entities:
+    #       - entity: fan.xiaomi_miio_device
+    #         icon:
+    #           "on": mdi:fan
+    #           "off": mdi:fan-off
+    #         color:
+    #           "on": [20, 60, 255]
+    #           "off": [126, 126, 126]
+    #       - entity: light.livingroom_lights
+    #         icon:
+    #           "on": mdi:lightbulb-group
+    #           "off": mdi:lightbulb-group-off
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: light.gyver_lamp2
+    #         icon: mdi:lava-lamp
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: light.livingroom_table_background
+    #         icon:
+    #           "on": mdi:led-strip-variant
+    #           "off": mdi:led-strip-variant-off
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #   - type: cardGrid
+    #     title: Doors
+    #     entities:
+    #       - entity: binary_sensor.main_corridor_door_sensor_contact
+    #         name: Main Corridor
+    #         color:
+    #           "on": [20, 60, 255]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.terrace_door_sensor_contact
+    #         name: Terrace
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.hallway_contact_sensor_ring
+    #         name: Hallway
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #   - type: cardGrid
+    #     title: Windows
+    #     entities:
+    #       - entity: binary_sensor.kitchen_window_sensor_contact
+    #         name: Kitchen
+    #         color:
+    #           "on": [20, 60, 255]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.livingroom_window_sensor_contact
+    #         name: Livingroom
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.kidsroom_window_sensor_contact
+    #         name: Kidsroom
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.main_corridor_window_sensor_contact
+    #         name: Main Corridor
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.toilet_window_sensor_contact
+    #         name: WC
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]
+    #       - entity: binary_sensor.dining_room_window_sensor_contact
+    #         name: Dining Room
+    #         color:
+    #           "on": [225, 226, 20]
+    #           "off": [126, 126, 126]

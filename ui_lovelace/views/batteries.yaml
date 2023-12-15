@@ -86,12 +86,9 @@ cards:
                 icon: mdi:card-search
                 entities:
                   - sensor.hallway_temperature_humidity_sensor_battery
-                  - sensor.keypad_battery
-                  - sensor.hallway_motion_detector_battery
                   - sensor.0x00158d000457e83c_battery
                   - sensor.outdoor_motion_sensor_battery_2
                   - sensor.kitchen_smoke_detector_battery
                   - sensor.dining_room_motion_sensor_battery
                   - sensor.backyard_motion_sensor_battery
-                  - sensor.sweet_home_range_extender_battery
-
+                  - sensor.qingping_motion_light_sensor_t_battery

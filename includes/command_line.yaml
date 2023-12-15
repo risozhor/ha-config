@@ -1,0 +1,14 @@
+- sensor:
+    name: shopping_list
+    json_attributes:
+      - complete
+      - incomplete
+    command: "jq -r '{complete: [.[] | select(.complete==true)], incomplete: [.[] | select(.complete==false)]}' /config/.shopping_list.json"
+    value_template: "{{ value_json.incomplete | length }}"
+
+- sensor:
+    name: Raspberry C Temp
+    unique_id: raspberry_c_temp
+    unit_of_measurement: "°C"
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    value_template: "{{ value | multiply(0.001) | round(2) }}"

@@ -1,0 +1,20 @@
+# both_date_and_time:
+#   name: Input with both date and time
+#   has_date: true
+#   has_time: true
+time_home_for_climate:
+  name: Увімкнення пресету "Home" термостату
+  has_date: false
+  has_time: true
+time_away_for_climate:
+  name: Увімкнення пресету "away" термостату
+  has_date: false
+  has_time: true
+time_sleep_for_climate:
+  name: Увімкнення пресету "sleep" термостату
+  has_date: false
+  has_time: true
+time_off_for_climate:
+  name: Вимкнення термостату
+  has_date: false
+  has_time: true

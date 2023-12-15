@@ -1,0 +1,20 @@
+esphome:
+  name: speaker
+  friendly_name: speaker
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+logger:
+api:
+ota:
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.10.9
+    gateway: 192.168.10.1
+    subnet: 255.255.255.0
+esp32_improv:
+  authorizer: none
+captive_portal:

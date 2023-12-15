@@ -15,9 +15,9 @@ timer_1h:
   duration: "01:00:00"
 timer_2h:
   duration: "02:00:00"
-zigbee_permit_join:
-  name: Time remaining
-  duration: 600
+# zigbee_permit_join:
+#   name: Time remaining
+#   duration: 600
 hallwaylamps_2m:
   duration: "00:02:00"
 hallwaylamps_5m:
@@ -49,5 +49,5 @@ diningroom_wled_from_diningroom:
 bathroom_bulb:
   duration: "00:00:30"
 
-test_presence:
-  duration: "00:00:10"
+# test_presence:
+#   duration: "00:00:10"

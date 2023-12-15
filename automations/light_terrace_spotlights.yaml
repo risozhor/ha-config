@@ -3,7 +3,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.hallway_contact_sensor_ring
+        # - binary_sensor.hallway_contact_sensor_ring
         - binary_sensor.terrace_door_sensor_contact
       to: "on"
   condition:
@@ -23,7 +23,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.hallway_contact_sensor_ring
+        # - binary_sensor.hallway_contact_sensor_ring
         - binary_sensor.terrace_door_sensor_contact
       to: "on"
   condition:

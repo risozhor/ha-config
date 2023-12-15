@@ -9,11 +9,11 @@ cards:
       ha-card {height: min-content!important;}
     image: /local/images/plan/plan.jpg
     elements:
-      - entity: alarm_control_panel.ring_alarm
-        style:
-          left: 95%
-          top: 8%
-        type: state-icon
+      # - entity: alarm_control_panel.ring_alarm
+      #   style:
+      #     left: 95%
+      #     top: 8%
+      #   type: state-icon
       - entity: camera.wyze
         style:
           left: 90%
@@ -28,13 +28,13 @@ cards:
           left: 6%
           top: 94%
         type: state-icon
-      - entity: binary_sensor.hallway_contact_sensor_ring
-        style:
-          left: 38%
-          margin: 0px
-          padding: 0px
-          top: 32%
-        type: state-icon
+      # - entity: binary_sensor.hallway_contact_sensor_ring
+      #   style:
+      #     left: 38%
+      #     margin: 0px
+      #     padding: 0px
+      #     top: 32%
+      #   type: state-icon
       - entity: binary_sensor.guestroom_motion_sensor_occupancy
         style:
           left: 61%
@@ -148,20 +148,20 @@ cards:
           padding: 0px
           top: 13%
         type: state-icon
-      - entity: binary_sensor.hallway_motion_detector_ring
-        style:
-          left: 42%
-          margin: 0px
-          padding: 0px
-          top: 45%
-        type: state-icon
+      # - entity: binary_sensor.hallway_motion_detector_ring
+      #   style:
+      #     left: 42%
+      #     margin: 0px
+      #     padding: 0px
+      #     top: 45%
+      #   type: state-icon
       - entity: sensor.hallway_temperature_humidity_sensor_temperature
         style:
           align-items: center
           background: center / contain no-repeat url("/local/nest_thermostat1.png")
           color: white
           display: flex
-          font-size: 12px
+          font-size: 14px
           height: 13%
           justify-content: center
           left: 9%
@@ -192,6 +192,19 @@ cards:
       - entity: light.shelly1
         style:
           left: 77%
+          margin: 0px
+          padding: 10px
+          top: 80%
+          width: 7%
+        tap_action:
+          action: toggle
+        image: /local/images/light_bulb_off.png
+        state_image:
+          "on": /local/images/light_bulb_on.png
+        type: image
+      - entity: light.toilet_light
+        style:
+          left: 65%
           margin: 0px
           padding: 10px
           top: 80%
@@ -235,17 +248,17 @@ cards:
           action: toggle
         icon: hue:pendant-devote-three-solid
         type: state-icon
-      - entity: light.wled
-        style:
-          left: 34%
-          margin: 0px
-          padding: 0px
-          top: 39%
-          width: 7%
-        tap_action:
-          action: toggle
-        icon: hue:gradient-lightstrip
-        type: state-icon
+      # - entity: light.wled
+      #   style:
+      #     left: 31%
+      #     margin: 0px
+      #     padding: 0px
+      #     top: 39%
+      #     width: 2%
+      #   tap_action:
+      #     action: toggle
+      #   icon: hue:gradient-lightstrip
+      #   type: state-icon
       - entity: light.livingroom_lights
         icon: hue:pendant-round
         style:
@@ -358,7 +371,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.gyver_lamp2
+      - entity: light.gyver
         style:
           left: 9%
           margin: 0px

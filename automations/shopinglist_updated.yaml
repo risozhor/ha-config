@@ -12,4 +12,20 @@
         message: "'{{ trigger.event.data.item.name }}' has been added to the shopping list"
         data:
           inline_keyboard:
+            - '{{"\U0001F4B5"}} Shoping :/shopinglist'
             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - alias: todolist_updated
+#   initial_state: true
+#   trigger:
+#     - platform: event
+#       event_type: shopping_list_updated
+#       event_data:
+#         action: "add"
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: '{{"\U0001F4B5"}} *ToDo list*'
+#         message: "'{{ trigger.event.data.item.name }}' has been added to the ToDo list"
+#         data:
+#           inline_keyboard:
+#             - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

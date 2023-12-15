@@ -15,119 +15,191 @@ cards:
               - type: template
                 content: "AQI - {{int(states.sensor.livingroom_aqi.state)}}"
                 icon: mdi:air-filter
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: none
+                hold_action:
+                  action: non
+                entity: sensor.livingroom_aqi
       - type: row
         cards:
-          - class: col-xs-12 col-sm-6 pt-2
-            type: vertical-stack
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: horizontal-stack
-                    cards:
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 15
-                            color: "#0011ff"
-                          - value: 20
-                            color: "#05e608"
-                          - value: 25
-                            color: "#FF0000"
-                        entities:
-                          - entity: sensor.hallway_temperature_humidity_sensor_temperature
-                            name: Hallway Temperature
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 15
-                            color: "#0011ff"
-                          - value: 20
-                            color: "#05e608"
-                          - value: 25
-                            color: "#FF0000"
-                        entities:
-                          - entity: sensor.livingroom_temperature
-                            name: Livingroom Temperature
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-          - class: col-xs-12 col-sm-6 pt-2
-            type: vertical-stack
-            cards:
-              - type: vertical-stack
-                cards:
-                  - type: horizontal-stack
-                    cards:
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 20
-                            color: "#FF0000"
-                          - value: 50
-                            color: "#05e608"
-                          - value: 90
-                            color: "#f39c12"
-                          - value: 100
-                            color: "#0011ff"
-                        entities:
-                          - entity: sensor.hallway_temperature_humidity_sensor_humidity
-                            name: Hallway Humidity
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-                      - type: custom:mini-graph-card
-                        color_thresholds:
-                          - value: 20
-                            color: "#FF0000"
-                          - value: 50
-                            color: "#05e608"
-                          - value: 90
-                            color: "#f39c12"
-                          - value: 100
-                            color: "#0011ff"
-                        entities:
-                          - entity: sensor.livingroom_humidity
-                            name: Livingroom Humidity
-                        font_size: 70
-                        height: 50
-                        hours_to_show: 24
-                        points_per_hour: 4
-                        show:
-                          fill: false
-                          icon: false
-          # - class: col-xs-12 col-md-4 pt-2
-          #   type: custom:mushroom-climate-card
-          #   entity: climate.living_room
-          #   fill_container: true
-          #   show_temperature_control: true
-          #   hvac_modes:
-          #     - "off"
-          #     - heat
-          #   collapsible_controls: false
-          - class: col-xs-12 col-md-4 pt-2
+          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 15
+                color: "#0011ff"
+              - value: 20
+                color: "#05e608"
+              - value: 25
+                color: "#FF0000"
+            entities:
+              - entity: sensor.hallway_temperature_humidity_sensor_temperature
+                name: Hallway Temperature
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 15
+                color: "#0011ff"
+              - value: 20
+                color: "#05e608"
+              - value: 25
+                color: "#FF0000"
+            entities:
+              - entity: sensor.livingroom_temperature
+                name: Livingroom Temperature
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 15
+                color: "#0011ff"
+              - value: 20
+                color: "#05e608"
+              - value: 25
+                color: "#FF0000"
+            entities:
+              - entity: sensor.guestroom_motion_sensor_temperature
+                name: Guestroom Temperature
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 15
+                color: "#0011ff"
+              - value: 20
+                color: "#05e608"
+              - value: 25
+                color: "#FF0000"
+            entities:
+              - entity: sensor.kitchen_smoke_detector_device_temperature
+                name: Kitchen Temperature
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 20
+                color: "#FF0000"
+              - value: 50
+                color: "#05e608"
+              - value: 90
+                color: "#f39c12"
+              - value: 100
+                color: "#0011ff"
+            entities:
+              - entity: sensor.nspanel_temperature
+                name: Kidsroom Temperature
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 20
+                color: "#FF0000"
+              - value: 50
+                color: "#05e608"
+              - value: 90
+                color: "#f39c12"
+              - value: 100
+                color: "#0011ff"
+            entities:
+              - entity: sensor.hallway_temperature_humidity_sensor_humidity
+                name: Hallway Humidity
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:mini-graph-card
+            color_thresholds:
+              - value: 20
+                color: "#FF0000"
+              - value: 50
+                color: "#05e608"
+              - value: 90
+                color: "#f39c12"
+              - value: 100
+                color: "#0011ff"
+            entities:
+              - entity: sensor.livingroom_humidity
+                name: Livingroom Humidity
+            font_size: 70
+            height: 50
+            hours_to_show: 24
+            points_per_hour: 4
+            show:
+              fill: false
+              icon: false
+
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
             type: custom:mushroom-fan-card
             entity: fan.xiaomi_miio_device
             icon_animation: true
             icon: mdi:fan
+            # show_percentage_control: true
             tap_action:
               action: more-info
-
-          - class: col-xs-12 col-md-4 pt-2
+            card_mod:
+              style: |
+                ha-card {height: 100%!important;}
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
             type: custom:mushroom-entity-card
             entity: binary_sensor.kitchen_smoke_detector_smoke
             icon_type: icon
             name: Smoke Detector
             fill_container: false
             icon: mdi:smoke-detector-variant
+            card_mod:
+              style: |
+                ha-card {height: 100%!important;}
+          - class: col-xs-12 col-md-6 col-lg-4 pt-2
+            type: custom:mushroom-climate-card
+            entity: climate.boiler_controller_boiler_thermostat
+            name: Thermostat
+            fill_container: false
+            layout: horizontal
+            show_temperature_control: true
+            tap_action:
+              action: more-info
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {height: 100%!important;}

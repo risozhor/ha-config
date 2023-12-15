@@ -1,8 +1,8 @@
 lock:
   - name: "Frontdoor"
     unique_id: "frontdoor_lock"
-    state_topic: "zigbee2mqtt_lan/Relay"
-    command_topic: "zigbee2mqtt_lan/Relay/right/set"
+    state_topic: "zigbee2mqtt_lan/Lock Switch"
+    command_topic: "zigbee2mqtt_lan/Lock Switch/right/set"
     payload_lock: "OFF"
     payload_unlock: "ON"
     state_locked: "OFF"

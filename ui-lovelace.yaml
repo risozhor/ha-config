@@ -20,4 +20,6 @@ views:
   - !include ui_lovelace/views/batteries.yaml
   - !include ui_lovelace/views/shopping-list.yaml
   - !include ui_lovelace/views/x-alerts.yaml
+  - !include ui_lovelace/views/sub-weather.yaml
+  - !include ui_lovelace/views/todo.yaml
   # - !include ui_lovelace/views/animatedicons.yaml

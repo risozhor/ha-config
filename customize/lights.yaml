@@ -1,6 +1,6 @@
 light.wled:
   friendly_name: "Hallway stripe"
-light.gyver_lamp2:
+light.gyver:
   friendly_name: "Gyver Bulb"
   entity_id: "gyver bulb"
   unique_id: gyver_bulb

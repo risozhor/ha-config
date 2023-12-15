@@ -76,7 +76,7 @@
           ] | random }}
         data:
         inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
 
@@ -119,31 +119,31 @@
           *{{- state_attr((integration_entities('places')[value]), 'friendly_name')}}*: {{ states(integration_entities('places')[value])}}{{"\n"}}
           {%- endfor -%}
         inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
-- id: telegram-ik-security-alarm
-  alias: "Telegram Alarm"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/security"
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: "Alarm control"
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        message: >
-          {% if is_state("alarm_control_panel.ring_alarm", "disarmed") %}Disarmed. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
-        inline_keyboard:
-          - '{{ "\u26D4" }} Arm (away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - id: telegram-ik-security-alarm
+#   alias: "Telegram Alarm"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/security"
+#   action:
+#     - service: telegram_bot.answer_callback_query
+#       data_template:
+#         callback_query_id: "{{ trigger.event.data.id }}"
+#         message: "Alarm control"
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         message: >
+#           {% if is_state("alarm_control_panel.sweet_home_alarm", "disarmed") %}Disarmed. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
+#         inline_keyboard:
+#           - '{{ "\u26D4" }} Arm (away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram-ik-set-security-arm_away
   alias: "Telegram Alarm SET arm_away"
@@ -155,7 +155,7 @@
   action:
     - service: alarm_control_panel.alarm_arm_away
       data:
-        entity_id: alarm_control_panel.ring_alarm
+        entity_id: alarm_control_panel.sweet_home_alarm
     - service: telegram_bot.edit_message
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
@@ -176,7 +176,7 @@
   action:
     - service: alarm_control_panel.alarm_arm_away
       data:
-        entity_id: alarm_control_panel.ring_alarm
+        entity_id: alarm_control_panel.sweet_home_alarm
     - service: telegram_bot.edit_message
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
@@ -196,7 +196,7 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       data:
-        entity_id: alarm_control_panel.ring_alarm
+        entity_id: alarm_control_panel.sweet_home_alarm
     - service: telegram_bot.edit_message
       data_template:
         message_id: "{{ trigger.event.data.message.message_id }}"
@@ -234,7 +234,7 @@
           {%- set weekday = weekday_list[wd_ok-1] -%}
           {{'\n'}}Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Select a section*{{'\n\n'}}
         inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus, {{"\u26D4"}} Security:/security'
+          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
           - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
 - alias: "Lights Actions"
@@ -348,10 +348,10 @@
           {{"\U0001F4AA"}} Pressure - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} mm Hg
           {{"\U0001f4a8"}} Wind speed {{ states('sensor.wind_speed') }} m/s.
           {{"\U00002600"}} Weather - {{ states('sensor.openweathermap_weather') }}
-          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.dew_point') }} °C.
+          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.weather_station_weather_station_dew_point') }} °C.
           ------------------------------------------------
-          {{"\U0001f305"}} Sunrise {{ states('sensor.next_sunrise') }}
-          {{"\U0001f307"}} Sunset {{ states('sensor.next_sunset') }}
+          {{"\U0001f305"}} Sunrise {{ states('sensor.weather_station_next_sunrise') }}
+          {{"\U0001f307"}} Sunset {{ states('sensor.weather_station_next_sunset') }}
           ------------------------------------------------
           *Forecast *
           {{"\U00002B50"}} Forecast for today - {{ states('sensor.openweathermap_forecast_temperature') }} °C
@@ -395,7 +395,7 @@
         title: '{{"\U0001F4B5"}} *Shopping list *'
         message: |
           {% if ((states.sensor.shopping_list.state)  | count > 0) %}
-          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s): {{states.sensor.shopping_list_items.state|replace("[", "")|replace("]", "")|replace("\n", "")-}}
+          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s):{{-'\n'-}}{{ states('sensor.shopping_list_items_2') }}
           {%else%}List is empty{%- endif %}
         inline_keyboard:
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

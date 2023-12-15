@@ -15,9 +15,21 @@ cards:
               - type: template
                 content: "{{int(states.sensor.opened_doors.state)}}"
                 icon: mdi:door-open
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: none
+                hold_action:
+                  action: non
               - type: template
                 content: "{{int(states.sensor.opened_windows.state)}}"
                 icon: mdi:window-open-variant
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: none
+                hold_action:
+                  action: non
               - type: weather
                 entity: weather.home
                 show_conditions: true
@@ -33,7 +45,7 @@ cards:
             icon: >-
               {%set state = states('binary_sensor.terrace_door_sensor_contact')%}{%if state
               == "off"%}mdi:door{%else%}mdi:door-open{%endif%}
-            entity: binary_sensor.terrace_door_sensor_contact
+            entity: lock.frontdoor
             tap_action:
               action: more-info
             hold_action:
@@ -71,25 +83,6 @@ cards:
             icon_color: >-
               {%set state = states('binary_sensor.main_corridor_door_sensor_contact')%}{%if
               state == "off"%}grey{%else%}blue{%endif%}
-
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: custom:mushroom-template-card
-            primary: Hallway Door
-            icon: >-
-              {%set state = states('binary_sensor.hallway_contact_sensor_ring')%}{%if state
-              == "off"%}mdi:door{%else%}mdi:door-open{%endif%}
-            entity: binary_sensor.hallway_contact_sensor_ring
-            tap_action:
-              action: more-info
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-            multiline_secondary: false
-            layout: horizontal
-            icon_color: >-
-              {%set state = states('binary_sensor.hallway_contact_sensor_ring')%}
-              {%if state == "off"%}grey{%else%}blue{%endif%}
 
           - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
             type: custom:mushroom-template-card

@@ -7,11 +7,17 @@
     entity_id: input_boolean.virt_sleepingmode
     to: "on"
   action:
-    - service: select.select_option
+    - service: light.turn_on
       data:
-        option: Fire 2012 # name of preset
+        brightness_pct: 10
+        effect: Fire 2012
       target:
-        entity_id: select.wled_preset_2
+        entity_id: light.gyver
+    # - service: select.select_option
+    #   data:
+    #     option: Fire 2012 # name of preset
+    #   target:
+    #     entity_id: select.gyver_preset
     - service: timer.start
       entity_id: timer.gyverlamp_1h_off
 
@@ -25,11 +31,11 @@
         entity_id: timer.gyverlamp_1h_off
   condition:
     - condition: state
-      entity_id: light.gyver_lamp2
+      entity_id: light.gyver
       state: "on"
   action:
     - service: light.turn_off
       target:
-        entity_id: light.gyver_lamp2
+        entity_id: light.gyver
     - service: timer.cancel
       entity_id: timer.gyverlamp_1h_off

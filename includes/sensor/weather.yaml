@@ -43,11 +43,31 @@
       unique_id: weather_station_info
       friendly_name: "Weather Station Info"
       value_template: >-
-        {{states.sensor.weather_station_temperature.state| round}}°C, {{states.sensor.weather_station_humidity.state| round }}%, {{states.sensor.pressure_mmhg.state| round}} mmHg, {{states.sensor.wind_sensor.state| round}} m/s
+        {{states.sensor.outdoor_themperature_dallas.state| round}}°C, {{ '\n' }}
+        {{states.sensor.weather_station_bme_weather_station_humidity.state| round }}%, {{ '\n' }}
+        {{states.sensor.weather_station_weather_station_pressure_mmhg.state| round}} mmHg
       icon_template: >
-        mdi:windsock
-      entity_picture_template: >-
-        /local/images/bg_card/wst.png
+        {%- if states.sensor.openweathermap_condition.state=='clear-day' -%}mdi:weather-sunny
+        {% elif states.sensor.openweathermap_condition.state=='sunny' -%}mdi:weather-sunny
+        {% elif states.sensor.openweathermap_condition.state=='clear-night' -%}mdi:weather-night
+        {% elif states.sensor.openweathermap_condition.state=='Clear,night' -%}mdi:weather-night
+        {% elif states.sensor.openweathermap_condition.state=='rainy' -%}mdi:weather-rainy
+        {% elif states.sensor.openweathermap_condition.state=='snowy' -%}mdi:weather-snowy
+        {% elif states.sensor.openweathermap_condition.state=='fogy' -%}mdi:weather-fog
+        {% elif states.sensor.openweathermap_condition.state=='sleet' -%}mdi:weather-partly-snowy-rainy
+        {% elif states.sensor.openweathermap_condition.state=='snowy-rainy' -%}mdi:partly-snowy-rainy
+        {% elif states.sensor.openweathermap_condition.state=='wind' -%}mdi:weather-windy
+        {% elif states.sensor.openweathermap_condition.state=='windy' -%}mdi:weather-windy
+        {% elif states.sensor.openweathermap_condition.state=='cloudy' -%}mdi:weather-cloudy
+        {% elif states.sensor.openweathermap_condition.state=='partly-cloudy-day' -%}mdi:weather-partly-cloudy
+        {% elif states.sensor.openweathermap_condition.state=='partlycloudy' -%}mdi:weather-partly-cloudy
+        {% elif states.sensor.openweathermap_condition.state=='partly-cloudy-night' -%}mdi:weather-night-partly-cloudy
+        {% elif states.sensor.openweathermap_condition.state=='hail' -%}mdi:weather-hail
+        {% elif states.sensor.openweathermap_condition.state=='lightning' -%}mdi:weather-sunny
+        {% elif states.sensor.openweathermap_condition.state=='thunderstorm' -%}mdi:weather-lightning-rainy
+        {%- endif -%}
+      # entity_picture_template: >-
+      #   /local/images/bg_card/wst.png
 
 - platform: template
   sensors:

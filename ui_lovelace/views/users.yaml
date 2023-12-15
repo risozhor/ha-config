@@ -126,7 +126,8 @@ cards:
                     entity: person.yaroslava
                     primary: Yaroslava
                     secondary: >-
-                      {{ state_attr('sensor.osmap_yaroslava', 'formatted_place') }}
+                      {{states.sensor.osmap_yaroslava.state}}
+                    # {{ state_attr('sensor.osmap_yaroslava', 'formatted_place') }}
                     picture: "{{ state_attr(entity, 'entity_picture') }}"
                     badge_icon: >-
                       {% set zone = iif(states(entity) == 'not_home', 'away',

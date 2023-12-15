@@ -6,19 +6,23 @@ cloud:
 map:
 media_source:
 ssdp:
-stream:
+zeroconf:
+usb:
+
 shopping_list:
 system_health:
-zeroconf:
 sun:
 mobile_app:
-discovery:
 http:
   ip_ban_enabled: false
   use_x_forwarded_for: true
   trusted_proxies:
     - 10.0.0.0/16
     - 172.30.33.0/24
+    - 172.0.0.0/8
+    - 192.168.10.0/24
+logger:
+  default: info
 recorder: !include includes/recorder.yaml
 homeassistant:
   country: UA
@@ -37,10 +41,10 @@ frontend:
   extra_module_url:
     - /local/community/lovelace-mushroom/mushroom.js
     - /local/community/lovelace-card-mod/card-mod.js
-tts: !include includes/tts.yaml
+
 notify: !include includes/notify.yaml
 telegram_bot: !include includes/telegram.yaml
-history: !include includes/history.yaml
+history: # !include includes/history.yaml
 light: !include includes/light.yaml
 timer: !include includes/timer.yaml
 input_boolean: !include includes/input_boolean.yaml
@@ -51,6 +55,7 @@ automation: !include_dir_merge_list automations
 utility_meter: !include includes/utility_meter.yaml
 climate: !include includes/climate/climate.yaml
 mqtt: !include includes/mqtt_devices.yaml
+blueprint:
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml
@@ -58,5 +63,24 @@ lovelace:
 # input_select: !include includes/input_select.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
-conversation: !include_dir_merge_named includes/conversation
-alarm_control_panel: !include includes/alarm_control_panel.yaml
+# alarm_control_panel: !include includes/alarm_control_panel.yaml
+
+command_line: !include includes/command_line.yaml
+input_button:
+input_number:
+input_select:
+input_datetime: !include includes/input_datetime.yaml
+counter:
+schedule:
+input_text:
+bluetooth:
+conversation: # !include_dir_merge_named includes/conversation
+tts: !include includes/tts.yaml
+stream:
+assist_pipeline:
+# panel_iframe:
+#   tasmoadmin:
+#     title: TasmoAdmin
+#     icon: mdi:lightbulb-on
+#     url: https://192.168.10.245:9541
+battery_notes:

@@ -22,13 +22,22 @@
       icon_template: >
         mdi:update
 
+    update_val:
+      friendly_name: "Updates number"
+      value_template: >-
+        {{states.update | selectattr ('state', 'equalto', 'on') | list | length}}
+      icon_template: >
+        mdi:cellphone-arrow-down
+
     livingroom_temperature:
       friendly_name: "Livingroom temperature"
+      unique_id: livingroom_temperature
       unit_of_measurement: "°C"
       value_template: "{{ states.sensor.xiaomi_miio_device_temperature.state }}"
       device_class: temperature
     livingroom_humidity:
       friendly_name: "Livingroom humidity"
+      unique_id: livingroom_humidity
       unit_of_measurement: "%"
       value_template: "{{  states.sensor.xiaomi_miio_device_humidity.state }}"
       device_class: humidity
@@ -44,14 +53,15 @@
         'livingroom_lights', 
         'livingroom_table_background',
         'wled',
-        'gyver_lamp2',
+        'gyver',
         'dining_room_stripe_3',
         '0x00178801030318a1',
         'guestroom_color_bulb',
         'main_corridor_light',
         'shelly1',
         'kitchen_ceiling_lights',
-        'kitchen_strip',  
+        'kitchen_strip',
+        'toilet_light',
         ] -%}
         {{- states.light | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length -}}
 
@@ -84,7 +94,6 @@
       value_template: >
         {%- set sel = [
         'terrace_door_sensor_contact',
-        'hallway_contact_sensor_ring',
         'main_corridor_door_sensor_contact',
         ] -%}
         {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
@@ -128,3 +137,13 @@
         mdi:raspberry-pi
       entity_picture_template: >-
         /local/images/bg_card/bg_rpi.png
+
+- platform: template
+  sensors:
+    turned_on_lights:
+      unique_id: turned_on_lights
+      friendly_name: "Turned lights on"
+      value_template: >
+        {{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}
+      icon_template: >
+        mdi:lightbulb-multiple-outline

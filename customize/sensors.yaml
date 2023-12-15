@@ -26,3 +26,5 @@ sensor.living_room_humidity:
   friendly_name: Living room Humidity by Nest
 sensor.living_room_temperature:
   friendly_name: Living room Temperature by Nest
+
+

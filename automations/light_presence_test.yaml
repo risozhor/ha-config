@@ -1,36 +1,36 @@
-- alias: on_test
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.test_presence_fp1
-      to: "on"
-  condition:
-    - condition: state
-      entity_id: light.wled
-      state: "off"
-  action:
-    - service: light.turn_on
-      data:
-        effect: Giitter
-      target:
-        entity_id:
-          - light.wled
+# - alias: on_test
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.test_presence_fp1
+#       to: "on"
+#   condition:
+#     - condition: state
+#       entity_id: light.wled
+#       state: "off"
+#   action:
+#     - service: light.turn_on
+#       data:
+#         effect: Giitter
+#       target:
+#         entity_id:
+#           - light.wled
 
-- alias: off_test
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.0x54ef4410005832db_presence
-      to: "off"
-  condition:
-    - condition: state
-      entity_id: light.wled
-      state: "on"
-  action:
-    - service: light.turn_off
-      target:
-        entity_id:
-          - light.wled
+# - alias: off_test
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.0x54ef4410005832db_presence
+#       to: "off"
+#   condition:
+#     - condition: state
+#       entity_id: light.wled
+#       state: "on"
+#   action:
+#     - service: light.turn_off
+#       target:
+#         entity_id:
+#           - light.wled
     # - service: timer.cancel
     #   entity_id: timer.test_presence
 # - alias: hallwaylight_on_night_timer
@@ -61,3 +61,4 @@
 #   action:
 #     - service: timer.cancel
 #       entity_id: timer.test_presence
+[]

@@ -1,0 +1,106 @@
+title: Weather Station Info
+theme: Backend-selected
+path: sub-weather
+icon: mdi:thermostat
+subview: true
+type: panel
+badges: []
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mini-graph-card
+            entities:
+              - sensor.outdoor_themperature_dallas
+            hours_to_show: 48
+            points_per_hour: 1
+            height: 80
+            show:
+              labels: true
+              icon: false
+              name: false
+              state: true
+            color_thresholds:
+              - value: 0
+                color: blue
+              - value: 18
+                color: green
+              - value: 24
+                color: red
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mini-graph-card
+            entities:
+              - sensor.weather_station_weather_station_pressure_mmhg
+            hours_to_show: 48
+            points_per_hour: 1
+            height: 80
+            show:
+              labels: true
+              icon: false
+              name: false
+              state: true
+            color_thresholds:
+              - value: 0
+                color: blue
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mini-graph-card
+            entities:
+              - sensor.weather_station_bme_weather_station_humidity
+            hours_to_show: 48
+            points_per_hour: 1
+            height: 80
+            show:
+              labels: true
+              icon: false
+              name: false
+              state: true
+            color_thresholds:
+              - value: 0
+                color: red
+              - value: 30
+                color: yellow
+              - value: 60
+                color: green
+              - value: 90
+                color: blue
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }
+          - class: col-xs-12 col-md-6 col-lg-3
+            type: custom:mini-graph-card
+            entities:
+              - sensor.weather_station_weather_station_wind_speed_sensor
+            hours_to_show: 48
+            points_per_hour: 1
+            height: 80
+            show:
+              labels: true
+              icon: false
+              name: false
+              state: true
+            color_thresholds:
+              - value: 0
+                color: green
+              - value: 3
+                color: yellow
+              - value: 6
+                color: red
+            card_mod:
+              style: |
+                :host {
+                  height: 100%;
+                }

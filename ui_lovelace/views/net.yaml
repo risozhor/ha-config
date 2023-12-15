@@ -13,12 +13,14 @@ cards:
             chips:
               - type: back
               - type: menu
-              - type: weather
-                entity: weather.home
-                show_conditions: true
-                show_temperature: true
               - type: entity
-                entity: sensor.socket_connections
+                entity: sensor.socket_connections_2
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: none
+                hold_action:
+                  action: non
               - type: entity
                 entity: sensor.maria_db_size
       - type: row
@@ -82,9 +84,10 @@ cards:
               ESP temperature: {{states.sensor.cpu_temperature.state | round}}°C, Uptime:
               {{states.sensor.uptime.state}}
             icon: mdi:raspberry-pi
-            entity: sensor.server_status
+            entity: sensor.cpu_temperature
             tap_action:
-              action: more-info
+              action: url
+              url_path: http://192.168.10.250/
             layout: horizontal
             multiline_secondary: false
             picture: /local/images/bg_card/bg_zsgw.png

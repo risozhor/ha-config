@@ -1,0 +1,78 @@
+substitutions:
+  lck_pin: GPIO21
+  blk_pin: GPIO20
+  mic_pin: GPIO6
+  player_pin: GPIO10
+  led_pin: GPIO7
+
+
+esphome:
+  name: c3
+  friendly_name: C3
+  name_add_mac_suffix: false
+  min_version: 2023.10.1
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+logger:
+
+api:
+ota:
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.10.116
+    gateway: 192.168.10.1
+    subnet: 255.255.255.0
+
+
+button:
+  - platform: factory_reset
+    id: factory_reset_btn
+    name: Factory reset
+
+i2s_audio:
+  - i2s_lrclk_pin: GPIO21 ##########################
+    i2s_bclk_pin: GPIO20 ############################
+
+light:
+  - platform: esp32_rmt_led_strip
+    id: leds
+    name: voice_led
+    pin: ${led_pin}
+    chipset: SK6812
+    num_leds: 1
+    rgb_order: grb
+    rmt_channel: 0
+    default_transition_length: 0s
+    gamma_correct: 2.8
+    effects:
+      - pulse:
+          name: pulse
+          transition_length: 250ms
+          update_interval: 250ms
+      - pulse:
+          name: slow_pulse
+          transition_length: 1s
+          update_interval: 2s
+media_player:
+  - platform: i2s_audio
+    name: None
+    id: onju_out
+    dac_type: external
+    i2s_dout_pin: ${player_pin} 
+    mode: mono
+    mute_pin:
+      number: GPIO8
+      inverted: True
+microphone:
+  - platform: i2s_audio
+    id: onju_microphone
+    i2s_din_pin: ${mic_pin} 
+    adc_type: external
+    pdm: false

@@ -1,13 +1,22 @@
-- platform: command_line
-  name: shopping_list
-  json_attributes:
-    - complete
-    - incomplete
-  command: "jq -r '{complete: [.[] | select(.complete==true)], incomplete: [.[] | select(.complete==false)]}' /config/.shopping_list.json"
-  value_template: "{{ value_json.incomplete | length }}"
+- platform: template
+  sensors:
+    shopping_list_items:
+      unique_id: shopping_list_items
+      friendly_name: "Shopping List Items"
+      value_template: >
+        {%- set produce_list = state_attr('sensor.shopping_list', 'incomplete')%}
+        {% for value in produce_list %}
+        {{-'\n'-}}{{value.name}}{% if loop.last %}.{% else %},{% endif -%}
+        {%-  endfor %}
+      icon_template: >
+        mdi:basket
 
-- platform: command_line
-  name: shopping_list_items
-  unique_id: shopping_list_items
-  unit_of_measurement: "items"
-  command: "jq '[.[] | select(.complete==false) | .name]' /config/.shopping_list.json"
+- platform: template
+  sensors:
+    todo_list:
+      unique_id: todo_list
+      friendly_name: "Todo List Incomplete"
+      value_template: >
+        {{ states.todo.todo.state }}
+      icon_template: >
+        mdi:checkbox-multiple-blank

@@ -1,60 +1,60 @@
-- alias: kidsroom_light_on
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "hold"
-  condition:
-    - condition: state
-      entity_id: light.0x0017880103aa4b71
-      state: "off"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
-        payload: '{"state": "ON","brightness": 254,"color_temp": 300,"transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-        qos: 1
-- alias: kidsroom_light_on_20perc
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "double"
-  condition:
-    - condition: state
-      entity_id: light.0x0017880103aa4b71
-      state: "off"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
-        payload: '{"state": "ON","brightness": 30,"color_temp": 300,"transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-        qos: 1
-- alias: kidsroom_light_off
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "double"
-    - platform: state
-      entity_id: sensor.kids_room_switch_action
-      to: "hold"
-  condition:
-    - condition: state
-      entity_id: light.0x0017880103aa4b71
-      state: "on"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-        qos: 1
+# - alias: kidsroom_light_on
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "single"
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "hold"
+#   condition:
+#     - condition: state
+#       entity_id: light.0x0017880103aa4b71
+#       state: "off"
+#   action:
+#     - service: mqtt.publish
+#       data_template:
+#         topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+#         payload: '{"state": "ON","brightness": 254,"color_temp": 300,"transition": 1,"hue_power_on_behavior": "off"}'
+#         retain: true
+#         qos: 1
+# - alias: kidsroom_light_on_20perc
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "double"
+#   condition:
+#     - condition: state
+#       entity_id: light.0x0017880103aa4b71
+#       state: "off"
+#   action:
+#     - service: mqtt.publish
+#       data_template:
+#         topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+#         payload: '{"state": "ON","brightness": 30,"color_temp": 300,"transition": 1,"hue_power_on_behavior": "off"}'
+#         retain: true
+#         qos: 1
+# - alias: kidsroom_light_off
+#   initial_state: true
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "single"
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "double"
+#     - platform: state
+#       entity_id: sensor.kids_room_switch_action
+#       to: "hold"
+#   condition:
+#     - condition: state
+#       entity_id: light.0x0017880103aa4b71
+#       state: "on"
+#   action:
+#     - service: mqtt.publish
+#       data_template:
+#         topic: zigbee2mqtt_lan/0x0017880103aa4b71/set
+#         payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
+#         retain: true
+#         qos: 1

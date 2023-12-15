@@ -47,8 +47,6 @@ entity_config:
     expose: false
   media_player.living_room_speaker:
     expose: false
-  alarm_control_panel.home_alarm:
-    expose: false
   switch.gyver_light:
     expose: false
   sensor.pogoda_temperature_measurement:

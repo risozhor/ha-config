@@ -14,10 +14,10 @@
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.0x00178801030318a1", "on") %}{{"\U0001F4A1"}} The lamp is on{{'\n'}}{% else %}The lamp is turned off{{'\n'}}{% endif %}
-          {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
+          # {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
         inline_keyboard:
           - '{% if is_state("light.0x00178801030318a1", "on") %}Turn off the lamp:/hl_off{% else %}Turn on the lamp:/hl_on{% endif %}'
-          - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
+          # - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_hl_off
@@ -41,10 +41,10 @@
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.0x00178801030318a1", "on") %}{{"\U0001F4A1"}} The lamp is on{{'\n'}}{% else %}The lamp is turned off{{'\n'}}{% endif %}
-          {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
+          # {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
         inline_keyboard:
           - '{% if is_state("light.0x00178801030318a1", "on") %}Turn off the lamp:/hl_off{% else %}Turn on the lamp:/hl_on{% endif %}'
-          - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
+          # - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram_light_hl_on
   alias: "IK - Telegram - Light Hallway hl_on"
@@ -69,10 +69,10 @@
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.0x00178801030318a1", "on") %}{{"\U0001F4A1"}} The lamp is on{{'\n'}}{% else %}The lamp is turned off{{'\n'}}{% endif %}
-          {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
+          # {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
         inline_keyboard:
           - '{% if is_state("light.0x00178801030318a1", "on") %}Turn off the lamp:/hl_off{% else %}Turn on the lamp:/hl_on{% endif %}'
-          - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
+          # - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - id: telegram_light_hw_off
@@ -96,10 +96,10 @@
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.0x00178801030318a1", "on") %}{{"\U0001F4A1"}} The lamp is on{{'\n'}}{% else %}The lamp is turned off{{'\n'}}{% endif %}
-          {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
+          # {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
         inline_keyboard:
           - '{% if is_state("light.0x00178801030318a1", "on") %}Turn off the lamp:/hl_off{% else %}Turn on the lamp:/hl_on{% endif %}'
-          - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
+          # - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 - id: telegram_light_hw_on
   alias: "IK - Telegram - Light Hallway hl_on"
@@ -124,8 +124,8 @@
         message: >
           {{"__________________________________ \n"}}
           {% if is_state("light.0x00178801030318a1", "on") %}{{"\U0001F4A1"}} The lamp is on{{'\n'}}{% else %}The lamp is turned off{{'\n'}}{% endif %}
-          {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
+          # {% if is_state("light.wled", "on") %}{{"\U0001F4A1"}} Wled is turned on{{'\n'}}{% else %}Wled is turned off{{'\n'}}{% endif %}
         inline_keyboard:
           - '{% if is_state("light.0x00178801030318a1", "on") %}Turn off the lamp:/hl_off{% else %}Turn on the lamp:/hl_on{% endif %}'
-          - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
+          # - '{% if is_state("light.wled", "on") %}Turn Wled off:/hw_off{% else %}Turn Wled on:/hw_on{% endif %}'
           - '{{ "\u21a9\ufe0f" }} Rooms and zones:/lights, {{ "\u21a9\ufe0f" }} Control Panel:/to_cp'

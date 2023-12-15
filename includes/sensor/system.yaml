@@ -14,9 +14,3 @@
     - type: last_boot
     - type: disk_free
       arg: /
-- platform: command_line
-  name: Raspberry C Temp
-  unique_id: raspberry_c_temp
-  unit_of_measurement: "°C"
-  command: "cat /sys/class/thermal/thermal_zone0/temp"
-  value_template: "{{ value | multiply(0.001) | round(2) }}"

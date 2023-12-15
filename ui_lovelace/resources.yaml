@@ -10,5 +10,11 @@
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
-- url: /local/community/ha-energy-overview-card/energy-overview-card.js
+- url: /local/community/lovelace-layout-card/layout-card.js
   type: module
+# - url: /local/community/person-entity-card/person-entity-card-bundle.js
+#   type: module
+# - url: /local/community/ha-energy-overview-card/energy-overview-card.js
+#   type: module
+# - url: /local/community/button-card/button-card.js
+#   type: module
