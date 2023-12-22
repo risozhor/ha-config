@@ -1,0 +1,10 @@
+- platform: template
+  sensors:
+    curent_downloadings:
+      friendly_name: "Curent downloadings"
+      value_template:
+        "{%- set payload = state_attr('sensor.transmission_started_torrents', 'torrent_info') -%}
+        {%- for torrent in payload.items() -%}
+        {%- set name = torrent[0] -%}
+        {% set data = torrent[1] %}
+        {{ name|truncate(90) }} is {{ data.percent_done }}% complete  {% endfor %}"

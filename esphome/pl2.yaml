@@ -1,0 +1,255 @@
+substitutions:
+  name: esp_player
+  friendly_name: ESP_player
+  lrclk_pin: GPIO12 #LRC
+  bclk_pin: GPIO14 #BCLK
+
+  lrclk_mpin: GPIO25 #WS
+  bclk_mpin: GPIO18 #SCK
+
+  player_pin: GPIO19 #DIN
+  microphone_pin: GPIO13
+
+  light_pin: GPIO16
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: false
+  min_version: 2023.10.1
+  # on_boot:
+  #   then:
+  #     - sensor.rotary_encoder.set_value:
+  #         id: rotary_dial
+  #         value: 0
+  #     - light.turn_on:
+  #         id: top_led
+  #         effect: slow_pulse
+  #         red: 100%
+  #         green: 60%
+  #         blue: 0%
+  #     - wait_until:
+  #         condition:
+  #           wifi.connected:
+  #     - light.turn_on:
+  #         id: top_led
+  #         effect: pulse
+  #         red: 0%
+  #         green: 100%
+  #         blue: 0%
+  #     - sensor.rotary_encoder.set_value:
+  #         id: rotary_dial
+  #         value: 0
+  #     - wait_until:
+  #         condition:
+  #           api.connected:
+  #     - light.turn_on:
+  #         id: top_led
+  #         effect: none
+  #         red: 0%
+  #         green: 100%
+  #         blue: 0%
+  #     - sensor.rotary_encoder.set_value:
+  #         id: rotary_dial
+  #         value: 0
+  #     - delay: 1s
+  #     - script.execute: reset_led
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+logger:
+api:
+ota:
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip:
+    static_ip: 192.168.10.108
+    gateway: 192.168.10.1
+    subnet: 255.255.255.0
+button:
+  - platform: factory_reset
+    id: factory_reset_btn
+    name: Factory reset
+i2s_audio:
+  - id: i2s_out
+    i2s_lrclk_pin: ${lrclk_pin}
+    i2s_bclk_pin: ${bclk_pin}
+
+  - id: i2s_in
+    i2s_lrclk_pin: ${lrclk_mpin}
+    i2s_bclk_pin: ${bclk_mpin}
+microphone:
+  - platform: i2s_audio
+    id: echo_microphone
+    i2s_audio_id: i2s_in
+    i2s_din_pin: ${microphone_pin}
+    adc_type: external
+    pdm: false
+media_player:
+  - platform: i2s_audio
+    i2s_audio_id: i2s_out
+    name: "ESPHome Player"
+    id: va_out
+    dac_type: external
+    i2s_dout_pin: ${player_pin}
+    mode: mono
+voice_assistant:
+  id: va
+  microphone: echo_microphone
+  # speaker: echo_speaker
+  media_player: va_out
+  on_client_connected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.start_continuous:
+  on_client_disconnected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.stop:
+
+
+light:
+  - platform: esp32_rmt_led_strip
+    id: leds
+    # name: voice_led
+    pin: ${light_pin}
+    # pin: GPIO48
+    chipset: SK6812
+    num_leds: 6
+    rgb_order: grb
+    rmt_channel: 0
+    default_transition_length: 0s
+    gamma_correct: 2.8
+  - platform: partition
+    id: top_led
+    segments:
+      - id: leds
+        from: 0
+        to: 5
+    effects:
+      - pulse:
+          name: fast
+          transition_length: 250ms
+          update_interval: 250ms
+      - pulse:
+          name: pulse
+          transition_length: 250ms
+          update_interval: 250ms
+      - pulse:
+          name: slow_pulse
+          transition_length: 1s
+          update_interval: 2s
+      - addressable_lambda: 
+          name: show_volume
+          update_interval: 50ms
+          lambda: |-
+            int int_volume = int(id(va_out).volume * 100.0f * it.size());
+            int full_leds = int_volume / 100;
+            int last_brightness = int_volume % 100;
+            int i = 0;
+            for(; i < full_leds; i++) {
+              it[i] = Color::WHITE;
+            }
+            if(i < 4) {
+              it[i++] = Color(0,0,0).fade_to_white(last_brightness*256/100);
+            }
+            for(; i < it.size(); i++) {
+              it[i] = Color::BLACK;
+            }
+switch:
+  - platform: template
+    name: Use wake word
+    id: use_wake_word
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    entity_category: config
+    on_turn_on:
+      - lambda: id(va).set_use_wake_word(true);
+      - if:
+          condition:
+            not:
+              - voice_assistant.is_running
+          then:
+            - voice_assistant.start_continuous
+    on_turn_off:
+      - voice_assistant.stop
+      - lambda: id(va).set_use_wake_word(false);
+# sensor:
+#   - platform: rotary_encoder
+#     name: "Rotary Encoder"
+#     id: rotary_dial
+#     pin_a:
+#       number: GPIO15
+#       inverted: true
+#     pin_b:
+#       number: GPIO17
+#       inverted: true
+#     on_clockwise:
+#       - script.execute:
+#           id: set_volume
+#           volume: 0.05
+#     on_anticlockwise:
+#       - script.execute:
+#           id: set_volume
+#           volume: -0.05
+
+# binary_sensor: 
+#   - platform: gpio
+#     icon: mdi:play-pause
+#     id: action
+#     name: "Play / Pause"
+#     pin:
+#       number: GPIO23
+#       inverted: true
+#     on_click:
+#       - if:
+#           condition:
+#             media_player.is_playing
+#           then:
+#             - media_player.pause
+#             - light.turn_on:
+#                 id: top_led
+#                 effect: pulse
+#                 brightness: 20%
+#                 red: 100%
+#                 green: 40%
+#                 blue: 0%
+#             - delay: 4s
+#             - script.execute: reset_led
+#             - script.wait: reset_led
+#           else:
+#               - media_player.play
+#               - light.turn_on:
+#                   id: top_led
+#                   effect: slow_pulse
+#                   brightness: 20%
+#                   red: 100%
+#                   green: 40%
+#                   blue: 0%
+#               - delay: 4s
+#               - script.execute: reset_led
+#               - script.wait: reset_led
+
+# script:
+#   - id: reset_led
+#     then:
+#       - light.turn_off: top_led
+#   - id: set_volume
+#     mode: restart
+#     parameters:
+#       volume: float
+#     then:
+#       - media_player.volume_set:
+#           id: va_out
+#           volume: !lambda return clamp(id(va_out).volume+volume, 0.0f, 1.0f);
+#       - light.turn_on:
+#           id: top_led
+#           effect: show_volume
+#       - delay: 1s
+#       - script.execute: reset_led

@@ -1,0 +1,40 @@
+title: Speedtest
+theme: Backend-selected
+path: sub-speedtest
+icon: mdi:speedometer
+subview: true
+# type: panel
+badges: []
+cards:
+  - type: custom:mini-graph-card
+    entities:
+      - entity: sensor.speedtest_download
+        name: Download
+        color: blue
+        show_line: false
+      - entity: sensor.speedtest_upload
+        name: Upload
+        color: green
+        show_line: false
+    hours_to_show: 24
+    points_per_hour: 24
+    height: 120
+    show:
+      labels: true
+      icon: false
+      name: false
+      state: false
+  - type: custom:mini-graph-card
+    entities:
+      - entity: sensor.speedtest_ping
+        name: Download
+        color: blue
+        show_line: false
+    hours_to_show: 24
+    points_per_hour: 24
+    height: 120
+    show:
+      labels: true
+      icon: false
+      name: false
+      state: true
