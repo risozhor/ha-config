@@ -14,3 +14,4 @@
     - type: last_boot
     - type: disk_free
       arg: /
+

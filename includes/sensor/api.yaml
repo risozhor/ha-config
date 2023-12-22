@@ -1,1 +1,23 @@
-[]
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.disk_free
+  name: NAS disk free
+  icon: mdi:harddisk
+  state_class: measurement
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  unit_of_measurement: "Gb"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.disk_use_percent
+  name: NAS disk use
+  icon: mdi:chart-pie
+  state_class: measurement
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  unit_of_measurement: "%"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json

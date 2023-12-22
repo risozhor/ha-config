@@ -29,21 +29,27 @@ button:
 
     
 i2s_audio:
-  i2s_lrclk_pin: GPIO33
-  i2s_bclk_pin: GPIO19
-# microphone:
-#   - platform: i2s_audio
-#     id: echo_microphone
-#     i2s_din_pin: GPIO18
-#     adc_type: external
-#     pdm: false
+  - id: i2s_out
+    i2s_lrclk_pin: GPIO12
+    i2s_bclk_pin: GPIO14
+  - id: i2s_in
+    i2s_lrclk_pin: GPIO25
+    i2s_bclk_pin: GPIO18
+microphone:
+  - platform: i2s_audio
+    id: echo_microphone
+    i2s_audio_id: i2s_in
+    i2s_din_pin: GPIO19
+    adc_type: external
+    pdm: false
 
 media_player:
   - platform: i2s_audio
+    i2s_audio_id: i2s_out
     name: "ESPHome Player"
     id: player
     dac_type: external
-    i2s_dout_pin: GPIO22
+    i2s_dout_pin: GPIO13
     mode: mono
 # speaker:
 #   - platform: i2s_audio
@@ -51,10 +57,11 @@ media_player:
 #     i2s_dout_pin: GPIO22
 #     dac_type: external
 #     mode: mono
-# voice_assistant:
-#   id: va
-#   microphone: echo_microphone
-#   speaker: echo_speaker
+voice_assistant:
+  id: va
+  microphone: echo_microphone
+  # speaker: echo_speaker
+  media_player: player
 #   noise_suppression_level: 2
 #   auto_gain: 31dBFS
 #   volume_multiplier: 2.0
@@ -64,18 +71,18 @@ media_player:
 #     - wait_until:
 #         not:
 #           speaker.is_playing:
-#   on_client_connected:
-#     - if:
-#         condition:
-#           switch.is_on: use_wake_word
-#         then:
-#           - voice_assistant.start_continuous:
-#   on_client_disconnected:
-#     - if:
-#         condition:
-#           switch.is_on: use_wake_word
-#         then:
-#           - voice_assistant.stop:
+  on_client_connected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.start_continuous:
+  on_client_disconnected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.stop:
 # binary_sensor:
 #   - platform: gpio
 #     pin:
@@ -101,24 +108,24 @@ media_player:
 #               - voice_assistant.stop
 #               - delay: 1s
 #               - voice_assistant.start_continuous:
-# switch:
-#   - platform: template
-#     name: Use wake word
-#     id: use_wake_word
-#     optimistic: true
-#     restore_mode: RESTORE_DEFAULT_OFF
-#     entity_category: config
-#     on_turn_on:
-#       - lambda: id(va).set_use_wake_word(true);
-#       - if:
-#           condition:
-#             not:
-#               - voice_assistant.is_running
-#           then:
-#             - voice_assistant.start_continuous
-#     on_turn_off:
-#       - voice_assistant.stop
-#       - lambda: id(va).set_use_wake_word(false);
+switch:
+  - platform: template
+    name: Use wake word
+    id: use_wake_word
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    entity_category: config
+    on_turn_on:
+      - lambda: id(va).set_use_wake_word(true);
+      - if:
+          condition:
+            not:
+              - voice_assistant.is_running
+          then:
+            - voice_assistant.start_continuous
+    on_turn_off:
+      - voice_assistant.stop
+      - lambda: id(va).set_use_wake_word(false);
 # external_components:
 #   - source: github://pr#5230
 #     components:
@@ -127,60 +134,60 @@ media_player:
 # esp_adf:
 
 
-switch:
-  - platform: gpio
-    icon: mdi:stop-circle-outline
-    pin:
-      number: GPIO14
-      inverted: true
-    name: "Stop"
-    id: stop
-    on_turn_on:
-      then:
-        - media_player.stop
-        - delay: 150ms
-        - switch.turn_off: stop
-  - platform: gpio
-    icon: mdi:volume-plus
-    pin:
-      number: GPIO18
-      inverted: true
-    name: "Volume Up"
-    id: volume_up
-    on_turn_on:
-      then:
-        - media_player.volume_up
-        - delay: 150ms
-        - switch.turn_off: volume_up
-  - platform: gpio
-    icon: mdi:volume-minus
-    pin:
-      number: GPIO27
-      inverted: true
-    name: "Volume Down"
-    id: volume_down
-    on_turn_on:
-      then:
-        - media_player.volume_down
-        - delay: 150ms
-        - switch.turn_off: volume_down
-  - platform: gpio
-    icon: mdi:play-pause
-    pin:
-      number: GPIO15
-      inverted: true
-    name: "Play / Pause"
-    id: playbtn
-    on_turn_on:
-      then:
-        - if:
-            condition:
-              media_player.is_playing
-            then:
-              - media_player.pause
-              - delay: 150ms
-              - switch.turn_off: playbtn
-            else:
-              - media_player.play
-              - delay: 150ms
-              - switch.turn_off: playbtn
+# switch:
+#   - platform: gpio
+#     icon: mdi:stop-circle-outline
+#     pin:
+#       number: GPIO14
+#       inverted: true
+#     name: "Stop"
+#     id: stop
+#     on_turn_on:
+#       then:
+#         - media_player.stop
+#         - delay: 150ms
+#         - switch.turn_off: stop
+#   - platform: gpio
+#     icon: mdi:volume-plus
+#     pin:
+#       number: GPIO18
+#       inverted: true
+#     name: "Volume Up"
+#     id: volume_up
+#     on_turn_on:
+#       then:
+#         - media_player.volume_up
+#         - delay: 150ms
+#         - switch.turn_off: volume_up
+  # - platform: gpio
+  #   icon: mdi:volume-minus
+  #   pin:
+  #     number: GPIO27
+  #     inverted: true
+  #   name: "Volume Down"
+  #   id: volume_down
+  #   on_turn_on:
+  #     then:
+  #       - media_player.volume_down
+  #       - delay: 150ms
+  #       - switch.turn_off: volume_down
+  # - platform: gpio
+  #   icon: mdi:play-pause
+  #   pin:
+  #     number: GPIO15
+  #     inverted: true
+  #   name: "Play / Pause"
+  #   id: playbtn
+  #   on_turn_on:
+  #     then:
+  #       - if:
+  #           condition:
+  #             media_player.is_playing
+  #           then:
+  #             - media_player.pause
+  #             - delay: 150ms
+  #             - switch.turn_off: playbtn
+  #           else:
+  #             - media_player.play
+  #             - delay: 150ms
+  #             - switch.turn_off: playbtn

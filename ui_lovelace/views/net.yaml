@@ -35,7 +35,8 @@ cards:
             icon: mdi:speedometer
             entity: sensor.server_status
             tap_action:
-              action: none
+              action: navigate
+              navigation_path: /lovelace/sub-speedtest
             layout: horizontal
             multiline_secondary: false
             picture: ""
@@ -46,7 +47,7 @@ cards:
             icon_color: green
           - class: col-xs-12 col-md-6 col-lg-3 # disk_use_percent
             type: custom:mushroom-template-card
-            primary: Hardware
+            primary: HA State
             secondary: |-
               HDD {{states.sensor.disk_use_percent.state}}%, 
               RAM: {{states.sensor.memory_use_percent.state | round}}%, 
@@ -66,6 +67,51 @@ cards:
               {% set processor_use_percent = states('sensor.processor_use_percent')| int %}
               {% if processor_use_percent >= 50 %}red
               {% else %}pink{% endif %}
+          - class: col-xs-12 col-md-6 col-lg-3 # disk_use_percent
+            type: custom:mushroom-template-card
+            primary: NAS State
+            secondary: |-
+              HDD Use: {{states.sensor.nas_disk_use.state}}%, 
+              HDD Free: {{states.sensor.nas_disk_free.state | round}} GB
+            icon: mdi:plex
+            entity: sensor.nas_disk_use
+            tap_action:
+              action: none
+            layout: horizontal
+            multiline_secondary: false
+            picture: ""
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
+            icon_color: |-
+              {% set processor_use_percent = states('sensor.nas_disk_use')| int %}
+              {% if processor_use_percent >= 75 %}red
+              {% else %}green{% endif %}
+          - class: col-xs-12 col-md-3 pt-2
+            type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.transmission_active_torrents
+                above: 0
+            card:
+              type: custom:mushroom-template-card
+              primary: "Curent downloads: {{states.sensor.transmission_started_torrents.state}}"
+              secondary: "Curent speed: {{states.sensor.transmission_download_speed.state | int}} MB/s"
+              icon: >+
+                {%- set transmission_download_speed =states.sensor.transmission_download_speed.state | int -%}
+                {%- if transmission_download_speed != 0 -%}mdi:download
+                {% else %}mdi:download-off{%- endif -%}
+              icon_color: >-
+                {%- set transmission_download_speed =
+                states.sensor.transmission_download_speed.state | int -%}
+                {%- if transmission_download_speed != 0 -%}green
+                {% else %}red{%- endif -%}
+              badge_icon: ""
+              badge_color: ""
+              tap_action:
+                action: more-info
+              entity: sensor.curent_downloadings
           - class: col-xs-12 col-md-6 col-lg-3 # rpi4
             type: custom:mushroom-template-card
             primary: Server status

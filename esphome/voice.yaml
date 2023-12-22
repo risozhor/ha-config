@@ -1,6 +1,6 @@
 substitutions:
-  name: voice_assistant
-  friendly_name: voice_assistant
+  name: esp32_player
+  friendly_name: ESP32_player
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -43,23 +43,13 @@ esphome:
           value: 0
       - delay: 1s
       - script.execute: reset_led
-
 esp32:
   board: esp32-s3-devkitc-1
   framework:
     type: arduino
 logger:
-  level: DEBUG 
-  # level: NONE
+  level: NONE
 api:
-  services:
-    - service: start_va
-      then:
-        - voice_assistant.start:
-            silence_detection: false
-    - service: stop_va
-      then:
-        - voice_assistant.stop
 ota:
 wifi:
   ssid: !secret wifi_ssid
@@ -73,100 +63,22 @@ button:
     id: factory_reset_btn
     name: Factory reset
 i2s_audio:
-  # - id: i2s_out
     i2s_lrclk_pin: GPIO13
     i2s_bclk_pin: GPIO18
-  # - id: i2s_in
-  #   i2s_lrclk_pin: GPIO37
-  #   i2s_bclk_pin: GPIO45
-speaker:
-  - platform: i2s_audio
-    # i2s_audio_id: i2s_out
-    id: va_speaker
-    i2s_dout_pin: GPIO12
-    dac_type: external
-    mode: mono
 media_player:
   - platform: i2s_audio
-    # i2s_audio_id: i2s_out
     name: va media player
     id: va_out
     dac_type: external
-    i2s_dout_pin: GPIO12
-    mode: mono
+    i2s_dout_pin: GPIO42
+    mode: stereo
     mute_pin:
-      number: GPIO21
+      number: GPIO42
       inverted: True
-    on_state:
-      - logger.log:
-          format: "va state %.1f"
-          args: [ 'id(va_out).volume']
-microphone:
-  - platform: i2s_audio
-    # i2s_audio_id: i2s_in
-    id: va_microphone
-    i2s_din_pin: GPIO20
-    adc_type: external
-    pdm: false
-voice_assistant:
-  id: va
-  microphone: va_microphone
-  media_player: va_out
-  # speaker: va_speaker
-  use_wake_word: true
-  on_start:
-    - light.turn_on:
-        id: top_led
-        blue: 100%
-        red: 0%
-        green: 0%
-        effect: none
-  on_listening:
-    - light.turn_on:
-        id: top_led
-        blue: 100%
-        red: 0%
-        green: 0%
-        brightness: 100%
-        effect: pulse
-  on_tts_end:
-    - media_player.play_media: !lambda return x;
-    - light.turn_on:
-        id: top_led
-        blue: 0%
-        red: 20%
-        green: 100%
-        effect: pulse
-  on_end:
-    - delay: 100ms
-    - wait_until:
-        not:
-          media_player.is_playing: va_out
-    - script.execute: reset_led
-  on_client_connected:
-    - if:
-        condition:
-          and:
-            - switch.is_on: use_wake_word
-            - binary_sensor.is_off: mute_switch
-        then:
-          - voice_assistant.start_continuous:
-  on_client_disconnected:
-    - if:
-        condition:
-          and:
-            - switch.is_on: use_wake_word
-            - binary_sensor.is_off: mute_switch
-        then:
-          - voice_assistant.stop:
-  on_error:
-    - light.turn_on:
-        id: top_led
-        blue: 0%
-        red: 100%
-        green: 0%
-    - delay: 1s
-    - script.execute: reset_led
+    # on_state:
+    #   - logger.log:
+    #       format: "va state %.1f"
+    #       args: [ 'id(va_out).volume']
 sensor:
   - platform: rotary_encoder
     name: "Rotary Encoder"
@@ -178,82 +90,57 @@ sensor:
       number: GPIO40
       inverted: true
     on_clockwise:
-      - logger.log: "Turned Clockwise"
       - script.execute:
           id: set_volume
           volume: 0.05
-      # - delay: 1s
     on_anticlockwise:
-      - logger.log: "Turned Anticlockwise"
       - script.execute:
           id: set_volume
           volume: -0.05
-      # - delay: 1s
 binary_sensor: 
   - platform: gpio
+    icon: mdi:play-pause
     id: action
-    name: action
+    name: "Play / Pause"
     pin:
       number: GPIO42
       inverted: true
     on_click:
       - if:
           condition:
-            or:
-              - switch.is_off: use_wake_word
-              - binary_sensor.is_on: mute_switch
+            media_player.is_playing
           then:
-            - if:
-                condition: voice_assistant.is_running
-                then:
-                  - voice_assistant.stop:
-                  - script.execute: reset_led
-                else:
-                  - voice_assistant.start:
-          else:
-            - voice_assistant.stop
-            - delay: 1s
+            - media_player.pause
+            - light.turn_on:
+                id: top_led
+                effect: pulse
+                brightness: 20%
+                red: 100%
+                green: 40%
+                blue: 0%
+            - delay: 4s
             - script.execute: reset_led
             - script.wait: reset_led
-            - voice_assistant.start_continuous: 
-  - platform: gpio
-    id: mute_switch
-    pin:
-      number: GPIO10
-      mode: INPUT_PULLUP
-    name: Disable wake word
-    on_press:
-      - script.execute: turn_on_wake_word
-    on_release:
-      - script.execute: turn_off_wake_word
-  - platform: status
-    id: api_connection
-    filters:
-      - delayed_on: 1s
-    on_press:
-      - if:
-          condition:
-            and:
-              - switch.is_on: use_wake_word
-              - binary_sensor.is_off: mute_switch
-          then:
-            - voice_assistant.start_continuous:
-    on_release:
-      - if:
-          condition:
-            and:
-              - switch.is_on: use_wake_word
-              - binary_sensor.is_off: mute_switch
-          then:
-            - voice_assistant.stop:
+          else:
+              - media_player.play
+              - light.turn_on:
+                  id: top_led
+                  effect: slow_pulse
+                  brightness: 20%
+                  red: 100%
+                  green: 40%
+                  blue: 0%
+              - delay: 4s
+              - script.execute: reset_led
+              - script.wait: reset_led
 # text_sensor:
 #   - platform: template
-#     name: "Media URL"
+#     name: "state"
 #     id: template_text
 light:
   - platform: esp32_rmt_led_strip
     id: leds
-    name: voice_led
+    # name: voice_led
     pin: GPIO35
     # pin: GPIO48
     chipset: SK6812
@@ -269,6 +156,10 @@ light:
         from: 0
         to: 5
     effects:
+      - pulse:
+          name: fast
+          transition_length: 250ms
+          update_interval: 250ms
       - pulse:
           name: pulse
           transition_length: 250ms
@@ -297,22 +188,7 @@ light:
 script:
   - id: reset_led
     then:
-      - if:
-          condition:
-            and:
-              - switch.is_on: use_wake_word
-              - binary_sensor.is_off: mute_switch
-          then:
-            - light.turn_on:
-                id: top_led
-                blue: 100%
-                red: 100%
-                green: 0%
-                brightness: 100%
-                effect: none
-          else:
-            - light.turn_off: top_led
-
+      - light.turn_off: top_led
   - id: set_volume
     mode: restart
     parameters:
@@ -326,36 +202,3 @@ script:
           effect: show_volume
       - delay: 1s
       - script.execute: reset_led
-
-  - id: turn_on_wake_word
-    then:
-      - if:
-          condition:
-            and:
-              - binary_sensor.is_off: mute_switch
-              - switch.is_on: use_wake_word
-          then:
-            - lambda: id(va).set_use_wake_word(true);
-            - if:
-                condition:
-                  not:
-                    - voice_assistant.is_running
-                then:
-                  - voice_assistant.start_continuous
-            - script.execute: reset_led
-
-  - id: turn_off_wake_word
-    then:
-      - voice_assistant.stop
-      - lambda: id(va).set_use_wake_word(false);
-      - script.execute: reset_led
-switch:
-  - platform: template
-    name: Use Wake Word
-    id: use_wake_word
-    optimistic: true
-    restore_mode: RESTORE_DEFAULT_ON
-    on_turn_on:
-      - script.execute: turn_on_wake_word
-    on_turn_off:
-      - script.execute: turn_off_wake_word
