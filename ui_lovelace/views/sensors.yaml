@@ -112,7 +112,7 @@ cards:
               - value: 100
                 color: "#0011ff"
             entities:
-              - entity: sensor.nspanel_temperature
+              - entity: sensor.nspmpanel_temperature
                 name: Kidsroom Temperature
             font_size: 70
             height: 50

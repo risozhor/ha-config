@@ -137,22 +137,8 @@ cards:
                     navigation_path: /lovelace/alerts
                   hold_action:
                     action: none
-              # - type: template
-              #   tap_action:
-              #     action: assist
-              #     pipeline_id: 01gzhqm91046hxn59enav6rjg1
-              #   icon: mdi:message-processing-outline
-              #   content: ""
-              #   icon_color: blue
-              # - type: template
-              #   tap_action:
-              #     action: assist
-              #     pipeline_id: 01hbpcwmqehq65h12b2nq119m1
-              #   icon: mdi:message-processing-outline
-              #   content: ""
-              #   icon_color: "#d2691e"
-
               - type: conditional
+
                 conditions:
                   - condition: and
                     conditions:
@@ -164,10 +150,24 @@ cards:
                           - ca6b753fa3864510837d851649a752d3
                 chip:
                   type: entity
+                  # mobile: >
+                  #   [[[
+                  #     if (navigator.userAgent.match(/Android|Mobile|IEMobile|Opera Mini|iPhone|iPad|iPod/i)==null)return false;
+                  #     else return true;
+                  #   ]]]
                   entity: sensor.imap_hitweb_gmail_com
                   tap_action:
                     action: url
-                    url_path: https://mail.google.com/
+                    # url_path: >
+                    #   [[[ if mobile==true{
+                    #       'app://com.google.gm'
+                    #     }
+                    #     else {
+                    #       https://mail.google.com
+                    #     }
+                    #   ]]]
+
+                    url_path: https://mail.google.com
                   hold_action:
                     action: none
                   double_tap_action:
