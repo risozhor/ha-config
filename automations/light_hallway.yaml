@@ -2,8 +2,11 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.halway_motion_sensor
+      entity_id: binary_sensor.hallway_presence_sensor_moving_target
       to: "on"
+    # - platform: state
+    #   entity_id: binary_sensor.hallway_presence_sensor_presence
+    #   to: "on"
   condition:
     - condition: state
       entity_id: light.0x00178801030318a1
@@ -24,8 +27,11 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.halway_motion_sensor
+      entity_id: binary_sensor.hallway_presence_sensor_moving_target
       to: "on"
+    # - platform: state
+    #   entity_id: binary_sensor.hallway_presence_sensor_presence
+    #   to: "on"
   condition:
     - condition: state
       entity_id: light.0x00178801030318a1
