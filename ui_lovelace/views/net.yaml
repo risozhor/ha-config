@@ -92,7 +92,7 @@ cards:
             type: conditional
             conditions:
               - condition: numeric_state
-                entity: sensor.transmission_active_torrents
+                entity: sensor.transmission_started_torrents
                 above: 0
             card:
               type: custom:mushroom-template-card

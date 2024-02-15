@@ -1,0 +1,4 @@
+input_boolean.virt_sleepingmode:
+  friendly_name: Sleep mode
+  icon: mdi:chat-sleep-outline
+  retain: true

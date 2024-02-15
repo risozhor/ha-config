@@ -2,198 +2,105 @@ title: Weather
 path: weather
 icon: mdi:weather-partly-cloudy
 type: panel
+subview: true
 cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
         cards:
-          - type: custom:mushroom-chips-card
-            class: col-xs-12
-            chips:
-              - type: back
-              - type: menu
-              - type: weather
-                entity: weather.home
-                show_conditions: true
-                show_temperature: true
-              - type: template
-                content: >-
-                  Dew point:
-                  {{int(states.sensor.weather_station_weather_station_dew_point.state)}} °C
-                icon: mdi:thermometer-alert
-                tap_action:
-                  action: more-info
-                entity: sensor.weather_station_weather_station_dew_point
-
-      - type: row
-        cards:
-          #aq
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
-            entity: sensor.u_s_air_quality_index
-            name: Air quality index
-          #uv
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-template-card
-            entity: sensor.home_uv_index
-            primary: UV Index
-            secondary: "{{int(states.sensor.home_uv_index.state)}} "
-            icon: mdi:sunglasses
-            icon_color: |
-              {%set uv = int(states.sensor.home_uv_index.state)%}
-              {%if uv == 0 %}green
-              {%elif uv <= 3 and uv > 0 %}yellow
-              {%else%}red{%endif%}
-            tap_action:
-              action: more-info
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-            multiline_secondary: false
-            layout: horizontal
-          #outdoor temp
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mini-graph-card
-            entities:
-              - sensor.home_temperature
-            hours_to_show: 24
-            points_per_hour: 2
-            height: 54
-            show:
-              labels: true
-              icon: false
-              name: false
-              state: false
-            color_thresholds:
-              - value: 0
-                color: "#0000ff"
-              - value: 16
-                color: "#008f04"
-              - value: 25.5
-                color: "#c0392b"
-            # line_color: var(--accent-color)
-            # color_thresholds:
-            #   - value: -5
-            #     color: blue
-            #   - value: 5
-            #     color: lightgreen
-            #   - value: 18
-            #     color: green
-            #   - value: 24
-            #     color: red
-            card_mod:
-              style: |
-                :host {
-                  height: 100%;
-                }
-          #wind
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
-            entity: sensor.wind_direction
-            icon_type: entity-picture
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-
-          #ws info
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
             entity: sensor.weather_station_info
-            icon_type: entity-picture
+            name: Weather Station
             tap_action:
               action: navigate
               navigation_path: /lovelace/sub-weather
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-          #weather
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-template-card
+            template:
+              - base
+              - icon_weatherstation
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.u_s_air_quality_index
+            name: AQI
             tap_action:
               action: more-info
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-            primary: >-
-              Weather: {{(states.weather.openweathermap.state)|capitalize}}
-            secondary: >-
-              {{state_attr('weather.openweathermap','temperature')|round}}°C, Precipitation {{ state_attr('weather.openweathermap', 'forecast')[0].precipitation_probability }}%
-            icon: >-
-              {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny
-              {% elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny
-              {% elif is_state("weather.openweathermap","clear-night") %}mdi:weather-night
-              {% elif is_state("weather.openweathermap","Clear,night") %}mdi:weather-night 
-              {% elif is_state("weather.openweathermap","rainy") %}mdi:weather-rainy
-              {% elif is_state("weather.openweathermap","snowy") %}mdi:weather-snowy
-              {% elif is_state("weather.openweathermap","fogy") %}mdi:weather-fog
-              {% elif is_state("weather.openweathermap","sleet") %}mdi:weather-partly-snowy-rainy
-              {% elif is_state("weather.openweathermap","snowy-rainy") %}mdi:partly-snowy-rainy
-              {% elif is_state("weather.openweathermap","wind") %}mdi:weather-windy
-              {% elif is_state("weather.openweathermap","windy") %}mdi:weather-windy
-              {% elif is_state("weather.openweathermap","cloudy") %}mdi:weather-cloudy
-              {% elif is_state("weather.openweathermap","partly-cloudy-day") %}mdi:weather-partly-cloudy
-              {% elif is_state("weather.openweathermap","partlycloudy") %}mdi:weather-partly-cloudy
-              {% elif is_state("weather.openweathermap","partly-cloudy-night") %}mdi:weather-night-partly-cloudy
-              {% elif is_state("weather.openweathermap","hail") %} mdi:weather-hail
-              {% elif is_state("weather.openweathermap","lightning") %}mdi:weather-lightning
-              {% elif is_state("weather.openweathermap","thunderstorm") %}mdi:weather-lightning-rainy
-              {% endif %}
+            template:
+              - sensors
+              - icon_aqi
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
             entity: weather.openweathermap
-            icon_color: |-
-              {% if is_state("weather.openweathermap","clear-day") %}#d4f000
-              {% elif is_state("weather.openweathermap","sunny") %}#d4f000
-              {% elif is_state("weather.openweathermap","clear-night") %}#023bab
-              {% elif is_state("weather.openweathermap","Clear,night") %}#023bab 
-              {% elif is_state("weather.openweathermap","rainy") %}#00bfbc
-              {% elif is_state("weather.openweathermap","snowy") %}#b6caf2
-              {% elif is_state("weather.openweathermap","fogy") %}#b6caf2
-              {% elif is_state("weather.openweathermap","sleet") %}#707580
-              {% elif is_state("weather.openweathermap","snowy-rainy") %}#707580
-              {% elif is_state("weather.openweathermap","wind") %}#9e0296
-              {% elif is_state("weather.openweathermap","windy") %}#9e0296
-              {% elif is_state("weather.openweathermap","cloudy") %}#7facad
-              {% elif is_state("weather.openweathermap","partly-cloudy-day")%}#8996b0
-              {% elif is_state("weather.openweathermap","partlycloudy") %}#8996b0
-              {% elif is_state("weather.openweathermap","partly-cloudy-night")%}#7288b3
-              {% elif is_state("weather.openweathermap","hail") %}#02749e
-              {% elif is_state("weather.openweathermap","lightning") %}#f09400
-              {% elif is_state("weather.openweathermap","thunderstorm") %}#e60000
-              {% endif %}
-          #sun times
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-template-card
-            entity: sun.sun
-            primary: >-
-              Sunrise {{as_timestamp(state_attr('sun.sun', 'next_rising'))|
-              timestamp_custom('%H:%M')}} / Sunset {{as_timestamp(state_attr('sun.sun',
-              'next_setting'))| timestamp_custom('%H:%M')}}
-            secondary: >-
-              Dawn {{as_timestamp(state_attr('sun.sun', 'next_dawn'))|
-              timestamp_custom('%H:%M')}} / Dusk {{as_timestamp(state_attr('sun.sun',
-              'next_dusk'))| timestamp_custom('%H:%M')}}
-            icon: >-
-              {%set sunstate = states('sun.sun')%}{%if sunstate ==
-              "above_horizon"%}mdi:weather-sunset-up{%else%}mdi:weather-sunset-down{%endif%}
-            icon_color: >
-              {%set color = states('sun.sun')%}{%if color ==
-              "above_horizon"%}yellow{%else%}#0f4285{%endif%}
+            name: Weather
             tap_action:
               action: more-info
-            hold_action:
-              action: none
-            double_tap_action:
-              action: none
-            multiline_secondary: false
-            layout: horizontal
-          #moon phase
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mushroom-entity-card
+            template:
+              - sensors
+              - icon_weather
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  return Math.round(entity.attributes.temperature).toString();
+                ]]]
+              circle_input_unit: "°C"
+
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.home_uv_index
+            name: UV Index
+            tap_action:
+              action: more-info
+            template:
+              - sensors
+              - icon_uv
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.openweathermap_wind_bearing
+            name: Wind Direction
+            tap_action:
+              action: more-info
+            template:
+              - base
+              - icon_wind_direction
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  let dir = states['sensor.wind_direction'];
+                  return (dir.state).toString();
+                ]]]
+
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
             entity: sensor.moon_phase_image
-            icon_type: entity-picture
             name: Moon Phase
+            template:
+              - person
+
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sun.sun
+            name: Sun
+            tap_action:
+              action: more-info
+            template:
+              - base
+              - icon_sun
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.weather_station_weather_station_dew_point
+            name: Dew Point
+            tap_action:
+              action: more-info
+            template:
+              - sensors
+              - icon_dew_point
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.home_temperature
+            tap_action:
+              action: more-info
+            name: Temperature
+            template:
+              - sensors
+              - icon_thermo_humid

@@ -1,0 +1,55 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Livingroom Nest Mini
+    content:
+      type: vertical-stack
+      cards:
+        - type: entities
+          state_color: true
+          card_mod:
+            class: content
+          entities:
+            - type: custom:mushroom-entity-card
+              entity: media_player.living_room_speaker
+              fill_container: false
+              icon_color: blue
+
+            - type: custom:mushroom-chips-card
+              alignment: center
+              chips:
+                - type: template
+                  icon: mdi:play-pause
+                  tap_action:
+                    action: call-service
+                    service: media_player.media_play_pause
+                    target:
+                      entity_id: media_player.living_room_speaker
+                  entity: none
+                - type: template
+                  icon: mdi:volume-minus
+                  tap_action:
+                    action: call-service
+                    service: media_player.volume_down
+                    target:
+                      entity_id: media_player.living_room_speaker
+                  entity: none
+                - type: template
+                  icon: mdi:volume-plus
+                  tap_action:
+                    action: call-service
+                    service: media_player.volume_up
+                    target:
+                      entity_id: media_player.living_room_speaker
+                  entity: none
+                - type: template
+                  icon: mdi:volume-mute
+                  tap_action:
+                    action: call-service
+                    service: media_player.volume_mute
+                    data:
+                      is_volume_muted: true
+                    target:
+                      entity_id: media_player.living_room_speaker
+                  entity: none

@@ -4,20 +4,15 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: input_boolean.virt_sleepingmode
+    entity_id: switch.homemode
     to: "on"
   action:
     - service: light.turn_on
       data:
-        brightness_pct: 10
+        brightness_pct: 1
         effect: Fire 2012
       target:
         entity_id: light.gyver
-    # - service: select.select_option
-    #   data:
-    #     option: Fire 2012 # name of preset
-    #   target:
-    #     entity_id: select.gyver_preset
     - service: timer.start
       entity_id: timer.gyverlamp_1h_off
 

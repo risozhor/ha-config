@@ -1,317 +1,140 @@
 title: lights
 path: lights
 icon: mdi:lightbulb-multiple-outline
+subview: true
 type: panel
 cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
         cards:
-          - type: custom:mushroom-chips-card
-            class: col-xs-12
-            chips:
-              - type: back
-              - type: menu
-              - type: template
-                content: "{{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}"
-                icon: mdi:lightbulb-multiple-outline
-                icon_color: >-
-                  {%set state = int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)%}
-                  {%if state == 0%}grey{%else%}yellow{%endif%}
-                double_tap_action:
-                  action: none
-                tap_action:
-                  action: none
-                hold_action:
-                  action: non
-              - type: weather
-                entity: weather.home
-                show_conditions: true
-                show_temperature: true
-                tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/weather
-      - type: row
-        cards:
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Kitchen
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;
-                  }
-            image: /local/rooms/kitchen.jpg
-            entities:
-              - entity: light.kitchen_ceiling_lamp
-              - entity: light.kitchen_color_lamp
-              - entity: light.kitchen_table_lamp
-              - entity: light.kitchen_strip
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Outdoor
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            image: /local/rooms/outdoor.jpg
-            entities:
-              - entity: switch.outdoor_floodlight
-              - entity: switch.yard_light
-              - entity: switch.backyard_light
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
             title: Livingroom
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            image: /local/rooms/living.jpg
-            entities:
-              - entity: light.livingroom_lights
-              - entity: light.livingroom_table_background
-              - entity: light.gyver
-                tap_action:
+            cards:
+              - type: custom:button-card
+                entity: light.livingroom_lights
+                name: Ceil Lights
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: light.livingroom_table_background
+                name: Table
+                template:
+                  - light
+                  - icon_lightstrip
+              - type: custom:button-card
+                entity: light.gyver
+                name: Lava Lamp
+                double_tap_action:
                   action: more-info
-
-            hold_action:
-              action: none
-            tap_action:
-              action: none
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Terrace
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            image: /local/rooms/terrace.jpg
-            entities:
-              - entity: switch.terrace_spotlights
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Bathroom
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            entities:
-              - entity: light.shelly1
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            image: /local/rooms/bathroom.jpg
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Dining Room
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            image: /local/rooms/diningroom.jpg
-            entities:
-              - entity: light.dining_room_stripe_3
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
+                hold_action:
+                  action: more-info
+                template:
+                  - light
+                  - icon_lava
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
+            title: Kitchen
+            cards:
+              - type: custom:button-card
+                entity: light.kitchen_ceiling_lights
+                name: Ceiling Lights
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: light.kitchen_strip
+                name: Strip
+                template:
+                  - light
+                  - icon_lightstrip
+                  - loader
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
             title: Hallway
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            entities:
-              - entity: light.0x00178801030318a1
-              # - entity: light.wled
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            image: /local/rooms/hallway.jpg
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Guestroom
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            entities:
-              - entity: light.guestroom_color_bulb
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            image: /local/rooms/guestroom.jpg
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Main Corridor
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            entities:
-              - entity: light.main_corridor_light
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            image: /local/rooms/frontdoor.jpg
-          - class: col-xs-12 col-sm-6 col-md-4 col-lg-3 pt-2
-            type: picture-glance
-            title: Toilet
-            card_mod:
-              style: >
-                ha-icon-button[title*="On" i] {color:#ffd640!important;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon{position: relative;}
-                ha-icon-button[title*="Unavailable" i] ha-state-icon:after {
-                  position: absolute;
-                  content: "";
-                  left: 0;
-                  top: 50%;
-                  right: 0;
-                  border-top: 3px solid red;
-                  -webkit-transform:rotate(-45deg);
-                  -moz-transform:rotate(-45deg);
-                  -ms-transform:rotate(-45deg);
-                  -o-transform:rotate(-45deg);
-                  transform:rotate(-45deg);
-                  min-block-size: -webkit-fill-available;}
-            entities:
-              - entity: light.toilet_light
-            tap_action:
-              action: none
-            hold_action:
-              action: none
-            image: /local/rooms/toilet.jpg
+            cards:
+              - type: custom:button-card
+                entity: light.0x00178801030318a1
+                name: Hallway Lamp
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: switch.terrace_spotlights
+                name: Terrace
+                template:
+                  - base
+                  - icon_ceiling-flush
+                  - loader
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
+            title: Bedroom
+            cards:
+              - type: custom:button-card
+                entity: light.kitchen_ceiling_lights
+                name: Ceil
+                template:
+                  - light
+                  - icon_bedroomlight
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
+            title: Guest Zone
+            cards:
+              - type: custom:button-card
+                entity: light.guestroom_color_bulb
+                name: Guests
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: light.main_corridor_light
+                name: Corridor
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: light.dining_room_stripe_3
+                name: Arch
+                template:
+                  - light
+                  - icon_arch
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
+            title: Restroom
+            cards:
+              - type: custom:button-card
+                entity: light.shelly1
+                name: Bath
+                template:
+                  - light
+                  - icon_hue
+              - type: custom:button-card
+                entity: light.toilet_light
+                name: Toilet
+                template:
+                  - light
+                  - icon_bathroom
+          - type: grid
+            class: col-md-6 col-lg-4 px-4
+            title: Outdoor
+            cards:
+              - type: custom:button-card
+                entity: switch.yard_light
+                name: Yard
+                template:
+                  - light
+                  - icon_spot
+              - type: custom:button-card
+                entity: light.outdoor_floodlight
+                name: Pathway
+                template:
+                  - light
+                  - icon_wall_runner
+              - type: custom:button-card
+                entity: switch.backyard_light
+                name: Backyard
+                template:
+                  - light
+                  - icon_wall_flood

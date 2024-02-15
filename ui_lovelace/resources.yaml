@@ -4,19 +4,35 @@
   type: module
 - url: /local/community/hass-hue-icons/hass-hue-icons.js
   type: module
-- url: /local/community/hass-swipe-navigation/swipe-navigation.js
-  type: module
+# - url: /local/community/hass-swipe-navigation/swipe-navigation.js
+#   type: module
 - url: /local/community/mini-graph-card/mini-graph-card-bundle.js
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
 - url: /local/community/lovelace-layout-card/layout-card.js
   type: module
-- url: /local//community/lovelace-card-mod/card-mod.js
+- url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
 # - url: /local/community/person-entity-card/person-entity-card-bundle.js
 #   type: module
 # - url: /local/community/ha-energy-overview-card/energy-overview-card.js
 #   type: module
-# - url: /local/community/button-card/button-card.js
+- url: /local/community/button-card/button-card.js
+  type: module
+- url: /local/marked.min.js?v=4.3.0
+  type: module
+- url: /local/browser_mod_icon.js?v=0.5
+  type: module
+
+- url: /local/fonts.css?v=1
+  type: css
+- url: /hacsfiles/apexcharts-card/apexcharts-card.js
+  type: module
+- url: /local/community/bar-card/bar-card.js
+  type: module
+- url: /hacsfiles/lovelace-climate-mode-entity-row/climate-mode-entity-row.js
+  type: module
+
+# - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
 #   type: module

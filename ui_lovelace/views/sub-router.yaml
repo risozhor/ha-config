@@ -1,0 +1,429 @@
+title: Router
+theme: Backend-selected
+path: sub-router
+icon: mdi:speedometer
+subview: true
+type: panel
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: col #sidebar
+            class: col-12 col-md-4 col-lg-3
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: Mikrotik RB4011
+
+                  - type: picture
+                    image: local/images/devices/rb4011.png
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    card_mod:
+                      style: |
+                        :host{
+                          --ha-card-border-width: 0px;
+                          width: 80%;
+                        }
+
+                  - type: custom:apexcharts-card
+                    layout: minimal
+                    locale: ua
+                    graph_span: 8h
+                    show:
+                      loading: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none;
+                          padding-top: 20px
+                        }
+                    apex_config:
+                      legend:
+                        show: true
+                      plotOptions:
+                        area:
+                          fillTo: end
+                      grid:
+                        padding:
+                          top: -15
+                      fill:
+                        type: gradient
+                        gradient:
+                          type: vertical
+                          opacityFrom: 0.8
+                          opacityTo: 0
+                          stops:
+                            - 0
+                            - 99
+                            - 100
+                      stroke:
+                        width: 4
+                      tooltip:
+                        style:
+                          fontSize: 14px
+                        x:
+                          format: dddd HH:mm
+                      chart:
+                        height: 200px
+                        offsetY: -20px
+                      xaxis:
+                        crosshairs:
+                          show: false
+                    yaxis:
+                      - id: first
+                        show: false
+                        decimals: 0
+                        apex_config:
+                          tickAmount: 4
+                          forceNiceScale: true
+                      - id: second
+                        show: false
+                        opposite: true
+                        decimals: 0
+                        apex_config:
+                          tickAmount: 4
+                          forceNiceScale: true
+                    series:
+                      - entity: sensor.mikrotik_cpu_load
+                        unit: "%"
+                        yaxis_id: first
+                        name: CPU
+                        color: "#385581"
+                        type: area
+                        fill_raw: last
+                        group_by:
+                          func: avg
+                          duration: .2h
+                      - entity: sensor.mikrotik_temperature
+                        unit: "°C"
+                        yaxis_id: second
+                        name: T
+                        color: "red"
+                        type: area
+                        fill_raw: last
+                        group_by:
+                          func: avg
+                          duration: .2h
+
+                  - type: custom:apexcharts-card
+                    layout: minimal
+                    locale: ua
+                    graph_span: 8h
+                    show:
+                      loading: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none;
+                          padding-top: 20px
+                        }
+                    apex_config:
+                      legend:
+                        show: true
+                      plotOptions:
+                        area:
+                          fillTo: end
+                      grid:
+                        padding:
+                          top: -15
+                      fill:
+                        type: gradient
+                        gradient:
+                          type: vertical
+                          opacityFrom: 0.8
+                          opacityTo: 0
+                          stops:
+                            - 0
+                            - 99
+                            - 100
+                      stroke:
+                        width: 4
+                      tooltip:
+                        style:
+                          fontSize: 14px
+                        x:
+                          format: dddd HH:mm
+                      chart:
+                        height: 300px
+                        offsetY: -20px
+                      xaxis:
+                        crosshairs:
+                          show: false
+                    series:
+                      - entity: sensor.mikrotik_rx
+                        name: RX
+                        color: "#385581"
+                        type: area
+                        fill_raw: last
+                        group_by:
+                          func: avg
+                          duration: 1h
+                      - entity: sensor.mikrotik_tx
+                        name: TX
+                        color: "#f85581"
+                        type: area
+                        fill_raw: last
+                        group_by:
+                          func: avg
+                          duration: 1h
+
+          - type: col #main
+            class: col-12 col-md-8 col-lg-9
+            cards:
+              - type: row ######
+                cards:
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether1_connection
+                    name: ETH 1
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether2_connection
+                    name: ETH 2
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether3_connection
+                    name: ETH 3
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether4_connection
+                    name: ETH 4
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether5_connection
+                    name: ETH 5
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether6_connection
+                    name: ETH 6
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether7_connection
+                    name: ETH 7
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether8_connection
+                    name: ETH 8
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether9_connection
+                    name: ETH 9
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
+                    entity: sensor.mikrotik_ether10_connection
+                    name: ETH 10
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+              - type: row ######
+                cards:
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 px-2 pt-4
+                    entity: sensor.mikrotik_wan_connection
+                    name: WAN
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_ethernet
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Connected';
+                        }
+                        if (variables.state === 'off') {
+                            return 'ready';
+                        }
+                      ]]]
+
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 px-2 pt-4
+                    entity: sensor.mikrotik_routerboard_firmware_update
+                    name: Firmware
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_firmware
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Upadate avaiailable';
+                        }
+                        else {return ' ';}
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 px-2 pt-4
+                    entity: sensor.mikrotik_routeros_update
+                    name: OS
+                    tap_action:
+                      action: more-info
+                    template:
+                      - router
+                      - icon_os
+                    state_display: >
+                      [[[
+                        if (variables.state === 'on') {
+                            return 'Upadate avaiailable';
+                        }
+                        else {return ' ';}
+                      ]]]
+                  - type: custom:button-card
+                    class: col-6 col-md-4 col-lg-2 px-2 pt-4
+                    entity: sensor.wired_clients
+                    name: Clients
+                    tap_action:
+                      action: none
+                    template:
+                      - sensors
+                      - icon_abonents
+                    state_display: >
+                      [[[
+                        let wired_clients = states['sensor.wired_clients'];
+                        let wireless_clients = states['sensor.wireless_clients'];
+                        return parseInt(wired_clients.state)+parseInt(wireless_clients.state);
+                      ]]]

@@ -1,6 +1,7 @@
 title: floorplan
 path: floorplan
 icon: mdi:floor-plan
+subview: true
 panel: true
 cards:
   - type: picture-elements

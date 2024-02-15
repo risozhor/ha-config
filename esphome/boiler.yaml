@@ -76,6 +76,6 @@ climate:
       - name: Home
         default_target_temperature_low: 16.5
       - name: sleep
-        default_target_temperature_low: 14.5
+        default_target_temperature_low: 14.0
       - name: away
         default_target_temperature_low: 14

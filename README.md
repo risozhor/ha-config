@@ -1,5 +1,5 @@
 <!-- Shield -->
-[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2023.12-blue.svg
+[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.2-blue.svg
 [ha-server]: https://img.shields.io/badge/Raspberry%20PI%204-RAM%204%20Gb-red.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.35-yellow.svg
@@ -62,12 +62,16 @@ You can support me:
 | Aqara Opple switch 2 bands | <img src="git/devices/Aqara Opple switch 2 bands.jpg"/> |
 | Aqara single key wireless wall switch | <img src="git/devices/Aqara single key wireless wall switch.jpg"/> |
 | SONOFF BASIC ZBR3 Zigbee DIY Smart Switch | <img src="git/devices/BASICZBR3.jpg"/> |
+| SONOFF MINI Extreme Wi-Fi Smart Switch (MiniR4M) [Rewiev](https://www.smarty.ninja/ecosystems-en/sonoff-en/review-of-the-first-matter-device-from-sonoff-mini-r4m/) | <img src="git/devices/sonoff_minir4m.jpg"/> |
+
+
 | Gledopto GL-C-007-1ID | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
 | Mi power plug ZigBee EU | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
 | MiJia door & window contact sensor | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
 | MiJia temperature & humidity sensor | <img src="git/devices/MiJia temperature & humidity sensor.jpg"/> |
 | Xiaomi Mijia Human Body Sensor  | <img src="git/devices/RTCGQ01LM.jpg"/> |
 | SmartThings Motion sensor | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
+| HLK LD2410C sensor | <img src="git/devices/HLK-LD2410C.jpg"/> |
 | Tuya smart zigbee 2ch relay module | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
 | Xiaomi Smart Wireless Switch | <img src="git/devices/WXKG01LM.jpg"/> |
 | Xiaomi Honeywell fire detector | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
@@ -84,6 +88,8 @@ You can support me:
 | Ring-Chime | <img src="git/devices/Ring-Chime.jpg"/> |
 | Ring doorbell wired | <img src="git/devices/ring-doorbell-wired.jpg"/> |
 | shelly 1 | <img src="git/devices/shelly-1.jpg"/> |
+| Shelly Plus 1 Switch Module | <img src="git/devices/shellu-plus-1.jpg"/> |
+| Shelly Plus Add-on [Rewiev](https://www.smarty.ninja/settings/lets-make-underfloor-heating-smart-and-add-it-to-home-assistant/)| <img src="git/devices/Shelly-Plus-Add-on.jpg"/> |
 | Wyze cam v3 | <img src="git/devices/Wyze-cam-v3.jpg"/> |
 | Xiaomi mi air purifier 3h | <img src="git/devices/xiaomi_mi_air_purifier_3h.jpg"/> |
 | *not so smart but important devices* ||
@@ -99,28 +105,39 @@ You can support me:
 
 
 
-
 # Welcome to my Home Assistant configuration
 
 | Mobile view  | Telegram bot |
 | ------------- | ------------- |
-|<video src="https://user-images.githubusercontent.com/12980782/224554395-f9f35544-1e7a-4dd5-b38d-afa82137f232.mp4">  |<video src="https://user-images.githubusercontent.com/12980782/224554851-c754417a-43d7-44d6-a952-3dc4d0e6fe3b.mp4">  |
+| <img src="git/mob_home.png"  />  |<video src="https://user-images.githubusercontent.com/12980782/224554851-c754417a-43d7-44d6-a952-3dc4d0e6fe3b.mp4">  |
 
 
 ### main screen
-<img src="git/1.png"  />
+<img src="git/home.png"  />
 
-### door and windows
-<img src="git/2.png" />
+### router modal window
+<img src="git/router.png" />
 
-### rooms (lights)
-<img src="git/3.png" />
+### lights
+<img src="git/lights.png" />
 
-### hardware
-<img src="git/4.png" />
+### devices and sensors
+<img src="git/devices.png" />
 
-### Weather
-<img src="git/5.png" />
+### servers page
+<img src="git/servers.png" />
 
-### Floorplan
-<img src="git/6.png" />
+### users
+<img src="git/users.png" />
+
+### weather
+<img src="git/weather.png" />
+
+### weather station info page
+<img src="git/weather_station_info.png" />
+
+### main screen mobile ersion
+<img src="git/mob_home.png"  />
+
+### weather page mobile version
+<img src="git/mob_weather.png" />

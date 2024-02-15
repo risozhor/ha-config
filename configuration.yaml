@@ -8,7 +8,6 @@ media_source:
 ssdp:
 zeroconf:
 usb:
-
 shopping_list:
 system_health:
 sun:
@@ -35,16 +34,15 @@ homeassistant:
   customize: !include_dir_merge_named customize
   external_url: !secret external_url
   internal_url: !secret internal_url
-  packages: !include_dir_merge_named includes/packages
+  # packages: !include_dir_merge_named includes/packages
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
     - /local/community/lovelace-mushroom/mushroom.js
     - /local/community/lovelace-card-mod/card-mod.js
-
 notify: !include includes/notify.yaml
 telegram_bot: !include includes/telegram.yaml
-history: # !include includes/history.yaml
+history:
 light: !include includes/light.yaml
 timer: !include includes/timer.yaml
 input_boolean: !include includes/input_boolean.yaml
@@ -64,7 +62,6 @@ lovelace:
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
 # alarm_control_panel: !include includes/alarm_control_panel.yaml
-
 command_line: !include includes/command_line.yaml
 input_button:
 input_number:
@@ -74,13 +71,9 @@ counter:
 schedule:
 input_text:
 bluetooth:
-conversation: # !include_dir_merge_named includes/conversation
+conversation:
 tts: !include includes/tts.yaml
 stream:
 assist_pipeline:
-# panel_iframe:
-#   tasmoadmin:
-#     title: TasmoAdmin
-#     icon: mdi:lightbulb-on
-#     url: https://192.168.10.245:9541
 battery_notes:
+template: !include includes/template_sensors.yaml

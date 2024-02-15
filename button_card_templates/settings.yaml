@@ -1,0 +1,20 @@
+settings:
+  variables:
+    entity_browser_mod: media_player.living_room_tv
+
+    translate_unknown: Unknown
+    translate_idle: idle
+    translate_home: Home
+    translate_not_home: Away
+    translate_available: tillgänglig
+    translate_no_updates: No updates
+    translate_update_available: Update available
+    translate_updates_available: Updates available
+
+    translate_on: "On"
+    translate_off: "Off"
+    translate_cool: cool
+    translate_fan_only: Endast fläkt
+    translate_playing: playing
+    translate_paused: paused
+    translate_standby: standby

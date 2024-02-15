@@ -2,7 +2,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.hallway_presence_sensor_moving_target
+      entity_id: binary_sensor.hallway_presence_sensor_presence
       to: "on"
     # - platform: state
     #   entity_id: binary_sensor.hallway_presence_sensor_presence
@@ -27,7 +27,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.hallway_presence_sensor_moving_target
+      entity_id: binary_sensor.hallway_presence_sensor_presence
       to: "on"
     # - platform: state
     #   entity_id: binary_sensor.hallway_presence_sensor_presence
@@ -37,8 +37,8 @@
       entity_id: light.0x00178801030318a1
       state: "off"
     - condition: state
-      entity_id: sensor.home_mode
-      state: "sleepingmode"
+      entity_id: switch.homemode
+      state: "on"
   action:
     - service: mqtt.publish
       data_template:
@@ -47,6 +47,39 @@
         retain: true
     - service: timer.start
       entity_id: timer.hallwaylamps_2m
+
+- alias: hallwaylight_off_moving_nightmode
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_presence_sensor_presence
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: sensor.home_mode
+      state: "nightmode"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
+        retain: true
+- alias: hallwaylight_off_moving_sleepingmode
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_presence_sensor_presence
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: switch.homemode
+      state: "on"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt_lan/0x00178801030318a1/set
+        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
+        retain: true
 
 - alias: hallwaylight_on_night_timer
   initial_state: true

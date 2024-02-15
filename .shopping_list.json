@@ -1,17 +1,52 @@
 [
   {
+    "name": "Папір",
+    "id": "21947301a1014585b5df834c25ac86d8",
+    "complete": true
+  },
+  {
+    "name": "Молоко",
+    "id": "6229f20e0796487780112e049e5b7723",
+    "complete": true
+  },
+  {
+    "name": "вівсянка",
+    "id": "543a9021bb414a76b79640daa3646bd2",
+    "complete": true
+  },
+  {
+    "name": "чай",
+    "id": "e14379759ff24b978cdf3d20a23a5afc",
+    "complete": false
+  },
+  {
+    "name": "Каптоарес",
+    "id": "3a1f70b26ded43b39493b36422e1fb24",
+    "complete": true
+  },
+  {
+    "name": "Аритміл",
+    "id": "13c2b4b79fec467a97cb859ea2e3ca08",
+    "complete": true
+  },
+  {
+    "name": "Ноліпрел",
+    "id": "93586c394a2e493ab12f217e0c5b7bfe",
+    "complete": true
+  },
+  {
+    "name": "Енап",
+    "id": "74e5cc9aa42e444ab7afb25464995250",
+    "complete": true
+  },
+  {
+    "name": "кава",
+    "id": "f4e1d90848624ded8a2db69c8d64f5c7",
+    "complete": false
+  },
+  {
     "name": "CR2450",
     "id": "e038f2640d2c4cbd832ddbaa7800330f",
-    "complete": false
-  },
-  {
-    "name": "Коронка для підрозетника",
-    "id": "ab2e2cba29e14dd5b2ba7ff165f3e68e",
-    "complete": false
-  },
-  {
-    "name": "Диск для болгарки",
-    "id": "7119a53f4af24c56a6c2b2816291c579",
     "complete": false
   }
 ]

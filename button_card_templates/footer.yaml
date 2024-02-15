@@ -1,0 +1,29 @@
+footer:
+  template:
+    - settings
+    - extra_styles
+  variables:
+    notify: >
+      [[[
+        return false;
+      ]]]
+  size: 2vw
+  show_icon: false
+  color: "#9da0a2"
+
+  styles:
+    card:
+      - color: "#97989c"
+      - width: fit-content
+      - border: 0.12vw solid rgba(115, 115, 115, 0.2)
+      - transition: none
+      - padding: 0 0 0.05vw 0
+      - overflow: visible
+      - --mdc-ripple-color: rgba(0, 0, 0, 0.8)
+
+  tap_action:
+    haptic: medium
+  hold_action:
+    action: block
+  double_tap_action:
+    action: block

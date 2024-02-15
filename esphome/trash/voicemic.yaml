@@ -1,0 +1,31 @@
+esphome:
+  name: voicemic
+  friendly_name: VoiceMic
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "6JsD1TInCyF2DgG+DENnw+RJEo/KTb+kJXB+YLJn5y4="
+
+ota:
+  password: "6eb08c8148d1be98c70d2a10bbfc6653"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Voicemic Fallback Hotspot"
+    password: "ApkTB54zeMdZ"
+
+captive_portal:
+    

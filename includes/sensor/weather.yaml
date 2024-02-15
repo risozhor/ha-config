@@ -42,10 +42,12 @@
     weather_station_info:
       unique_id: weather_station_info
       friendly_name: "Weather Station Info"
+      unit_of_measurement: "°C"
       value_template: >-
-        {{states.sensor.outdoor_themperature_dallas.state| round}}°C, {{ '\n' }}
-        {{states.sensor.weather_station_bme_weather_station_humidity.state| round }}%, {{ '\n' }}
-        {{states.sensor.weather_station_weather_station_pressure_mmhg.state| round}} mmHg
+        {{states.sensor.outdoor_themperature_dallas.state| round}}
+      attribute_templates:
+        humidity: "{{states.sensor.weather_station_bme_weather_station_humidity.state | round }}%"
+        pressure: "{{states.sensor.weather_station_weather_station_pressure_mmhg.state | round}} mmHg"
       icon_template: >
         {%- if states.sensor.openweathermap_condition.state=='clear-day' -%}mdi:weather-sunny
         {% elif states.sensor.openweathermap_condition.state=='sunny' -%}mdi:weather-sunny
@@ -66,8 +68,8 @@
         {% elif states.sensor.openweathermap_condition.state=='lightning' -%}mdi:weather-sunny
         {% elif states.sensor.openweathermap_condition.state=='thunderstorm' -%}mdi:weather-lightning-rainy
         {%- endif -%}
-      # entity_picture_template: >-
-      #   /local/images/bg_card/wst.png
+      entity_picture_template: >-
+        /local/images/bg_card/station.png
 
 - platform: template
   sensors:
@@ -93,10 +95,8 @@
         {% elif wind_bearing >= 304 and wind_bearing < 326 %}WN
         {% elif wind_bearing >= 326 and wind_bearing < 349 %}WNN
         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
-        {% else %}Not available
+        {% else %}NA
         {%- endif %}
-        {%- if wind_bearing >= 0 and wind_bearing <= 360 %}, {{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6) | round(2) }} m/s{%- endif %}
-
       icon_template: >
         mdi:kubernetes
       entity_picture_template: >-

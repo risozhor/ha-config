@@ -399,3 +399,25 @@
           {%else%}List is empty{%- endif %}
         inline_keyboard:
           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+
+- alias: "Home Assistant Update Avalable"
+  trigger:
+    - platform: state
+      entity_id: update.home_assistant_core_update
+      to: "on"
+  action:
+    service: notify.mobile_app_note20
+    data:
+      title: Home Assistant Update Avalable
+      message: >-
+        Installed: {{state_attr('update.home_assistant_core_update','installed_version')}} \r\n Latest:
+        {{state_attr('update.home_assistant_core_update','latest_version')}}
+      data:
+        color: "#2DF56D"
+        actions:
+          - action: "URI"
+            title: "Release Notes"
+            uri: "https://www.home-assistant.io/latest-release-notes/"
+          - action: "URI"
+            title: "Update"
+            uri: "/config/updates"

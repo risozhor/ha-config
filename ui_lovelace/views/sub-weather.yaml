@@ -4,103 +4,123 @@ path: sub-weather
 icon: mdi:thermostat
 subview: true
 type: panel
-badges: []
 cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
         cards:
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mini-graph-card
-            entities:
-              - sensor.outdoor_themperature_dallas
-            hours_to_show: 48
-            points_per_hour: 1
-            height: 80
-            show:
-              labels: true
-              icon: false
-              name: false
-              state: true
-            color_thresholds:
-              - value: 0
-                color: blue
-              - value: 18
-                color: green
-              - value: 24
-                color: red
-            card_mod:
-              style: |
-                :host {
-                  height: 100%;
-                }
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mini-graph-card
-            entities:
-              - sensor.weather_station_weather_station_pressure_mmhg
-            hours_to_show: 48
-            points_per_hour: 1
-            height: 80
-            show:
-              labels: true
-              icon: false
-              name: false
-              state: true
-            color_thresholds:
-              - value: 0
-                color: blue
-            card_mod:
-              style: |
-                :host {
-                  height: 100%;
-                }
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mini-graph-card
-            entities:
-              - sensor.weather_station_bme_weather_station_humidity
-            hours_to_show: 48
-            points_per_hour: 1
-            height: 80
-            show:
-              labels: true
-              icon: false
-              name: false
-              state: true
-            color_thresholds:
-              - value: 0
-                color: red
-              - value: 30
-                color: yellow
-              - value: 60
-                color: green
-              - value: 90
-                color: blue
-            card_mod:
-              style: |
-                :host {
-                  height: 100%;
-                }
-          - class: col-xs-12 col-md-6 col-lg-3
-            type: custom:mini-graph-card
-            entities:
-              - sensor.weather_station_weather_station_wind_speed_sensor
-            hours_to_show: 48
-            points_per_hour: 1
-            height: 80
-            show:
-              labels: true
-              icon: false
-              name: false
-              state: true
-            color_thresholds:
-              - value: 0
-                color: green
-              - value: 3
-                color: yellow
-              - value: 6
-                color: red
-            card_mod:
-              style: |
-                :host {
-                  height: 100%;
-                }
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.outdoor_themperature_dallas
+            name: Themperature
+            tap_action:
+              action: more-info
+            template:
+              - temperature
+              - icon_temp
+              - circle
+            custom_fields:
+              graph:
+                card:
+                  entities:
+                    - entity: sensor.outdoor_themperature_dallas
+            variables:
+              state_on: >
+                [[[
+                  if (entity) {
+                      return entity.state
+                  }
+                ]]]
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return Math.round(entity.state).toString()
+                  }
+                ]]]
+              circle_input_unit: "°C"
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.weather_station_weather_station_pressure_mmhg
+            name: Pressure
+            tap_action:
+              action: more-info
+            template:
+              - temperature
+              - icon_abonents
+              - circle
+            custom_fields:
+              graph:
+                card:
+                  entities:
+                    - entity: sensor.weather_station_weather_station_pressure_mmhg
+            variables:
+              state_on: >
+                [[[
+                  if (entity) {
+                      return entity.state
+                  }
+                ]]]
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return Math.round(entity.state).toString()
+                  }
+                ]]]
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.weather_station_bme_weather_station_humidity
+            name: Humidity
+            tap_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  entities:
+                    - entity: sensor.weather_station_bme_weather_station_humidity
+            variables:
+              state_on: >
+                [[[
+                  if (entity) {
+                      return entity.state
+                  }
+                ]]]
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return Math.round(entity.state).toString()
+                  }
+                ]]]
+              circle_input_unit: "%"
+            template:
+              - temperature
+              - icon_humidity
+              - circle
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.weather_station_weather_station_wind_speed_sensor
+            name: Wind Speed
+            tap_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  entities:
+                    - entity: sensor.weather_station_weather_station_wind_speed_sensor
+            variables:
+              state_on: >
+                [[[
+                  if (entity) {
+                      return entity.state
+                  }
+                ]]]
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return Math.round(entity.state).toString()
+                  }
+                ]]]
+              circle_input_unit: "m/s"
+            template:
+              - temperature
+              - icon_anemometer
+              - circle

@@ -1,205 +1,243 @@
-title: Sensors
+title: Sensors & Devices
 path: sensors
 icon: mdi:thermometer
 type: panel
+subview: true
 cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
         cards:
-          - type: custom:mushroom-chips-card
-            class: col-xs-12
-            chips:
-              - type: back
-              - type: menu
-              - type: template
-                content: "AQI - {{int(states.sensor.livingroom_aqi.state)}}"
-                icon: mdi:air-filter
-                double_tap_action:
-                  action: none
-                tap_action:
-                  action: none
-                hold_action:
-                  action: non
-                entity: sensor.livingroom_aqi
-      - type: row
-        cards:
-          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 15
-                color: "#0011ff"
-              - value: 20
-                color: "#05e608"
-              - value: 25
-                color: "#FF0000"
-            entities:
-              - entity: sensor.hallway_temperature_humidity_sensor_temperature
-                name: Hallway Temperature
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 15
-                color: "#0011ff"
-              - value: 20
-                color: "#05e608"
-              - value: 25
-                color: "#FF0000"
-            entities:
-              - entity: sensor.livingroom_temperature
-                name: Livingroom Temperature
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 15
-                color: "#0011ff"
-              - value: 20
-                color: "#05e608"
-              - value: 25
-                color: "#FF0000"
-            entities:
-              - entity: sensor.guestroom_motion_sensor_temperature
-                name: Guestroom Temperature
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-          - class: col-xs-12 col-sm-6 col-lg-3 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 15
-                color: "#0011ff"
-              - value: 20
-                color: "#05e608"
-              - value: 25
-                color: "#FF0000"
-            entities:
-              - entity: sensor.kitchen_smoke_detector_device_temperature
-                name: Kitchen Temperature
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 20
-                color: "#FF0000"
-              - value: 50
-                color: "#05e608"
-              - value: 90
-                color: "#f39c12"
-              - value: 100
-                color: "#0011ff"
-            entities:
-              - entity: sensor.nspmpanel_temperature
-                name: Kidsroom Temperature
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 20
-                color: "#FF0000"
-              - value: 50
-                color: "#05e608"
-              - value: 90
-                color: "#f39c12"
-              - value: 100
-                color: "#0011ff"
-            entities:
-              - entity: sensor.hallway_temperature_humidity_sensor_humidity
-                name: Hallway Humidity
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mini-graph-card
-            color_thresholds:
-              - value: 20
-                color: "#FF0000"
-              - value: 50
-                color: "#05e608"
-              - value: 90
-                color: "#f39c12"
-              - value: 100
-                color: "#0011ff"
-            entities:
-              - entity: sensor.livingroom_humidity
-                name: Livingroom Humidity
-            font_size: 70
-            height: 50
-            hours_to_show: 24
-            points_per_hour: 4
-            show:
-              fill: false
-              icon: false
-
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mushroom-fan-card
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.hallway_temperature_humidity_sensor_temperature
+            name: Hallway
+            tap_action: !include popup/modal_hallway_sensors.yaml
+            template:
+              - sensors
+              - icon_thermo_humid
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.livingroom_temperature
+            name: Livingroom
+            tap_action: !include popup/modal_livingroom_sensors.yaml
+            template:
+              - sensors
+              - icon_thermo_humid
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.guestroom_motion_sensor_temperature
+            name: Guestroom
+            tap_action: !include popup/modal_guestroom_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.kitchen_smoke_detector_device_temperature
+            name: Kitchen
+            tap_action: !include popup/modal_kitchen_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.nspmpanel_temperature
+            name: Kidsroom
+            tap_action: !include popup/modal_kidsroom_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: sensor.livingroom_aqi
+            name: Livingroom
+            template:
+              - sensors
+              - icon_pm2_5
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
             entity: fan.xiaomi_miio_device
-            icon_animation: true
-            icon: mdi:fan
-            # show_percentage_control: true
+            name: Purifier
             tap_action:
               action: more-info
-            card_mod:
-              style: |
-                ha-card {height: 100%!important;}
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mushroom-entity-card
-            entity: binary_sensor.kitchen_smoke_detector_smoke
-            icon_type: icon
-            name: Smoke Detector
-            fill_container: false
-            icon: mdi:smoke-detector-variant
-            card_mod:
-              style: |
-                ha-card {height: 100%!important;}
-          - class: col-xs-12 col-md-6 col-lg-4 pt-2
-            type: custom:mushroom-climate-card
+            template:
+              - base
+              - icon_fan2
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
             entity: climate.boiler_controller_boiler_thermostat
-            name: Thermostat
-            fill_container: false
-            layout: horizontal
-            show_temperature_control: true
+            name: Klimate
+            tap_action: !include popup/climate.yaml
+            template:
+              - base
+              - icon_climate
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'heat'
+                          ? Math.round(entity.attributes.temperature).toString()
+                          : Math.round(entity.attributes.current_temperature).toString();
+                  }
+                ]]]
+              circle_input_unit: "°C"
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.kitchen_smoke_detector_smoke
+            name: Smoke
+            tap_action:
+              action: none
+            template:
+              - base
+              - icon_fire
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: media_player.living_room_speaker
+            name: Nest mini
+            tap_action: !include popup/nest_mini_livingroom.yaml
+            template:
+              - base
+              - icon_nest_mini
+              - loader
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'playing'
+                          ? Math.round(entity.attributes.volume_level*100)
+                          : Math.round(entity.attributes.volume_level).toString();
+                          }
+                      
+                  
+                ]]]
+              circle_input_unit: "%"
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.hallway_presence_sensor_presence
+            name: Hallway
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.guestroom_motion_sensor_occupancy
+            name: Guestroom
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.dining_room_motion_sensor_occupancy
+            name: Diningroom
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.outdoor_motion_sensor_occupancy
+            name: Pathway
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.0x00158d000457e83c_occupancy
+            name: Yard
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: binary_sensor.backyard_motion_sensor_occupancy
+            name: Backyard
+            double_tap_action: none
+            tap_action: none
+            hold_action: none
+            template:
+              - sensors
+              - icon_walk
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: switch.guestroom_plug_2
+            name: Plug 1
+            double_tap_action:
+              action: more-info
             tap_action:
               action: more-info
             hold_action:
-              action: none
+              action: more-info
+            template:
+              - sensors
+              - icon_plug
+              - circle
+              - loader
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'on'
+                          ? Math.round(entity.attributes.voltage).toString()+'V'
+                          : Math.round(entity.attributes.voltage).toString()+'V';
+                  }
+                ]]]
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: switch.outlet
+            name: Kitchen
             double_tap_action:
-              action: none
-            card_mod:
-              style: |
-                ha-card {height: 100%!important;}
+              action: more-info
+            hold_action:
+              action: more-info
+            template:
+              - base
+              - icon_plug
+              - loader
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: media_player.living_room_tv
+            name: TV
+            # tap_action: !include popup/nest_mini_livingroom.yaml
+            tap_action:
+              action: more-info
+            template:
+              - base
+              - icon_tv
+              - loader
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'playing'
+                          ? Math.round(entity.attributes.volume_level*100)
+                          : Math.round(entity.attributes.volume_level).toString();
+                          }
+                      
+                  
+                ]]]
+              circle_input_unit: "%"

@@ -1,8 +1,8 @@
 substitutions:
   name: hallway_presence_sensor
   friendly_name: Hallway Presence Sensor
-  projectname: "ceeed.hallway presence"
-  projecversion: "2"
+  projectname: "ceeed.ld2410"
+  projecversion: "2.1"
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -27,11 +27,11 @@ wifi:
     subnet: 255.255.255.0
 esp32_improv:
   authorizer: none
-esp32_ble_tracker:
-  scan_parameters:
-    interval: 1100ms
-    window: 1100ms
-    active: true
+# esp32_ble_tracker:
+#   scan_parameters:
+#     interval: 1100ms
+#     window: 1100ms
+#     active: true
 bluetooth_proxy:
   active: true
 uart:
@@ -53,8 +53,3 @@ sensor:
   - platform: ld2410
     detection_distance:
       name: Detection Distance
-
-button:
-  - platform: factory_reset
-    id: factory_reset_btn
-    name: Factory reset

@@ -1,0 +1,56 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Kidsroom Climate
+    content:
+      type: vertical-stack
+      cards:
+        - type: custom:apexcharts-card
+          header:
+            show: true
+            title: Temperature
+          layout: minimal
+          locale: ua
+          graph_span: 24h
+          show:
+            loading: false
+          apex_config:
+            plotOptions:
+              area:
+                fillTo: end
+            grid:
+              padding:
+                top: -15
+            fill:
+              type: gradient
+              gradient:
+                type: vertical
+                opacityFrom: 0.8
+                opacityTo: 0
+                stops:
+                  - 0
+                  - 99
+                  - 100
+            stroke:
+              width: 4
+            tooltip:
+              style:
+                fontSize: 14px
+              x:
+                format: dddd HH:mm
+            chart:
+              height: 300px
+              offsetY: -20px
+            xaxis:
+              crosshairs:
+                show: false
+          series:
+            - entity: sensor.nspmpanel_temperature
+              name: Temperature
+              color: "#385581"
+              type: area
+              fill_raw: last
+              group_by:
+                func: avg
+                duration: 1h

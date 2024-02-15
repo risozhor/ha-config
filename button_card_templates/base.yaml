@@ -1,0 +1,323 @@
+base:
+  template:
+    - settings
+    - extra_styles
+  variables:
+    state_on: >
+      [[[ return ['on', 'home', 'cool', 'heat', 'fan_only', 'playing', 'unlocked'].indexOf(!entity || entity.state) !== -1; ]]]
+    state: >
+      [[[ return !entity || entity.state; ]]]
+    entity_id: >
+      [[[ return !entity || entity.entity_id; ]]]
+    entity_picture: >
+      [[[ return !entity || entity.attributes.entity_picture; ]]]
+    timeout: >
+      [[[ return !entity || Date.now() - Date.parse(entity.last_changed); ]]]
+  aspect_ratio: 1/1
+  show_state: true
+  show_icon: false
+  state_display: >
+    [[[
+      const stateDict = {
+        'on': variables.translate_on,
+        'off': variables.translate_off,
+        'cool': variables.translate_cool,
+        'fan_only': variables.translate_fan_only,
+      };
+      if (variables.state === true) return variables.translate_unknown;
+      return stateDict[variables.state];
+    ]]]
+  tap_action:
+    card_bounce: |
+      [[[
+        // add animation
+        if (this.getElementsByTagName("style").length === 0) {
+            let mq = window.matchMedia('(max-width: 800px)').matches;
+            let style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes card_bounce {
+                    0%   { transform: scale(1); }
+                    10%  { transform: scale(${ mq ? '0.92' : '0.94' }); }
+                    25%  { transform: scale(1); }
+                    30%  { transform: scale(${ mq ? '0.96' : '0.98' }); }
+                    100% { transform: scale(1); }
+                }
+            `;
+            this.appendChild(style);
+        }
+        let duration = 800;
+        this.style.animation = `card_bounce ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        window.setTimeout(() => { this.style.animation = "none"; }, duration + 100)
+      ]]]
+    action: toggle
+    haptic: medium
+  double_tap_action:
+    haptic: success
+  hold_action:
+    action: block
+  styles:
+    grid:
+      - grid-template-areas: |
+          "icon  circle"
+          "n     n"
+          "s     s"
+      - grid-template-columns: repeat(2, 1fr)
+      - grid-template-rows: auto repeat(2, min-content)
+      - gap: 1.3%
+      - align-items: start
+      - will-change: transform
+    name:
+      - justify-self: start
+      - line-height: 121%
+    state:
+      - justify-self: start
+      - line-height: 115%
+    card:
+      - border-radius: var(--button-card-border-radius)
+      - border-width: 0
+      - -webkit-tap-highlight-color: rgba(0,0,0,0)
+      - transition: none
+      - --mdc-ripple-color: >
+          [[[
+            return variables.state_on
+                ? 'rgb(0, 0, 0)'
+                : '#97989c';
+          ]]]
+      - color: >
+          [[[
+            return variables.state_on
+                ? '#4b5254'
+                : '#97989c';
+          ]]]
+      - background-color: >
+          [[[
+            return variables.state_on
+                ? 'rgba(255, 255, 255, 0.85)'
+                : 'rgba(115, 115, 115, 0.25)';
+          ]]]
+base2:
+  template:
+    - settings
+    - extra_styles
+  variables:
+    state_on: >
+      [[[ return ['on', 'home', 'cool', 'fan_only', 'playing', 'unlocked'].indexOf(!entity || entity.state) !== -1; ]]]
+    state: >
+      [[[ return !entity || entity.state; ]]]
+    entity_id: >
+      [[[ return !entity || entity.entity_id; ]]]
+    entity_picture: >
+      [[[ return !entity || entity.attributes.entity_picture; ]]]
+    timeout: >
+      [[[ return !entity || Date.now() - Date.parse(entity.last_changed); ]]]
+  aspect_ratio: 1/1
+  show_state: true
+  show_icon: false
+  state_display: >
+    [[[ if (variables.state === true) return variables.translate_unknown; ]]]
+  tap_action:
+    ui_sound_tablet: |
+      [[[
+        let screensaver = states[variables.entity_tablet] === undefined ||
+            states[variables.entity_tablet].state;
+        if (variables.state === 'off' && screensaver === 'off') {
+            hass.callService('media_player', 'play_media', {
+                entity_id: variables.entity_browser_mod,
+                media_content_id: '/local/sound/on.m4a',
+                media_content_type: 'music'
+            });
+        }
+        if (variables.state_on && screensaver === 'off') {
+            hass.callService('media_player', 'play_media', {
+                entity_id: variables.entity_browser_mod,
+                media_content_id: '/local/sound/off.m4a',
+                media_content_type: 'music'
+            });
+        }
+      ]]]
+    card_bounce: |
+      [[[
+        // duration
+        let duration = 800;
+        this.style.animation = `card_bounce ${duration}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        window.setTimeout(() => { this.style.animation = "none"; }, duration + 100)
+        if (this.getElementsByTagName("style").length === 0) {
+            let mq = window.matchMedia('(max-width: 800px)').matches;
+            let style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes card_bounce {
+                    0%   { transform: scale(1);    }
+                    10%  { transform: scale(${mq ? "0.92" : "0.94"}); }
+                    25%  { transform: scale(1);    }
+                    30%  { transform: scale(${mq ? "0.96" : "0.98"}); }
+                    100% { transform: scale(1);    }
+                }
+            `;
+            this.appendChild(style);
+        }
+      ]]]
+    action: toggle
+    haptic: medium
+  double_tap_action:
+    haptic: success
+  hold_action:
+    action: block
+  styles:
+    grid:
+      - grid-template-areas: |
+          "icon  circle"
+          "n     n"
+          "s     s"
+      - grid-template-columns: repeat(2, 1fr)
+      - grid-template-rows: auto repeat(2, 1fr)
+      - gap: 1.3%
+      - align-items: start
+      - will-change: transform
+    name:
+      - justify-self: start
+      - line-height: 121%
+    state:
+      - justify-self: start
+      - line-height: 115%
+    card:
+      - border-radius: var(--button-card-border-radius)
+      - border-width: 0
+      - -webkit-tap-highlight-color: rgba(0,0,0,0)
+      - transition: none
+      - overflow: hidden # REQUIRED FOR CUSTOM TEMPLATES
+      - --mdc-ripple-color: #97989c;
+      - color: #97989c;
+      - background-color: rgba(115, 115, 115, 0.25);
+base3:
+  template:
+    - settings
+  variables:
+    state: >
+      [[[ return !entity || entity.state; ]]]
+    entity_id: >
+      [[[ return !entity || entity.entity_id; ]]]
+  aspect_ratio: 1/1
+  show_state: true
+  show_icon: false
+  state_display: >
+    [[[ if (variables.state === true) return variables.translate_unknown; ]]]
+  styles:
+    name:
+      - justify-self: start
+      - line-height: 100%
+    state:
+      - justify-self: start
+      - line-height: 100%
+    card:
+      - border-radius: var(--button-card-border-radius)
+      - border-width: 0
+      - -webkit-tap-highlight-color: rgba(0,0,0,0)
+      - transition: none
+      - border: none
+      - overflow: hidden # REQUIRED FOR CUSTOM TEMPLATES
+temperature:
+  template:
+    - base2
+    - extra_styles
+  show_name: true # Hides Card Name
+  show_state: true # Hides Card state
+  state_display: >
+    [[[ return '&nbsp;'; ]]]
+  custom_fields:
+    graph:
+      card:
+        type: "custom:mini-graph-card"
+        height: 140
+        hours_to_show: 24
+        points_per_hour: 1
+        line_width: 8
+        font_size: 75
+        decimals: 0
+        show:
+          name: false
+          icon: false
+          state: false
+          legend: false
+          labels: false
+          labels_secondary: false
+          points: false
+        color_thresholds:
+          - value: 65
+            color: "#276696"
+          - value: 77
+            color: "#228C22"
+          - value: 79
+            color: "#d35400"
+          - value: 80
+            color: "#c0392b"
+        card_mod:
+          style: |
+            :host{
+              --accent-color: #039be5;
+              --ha-card-border-width: 0px;
+            }
+  styles:
+    custom_fields:
+      graph:
+        [
+          bottom: 0%,
+          left: 0%,
+          width: 130%,
+          position: absolute,
+          margin: 0% 0% -14% -15.2%,
+        ]
+      icon:
+        - width: 67%
+        - fill: "#9da0a2"
+radialBar:
+  template:
+    - base3
+  show_name: false
+  show_state: false
+  custom_fields:
+    graph:
+      card:
+        type: "custom:apexcharts-card"
+        header:
+          show: false
+          show_states: false
+          colorize_states: true
+        chart_type: radialBar
+        apex_config:
+          plotOptions:
+            radialBar:
+              hollow:
+                size: 50%
+              dataLabels:
+                name:
+                  show: true
+                value:
+                  show: true
+          legend:
+            show: false
+        series:
+          - entity: >
+              [[[return entity.entity_id]]]
+            name: >
+              [[[return entity.name]]]
+            yaxis_id: a_small_number
+            float_precision: 5
+        yaxis:
+          - id: a_small_number
+            min: 0
+            max: 100
+        card_mod:
+          style: |
+            :host{
+              --ha-card-border-width: 0px;
+            }
+  styles:
+    custom_fields:
+      graph:
+        [
+          display: block,
+          width: 150%,
+          transform: translateX(-14.5%),
+          position: absolute,
+          left: 0,
+        ]

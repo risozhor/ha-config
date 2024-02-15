@@ -1,0 +1,19 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: Low Batteries
+    style: >
+      --popup-max-width: 400px;
+    content:
+      type: markdown
+      content: >-
+        {%- set threshold = 50 -%}
+        {%- set class = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'eq', 'battery') | rejectattr('state','in',['unavailable','unknown']) -%}
+        {%- set low_battery_sensors = namespace(sensors=[]) -%}
+        {%- for battery in class -%}
+          {%- if not battery.entity_id in integration_entities('mobile_app') and battery.state | int (0) <= threshold  | int and battery.state | int (0) != 0 -%}
+            {%- set low_battery_sensors.sensors = low_battery_sensors.sensors+[battery.name +': '+battery.state +'%'] -%}
+          {%- endif -%}
+        {% endfor %}
+        {{low_battery_sensors.sensors | replace('[','') | replace(']','') | replace('\'','')| replace(',',',\r\n')}}

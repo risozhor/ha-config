@@ -13,11 +13,316 @@
 - platform: rest
   resource: http://192.168.10.17:8123/api/states/sensor.disk_use_percent
   name: NAS disk use
+  unique_id: nas_disk_use
   icon: mdi:chart-pie
   state_class: measurement
   force_update: true
   value_template: "{{ value_json.state }}"
   unit_of_measurement: "%"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.processor_use
+  name: NAS Processor Use
+  unique_id: nas_processor_use
+  icon: mdi:cpu-64-bit
+  state_class: measurement
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  unit_of_measurement: "%"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.system_monitor_processor_temperature
+  name: NAS Processor Temperature
+  icon: mdi:thermometer-lines
+  state_class: measurement
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  unit_of_measurement: "°C"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.memory_use_percent
+  name: NAS Memory Use
+  unique_id: nas_memory_use
+  icon: mdi:memory
+  state_class: measurement
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  unit_of_measurement: "%"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.plex_media_server_running
+  name: Plex Media Server Running
+  icon: mdi:plex
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.system_monitor_last_boot
+  name: NAS Last Boot
+  icon: mdi:reload
+  device_class: timestamp
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.db_size2
+  name: NAS DB Size
+  icon: mdi:database
+  force_update: true
+  unique_id: nas_db_size
+  unit_of_measurement: Mb
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.home_assistant_versions
+  name: NAS HA Version
+  icon: mdi:package-up
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.installed_version
+  name: NAS HA Installed Version
+  icon: mdi:package-up
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.addon_updates
+  name: NAS Addon Updates Count
+  icon: mdi:update
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.nas_updates_names
+  name: NAS Updates Names
+  icon: mdi:update
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+    ###########################################################
+    ####               MIKROTIK SENSORS                    ####
+    ###########################################################
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_rb4011igs_5hacq2hnd_cpu_load
+  name: Mikrotik CPU Load
+  icon: mdi:speedometer
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_rb4011igs_5hacq2hnd_memory_usage
+  name: Mikrotik Memory Usage
+  icon: mdi:chip
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_rb4011igs_5hacq2hnd_wired_clients
+  name: Wired Clients
+  icon: mdi:lan
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_rb4011igs_5hacq2hnd_wireless_clients
+  name: Wireless Clients
+  icon: mdi:wifi
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_rb4011igs_5hacq2hnd_temperature
+  name: Mikrotik Temperature
+  icon: mdi:thermometer
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/update.mikrotik_rb4011igs_5hacq2hnd_routerboard_firmware_update
+  name: Mikrotik RouterBOARD firmware update
+  icon: mdi:update
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/update.mikrotik_rb4011igs_5hacq2hnd_routeros_update
+  name: Mikrotik RouterOS update
+  icon: mdi:update
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether1_connection
+  name: Mikrotik ether1 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether2_connection
+  name: Mikrotik ether2 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether3_connection
+  name: Mikrotik ether3 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether4_connection
+  name: Mikrotik ether4 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether5_connection
+  name: Mikrotik ether5 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether6_connection
+  name: Mikrotik ether6 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether7_connection
+  name: Mikrotik ether7 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether8_connection
+  name: Mikrotik ether8 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether9_connection
+  name: Mikrotik ether9 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_ether10_connection
+  name: Mikrotik ether10 Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/binary_sensor.mikrotik_sfp_sfpplus1_connection
+  name: Mikrotik WAN Connection
+  icon: mdi:lan-connect
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_sfp_sfpplus1_rx
+  name: Mikrotik RX
+  icon: mdi:download-network-outline
+  force_update: true
+  value_template: "{{ value_json.state }}"
+  headers:
+    Authorization: !secret nas_token
+    Content-Type: application/json
+- platform: rest
+  resource: http://192.168.10.17:8123/api/states/sensor.mikrotik_sfp_sfpplus1_tx
+  name: Mikrotik TX
+  icon: mdi:upload-network-outline
+  force_update: true
+  value_template: "{{ value_json.state }}"
   headers:
     Authorization: !secret nas_token
     Content-Type: application/json

@@ -1,0 +1,110 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    title: risozhor
+    style: >
+      --popup-max-width: 400px;
+    content:
+      type: vertical-stack
+      cards:
+        - type: entities
+          card_mod:
+            class: content
+          entities:
+            - entity: person.risozhor
+              secondary_info: last-changed
+
+        - type: history-graph
+          card_mod:
+            style: |
+              ha-card > div {
+                padding: 0 2em 1em 1.6em !important;
+              }
+          entities:
+            - entity: person.risozhor
+        - type: custom:battery-state-card
+          entities:
+            - sensor.note20_battery_level
+        # - type: glance
+        #   show_name: false
+        #   show_icon: true
+        #   show_state: true
+        #   card_mod:
+        #     style: |
+        #       ha-card > div {
+        #         padding: 1em 1.5em 0.2em 1em !important;
+        #         box-sizing: content-box;
+        #       }
+        #     - entity: device_tracker.note20
+        #       name: Router
+        #       icon: mdi:wifi
+        #       card_mod:
+        #         style: &state |
+        #           state-badge {
+        #             color: {{ is_state(config.entity, 'home') | iif('#3182b7', '#3c3f3f') }};
+        #           }
+
+        - type: markdown
+          content: " "
+        - type: custom:mushroom-chips-card
+          chips:
+            - type: spacer
+            - type: template
+              icon: mdi:volume-high
+              content: Find Note20
+              tap_action:
+                action: call-service
+                service: notify.mobile_app_note20
+                data:
+                  message: TTS
+                  data:
+                    ttl: 0
+                    priority: high
+                    media_stream: alarm_stream
+                    tts_text: Find me, i'm here!, i'm waiting for you!
+            - type: spacer
+        - type: markdown
+          content: " "
+        - type: map
+          default_zoom: 16
+          dark_mode: true
+          entities:
+            - device_tracker.note20
+          card_mod:
+            style:
+              .: |
+                #root {
+                  height: 25em;
+                  padding-bottom: 0 !important;
+                }
+                ha-icon-button {
+                  color: var(--primary-color);
+                  zoom: 140%;
+                  margin-left: -0.2em;
+                }
+                ha-card {
+                  border-top: 2px solid #1a1a1a;
+                  border-radius: 0;
+                  transition: none;
+                  height: 25em !important;
+                }
+              ha-map$: |
+                #map {
+                  background-color: #191919 !important;
+                }
+                .leaflet-control-attribution {
+                  display: none;
+                }
+                .leaflet-bar a {
+                  background-color: rgba(115, 123, 124, 0.2) !important;
+                  color: #9da0a2 !important;
+                  backdrop-filter: blur(0.25em);
+                  zoom: 140%;
+                }
+                a.leaflet-control-zoom-in {
+                  border-bottom: 1px solid #181818 !important;
+                }
+                .leaflet-pane.leaflet-tile-pane {
+                  filter: invert(0.95) grayscale(0.95) contrast(95%);
+                }

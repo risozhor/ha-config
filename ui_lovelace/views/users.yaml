@@ -2,152 +2,36 @@ title: users
 path: users
 icon: mdi:account
 type: panel
+subview: true
 cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
         cards:
-          - type: custom:mushroom-chips-card
-            class: col-xs-12
-            chips:
-              - type: back
-              - type: menu
-      - type: row
-        cards:
-          - type: custom:stack-in-card
-            class: col-xs-12 col-md-6 col-lg-3 pt-2
-            cards:
-              - type: custom:stack-in-card
-                cards:
-                  - type: custom:mushroom-template-card
-                    entity: person.risozhor
-                    primary: Oleksandr
-                    secondary: >-
-                      {{ state_attr('sensor.osmap_note20', 'formatted_place') }}
-                    picture: "{{ state_attr(entity, 'entity_picture') }}"
-                    badge_icon: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %} {%- if 'home' in zone.lower() -%}mdi:home {%- elif
-                      zone == 'office' -%}mdi:office-building {%- else
-                      -%}mdi:home-export-outline{%- endif -%}
-                    badge_color: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %}  {%- if 'home' in zone.lower() -%}blue {%- elif
-                      zone == 'office' -%}green {%- else -%}red{%- endif -%}
-                    fill_container: true
-                    multiline_secondary: false
-                    layout: horizontal
-                    tap_action:
-                      action: more-info
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: entity
-                    entity: sensor.note20_battery_level
-                card_mod:
-                  style: |
-                    .chip-container * {padding-bottom: 4px;}
-                    .chip-container *:first-child {margin-left: 4px;}
-
-          - type: custom:stack-in-card
-            class: col-xs-12 col-md-6 col-lg-3 pt-2
-            cards:
-              - type: custom:stack-in-card
-                cards:
-                  - type: custom:mushroom-template-card
-                    entity: person.maryna
-                    primary: Maryna
-                    secondary: >-
-                      {{ state_attr('sensor.osmap_maryna', 'formatted_place') }}
-                    picture: "{{ state_attr(entity, 'entity_picture') }}"
-                    badge_icon: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %} {%- if 'home' in zone.lower() -%}mdi:home {%- elif
-                      zone == 'office' -%}mdi:office-building {%- else
-                      -%}mdi:home-export-outline{%- endif -%}
-                    badge_color: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %}  {%- if 'home' in zone.lower() -%}blue {%- elif
-                      zone == 'office' -%}green {%- else -%}red{%- endif -%}
-                    fill_container: true
-                    multiline_secondary: false
-                    layout: horizontal
-                    tap_action:
-                      action: more-info
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: entity
-                    entity: sensor.sm_a505fn_battery_level
-                card_mod:
-                  style: |
-                    .chip-container * {padding-bottom: 4px;}
-                    .chip-container *:first-child {margin-left: 4px;}
-
-          - type: custom:stack-in-card
-            class: col-xs-12 col-md-6 col-lg-3 pt-2
-            cards:
-              - type: custom:stack-in-card
-                cards:
-                  - type: custom:mushroom-template-card
-                    entity: person.vitaliy
-                    primary: Vitalii
-                    secondary: >-
-                      {{ iif(states(entity) == 'not_home', 'away', states(entity)) | title
-                      }} | {{ states('sensor.sm_m315f_geocoded_location') }}
-                    picture: "{{ state_attr(entity, 'entity_picture') }}"
-                    badge_icon: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %} {%- if 'home' in zone.lower() -%}mdi:home {%- elif
-                      zone == 'office' -%}mdi:office-building {%- else
-                      -%}mdi:home-export-outline{%- endif -%}
-                    badge_color: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %}  {%- if 'home' in zone.lower() -%}blue {%- elif
-                      zone == 'office' -%}green {%- else -%}red{%- endif -%}
-                    fill_container: true
-                    multiline_secondary: false
-                    layout: horizontal
-                    tap_action:
-                      action: more-info
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: entity
-                    entity: sensor.sm_m315f_battery_level
-                card_mod:
-                  style: |
-                    .chip-container * {padding-bottom: 4px;}
-                    .chip-container *:first-child {margin-left: 4px;}
-
-          - type: custom:stack-in-card
-            class: col-xs-12 col-md-6 col-lg-3 pt-2
-            cards:
-              - type: custom:stack-in-card
-                cards:
-                  - type: custom:mushroom-template-card
-                    entity: person.yaroslava
-                    primary: Yaroslava
-                    secondary: >-
-                      {{states.sensor.osmap_yaroslava.state}}
-                    # {{ state_attr('sensor.osmap_yaroslava', 'formatted_place') }}
-                    picture: "{{ state_attr(entity, 'entity_picture') }}"
-                    badge_icon: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %} {%- if 'home' in zone.lower() -%}mdi:home {%- elif
-                      zone == 'office' -%}mdi:office-building {%- else
-                      -%}mdi:home-export-outline{%- endif -%}
-                    badge_color: >-
-                      {% set zone = iif(states(entity) == 'not_home', 'away',
-                      states(entity)) %}  {%- if 'home' in zone.lower() -%}blue {%- elif
-                      zone == 'office' -%}green {%- else -%}red{%- endif -%}
-                    fill_container: true
-                    multiline_secondary: false
-                    layout: horizontal
-                    tap_action:
-                      action: more-info
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: entity
-                    entity: sensor.yaroslava_battery_level
-                card_mod:
-                  style: |
-                    .chip-container * {padding-bottom: 4px;}
-                    .chip-container *:first-child {margin-left: 4px;}
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: person.risozhor
+            name: Aleks
+            tap_action: !include popup/device_tracker_aleks.yaml
+            template:
+              - person
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: person.yaroslava
+            name: Yaroslava
+            tap_action: !include popup/device_tracker_yaroslava.yaml
+            template:
+              - person
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: person.vitaliy
+            name: Vitaliy
+            # tap_action: !include popup/footer_router.yaml
+            template:
+              - person
+          - type: custom:button-card
+            class: col-6 col-lg-2 px-2 pt-4
+            entity: person.maryna
+            name: Maryna
+            template:
+              - person
