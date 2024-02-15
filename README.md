@@ -63,8 +63,6 @@ You can support me:
 | Aqara single key wireless wall switch | <img src="git/devices/Aqara single key wireless wall switch.jpg"/> |
 | SONOFF BASIC ZBR3 Zigbee DIY Smart Switch | <img src="git/devices/BASICZBR3.jpg"/> |
 | SONOFF MINI Extreme Wi-Fi Smart Switch (MiniR4M) [Rewiev](https://www.smarty.ninja/ecosystems-en/sonoff-en/review-of-the-first-matter-device-from-sonoff-mini-r4m/) | <img src="git/devices/sonoff_minir4m.jpg"/> |
-
-
 | Gledopto GL-C-007-1ID | <img src="git/devices/Gledopto GL-C-007-1ID.jpg"/> |
 | Mi power plug ZigBee EU | <img src="git/devices/Mi power plug ZigBee EU.jpg"/> |
 | MiJia door & window contact sensor | <img src="git/devices/MiJia door & window contact sensor.jpg"/> |
