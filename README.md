@@ -48,6 +48,9 @@ You can support me:
 | - | - |
 
 ---
+
+My design is based on Mattias Persson's design (link), but I used bootstrap-grid-card instead of grids. Some svg icons have been redrawn or created from scratch. Some files are no longer used and will be removed in future iterations
+
 ## Below is a list of hardware in-house (table in spoiler)
 
 <details>
@@ -69,7 +72,6 @@ You can support me:
 | MiJia temperature & humidity sensor | <img src="git/devices/MiJia temperature & humidity sensor.jpg"/> |
 | Xiaomi Mijia Human Body Sensor  | <img src="git/devices/RTCGQ01LM.jpg"/> |
 | SmartThings Motion sensor | <img src="git/devices/SmartThingsMotion sensor (2018 model).jpg"/> |
-| HLK LD2410C sensor | <img src="git/devices/HLK-LD2410C.jpg"/> |
 | Tuya smart zigbee 2ch relay module | <img src="git/devices/tuya-smart-zigbee-2ch-relay-module.png"/> |
 | Xiaomi Smart Wireless Switch | <img src="git/devices/WXKG01LM.jpg"/> |
 | Xiaomi Honeywell fire detector | <img src="git/devices/xiaomi honeywell fire detector.png"/> |
@@ -89,6 +91,7 @@ You can support me:
 | Shelly Plus 1 Switch Module | <img src="git/devices/shellu-plus-1.jpg"/> |
 | Shelly Plus Add-on [Rewiev](https://www.smarty.ninja/settings/lets-make-underfloor-heating-smart-and-add-it-to-home-assistant/)| <img src="git/devices/Shelly-Plus-Add-on.jpg"/> |
 | Wyze cam v3 | <img src="git/devices/Wyze-cam-v3.jpg"/> |
+| HLK LD2410C sensor | <img src="git/devices/HLK-LD2410C.jpg"/> |
 | Xiaomi mi air purifier 3h | <img src="git/devices/xiaomi_mi_air_purifier_3h.jpg"/> |
 | *not so smart but important devices* ||
 | Argon One M.2 Case for Raspberry 4 and m2 SSD| <img src="git/devices/Argon-One-M.2-Case.jpg"/> |
