@@ -49,7 +49,7 @@ You can support me:
 
 ---
 
-My design is based on Mattias Persson's design (link), but I used bootstrap-grid-card instead of grids. Some svg icons have been redrawn or created from scratch. Some files are no longer used and will be removed in future iterations
+My design is based on [Mattias Persson's design](https://github.com/matt8707/hass-config), but I used bootstrap-grid-card instead of grids. Some svg icons have been redrawn or created from scratch. Some files are no longer used and will be removed in future iterations
 
 ## Below is a list of hardware in-house (table in spoiler)
 
