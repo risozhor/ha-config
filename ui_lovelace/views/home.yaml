@@ -14,76 +14,13 @@ cards:
     cards:
       - type: row
         cards:
-          - type: col #sidebar
+          - type: vertical-stack #sidebar
             class: col-12 col-md-4 col-lg-3
             cards:
-              - type: vertical-stack
-                cards:
-                  - type: custom:button-card
-                    entity: sensor.template_sidebar
-                    template: sidebar
+              - type: custom:button-card
+                entity: sensor.template_sidebar
+                template: sidebar
 
-                  - type: custom:apexcharts-card
-                    header:
-                      show: false
-                      title: ApexCharts-Card
-                      show_states: false
-                      colorize_states: true
-                    show:
-                      loading: false
-                    card_mod:
-                      style: |
-                        ha-card {
-                          border: none;
-                        }
-                    apex_config:
-                      tickAmount: 4
-                      legend:
-                        show: false
-                      stroke:
-                        width: 0
-                      chart:
-                        height: 200px
-                      xaxis:
-                        crosshairs:
-                          show: false
-                      yaxis:
-                        - id: first
-                          show: true
-                          decimalsInFloat: 0
-                        - id: second
-                          opposite: true
-                          show: false
-                    locale: ua
-                    graph_span: 12h
-                    experimental:
-                      color_threshold: true
-                    series:
-                      - entity: sensor.guestroom_motion_sensor_temperature
-                        yaxis_id: first
-                        name: Temperature
-                        color_threshold:
-                          - value: 13
-                            color: blue
-                          - value: 20
-                            color: green
-                          - value: 23
-                            color: red
-                        type: area
-                        fill_raw: last
-                        curve: smooth
-                        group_by:
-                          duration: .1h
-                      - entity: binary_sensor.heating_state
-                        transform: "return x === 'on' ? 1 : 0;"
-                        yaxis_id: second
-                        curve: stepline
-                        stroke_width: 0
-                        opacity: 0.2
-                        color: "#f00"
-                        type: area
-                        show:
-                          in_header: false
           - type: col #main
             class: col-12 col-md-8 col-lg-9
             cards:
@@ -418,47 +355,114 @@ cards:
                       action: navigate
                       navigation_path: /lovelace/todo
 
+              - type: row # charts
+                cards:
+                  - type: vertical-stack
+                    class: col-xs-12 col-md-6 pt-2
+                    cards:
+                      - type: custom:apexcharts-card
+                        header:
+                          show: false
+                          title: ApexCharts-Card
+                          show_states: false
+                          colorize_states: true
+                        show:
+                          loading: false
+                        card_mod:
+                          style: |
+                            ha-card {
+                              border: none;
+                            }
+                        apex_config:
+                          tickAmount: 4
+                          legend:
+                            show: false
+                          stroke:
+                            width: 0
+                          chart:
+                            height: 200px
+                          xaxis:
+                            crosshairs:
+                              show: false
+                          yaxis:
+                            - id: first
+                              show: false
+                              decimalsInFloat: 0
+                            - id: second
+                              opposite: true
+                              show: false
+                        locale: ua
+                        graph_span: 12h
+                        experimental:
+                          color_threshold: true
+                        series:
+                          - entity: sensor.guestroom_motion_sensor_temperature
+                            yaxis_id: first
+                            name: Temperature
+                            color_threshold:
+                              - value: 13
+                                color: blue
+                              - value: 20
+                                color: green
+                              - value: 23
+                                color: red
+                            type: area
+                            fill_raw: last
+                            curve: smooth
+                            group_by:
+                              duration: .1h
+                          - entity: binary_sensor.heating_state
+                            transform: "return x === 'on' ? 1 : 0;"
+                            yaxis_id: second
+                            curve: stepline
+                            stroke_width: 0
+                            opacity: 0.2
+                            color: "#f00"
+                            type: area
+                            show:
+                              in_header: false
+
               - type: row ###### radialBar
                 cards:
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-0
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-0
                     entity: sensor.processor_use_percent
                     tap_action:
                       action: more-info
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-2 order-md-1
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-2 order-md-1
                     entity: sensor.memory_use_percent
                     tap_action:
                       action: more-info
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-4 order-md-2
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-4 order-md-2
                     entity: sensor.disk_use_percent
                     tap_action:
                       action: more-info
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-1 order-md-3
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-1 order-md-3
                     entity: sensor.nas_processor_use
                     tap_action:
                       action: more-info
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-3 order-md-4
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-3 order-md-4
                     entity: sensor.nas_memory_use
                     tap_action:
                       action: more-info
                   - type: custom:button-card
                     template:
                       - radialBar
-                    class: col-6 col-md-4 col-xl-2 px-2 pt-4 order-5
+                    class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-5
                     entity: sensor.nas_disk_use
                     tap_action:
                       action: more-info
@@ -469,7 +473,10 @@ cards:
             class: col-auto mb-md-5
             name: >
               <ha-icon icon="mdi:nas"></ha-icon> Server
-            tap_action: !include popup/footer_nas.yaml
+            # tap_action: !include popup/footer_nas.yaml
+            tap_action:
+              action: navigate
+              navigation_path: sub-servers
             template: footer
           - type: custom:button-card
             class: col-auto mb-md-5

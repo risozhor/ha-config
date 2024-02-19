@@ -238,8 +238,7 @@ tablet:
             color: rgba(255, 255, 255, 0.8) !important;
             padding: 0.2vw 0 2vw 0 !important;
             letter-spacing: normal !important;
-            width: 100%;
-          }
+            width: 100%;}
           /* portrait */
           @media screen and (max-width: 1200px) {
             h1 {
@@ -249,40 +248,17 @@ tablet:
           }
           /* phone */
           @media screen and (max-width: 767px) {
-            h1 {
-              /*font-size: 5.5vw !important;*/
-              line-height: 6vw !important;
-              margin: 2vw 0 0 0 !important;
-            }
+            h1 {line-height: 6vw !important; margin: 2vw 0 0 0 !important;}
           }
-
-    #################################################
-    #                                               #
-    #               SWIPE CARD MARGIN               #
-    #                                               #
-    #################################################
-
         $swipe-card$:
           .: |
-            div {
-              height: 100%;
-            }
-            .swiper-container {
-              margin: -1.5vw !important;
-              padding: 1.5vw !important;
-            }
+            div {height: 100%;}
+            .swiper-container {margin: -1.5vw !important; padding: 1.5vw !important;}
           horizontal-stack$:
             .: |
               hui-conditional-card {
                 margin: 0 0.15vh 0 0 !important;
               }
-
-
-    #################################################
-    #                                               #
-    #            SIDEBAR VERTICAL-STACK             #
-    #                                               #
-    #################################################
 
     grid-layout$hui-vertical-stack-card$: |
       #root {
@@ -292,6 +268,7 @@ tablet:
         min-height: calc(100vh - var(--header-height));
         justify-content: space-between;
       }
+
       /* phone */
       @media screen and (max-width: 767px) {
         #root {

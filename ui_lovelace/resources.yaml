@@ -25,7 +25,7 @@
 - url: /local/browser_mod_icon.js?v=0.5
   type: module
 
-- url: /local/fonts.css?v=1
+- url: /local/styles.css?v=2
   type: css
 - url: /hacsfiles/apexcharts-card/apexcharts-card.js
   type: module
@@ -33,6 +33,5 @@
   type: module
 - url: /hacsfiles/lovelace-climate-mode-entity-row/climate-mode-entity-row.js
   type: module
-
 # - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
 #   type: module

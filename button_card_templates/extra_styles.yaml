@@ -29,6 +29,7 @@ extra_styles:
       }
       return `
 
+
        /* * * * * * * * * * * * * * * * * *
         *                                 *
         *              LIGHT              *
@@ -227,11 +228,6 @@ extra_styles:
 
           /* magnification */
 
-
-
-
-
-          
           :host {
             --footer-portrait: 1.4;
             --footer-phone: 2.8;
