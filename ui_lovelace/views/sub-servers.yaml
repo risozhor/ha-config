@@ -1,0 +1,278 @@
+title: Servers
+theme: Backend-selected
+path: sub-servers
+icon: mdi:speedometer
+subview: true
+type: panel
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        class: h-100
+        card_mod:
+          style:
+            .h-100 {min-height: calc(100vh - var(--header-height));}
+        cards:
+          - type: entities #HOME ASSISTANT
+            class: col-12 col-md-4
+            title: Home Assistant
+            show_header_toggle: false
+            card_mod:
+              style: |
+                ha-card {border: none !important;}
+                ha-card #states {display: flex;flex-direction: column;}
+                #states {padding-bottom: 0;}
+                #states > * {margin: 0!important;}
+                #states > :last-child {margin-bottom: 0px;margin-top: auto!important;}
+            entities:
+              - type: custom:mushroom-template-card
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                primary: >-
+                  {% if state_attr('update.home_assistant_core_update','installed_version') ==
+                  state_attr('update.home_assistant_core_update','latest_version') -%} Installed
+                  version: {{state_attr('update.home_assistant_core_update','latest_version')}}
+                  {%- else -%}Update to
+                  {{state_attr('update.home_assistant_core_update','installed_version') }}
+                  avalable{%- endif %}
+                icon: mdi:home-assistant
+                entity: sensor.nas_ha_installed_version
+                icon_color: >-
+                  {% if state_attr('update.home_assistant_core_update','installed_version') ==
+                  state_attr('update.home_assistant_core_update','latest_version') -%}green {%-
+                  else -%} orange {%- endif %}
+              - entity: sensor.maria_db_size
+                name: DB Size
+                icon: mdi:database
+              - entity: sensor.last_boot
+                name: Last Boot
+                icon: mdi:update
+              - type: custom:bar-card
+                width: 55%
+                height: 2em
+                decimal: 0
+                unit_of_measurement: "%"
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                entities:
+                  - entity: sensor.processor_use_percent
+                    name: Processor
+                    icon: mdi:chip
+                  - entity: sensor.memory_use_percent
+                    name: Memory
+                    icon: mdi:memory
+                  - entity: sensor.disk_use_percent
+                    name: Disk
+                    icon: mdi:harddisk
+              - type: custom:gap-card
+              - type: custom:mushroom-chips-card
+                card_mod:
+                  class: chipps
+                  style: |
+                    ha-card {
+                      --chip-border-width: 0;
+                      --chip-spacing: 0px;
+                    }
+                chips:
+                  - type: entity
+                    entity: update.home_assistant_core_update
+                    content_info: name
+                    tap_action:
+                      action: call-service
+                      service: homeassistant.restart
+                      target: {}
+                    icon: mdi:reload
+                    name: Restart
+                    use_entity_picture: false
+                  - type: entity
+                    entity: update.home_assistant_core_update
+                    content_info: name
+                    tap_action:
+                      action: call-service
+                      service: hassio.host_shutdown
+                      target: {}
+                    icon: mdi:power-plug-off
+                    name: Shutdown
+                    use_entity_picture: false
+          - type: entities # NAS
+            class: col-12 col-md-4
+            view_layout:
+              grid-area: nas
+            title: NAS
+            show_header_toggle: false
+            card_mod:
+              style: |
+                ha-card {border: none !important;}
+                ha-card #states {display: flex;flex-direction: column;}
+                #states {padding-bottom: 0;}
+                #states > * {margin: 0!important;}
+                #states > :last-child {margin-bottom: 0px;margin-top: auto!important;}
+            entities:
+              - type: custom:mushroom-template-card
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                primary: >-
+                  {% if (states.sensor.nas_ha_version.state ==
+                  states.sensor.nas_ha_installed_version.state) -%}Installed version: {{states.sensor.nas_ha_installed_version.state }}
+                  {%- else -%}Update to {{states.sensor.nas_ha_version.state }} avalable{%- endif %}
+                secondary: >-
+                  {% if (states.sensor.nas_ha_version.state != states.sensor.nas_ha_installed_version.state) -%}
+                  Installed version: {{states.sensor.nas_ha_installed_version.state }}
+                icon: mdi:home-assistant
+                entity: sensor.nas_ha_installed_version
+                icon_color: >-
+                  {% if (states.sensor.nas_ha_version.state ==
+                  states.sensor.nas_ha_installed_version.state) -%}green
+                  {%- else -%} orange {%- endif %}
+              - entity: sensor.nas_db_size
+                name: DB Size
+                icon: mdi:database
+              - entity: sensor.nas_last_boot
+                name: Last Boot
+                icon: mdi:update
+              - type: custom:bar-card
+                width: 55%
+                height: 2em
+                decimal: 0
+                unit_of_measurement: "%"
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                entities:
+                  - entity: sensor.nas_processor_use
+                    name: Processor
+                    icon: mdi:chip
+                  - entity: sensor.nas_memory_use
+                    name: Memory
+                    icon: mdi:memory
+                  - entity: sensor.nas_disk_use
+                    name: Disk
+                    icon: mdi:harddisk
+              - type: custom:gap-card
+              - type: custom:mushroom-chips-card
+                card_mod:
+                  class: chipps
+                  style: |
+                    ha-card {
+                      --chip-border-width: 0;
+                      --chip-spacing: 0px;
+                    }
+                chips:
+                  - type: conditional
+                    conditions:
+                      - condition: state
+                        entity: sensor.nas_addon_updates_count
+                        state_not: "0"
+                    chip:
+                      type: template
+                      tap_action:
+                        action: more-info
+                      entity: sensor.nas_updates_names
+                      icon_color: orange
+                      icon: mdi:update
+                      content: "{{states.sensor.nas_addon_updates_count.state}}"
+          - type: entities # NET
+            class: col-12 col-md-4
+            view_layout:
+              grid-area: hard
+            title: Network/Gateway
+            show_header_toggle: false
+            card_mod:
+              style: |
+                ha-card {border: none !important;}
+                ha-card #states {display: flex;flex-direction: column;}
+                #states {padding-bottom: 0;}
+                #states > * {margin: 0!important;}
+                #states > :last-child {margin-bottom: 0px;margin-top: auto!important;}
+            entities:
+              - type: custom:mushroom-template-card
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                primary: |-
+                  {% if states.sensor.socket_connections_2.state | int (0) != 0 %} 
+                  Connected to {{states.sensor.socket_connections_2.state -}}
+                  {% if states.sensor.socket_connections_2.state | int (0) > 0 %} socket
+                  {%- else %} sockets{%- endif %}
+                  {%- else %}Sockets disconected{%- endif %}
+                icon: mdi:check-network-outline
+                entity: sensor.socket_connections_2
+                icon_color: |-
+                  {% if states.sensor.socket_connections_2.state ==0  -%}red
+                  {%- else -%}blue{%- endif %}
+                tap_action:
+                  action: url
+                  url_path: http://zigstargw.local
+              - entity: sensor.uptime_2
+                name: Gateway Uptime
+                icon: mdi:clock
+              - entity: sensor.cpu_temperature
+                name: Gateway Temp
+                icon: mdi:coolant-temperature
+              - entity: sensor.speedtest_ping
+                name: Ping
+                icon: mdi:speedometer
+              - type: custom:gap-card
+              - type: custom:apexcharts-card
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+                layout: minimal
+                locale: ua
+                graph_span: 24h
+                show:
+                  loading: false
+                apex_config:
+                  legend:
+                    show: true
+                  plotOptions:
+                    area:
+                      fillTo: end
+                  grid:
+                    padding:
+                      top: -15
+                  fill:
+                    type: gradient
+                    gradient:
+                      type: vertical
+                      opacityFrom: 0.8
+                      opacityTo: 0
+                      stops:
+                        - 0
+                        - 99
+                        - 100
+                  stroke:
+                    width: 4
+                  tooltip:
+                    style:
+                      fontSize: 14px
+                    x:
+                      format: dddd HH:mm
+                  chart:
+                    height: 100px
+                    offsetY: -20px
+                  xaxis:
+                    crosshairs:
+                      show: false
+                series:
+                  - entity: sensor.speedtest_download
+                    name: Download
+                    color: "#385581"
+                    type: area
+                    fill_raw: last
+                    group_by:
+                      func: avg
+                      duration: 1h
+                  - entity: sensor.speedtest_upload
+                    name: Upload
+                    color: "#f85581"
+                    type: area
+                    fill_raw: last
+                    group_by:
+                      func: avg
+                      duration: 1h
