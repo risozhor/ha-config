@@ -473,7 +473,6 @@ cards:
             class: col-auto mb-md-5
             name: >
               <ha-icon icon="mdi:nas"></ha-icon> Server
-            # tap_action: !include popup/footer_nas.yaml
             tap_action:
               action: navigate
               navigation_path: sub-servers
@@ -499,7 +498,7 @@ cards:
                     ]]]
             name: >
               <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Updates
-            # tap_action: !include popup/footer_updates.yaml
+
             tap_action:
               action: navigate
               navigation_path: /config/updates

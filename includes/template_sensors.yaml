@@ -12,8 +12,8 @@
           <font color='#6a7377'><b>
           {% if strptime(states('sensor.date'), '%Y-%m-%d').day != None %}
           {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
-          {% set months = ['January', 'Februari', 'Mars', 'April', 'Maj', 'Juni',
-          'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'] %}
+          {% set months = ['January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'] %}
             {{ days[now().weekday()] }} {{ strptime(states('sensor.date'), '%Y-%m-%d').day }} {{ months[now().month-1] }}
           {% endif %}
           </b></font>

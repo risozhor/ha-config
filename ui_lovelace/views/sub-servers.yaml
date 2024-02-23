@@ -8,10 +8,10 @@ cards:
   - type: custom:bootstrap-grid-card
     cards:
       - type: row
-        class: h-100
+        class: fullheight
         card_mod:
-          style:
-            .h-100 {min-height: calc(100vh - var(--header-height));}
+          style: |
+            .fullheight {min-height: calc(100vh - var(--header-height));}
         cards:
           - type: entities #HOME ASSISTANT
             class: col-12 col-md-4

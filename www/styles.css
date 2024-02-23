@@ -1,1 +1,1 @@
-.h-100 {min-height: calc(100vh - var(--header-height));}
+.fullheight {min-height: calc(100vh - var(--header-height));}
