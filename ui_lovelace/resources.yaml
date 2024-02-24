@@ -1,6 +1,6 @@
 - url: /local/community/battery-state-card/battery-state-card.js
   type: module
-- url: /local/community/bootstrap-grid-card/bootstrap-grid-card.js
+- url: /local/community/bootstrap-grid-card/bootstrap-grid-card.js?v=2.0.2.5
   type: module
 - url: /local/community/hass-hue-icons/hass-hue-icons.js
   type: module
@@ -20,13 +20,13 @@
 #   type: module
 - url: /local/community/button-card/button-card.js
   type: module
-- url: /local/marked.min.js?v=4.3.0
-  type: module
+# - url: /local/marked.min.js?v=4.3.0
+#   type: module
 - url: /local/browser_mod_icon.js?v=0.5
   type: module
 
-- url: /local/styles.css?v=2
-  type: css
+# - url: /local/styles.css?v=2
+#   type: css
 - url: /hacsfiles/apexcharts-card/apexcharts-card.js
   type: module
 - url: /local/community/bar-card/bar-card.js
