@@ -10,7 +10,6 @@ footer:
   size: 2vw
   show_icon: false
   color: "#9da0a2"
-
   styles:
     card:
       - color: "#97989c"
@@ -20,7 +19,6 @@ footer:
       - padding: 0 0 0.05vw 0
       - overflow: visible
       - --mdc-ripple-color: rgba(0, 0, 0, 0.8)
-
   tap_action:
     haptic: medium
   hold_action:

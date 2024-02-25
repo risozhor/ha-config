@@ -4,10 +4,6 @@ home:
   # tap_action:
   #   action: none
   extra_styles: >
-    hui-vertical-stack-card$ bootstrap-grid-card$:last-child {margin-top: auto;}
-    bootstrap-grid-card$:last-child {margin-top: auto;}
-    bootstrap-grid-card$ {margin-top: auto;}
-    $bootstrap-grid-card {margin-top: auto;}
     #card {
       padding: 0;
       border-width: 0;

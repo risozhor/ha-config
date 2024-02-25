@@ -497,7 +497,6 @@ cards:
                             ]]]
                     name: >
                       <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Updates
-
                     tap_action:
                       action: navigate
                       navigation_path: /config/updates
