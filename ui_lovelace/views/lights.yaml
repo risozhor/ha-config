@@ -8,133 +8,240 @@ cards:
     cards:
       - type: row
         cards:
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Livingroom
+          - type: col
+            class: col-md-6 col-lg-4
             cards:
-              - type: custom:button-card
-                entity: light.livingroom_lights
-                name: Ceil Lights
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: light.livingroom_table_background
-                name: Table
-                template:
-                  - light
-                  - icon_lightstrip
-              - type: custom:button-card
-                entity: light.gyver
-                name: Lava Lamp
-                double_tap_action:
-                  action: more-info
-                hold_action:
-                  action: more-info
-                template:
-                  - light
-                  - icon_lava
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Kitchen
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Livingroom
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.livingroom_lights
+                    name: Ceil Lights
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.livingroom_table_background
+                    name: Table
+                    template:
+                      - light
+                      - icon_lightstrip
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.gyver
+                    name: Lava Lamp
+                    double_tap_action:
+                      action: more-info
+                    hold_action:
+                      action: more-info
+                    template:
+                      - light
+                      - icon_lava
+          - type: col
+            class: col-md-6 col-lg-4
             cards:
-              - type: custom:button-card
-                entity: light.kitchen_ceiling_lights
-                name: Ceiling Lights
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: light.kitchen_strip
-                name: Strip
-                template:
-                  - light
-                  - icon_lightstrip
-                  - loader
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Hallway
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Kitchen
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.kitchen_ceiling_lights
+                    name: Ceiling Lights
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.kitchen_strip
+                    name: Strip
+                    template:
+                      - light
+                      - icon_lightstrip
+                      - loader
+          - type: col
+            class: col-md-6 col-lg-4
             cards:
-              - type: custom:button-card
-                entity: light.0x00178801030318a1
-                name: Hallway Lamp
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: switch.terrace_spotlights
-                name: Terrace
-                template:
-                  - base
-                  - icon_ceiling-flush
-                  - loader
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Bedroom
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Hallway
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4
+                    entity: light.0x00178801030318a1
+                    name: Hallway Lamp
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4
+                    entity: switch.terrace_spotlights
+                    name: Terrace
+                    template:
+                      - base
+                      - icon_ceiling-flush
+                      - loader
+          - type: col
+            class: col-md-6 col-lg-2
             cards:
-              - type: custom:button-card
-                entity: light.kitchen_ceiling_lights
-                name: Ceil
-                template:
-                  - light
-                  - icon_bedroomlight
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Guest Zone
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Bedroom
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-8
+                    entity: light.kitchen_ceiling_lights
+                    name: Ceil
+                    template:
+                      - light
+                      - icon_bedroomlight
+          - type: col
+            class: col-md-6 col-lg-2
             cards:
-              - type: custom:button-card
-                entity: light.guestroom_color_bulb
-                name: Guests
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: light.main_corridor_light
-                name: Corridor
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: light.dining_room_stripe_3
-                name: Arch
-                template:
-                  - light
-                  - icon_arch
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Restroom
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Kids Room
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-8
+                    entity: light.kidsroom_wled
+                    name: WLED
+                    template:
+                      - light
+                      - icon_lightstrip
+          - type: col
+            class: col-md-6 col-lg-4
             cards:
-              - type: custom:button-card
-                entity: light.shelly1
-                name: Bath
-                template:
-                  - light
-                  - icon_hue
-              - type: custom:button-card
-                entity: light.toilet_light
-                name: Toilet
-                template:
-                  - light
-                  - icon_bathroom
-          - type: grid
-            class: col-md-6 col-lg-4 px-4
-            title: Outdoor
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Guest Zone
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.guestroom_color_bulb
+                    name: Guests
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.main_corridor_light
+                    name: Corridor
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.dining_room_stripe_3
+                    name: Arch
+                    template:
+                      - light
+                      - icon_arch
+          - type: col
+            class: col-md-6 col-lg-4
             cards:
-              - type: custom:button-card
-                entity: switch.yard_light
-                name: Yard
-                template:
-                  - light
-                  - icon_spot
-              - type: custom:button-card
-                entity: light.outdoor_floodlight
-                name: Pathway
-                template:
-                  - light
-                  - icon_wall_runner
-              - type: custom:button-card
-                entity: switch.backyard_light
-                name: Backyard
-                template:
-                  - light
-                  - icon_wall_flood
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Restroom
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.shelly1
+                    name: Bath
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.toilet_light
+                    name: Toilet
+                    template:
+                      - light
+                      - icon_bathroom
+          - type: col
+            class: col-md-6 col-lg-4
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Outdoor
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: switch.yard_light
+                    name: Yard
+                    template:
+                      - light
+                      - icon_spot
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.outdoor_floodlight
+                    name: Pathway
+                    template:
+                      - light
+                      - icon_wall_runner
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: switch.backyard_light
+                    name: Backyard
+                    template:
+                      - light
+                      - icon_wall_flood

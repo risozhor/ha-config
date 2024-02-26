@@ -41,6 +41,7 @@
             states.light.livingroom_table_background,
             states.light.wled,
             states.light.gyver,
+            states.light.kidsroom_wled,
             states.light.dining_room_stripe_3,
             states.light.0x00178801030318a1,
             states.light.guestroom_color_bulb,

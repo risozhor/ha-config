@@ -165,7 +165,7 @@ extra_styles:
         /* phone */
         @media screen and (max-width: 991px) {
           #name, #state {
-            font-size: 3.35vw;
+            font-size: 2vw;
           }
         }
         @media screen and (max-width: 767px) {

@@ -10,7 +10,8 @@
     - service: light.turn_on
       data:
         brightness_pct: 1
-        effect: Fire 2012
+        # effect: Fire 2012
+        effect: Fire
       target:
         entity_id: light.gyver
     - service: timer.start
