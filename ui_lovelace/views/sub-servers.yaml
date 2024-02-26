@@ -64,35 +64,30 @@ cards:
                   - entity: sensor.disk_use_percent
                     name: Disk
                     icon: mdi:harddisk
-              - type: custom:mushroom-chips-card
+              - type: custom:stack-in-card
+                mode: horizontal
                 card_mod:
-                  class: chipps
                   style: |
-                    ha-card {
-                      --chip-border-width: 0;
-                      --chip-spacing: 0px;
-                    }
-                chips:
-                  - type: entity
-                    entity: update.home_assistant_core_update
-                    content_info: name
+                    ha-card {border: none !important;border-radius: 0; padding-bottom: 15px;}
+                cards:
+                  - type: custom:button-card
+                    class: col-auto mb-md-5
+                    template: footer
+                    name: >
+                      <ha-icon icon="mdi:reload"></ha-icon> Restart
                     tap_action:
                       action: call-service
                       service: homeassistant.restart
                       target: {}
-                    icon: mdi:reload
-                    name: Restart
-                    use_entity_picture: false
-                  - type: entity
-                    entity: update.home_assistant_core_update
-                    content_info: name
+                  - type: custom:button-card
+                    class: col-auto mb-md-5
+                    template: footer
+                    name: >
+                      <ha-icon icon="mdi:power-plug-off"></ha-icon> Off
                     tap_action:
                       action: call-service
                       service: hassio.host_shutdown
                       target: {}
-                    icon: mdi:power-plug-off
-                    name: Shutdown
-                    use_entity_picture: false
           - type: entities # NAS
             class: col-12 col-md-4
             view_layout:
@@ -149,28 +144,25 @@ cards:
                   - entity: sensor.nas_disk_use
                     name: Disk
                     icon: mdi:harddisk
-              - type: custom:mushroom-chips-card
+              - type: custom:stack-in-card
+                mode: horizontal
                 card_mod:
-                  class: chipps
                   style: |
-                    ha-card {
-                      --chip-border-width: 0;
-                      --chip-spacing: 0px;
-                    }
-                chips:
+                    ha-card {border: none !important;border-radius: 0; padding-bottom: 15px;}
+                cards:
                   - type: conditional
                     conditions:
-                      - condition: state
+                      - condition: numeric_state
                         entity: sensor.nas_addon_updates_count
-                        state_not: "0"
-                    chip:
-                      type: template
+                        above: 0
+                    card:
+                      type: custom:button-card
+                      class: col-auto mb-md-5
+                      entity: sensor.nas_updates_names
+                      template: footer
+                      name: NAS Update Ready
                       tap_action:
                         action: more-info
-                      entity: sensor.nas_updates_names
-                      icon_color: orange
-                      icon: mdi:update
-                      content: "{{states.sensor.nas_addon_updates_count.state}}"
           - type: entities # NET
             class: col-12 col-md-4
             view_layout:
