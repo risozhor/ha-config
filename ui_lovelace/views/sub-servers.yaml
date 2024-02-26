@@ -68,7 +68,7 @@ cards:
                 mode: horizontal
                 card_mod:
                   style: |
-                    ha-card {border: none !important;border-radius: 0; padding-bottom: 15px;}
+                    ha-card {border: none !important;border-radius: 0; padding: 15px 0;}
                 cards:
                   - type: custom:button-card
                     class: col-auto mb-md-5
@@ -148,7 +148,7 @@ cards:
                 mode: horizontal
                 card_mod:
                   style: |
-                    ha-card {border: none !important;border-radius: 0; padding-bottom: 15px;}
+                    ha-card {border: none !important;border-radius: 0; padding: 15px 0;}
                 cards:
                   - type: conditional
                     conditions:
@@ -240,7 +240,7 @@ cards:
                     x:
                       format: dddd HH:mm
                   chart:
-                    height: 100px
+                    height: 150px
                     offsetY: -20px
                   xaxis:
                     crosshairs:
