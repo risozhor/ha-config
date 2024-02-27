@@ -163,6 +163,12 @@ cards:
                       name: NAS Update Ready
                       tap_action:
                         action: more-info
+                      custom_fields:
+                        notification: >
+                          [[[
+                            let count = states['sensor.nas_addon_updates_count'];
+                            return (count.state).toString();
+                          ]]]
           - type: entities # NET
             class: col-12 col-md-4
             view_layout:
