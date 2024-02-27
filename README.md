@@ -1,6 +1,7 @@
 <!-- Shield -->
 [ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.2-blue.svg
 [ha-server]: https://img.shields.io/badge/Raspberry%20PI%204-RAM%204%20Gb-red.svg
+[nas]: https://img.shields.io/badge/Raspberry%20CM4-RAM%204%20Gb-orange.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.35-yellow.svg
 [ring-alarm-shield]: https://img.shields.io/badge/Security%20Kit-Ring-blue.svg
@@ -42,10 +43,10 @@ You can support me:
 |:---|:---|
 | Current Home Assistant that I use | [![HA Version][ha-version-shield]][home-assistant] |
 | Current server based on | [![HA server][ha-server]][home-assistant] |
+| NAS & Plex | [![HA server][nas]][home-assistant] |
 | Current Zigbee2MQTT that I use | [![z2m Version][z2m-shield]][z2m-link] |
 | Alarm kit | ![alarmkit][ring-alarm-shield] |
 | Zigbee gateway | ![zgw][zgw-shield] |
-| - | - |
 
 ---
 
