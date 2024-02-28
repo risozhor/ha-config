@@ -31,7 +31,7 @@ cards:
                   state_attr('update.home_assistant_core_update','latest_version') -%} Installed
                   version: {{state_attr('update.home_assistant_core_update','latest_version')}}
                   {%- else -%}Update to
-                  {{state_attr('update.home_assistant_core_update','installed_version') }}
+                  {{state_attr('update.home_assistant_core_update','latest_version') }}
                   avalable{%- endif %}
                 icon: mdi:home-assistant
                 entity: sensor.nas_ha_installed_version
