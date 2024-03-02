@@ -1,77 +1,12 @@
 [
   {
+    "name": "Бісептол",
+    "id": "349bb93566cb4384af2e5e7a6764b4e0",
+    "complete": false
+  },
+  {
     "name": "CR2450",
     "id": "e038f2640d2c4cbd832ddbaa7800330f",
-    "complete": false
-  },
-  {
-    "name": "LR41",
-    "id": "94463a272beb4bcdbc37d72c8488b7cf",
-    "complete": false
-  },
-  {
-    "name": "Бісопролол",
-    "id": "b75071f8d6a54c5e9af17213d85d47c1",
-    "complete": false
-  },
-  {
-    "name": "Бісептот100",
-    "id": "479fb7e88e1b42f98a705465625d665d",
-    "complete": false
-  },
-  {
-    "name": "Каптопрес",
-    "id": "de5203318c4d446fae45eab1882cce1c",
-    "complete": false
-  },
-  {
-    "name": "Фармадипін",
-    "id": "ee24766185c84053aa220771b39a704a",
-    "complete": false
-  },
-  {
-    "name": "Фарш",
-    "id": "ef1042ccf3d54fd9a9d16865be230adf",
-    "complete": false
-  },
-  {
-    "name": "Гриби",
-    "id": "765fbadc636148a4b4d6d494fad2fd25",
-    "complete": false
-  },
-  {
-    "name": "Тісто",
-    "id": "55dd08780cb7440f8b499d91c2fd5f6c",
-    "complete": false
-  },
-  {
-    "name": "Сир",
-    "id": "3f5a552823224639aa98d629de2cbca6",
-    "complete": false
-  },
-  {
-    "name": "Яйця",
-    "id": "9081c72891bc403aa8788c8555924cd4",
-    "complete": false
-  },
-  {
-    "name": "Молоко",
-    "id": "c9b3bb95005245ca9d6e3b7b676ba4ae",
-    "complete": false
-  },
-  {
-    "name": "Салат",
-    "id": "e08bfaa6d79f4bbdbeaa448c437e4697",
-    "complete": false
-  },
-  {
-    "name": "Майонез",
-    "id": "175e7aa56b3a409ebbf52bcff1b5fba7",
-    "complete": false
-  },
-  {
-    "name": "Кетчуп",
-    "id": "7c83b7c7bd1b4df5904f0abd286118fa",
     "complete": false
   }
 ]

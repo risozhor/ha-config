@@ -120,7 +120,8 @@ cards:
             entity: binary_sensor.hallway_presence_sensor_presence
             name: Hallway
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors
@@ -131,7 +132,8 @@ cards:
             entity: binary_sensor.guestroom_motion_sensor_occupancy
             name: Guestroom
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors
@@ -142,7 +144,8 @@ cards:
             entity: binary_sensor.dining_room_motion_sensor_occupancy
             name: Diningroom
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors
@@ -153,7 +156,8 @@ cards:
             entity: binary_sensor.outdoor_motion_sensor_occupancy
             name: Pathway
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors
@@ -164,7 +168,8 @@ cards:
             entity: binary_sensor.0x00158d000457e83c_occupancy
             name: Yard
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors

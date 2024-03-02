@@ -74,8 +74,8 @@ climate:
     default_preset: Home
     preset:
       - name: Home
-        default_target_temperature_low: 16.5
+        default_target_temperature_low: 17.5
       - name: sleep
-        default_target_temperature_low: 14.0
+        default_target_temperature_low: 15.5
       - name: away
         default_target_temperature_low: 14
