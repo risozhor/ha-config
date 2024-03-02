@@ -126,7 +126,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.guestroom_motion_sensor_occupancy
@@ -138,7 +137,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.dining_room_motion_sensor_occupancy
@@ -150,7 +148,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.outdoor_motion_sensor_occupancy
@@ -162,7 +159,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.0x00158d000457e83c_occupancy
@@ -174,7 +170,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.backyard_motion_sensor_occupancy
@@ -185,7 +180,6 @@ cards:
             template:
               - sensors
               - icon_walk
-              - loader
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: switch.guestroom_plug_2
