@@ -144,7 +144,6 @@ tablet:
   ####################################################
 
   card-mod-theme: tablet
-
   card-mod-root: |
     #view {background: url('/local/background.png');background-size: cover;}
     paper-tab ha-icon:after {
@@ -210,127 +209,16 @@ tablet:
         {% endif %}
       {% endif %}
       }
-
   card-mod-view-yaml: |
     .: |
       hui-view {
         background: none !important;
       }
-
-    #################################################
-    #                                               #
-    #              GRID CARD HEADINGS               #
-    #                                               #
-    #################################################
-
-    grid-layout$:
-      hui-grid-card:
-        .: |
-          hui-grid-card {
-            padding-bottom: 1vw;
-          }
-        $: |
-          /* default */
-          h1 {
-            font-size: 2.5vw !important;
-            line-height: 0 !important;
-            font-weight: 600 !important;
-            color: rgba(255, 255, 255, 0.8) !important;
-            padding: 0.2vw 0 2vw 0 !important;
-            letter-spacing: normal !important;
-            width: 100%;}
-          /* portrait */
-          @media screen and (max-width: 1200px) {
-            h1 {
-              /*font-size: 3.3vw !important;*/
-              line-height: 1.1vw !important;
-            }
-          }
-          /* phone */
-          @media screen and (max-width: 767px) {
-            h1 {line-height: 6vw !important; margin: 2vw 0 0 0 !important;}
-          }
-        $swipe-card$:
-          .: |
-            div {height: 100%;}
-            .swiper-container {margin: -1.5vw !important; padding: 1.5vw !important;}
-          horizontal-stack$:
-            .: |
-              hui-conditional-card {
-                margin: 0 0.15vh 0 0 !important;
-              }
-
-    grid-layout$hui-vertical-stack-card$: |
-      #root {
-        background-color: rgba(0, 0, 0, 0.06);
-        border-radius: 0;
-        border-right: 0.1vw solid rgba(58, 69, 73, 0.2);
-        min-height: calc(100vh - var(--header-height));
-        justify-content: space-between;
-      }
-
-      /* phone */
-      @media screen and (max-width: 767px) {
-        #root {
-          background-color: rgba(0,0,0,0);
-          border-right: none;
-          min-height: 100%;
-          margin-left: -0.8%;
-          margin-bottom: -6%;
-        }
-      }
-
-    #################################################
-    #                                               #
-    #             SIDEBAR LAUNDRY TIMER             #
-    #                                               #
-    #################################################
-
-    grid-layout$hui-vertical-stack-card$hui-conditional-card:
-      .: |
-        hui-conditional-card {
-          display: flex;
-          justify-content: center;
-        }
-        /* phone */
-        @media screen and (max-width: 767px) {
-          hui-conditional-card > button-card {
-            zoom: 250%;
-            width: 100%;
-            filter: contrast(85%);
-          }
-        }
-
     #################################################
     #                                               #
     #                    FOOTER                     #
     #                                               #
     #################################################
-
-    grid-layout$horizontal-stack:
-      $: |
-        #root {
-          flex-wrap: wrap;
-          justify-content: center;
-          overflow: visible;
-          margin-top: -1.95vw !important;
-          padding-bottom: 2.5em;
-        }
-        @media screen and (min-width: 1200px) {
-          #root {
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            margin-top: -1.6vh;
-            padding-bottom: 0;
-          }
-        }
-        /* phone */
-        @media screen and (max-width: 767px) {
-          #root {
-            padding-top: 4vw !important;
-          }
-        }
-
   card-mod-card: |
     .header .card-header {
       letter-spacing: 0.005em;
@@ -340,11 +228,9 @@ tablet:
       line-height: initial;
       cursor: default;
     }
-
     .content .card-content {
       padding: var(--tablet-popup-content-padding);
     }
-
     /* * * * * * * * * * * * * * * * * *
       *                                 *
       *         CUSTOM BAR CARD         *
@@ -355,11 +241,9 @@ tablet:
       padding-left: 0.25em;
       letter-spacing: normal;
     }
-
     .type-custom-bar-card bar-card-iconbar {
       padding-left: 0.23em;
     }
-
     .type-custom-bar-card bar-card-value {
       font-size: 0.9em;
       font-weight: 400;
@@ -368,48 +252,39 @@ tablet:
       text-shadow: none;
       margin-right: auto;
     }
-
     .type-custom-bar-card bar-card-backgroundbar {
       background: none;
     }
-
     .type-custom-bar-card bar-card-background {
       background: radial-gradient(circle, rgba(52, 57, 58, 0.1) 0%, rgba(17, 18, 18, 0.2) 75%);
       box-shadow: inset 0 0 25px #00000045;
       border-radius: 0.3em;
       overflow: hidden;
     }
-
   card-mod-more-info-yaml: |
     .: |
       :host {
         --ha-card-border-width: 0;
       }
-
       ha-dialog {
         --vertical-align-dialog: var(--tablet-popup-align-dialog) !important;
         --dialog-surface-margin-top: var(--tablet-popup-margin-top) !important;
       }
-
       ha-dialog > div:focus {
         outline: none;
       }
-
       ha-dialog > div.content > div.container {
         padding: 0 !important;
       }
-
       ha-dialog-header {
         font-family: var(--primary-font-family);
         background-color: var(--tablet-popup-header-color);
         border-bottom: var(--tablet-popup-border-style);
       }
-
     ha-dialog-header$header: |
       div.header-bar {
         padding: 10px 17px 8px 17px;
       }
-
     ha-dialog$: |
       div.mdc-dialog__surface {
         background-color: var(--popup-background-color) !important;

@@ -8,8 +8,8 @@
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
-- url: /local/community/lovelace-layout-card/layout-card.js
-  type: module
+# - url: /local/community/lovelace-layout-card/layout-card.js
+#   type: module
 - url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
 # - url: /local/community/person-entity-card/person-entity-card-bundle.js
