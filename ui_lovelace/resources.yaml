@@ -8,12 +8,8 @@
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
-# - url: /local/community/lovelace-layout-card/layout-card.js
-#   type: module
 - url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
-# - url: /local/community/person-entity-card/person-entity-card-bundle.js
-#   type: module
 # - url: /local/community/ha-energy-overview-card/energy-overview-card.js
 #   type: module
 - url: /local/community/button-card/button-card.js
@@ -26,5 +22,3 @@
   type: module
 - url: /hacsfiles/lovelace-climate-mode-entity-row/climate-mode-entity-row.js
   type: module
-# - url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
-#   type: module
