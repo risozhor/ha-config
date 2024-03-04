@@ -1,12 +1,5 @@
 button_card_templates: !include_dir_merge_named button_card_templates
-
 background: var(--background-image)
-# swipe_nav:
-#   swipe_amount: 30
-#   wrap: true
-#   animate: swipe
-#   prevent_default: true
-
 views:
   - !include ui_lovelace/views/home.yaml
   # - !include ui_lovelace/views/security.yaml
