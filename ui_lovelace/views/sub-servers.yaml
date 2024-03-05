@@ -204,7 +204,7 @@ cards:
               - entity: sensor.uptime_2
                 name: Gateway Uptime
                 icon: mdi:clock
-              - entity: sensor.cpu_temperature
+              - entity: sensor.esp_temperature
                 name: Gateway Temp
                 icon: mdi:coolant-temperature
               - entity: sensor.speedtest_ping

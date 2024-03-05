@@ -377,7 +377,6 @@ cards:
                             return 'ready';
                         }
                       ]]]
-
               - type: row
                 cards:
                   - type: custom:button-card
