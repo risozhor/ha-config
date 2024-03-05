@@ -21,4 +21,4 @@ views:
   - !include ui_lovelace/views/sub-router.yaml
   - !include ui_lovelace/views/sub-servers.yaml
   - !include ui_lovelace/views/todo.yaml
-  # - !include ui_lovelace/views/animatedicons.yaml
+  # - !include ui_lovelace/views/test.yaml
