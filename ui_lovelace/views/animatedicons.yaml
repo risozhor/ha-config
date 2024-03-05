@@ -6,243 +6,509 @@ visible:
 type: panel
 cards:
   - type: custom:bootstrap-grid-card
+
     cards:
       - type: row
         cards:
           - type: col
-            class: col-md-6 col-lg-4
+            class: col-12 fullheight space-between
             cards:
               - type: row
                 cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Livingroom
-              - type: row
+                  - type: vertical-stack #sidebar
+                    class: col-12 col-md-4 col-lg-3
+                    cards:
+                      - type: custom:button-card
+                        entity: sensor.template_sidebar
+                        template: sidebar
+
+                  - type: col #main
+                    class: col-12 col-md-8 col-lg-9
+                    cards:
+                      - type: row ###### chips
+                        cards:
+                          - class: col-xs-12 mt-md-5
+                            type: custom:mushroom-chips-card
+                            card_mod:
+                              class: chipps
+                              style: |
+                                ha-card {
+                                  --chip-border-width: 0;
+                                  --chip-spacing: 0px;
+                                }
+                            chips:
+                              # - type: action
+                              #   tap_action:
+                              #     action: assist
+                              #     pipeline_id: preferred
+                              #   icon: mdi:chat
+                              #   icon_color: yellow
+                              - type: conditional
+                                conditions:
+                                  - entity: sensor.devices_with_low_battery
+                                    state_not: "0"
+                                chip:
+                                  type: template
+                                  icon_color: grey
+                                  icon: mdi:battery-alert
+                                  tap_action: !include popup/low_batteries.yaml
+                                  content: "{{int(states.sensor.devices_with_low_battery.state)}}"
+                                  entity: sensor.devices_with_low_battery
+                              - type: template
+                                icon_color: |-
+                                  {%- if is_state("person.risozhor", "home")
+                                  or is_state("person.maryna", "home")
+                                  or is_state("person.yaroslava", "home") -%}blue
+                                  {%- endif -%}
+                                icon: |-
+                                  {%- if is_state("person.risozhor", "home")
+                                  or is_state("person.maryna", "home")
+                                  or is_state("person.yaroslava", "home") -%}mdi:account-check
+                                  {% else%}mdi:account-cancel
+                                  {%- endif -%}
+                                double_tap_action:
+                                  action: none
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/users
+                                hold_action:
+                                  action: none
+                                content: ""
+                                entity: none
+                              - type: template
+                                icon_color: |-
+                                  {%set state = int(states.sensor.turned_on_lights.state)%}
+                                  {%if state == 0%}grey{%else%}yellow{%endif%}
+                                icon: mdi:lightbulb-multiple-outline
+                                double_tap_action:
+                                  action: none
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/lights
+                                hold_action:
+                                  action: none
+                                content: |
+                                  {%set state = int(states.sensor.turned_on_lights.state)%}
+                                  {%if state > 0%}{{int(states.sensor.turned_on_lights.state)}}{%endif%}
+                                entity: sensor.turned_on_light
+                              - type: template
+                                icon_color: |-
+                                  {%set state = int(states.sensor.opened_doors.state)%}
+                                  {%if state == 0%}grey{%else%}yellow{%endif%}
+                                icon: mdi:door-open
+                                double_tap_action:
+                                  action: none
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/doors
+                                hold_action:
+                                  action: none
+                                content: |-
+                                  {%set state = int(states.sensor.opened_doors.state)%}
+                                  {%if state > 0%}{{int(states.sensor.opened_doors.state)}}{%endif%}
+                                entity: sensor.opened_doors
+                              - type: conditional
+                                conditions:
+                                  - entity: sensor.opened_windows
+                                    state_not: "0"
+                                chip:
+                                  type: template
+                                  icon_color: |-
+                                    {%set state = int(states.sensor.opened_windows.state)%}
+                                    {%if state == 0%}grey{%else%}yellow{%endif%}
+                                  icon: mdi:window-open-variant
+                                  double_tap_action:
+                                    action: none
+                                  tap_action:
+                                    action: navigate
+                                    navigation_path: /lovelace/doors
+                                  hold_action:
+                                    action: none
+                                  content: "{{int(states.sensor.opened_windows.state)}}"
+                                  entity: sensor.opened_windows
+                              - type: template
+                                icon: mdi:devices
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/sensors
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                                content: ""
+                              - type: template
+                                icon: mdi:cctv
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/camera
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                                content: ""
+                              - type: weather
+                                entity: weather.home_2
+                                show_conditions: false
+                                show_temperature: false
+                                tap_action:
+                                  action: navigate
+                                  navigation_path: /lovelace/weather
+                              - type: conditional
+                                conditions:
+                                  - entity: sensor.ua_alarms
+                                    state_not: Safe
+                                chip:
+                                  type: template
+                                  entity: sensor.ua_alarms
+                                  card_mod:
+                                    style: |
+                                      ha-card {animation:pulse 1500ms infinite!important;}
+                                      @keyframes pulse{
+                                        0%{box-shadow:red 0 0 0 0;}
+                                        70%{box-shadow:#ff69b400 0 0 0 10px;}
+                                        100%{box-shadow:none;}
+                                      }
+                                  icon: >-
+                                    {%- if is_state("binary_sensor.teritorialna_gromada_air",
+                                    "on")%}mdi:cloud{%- elif
+                                    is_state("binary_sensor.teritorialna_gromada_artillery",
+                                    "on")%}mdi:tank{%- elif
+                                    is_state("binary_sensor.teritorialna_gromada_unknown","on")
+                                    %}mdi:check-circle{%- elif
+                                    is_state("binary_sensor.teritorialna_gromada_urban_fights","on")
+                                    %}mdi:pistol{%- elif is_state("binary_sensor.chemical",
+                                    "on")%}mdi:chemical-weapon{%- elif is_state("binary_sensor.nuclear",
+                                    "on") %}mdi:nuke{%- else %}mdi:shield-home{%- endif -%}
+                                  icon_color: red
+                                  content: "{{states.sensor.ua_alarms.state}} "
+                                  double_tap_action:
+                                    action: none
+                                  tap_action:
+                                    action: navigate
+                                    navigation_path: /lovelace/alerts
+                                  hold_action:
+                                    action: none
+                              - type: conditional
+                                conditions:
+                                  - condition: and
+                                    conditions:
+                                      - condition: numeric_state
+                                        entity: sensor.imap_gmail_aleks
+                                        above: 0
+                                      - condition: user
+                                        users:
+                                          - ca6b753fa3864510837d851649a752d3
+                                chip:
+                                  type: entity
+                                  icon_color: red
+                                  entity: sensor.imap_gmail_aleks
+                                  tap_action:
+                                    action: url
+                                    url_path: https://mail.google.com
+                                  hold_action:
+                                    action: none
+                                  double_tap_action:
+                                    action: none
+                      - type: row ###### mushrooms
+                        cards:
+                          - class: col-xs-6 col-lg-3 pt-2
+                            type: custom:mushroom-template-card
+                            fill_container: true
+                            primary: Hi,  {{user}}!
+                            secondary: |-
+                              {%- if is_state("person.risozhor", "home")
+                              or is_state("person.maryna", "home")
+                              or is_state("person.yaroslava", "home") -%}Somebody home
+                              {%- else -%}Nobody home{%- endif -%}
+                            icon: |-
+                              {%- if is_state( "person.risozhor" , "home")
+                              or is_state("person.maryna", "home")
+                              or is_state("person.yaroslava", "home") -%}mdi:floor-plan
+                              {%- else -%}mdi:home-remove-outline{%- endif -%}
+                            tap_action:
+                              action: navigate
+                              navigation_path: /lovelace/floorplan
+                            hold_action:
+                              action: navigate
+                              navigation_path: /lovelace/floorplan
+                            double_tap_action:
+                              action: navigate
+                              navigation_path: /lovelace/floorplan
+                            badge_icon: "{{state_attr('sensor.ua_alarms', 'icon') }}"
+                            picture: ""
+                            badge_color: |-
+                              {% if states('sensor.ua_alarms') != 'Safe' %}red 
+                              {% else %}green{% endif %}
+                            icon_color: |-
+                              {%- if is_state("person.risozhor", "home")
+                              or is_state("person.maryna", "home")
+                              or is_state("person.yaroslava", "home") -%}green
+                              {%- else -%}grey{%- endif -%}
+                          - class: col-xs-6 col-lg-3 pt-2
+                            type: custom:mushroom-template-card
+                            entity: weather.openweathermap
+                            layout: horizontal
+                            fill_container: true
+                            tap_action:
+                              action: more-info
+                            hold_action:
+                              action: none
+                            double_tap_action:
+                              action: none
+                            primary: >-
+                              {{state_attr('weather.openweathermap','temperature')|round}}°C,
+                              {{(states.weather.openweathermap.state)|capitalize}}
+                            secondary: >-
+                              Wind speed {{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6)
+                              | round(2) }} m/s
+
+                              Precipitation {{ state_attr('weather.openweathermap',
+                              'forecast')[0].precipitation_probability }}%
+                            icon: >-
+                              {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny {%
+                              elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny {% elif
+                              is_state("weather.openweathermap","clear-night") %}mdi:weather-night {% elif
+                              is_state("weather.openweathermap","Clear,night") %}mdi:weather-night {% elif
+                              is_state("weather.openweathermap","rainy") %}mdi:weather-rainy {% elif
+                              is_state("weather.openweathermap","snowy") %}mdi:weather-snowy {% elif
+                              is_state("weather.openweathermap","fogy") %}mdi:weather-fog {% elif
+                              is_state("weather.openweathermap","sleet") %}mdi:weather-partly-snowy-rainy {%
+                              elif is_state("weather.openweathermap","snowy-rainy") %}mdi:partly-snowy-rainy
+                              {% elif is_state("weather.openweathermap","wind") %}mdi:weather-windy {% elif
+                              is_state("weather.openweathermap","windy") %}mdi:weather-windy {% elif
+                              is_state("weather.openweathermap","cloudy") %}mdi:weather-cloudy {% elif
+                              is_state("weather.openweathermap","partly-cloudy-day")
+                              %}mdi:weather-partly-cloudy {% elif
+                              is_state("weather.openweathermap","partlycloudy") %}mdi:weather-partly-cloudy
+                              {% elif is_state("weather.openweathermap","partly-cloudy-night")
+                              %}mdi:weather-night-partly-cloudy {% elif
+                              is_state("weather.openweathermap","hail") %} mdi:weather-hail {% elif
+                              is_state("weather.openweathermap","lightning") %}mdi:weather-lightning {% elif
+                              is_state("weather.openweathermap","thunderstorm")
+                              %}mdi:weather-lightning-rainy {% endif %}
+                            icon_color: >-
+                              {% if is_state("weather.openweathermap","clear-day") %}#d4f000 {% elif
+                              is_state("weather.openweathermap","sunny") %}#d4f000 {% elif
+                              is_state("weather.openweathermap","clear-night") %}#023bab {% elif
+                              is_state("weather.openweathermap","Clear,night") %}#023bab {% elif
+                              is_state("weather.openweathermap","rainy") %}#00bfbc {% elif
+                              is_state("weather.openweathermap","snowy") %}#b6caf2 {% elif
+                              is_state("weather.openweathermap","fogy") %}#b6caf2 {% elif
+                              is_state("weather.openweathermap","sleet") %}#707580 {% elif
+                              is_state("weather.openweathermap","snowy-rainy") %}#707580 {% elif
+                              is_state("weather.openweathermap","wind") %}#9e0296 {% elif
+                              is_state("weather.openweathermap","windy") %}#9e0296 {% elif
+                              is_state("weather.openweathermap","cloudy") %}#7facad {% elif
+                              is_state("weather.openweathermap","partly-cloudy-day")%}#8996b0 {% elif
+                              is_state("weather.openweathermap","partlycloudy") %}#8996b0 {% elif
+                              is_state("weather.openweathermap","partly-cloudy-night")%}#7288b3 {% elif
+                              is_state("weather.openweathermap","hail") %}#02749e {% elif
+                              is_state("weather.openweathermap","lightning") %}#f09400 {% elif
+                              is_state("weather.openweathermap","thunderstorm") %}#e60000 {% endif %}
+                            multiline_secondary: true
+
+                          - class: col-xs-6 col-lg-3 pt-2
+                            type: custom:mushroom-template-card
+                            fill_container: true
+                            primary: Shopping List
+                            secondary: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}
+                              Click to see items
+                              {%- endif -%}
+                            icon: mdi:basket
+                            badge_icon: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}
+                              {%- if count < 10 -%}
+                              mdi:numeric-{{ count }}-circle
+                              {%- else -%}
+                              mdi:numeric-9-plus-circle
+                              {%- endif -%}
+                              {%- endif -%}
+                            entity: sensor.shopping_list
+                            badge_color: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}
+                              pink
+                              {%- endif -%}
+                            icon_color: "#ffb300"
+                            # tap_action: !include popup/shoppinglist.yaml
+                            tap_action:
+                              action: navigate
+                              navigation_path: /lovelace/shopping-list
+                          - class: col-xs-6 col-lg-3 pt-2
+                            type: custom:mushroom-template-card
+                            fill_container: true
+                            primary: Todo List
+                            secondary: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}Click to see items{%- endif -%}
+                            icon: mdi:clipboard-list
+                            badge_icon: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}
+                              {%- if count < 10 -%}mdi:numeric-{{ count }}-circle
+                              {%- else -%}numeric-9-plus-circle{%- endif -%}
+                              {%- endif -%}
+                            entity: sensor.todo_list_items_2
+                            badge_color: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}blue{%- endif -%}
+                            icon_color: |-
+                              {% set count = states(entity) | int(default=0) %}
+                              {%- if count > 0 -%}blue{%- endif -%}
+                            tap_action:
+                              action: navigate
+                              navigation_path: /lovelace/todo
+
+                      - type: row # charts
+                        cards:
+                          - type: vertical-stack
+                            class: col-xs-12 col-md-6 pt-2
+                            cards:
+                              - type: custom:apexcharts-card
+                                header:
+                                  show: false
+                                  title: ApexCharts-Card
+                                  show_states: false
+                                  colorize_states: true
+                                show:
+                                  loading: false
+                                card_mod:
+                                  style: |
+                                    ha-card {
+                                      border: none;
+                                    }
+                                apex_config:
+                                  tickAmount: 4
+                                  legend:
+                                    show: false
+                                  stroke:
+                                    width: 0
+                                  chart:
+                                    height: 200px
+                                  xaxis:
+                                    crosshairs:
+                                      show: false
+                                  yaxis:
+                                    - id: first
+                                      show: false
+                                      decimalsInFloat: 0
+                                    - id: second
+                                      opposite: true
+                                      show: false
+                                locale: ua
+                                graph_span: 12h
+                                experimental:
+                                  color_threshold: true
+                                series:
+                                  - entity: sensor.guestroom_motion_sensor_temperature
+                                    yaxis_id: first
+                                    name: Temperature
+                                    color_threshold:
+                                      - value: 13
+                                        color: blue
+                                      - value: 20
+                                        color: green
+                                      - value: 23
+                                        color: red
+                                    type: area
+                                    fill_raw: last
+                                    curve: smooth
+                                    group_by:
+                                      duration: .1h
+                                  - entity: binary_sensor.heating_state
+                                    transform: "return x === 'on' ? 1 : 0;"
+                                    yaxis_id: second
+                                    curve: stepline
+                                    stroke_width: 0
+                                    opacity: 0.2
+                                    color: "#f00"
+                                    type: area
+                                    show:
+                                      in_header: false
+
+                      - type: row ###### radialBar
+                        cards:
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-0
+                            entity: sensor.processor_use_percent
+                            tap_action:
+                              action: more-info
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-2 order-md-1
+                            entity: sensor.memory_use_percent
+                            tap_action:
+                              action: more-info
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-4 order-md-2
+                            entity: sensor.disk_use_percent
+                            tap_action:
+                              action: more-info
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-1 order-md-3
+                            entity: sensor.nas_processor_use
+                            tap_action:
+                              action: more-info
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-3 order-md-4
+                            entity: sensor.nas_memory_use
+                            tap_action:
+                              action: more-info
+                          - type: custom:button-card
+                            template:
+                              - radialBar
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-5
+                            entity: sensor.nas_disk_use
+                            tap_action:
+                              action: more-info
+              - type: row ###### footer
+                class: mt-auto
                 cards:
                   - type: custom:button-card
-                    class: col-4
-                    entity: light.livingroom_lights
-                    name: Ceil Lights
-                    template:
-                      - light
-                      - icon_hue
+                    class: col-auto mb-md-5
+                    name: >
+                      <ha-icon icon="mdi:nas"></ha-icon> Server
+                    tap_action:
+                      action: navigate
+                      navigation_path: sub-servers
+                    template: footer
                   - type: custom:button-card
-                    class: col-4
-                    entity: light.livingroom_table_background
-                    name: Table
-                    template:
-                      - light
-                      - icon_lightstrip
+                    class: col-auto mb-md-5
+                    name: >
+                      <ha-icon icon="mdi:router-network-wireless"></ha-icon> Router
+                    tap_action:
+                      action: navigate
+                      navigation_path: sub-router
+                    template: footer
                   - type: custom:button-card
-                    class: col-4
-                    entity: light.gyver
-                    name: Lava Lamp
-                    double_tap_action:
-                      action: more-info
-                    hold_action:
-                      action: more-info
-                    template:
-                      - light
-                      - icon_lava
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Kitchen
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.kitchen_ceiling_lights
-                    name: Ceiling Lights
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.kitchen_strip
-                    name: Strip
-                    template:
-                      - light
-                      - icon_lightstrip
-                      - loader
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Hallway
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.0x00178801030318a1
-                    name: Hallway Lamp
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4
-                    entity: switch.terrace_spotlights
-                    name: Terrace
-                    template:
-                      - base
-                      - icon_ceiling-flush
-                      - loader
-          - type: col
-            class: col-md-6 col-lg-2
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Bedroom
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kitchen_ceiling_lights
-                    name: Ceil
-                    template:
-                      - light
-                      - icon_bedroomlight
-          - type: col
-            class: col-md-6 col-lg-2
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Kids Room
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kidsroom_wled
-                    name: WLED
-                    template:
-                      - light
-                      - icon_lightstrip
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Guest Zone
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.guestroom_color_bulb
-                    name: Guests
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.main_corridor_light
-                    name: Corridor
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.dining_room_stripe_3
-                    name: Arch
-                    template:
-                      - light
-                      - icon_arch
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Restroom
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.shelly1
-                    name: Bath
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.toilet_light
-                    name: Toilet
-                    template:
-                      - light
-                      - icon_bathroom
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Outdoor
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: switch.yard_light
-                    name: Yard
-                    template:
-                      - light
-                      - icon_spot
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.outdoor_floodlight
-                    name: Pathway
-                    template:
-                      - light
-                      - icon_wall_runner
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: switch.backyard_light
-                    name: Backyard
-                    template:
-                      - light
-                      - icon_wall_flood
+                    class: col-auto mb-md-5
+                    entity: sensor.update_val
+                    styles:
+                      card:
+                        - display: >
+                            [[[
+                              if (entity.state == 0)
+                                return "none";
+                              return "flex";
+                            ]]]
+                    name: >
+                      <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Updates
+                    tap_action:
+                      action: navigate
+                      navigation_path: /config/updates
+                    custom_fields:
+                      notification: >
+                        [[[ return parseInt(entity?.state); ]]]
+                    template: footer

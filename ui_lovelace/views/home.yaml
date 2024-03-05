@@ -25,7 +25,7 @@ cards:
                     cards:
                       - type: row ###### chips
                         cards:
-                          - class: col-xs-12 mt-md-5
+                          - class: col-xs-12 mt-xxl-5
                             type: custom:mushroom-chips-card
                             card_mod:
                               class: chipps
@@ -209,8 +209,9 @@ cards:
                                     action: none
                       - type: row ###### mushrooms
                         cards:
-                          - class: col-xs-12 col-md-6 pt-2
+                          - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
+                            fill_container: true
                             primary: Hi,  {{user}}!
                             secondary: |-
                               {%- if is_state("person.risozhor", "home")
@@ -241,7 +242,7 @@ cards:
                               or is_state("person.maryna", "home")
                               or is_state("person.yaroslava", "home") -%}green
                               {%- else -%}grey{%- endif -%}
-                          - class: col-xs-12 col-md-6 pt-2
+                          - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
                             entity: weather.openweathermap
                             layout: horizontal
@@ -253,56 +254,60 @@ cards:
                             double_tap_action:
                               action: none
                             primary: >-
-                              Weather:
                               {{state_attr('weather.openweathermap','temperature')|round}}°C,
-                              {{(states.weather.openweathermap.state)|capitalize}},
-                              Wind speed {{ (state_attr('weather.openweathermap',
-                              'wind_speed')|float()/3.6) | round(2) }} m/s
+                              {{(states.weather.openweathermap.state)|capitalize}}
                             secondary: >-
+                              Wind speed {{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6)
+                              | round(2) }} m/s
+
                               Precipitation {{ state_attr('weather.openweathermap',
                               'forecast')[0].precipitation_probability }}%
                             icon: >-
-                              {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny
-                              {% elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny
-                              {% elif is_state("weather.openweathermap","clear-night") %}mdi:weather-night
-                              {% elif is_state("weather.openweathermap","Clear,night") %}mdi:weather-night
-                              {% elif is_state("weather.openweathermap","rainy") %}mdi:weather-rainy
-                              {% elif is_state("weather.openweathermap","snowy") %}mdi:weather-snowy
-                              {% elif is_state("weather.openweathermap","fogy") %}mdi:weather-fog
-                              {% elif is_state("weather.openweathermap","sleet") %}mdi:weather-partly-snowy-rainy
-                              {% elif is_state("weather.openweathermap","snowy-rainy") %}mdi:partly-snowy-rainy
-                              {% elif is_state("weather.openweathermap","wind") %}mdi:weather-windy
-                              {% elif is_state("weather.openweathermap","windy") %}mdi:weather-windy
-                              {% elif is_state("weather.openweathermap","cloudy") %}mdi:weather-cloudy
-                              {% elif is_state("weather.openweathermap","partly-cloudy-day") %}mdi:weather-partly-cloudy
-                              {% elif is_state("weather.openweathermap","partlycloudy") %}mdi:weather-partly-cloudy
-                              {% elif is_state("weather.openweathermap","partly-cloudy-night") %}mdi:weather-night-partly-cloudy
-                              {% elif is_state("weather.openweathermap","hail") %} mdi:weather-hail
-                              {% elif is_state("weather.openweathermap","lightning") %}mdi:weather-lightning
-                              {% elif is_state("weather.openweathermap","thunderstorm") %}mdi:weather-lightning-rainy
-                              {% endif %}
+                              {% if is_state("weather.openweathermap","clear-day") %}mdi:weather-sunny {%
+                              elif is_state("weather.openweathermap","sunny") %}mdi:weather-sunny {% elif
+                              is_state("weather.openweathermap","clear-night") %}mdi:weather-night {% elif
+                              is_state("weather.openweathermap","Clear,night") %}mdi:weather-night {% elif
+                              is_state("weather.openweathermap","rainy") %}mdi:weather-rainy {% elif
+                              is_state("weather.openweathermap","snowy") %}mdi:weather-snowy {% elif
+                              is_state("weather.openweathermap","fogy") %}mdi:weather-fog {% elif
+                              is_state("weather.openweathermap","sleet") %}mdi:weather-partly-snowy-rainy {%
+                              elif is_state("weather.openweathermap","snowy-rainy") %}mdi:partly-snowy-rainy
+                              {% elif is_state("weather.openweathermap","wind") %}mdi:weather-windy {% elif
+                              is_state("weather.openweathermap","windy") %}mdi:weather-windy {% elif
+                              is_state("weather.openweathermap","cloudy") %}mdi:weather-cloudy {% elif
+                              is_state("weather.openweathermap","partly-cloudy-day")
+                              %}mdi:weather-partly-cloudy {% elif
+                              is_state("weather.openweathermap","partlycloudy") %}mdi:weather-partly-cloudy
+                              {% elif is_state("weather.openweathermap","partly-cloudy-night")
+                              %}mdi:weather-night-partly-cloudy {% elif
+                              is_state("weather.openweathermap","hail") %} mdi:weather-hail {% elif
+                              is_state("weather.openweathermap","lightning") %}mdi:weather-lightning {% elif
+                              is_state("weather.openweathermap","thunderstorm")
+                              %}mdi:weather-lightning-rainy {% endif %}
                             icon_color: >-
-                              {% if is_state("weather.openweathermap","clear-day") %}#d4f000
-                              {% elif is_state("weather.openweathermap","sunny") %}#d4f000
-                              {% elif is_state("weather.openweathermap","clear-night") %}#023bab
-                              {% elif is_state("weather.openweathermap","Clear,night") %}#023bab
-                              {% elif is_state("weather.openweathermap","rainy") %}#00bfbc
-                              {% elif is_state("weather.openweathermap","snowy") %}#b6caf2
-                              {% elif is_state("weather.openweathermap","fogy") %}#b6caf2
-                              {% elif is_state("weather.openweathermap","sleet") %}#707580
-                              {% elif is_state("weather.openweathermap","snowy-rainy") %}#707580
-                              {% elif is_state("weather.openweathermap","wind") %}#9e0296
-                              {% elif is_state("weather.openweathermap","windy") %}#9e0296
-                              {% elif is_state("weather.openweathermap","cloudy") %}#7facad
-                              {% elif is_state("weather.openweathermap","partly-cloudy-day")%}#8996b0
-                              {% elif is_state("weather.openweathermap","partlycloudy") %}#8996b0
-                              {% elif is_state("weather.openweathermap","partly-cloudy-night")%}#7288b3
-                              {% elif is_state("weather.openweathermap","hail") %}#02749e
-                              {% elif is_state("weather.openweathermap","lightning") %}#f09400
-                              {% elif is_state("weather.openweathermap","thunderstorm") %}#e60000
-                              {% endif %}
-                          - class: col-xs-12 col-md-6 pt-2
+                              {% if is_state("weather.openweathermap","clear-day") %}#d4f000 {% elif
+                              is_state("weather.openweathermap","sunny") %}#d4f000 {% elif
+                              is_state("weather.openweathermap","clear-night") %}#023bab {% elif
+                              is_state("weather.openweathermap","Clear,night") %}#023bab {% elif
+                              is_state("weather.openweathermap","rainy") %}#00bfbc {% elif
+                              is_state("weather.openweathermap","snowy") %}#b6caf2 {% elif
+                              is_state("weather.openweathermap","fogy") %}#b6caf2 {% elif
+                              is_state("weather.openweathermap","sleet") %}#707580 {% elif
+                              is_state("weather.openweathermap","snowy-rainy") %}#707580 {% elif
+                              is_state("weather.openweathermap","wind") %}#9e0296 {% elif
+                              is_state("weather.openweathermap","windy") %}#9e0296 {% elif
+                              is_state("weather.openweathermap","cloudy") %}#7facad {% elif
+                              is_state("weather.openweathermap","partly-cloudy-day")%}#8996b0 {% elif
+                              is_state("weather.openweathermap","partlycloudy") %}#8996b0 {% elif
+                              is_state("weather.openweathermap","partly-cloudy-night")%}#7288b3 {% elif
+                              is_state("weather.openweathermap","hail") %}#02749e {% elif
+                              is_state("weather.openweathermap","lightning") %}#f09400 {% elif
+                              is_state("weather.openweathermap","thunderstorm") %}#e60000 {% endif %}
+                            multiline_secondary: true
+
+                          - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
+                            fill_container: true
                             primary: Shopping List
                             secondary: |-
                               {% set count = states(entity) | int(default=0) %}
@@ -330,8 +335,9 @@ cards:
                             tap_action:
                               action: navigate
                               navigation_path: /lovelace/shopping-list
-                          - class: col-xs-12 col-md-6 pt-2
+                          - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
+                            fill_container: true
                             primary: Todo List
                             secondary: |-
                               {% set count = states(entity) | int(default=0) %}
@@ -426,50 +432,50 @@ cards:
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-0
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-0
                             entity: sensor.processor_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-2 order-md-1
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-2 order-md-1
                             entity: sensor.memory_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-4 order-md-2
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-4 order-md-2
                             entity: sensor.disk_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-1 order-md-3
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-1 order-md-3
                             entity: sensor.nas_processor_use
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-3 order-md-4
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-3 order-md-4
                             entity: sensor.nas_memory_use
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-5
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-5
                             entity: sensor.nas_disk_use
                             tap_action:
                               action: more-info
               - type: row ###### footer
-                class: mt-auto
+                class: mt-auto mb-xxl-5
                 cards:
                   - type: custom:button-card
-                    class: col-auto mb-md-5
+                    class: col-auto
                     name: >
                       <ha-icon icon="mdi:nas"></ha-icon> Server
                     tap_action:
@@ -477,7 +483,7 @@ cards:
                       navigation_path: sub-servers
                     template: footer
                   - type: custom:button-card
-                    class: col-auto mb-md-5
+                    class: col-auto
                     name: >
                       <ha-icon icon="mdi:router-network-wireless"></ha-icon> Router
                     tap_action:
@@ -485,7 +491,7 @@ cards:
                       navigation_path: sub-router
                     template: footer
                   - type: custom:button-card
-                    class: col-auto mb-md-5
+                    class: col-auto
                     entity: sensor.update_val
                     styles:
                       card:
