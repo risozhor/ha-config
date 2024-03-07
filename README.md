@@ -1,5 +1,5 @@
 <!-- Shield -->
-[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.2-blue.svg
+[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.3-blue.svg
 [ha-server]: https://img.shields.io/badge/Raspberry%20PI%204-RAM%204%20Gb-red.svg
 [nas]: https://img.shields.io/badge/Raspberry%20CM4-RAM%204%20Gb-orange.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
