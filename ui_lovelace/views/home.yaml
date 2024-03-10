@@ -508,6 +508,7 @@ cards:
                             [[[
                               if (entity.state == 0)
                                 return "#fff";
+                              else return "#97989c";
                             ]]]
                         - animation: >
                             [[[
