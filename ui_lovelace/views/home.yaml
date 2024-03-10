@@ -358,7 +358,6 @@ cards:
                             tap_action:
                               action: navigate
                               navigation_path: /lovelace/todo
-
                       - type: row # charts
                         cards:
                           - type: vertical-stack
@@ -425,7 +424,6 @@ cards:
                                     type: area
                                     show:
                                       in_header: false
-
                       - type: row ###### radialBar
                         cards:
                           - type: custom:button-card
@@ -521,6 +519,19 @@ cards:
                     tap_action:
                       action: url
                       url_path: http://zigstargw.local
+                    template: footer
+                  - type: custom:button-card
+                    class: col-auto d-none d-md-flex
+                    entity: sensor.home_mode
+                    show_name: false
+                    custom_fields:
+                      name: >
+                        [[[
+                          return '<ha-icon icon="mdi:auto-mode"></ha-icon> ' + entity?.state
+                        ]]]
+                    tap_action:
+                      action: more-info
+                      entity: input_boolean.away_mode
                     template: footer
                   - type: custom:button-card
                     class: col-auto
