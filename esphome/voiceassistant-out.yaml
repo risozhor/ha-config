@@ -4,11 +4,13 @@ substitutions:
   lrclk_pin: GPIO12 #LRC
   bclk_pin: GPIO14 #BCLK
   player_pin: GPIO11 #DIN
+  lrclk_mpin: GPIO5 #WS green
+  bclk_mpin: GPIO7 #SCK yellow
+  microphone_pin: GPIO6 #SD blue
   light_pin: GPIO17
   play_pause_pin: GPIO18
   rotary_pin_a: GPIO15
   rotary_pin_b: GPIO16
-
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -51,8 +53,6 @@ esphome:
           value: 0
       - delay: 1s
       - script.execute: reset_led
-
-
 esp32:
   board: esp32-s3-devkitc-1
   framework:
@@ -75,6 +75,16 @@ i2s_audio:
   - id: i2s_out
     i2s_lrclk_pin: ${lrclk_pin}
     i2s_bclk_pin: ${bclk_pin}
+  - id: i2s_in
+    i2s_lrclk_pin: ${lrclk_mpin}
+    i2s_bclk_pin: ${bclk_mpin}
+microphone:
+  - platform: i2s_audio
+    id: echo_microphone
+    i2s_audio_id: i2s_in
+    i2s_din_pin: ${microphone_pin}
+    adc_type: external
+    pdm: false
 media_player:
   - platform: i2s_audio
     i2s_audio_id: i2s_out
@@ -83,6 +93,58 @@ media_player:
     dac_type: external
     i2s_dout_pin: ${player_pin}
     mode: stereo
+voice_assistant:
+  id: va
+  microphone: echo_microphone
+  media_player: va_out
+  noise_suppression_level: 3
+  auto_gain: 31dBFS
+  volume_multiplier: 8.0
+  on_client_connected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.start_continuous:
+  on_client_disconnected:
+    - if:
+        condition:
+          switch.is_on: use_wake_word
+        then:
+          - voice_assistant.stop:
+  on_wake_word_detected:
+    - light.turn_on:
+        id: top_led
+        brightness: 100%
+        red: 80%
+        green: 0%
+        blue: 100%
+  on_listening: 
+    # - homeassistant.service:
+    #     service: tts.cloud_say
+    #     data:
+    #       entity_id: media_player.voiceassistant_out_esphome_player
+    #       message: Its me
+    - delay: 4s
+    - light.turn_off:
+        id: top_led
+  on_tts_start:
+    - light.turn_on:
+        id: top_led
+        brightness: 100%
+        red: 80%
+        green: 0%
+        blue: 100%
+    # - homeassistant.service:
+    #     service: tts.cloud_say
+    #     data:
+    #       entity_id: media_player.voiceassistant_out_esphome_player
+    #       message: !lambda 'return x;'
+    - delay: 4s
+    - light.turn_off:
+        id: top_led
+
+
 light:
   - platform: esp32_rmt_led_strip
     id: top_led
@@ -187,7 +249,6 @@ script:
           brightness: 100%
       - delay: .01s
       - light.turn_off: top_led
-      
   - id: set_volume
     mode: restart
     parameters:
@@ -201,3 +262,21 @@ script:
           effect: show_volume
       - delay: 1s
       - script.execute: reset_led
+switch:
+  - platform: template
+    name: Use wake word
+    id: use_wake_word
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+    entity_category: config
+    on_turn_on:
+      - lambda: id(va).set_use_wake_word(true);
+      - if:
+          condition:
+            not:
+              - voice_assistant.is_running
+          then:
+            - voice_assistant.start_continuous
+    on_turn_off:
+      - voice_assistant.stop
+      - lambda: id(va).set_use_wake_word(false);

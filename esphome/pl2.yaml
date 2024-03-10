@@ -1,9 +1,9 @@
 substitutions:
   name: esp_player
   friendly_name: ESP player
-  lrclk_mpin: GPIO33 #WS
-  bclk_mpin: GPIO18 #SCK
-  microphone_pin: GPIO13 #SD
+  lrclk_mpin: GPIO5 #WS green
+  bclk_mpin: GPIO7 #SCK yellow
+  microphone_pin: GPIO6 #SD blue
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}

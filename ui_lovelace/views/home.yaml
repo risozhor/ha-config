@@ -304,7 +304,6 @@ cards:
                               is_state("weather.openweathermap","lightning") %}#f09400 {% elif
                               is_state("weather.openweathermap","thunderstorm") %}#e60000 {% endif %}
                             multiline_secondary: true
-
                           - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
                             fill_container: true
@@ -489,6 +488,39 @@ cards:
                     tap_action:
                       action: navigate
                       navigation_path: sub-router
+                    template: footer
+                  - type: custom:button-card
+                    class: col-auto d-none d-md-flex
+                    entity: sensor.socket_connections_2
+                    card_mod:
+                      style: |
+                        @keyframes pulse{
+                          0%{box-shadow:red 0 0 0 0;}
+                          70%{box-shadow:#ff69b400 0 0 0 10px;}
+                          100%{box-shadow:none;}
+                        }
+                    styles:
+                      card:
+                        - background: >
+                            [[[
+                              if (entity.state == 0)
+                                return "rgb(255 0 0 / 40%)";
+                            ]]]
+                        - color: >
+                            [[[
+                              if (entity.state == 0)
+                                return "#fff";
+                            ]]]
+                        - animation: >
+                            [[[
+                              if (entity.state == 0)
+                                return "pulse 1500ms infinite!important";
+                            ]]]
+                    name: >
+                      <ha-icon icon="mdi:zigbee"></ha-icon> Gateway
+                    tap_action:
+                      action: url
+                      url_path: http://zigstargw.local
                     template: footer
                   - type: custom:button-card
                     class: col-auto
