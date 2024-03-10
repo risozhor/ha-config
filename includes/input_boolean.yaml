@@ -2,3 +2,8 @@ virt_sleepingmode:
   name: Sleeping Mode
   initial: off
   icon: mdi:sleep
+
+away_mode:
+  name: Away Mode
+  initial: off
+  icon: mdi:shield-lock

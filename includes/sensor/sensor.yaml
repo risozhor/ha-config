@@ -3,9 +3,17 @@
     home_mode:
       friendly_name: "Housemode"
       value_template: >-
-        {% if is_state("binary_sensor.day_tod", "on") %}daymode{% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}sleepingmode{% else %}nightmode{% endif %}
+        {% if is_state("input_boolean.away_mode", "on") %}Away
+        {% elif is_state("binary_sensor.day_tod", "on") %}Day Mode
+        {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}Sleeping Mode
+        {% else %}Night Mode
+        {% endif %}
       icon_template: >
-        {% if is_state("binary_sensor.day_tod", "on") %}mdi:white-balance-sunny{% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}mdi:sleep{% else %}mdi:power-sleep{% endif %}
+        {% if is_state("input_boolean.away_mode", "on") %}mdi:shield
+        {% elif is_state("binary_sensor.day_tod", "on") %}mdi:white-balance-sunny
+        {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}mdi:sleep
+        {% else %}mdi:power-sleep
+        {% endif %}
 
     count_update:
       friendly_name: "Updates Count"

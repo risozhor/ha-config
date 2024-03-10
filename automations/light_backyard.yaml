@@ -10,7 +10,7 @@
 #       state: "off"
 #     - condition: state
 #       entity_id: sensor.home_mode
-#       state: "nightmode"
+#       state: "Night Mode"
 #   action:
 #     - service: switch.turn_on
 #       data:
@@ -30,7 +30,7 @@
 #       state: "off"
 #     - condition: state
 #       entity_id: sensor.home_mode
-#       state: "sleepingmode"
+#       state: "Sleeping Mode"
 #   action:
 #     - service: switch.turn_on
 #       data:

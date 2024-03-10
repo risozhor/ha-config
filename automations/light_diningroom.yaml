@@ -11,10 +11,10 @@
    - or:
        - condition: state
          entity_id: sensor.home_mode
-         state: "nightmode"
+         state: "Night Mode"
        - condition: state
          entity_id: sensor.home_mode
-         state: "sleepingmode"
+         state: "Sleeping Mode"
   action:
    - service: light.turn_on
      target:
@@ -40,10 +40,10 @@
    - or:
        - condition: state
          entity_id: sensor.home_mode
-         state: "nightmode"
+         state: "Night Mode"
        - condition: state
          entity_id: sensor.home_mode
-         state: "sleepingmode"
+         state: "Sleeping Mode"
   action:
    - service: light.turn_on
      target:

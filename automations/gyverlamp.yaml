@@ -1,4 +1,4 @@
-#   Вмикаємо gyverlamp в редмиі "sleepingmode", і врубаємо таймер на годину (gyverlamp_1h_off)
+#   Вмикаємо gyverlamp в редмиі "Sleeping Mode", і врубаємо таймер на годину (gyverlamp_1h_off)
 - id: Gyver_on_at_sleepingmode
   alias: Gyver_on_at_sleepingmode
   initial_state: true

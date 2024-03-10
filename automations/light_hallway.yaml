@@ -13,7 +13,7 @@
       state: "off"
     - condition: state
       entity_id: sensor.home_mode
-      state: "nightmode"
+      state: "Night Mode"
   action:
     - service: mqtt.publish
       data_template:
@@ -57,7 +57,7 @@
   condition:
     - condition: state
       entity_id: sensor.home_mode
-      state: "nightmode"
+      state: "Night Mode"
   action:
     - service: mqtt.publish
       data_template:
