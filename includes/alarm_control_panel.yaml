@@ -1,19 +1,22 @@
-# - platform: template
-#   panels:
-#     alarm_panel:
-#       unique_id: alarm_panel
-#       value_template: "{{ states('alarm_control_panel.sweet_home_alarm') }}"
-#       arm_away:
-#         service: alarm_control_panel.alarm_arm_away
-#         target:
-#           entity_id: alarm_control_panel.sweet_home_alarm
-#       arm_home:
-#         service: alarm_control_panel.alarm_arm_home
-#         target:
-#           entity_id: alarm_control_panel.sweet_home_alarm
-#       disarm:
-#         - service: alarm_control_panel.alarm_disarm
-#           target:
-#             entity_id: alarm_control_panel.sweet_home_alarm
-#           data:
-#             code: !secret alarm_code
+- platform: template
+  panels:
+    alarm_panel:
+      unique_id: alarm_panel
+      value_template: "{{ states('alarm_control_panel.home_alarm') }}"
+      arm_away:
+        service: alarm_control_panel.alarm_arm_away
+        target:
+          entity_id: alarm_control_panel.home_alarm
+      arm_home:
+        service: alarm_control_panel.alarm_arm_home
+        target:
+          entity_id: alarm_control_panel.home_alarm
+      disarm:
+        - service: alarm_control_panel.alarm_disarm
+          target:
+            entity_id: alarm_control_panel.home_alarm
+          data:
+            code: !secret alarm_code
+
+- platform: manual
+  name: Home Alarm

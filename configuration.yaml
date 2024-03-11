@@ -61,7 +61,7 @@ lovelace:
 # input_select: !include includes/input_select.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
-# alarm_control_panel: !include includes/alarm_control_panel.yaml
+alarm_control_panel: !include includes/alarm_control_panel.yaml
 command_line: !include includes/command_line.yaml
 input_button:
 input_number:
