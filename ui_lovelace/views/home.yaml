@@ -525,6 +525,7 @@ cards:
                     class: col-auto d-none d-md-flex
                     entity: sensor.home_mode
                     show_name: false
+
                     custom_fields:
                       name: >
                         [[[
@@ -534,6 +535,49 @@ cards:
                       action: more-info
                       entity: input_boolean.away_mode
                     template: footer
+
+                  - type: custom:button-card
+                    class: col-auto d-none d-md-flex
+                    entity: alarm_control_panel.alarm_panel
+                    show_name: false
+                    card_mod:
+                      style: |
+                        @keyframes pulse{
+                          0%{box-shadow:red 0 0 0 0;}
+                          70%{box-shadow:#ff69b400 0 0 0 10px;}
+                          100%{box-shadow:none;}
+                        }
+                    styles:
+                      card:
+                        - background: >
+                            [[[
+                              if (entity.state != 'disarmed')
+                                return "rgb(255 0 0 / 40%)";
+                            ]]]
+                        - color: >
+                            [[[
+                              if (entity.state != 'disarmed')
+                                return "#fff";
+                              else return "#97989c";
+                            ]]]
+                        - animation: >
+                            [[[
+                              if (entity.state != 'disarmed')
+                                return "pulse 1500ms infinite!important";
+                            ]]]
+                    custom_fields:
+                      name: >
+                        [[[
+                          const str = entity?.state;
+                          // capitalize the first letter and replace "_"
+                          let result = (str.charAt(0).toUpperCase() + str.slice(1)).replace( '_', ' ');
+
+                          return '<ha-icon icon="mdi:shield-check-outline"></ha-icon> ' + result
+                        ]]]
+                    tap_action:
+                      action: more-info
+                    template: footer
+
                   - type: custom:button-card
                     class: col-auto
                     entity: sensor.update_val
