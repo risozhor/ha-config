@@ -68,7 +68,8 @@ cards:
                 ]]]
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.weather_station_bme_weather_station_humidity
+            # entity: sensor.weather_station_bme_weather_station_humidity
+            entity: sensor.openweathermap_humidity
             name: Humidity
             tap_action:
               action: more-info
@@ -76,7 +77,8 @@ cards:
               graph:
                 card:
                   entities:
-                    - entity: sensor.weather_station_bme_weather_station_humidity
+                    - entity: sensor.openweathermap_humidity
+                    # - entity: sensor.weather_station_bme_weather_station_humidity
             variables:
               state_on: >
                 [[[

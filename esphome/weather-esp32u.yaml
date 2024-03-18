@@ -47,6 +47,12 @@ text_sensor:
     type: sunset
     update_interval: 299s
 sensor:
+
+
+  - platform: homeassistant
+    id: humidity
+    entity_id: sensor.openweathermap_humidity
+
   - platform: dallas
     address: 0x3b3c01d60756cf28
     id: dallas_sensor
@@ -60,8 +66,8 @@ sensor:
       name: "BME ${upper_devicename} Pressure"
       id: pressure
     humidity:
-      name: "BME ${upper_devicename} Humidity"
-      id: humidity
+      # name: "BME ${upper_devicename} Humidity"
+      id: humidity_old
   - platform: pulse_counter
     pin: 
       number: 19
@@ -109,6 +115,10 @@ sensor:
     unit_of_measurement: °C
     update_interval: 60s
     icon: 'mdi:thermometer-alert'
+
+
+
+
 button:
   - platform: restart
     name: "Restart $upper_devicename"
