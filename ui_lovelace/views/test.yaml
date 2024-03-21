@@ -1,8 +1,6 @@
-title: animatedicons
-path: animatedicons
+title: test
+path: test
 icon: mdi:auto-fix
-visible:
-  - user: ca6b753fa3864510837d851649a752d3
 type: panel
 cards:
   - type: custom:bootstrap-grid-card
@@ -10,8 +8,47 @@ cards:
     cards:
       - type: row
         cards:
+          - type: custom:button-card
+            class: m-0 p-0
+            name: SET THEME TO "tablet" or "Glass and Metal" IN PROFILE
+            tap_action:
+              action: navigate
+              navigation_path: /profile
+            styles:
+              grid:
+                - grid-template-areas: |
+                    "n"
+              card:
+                - display: >
+                    [[[
+                      return hass.themes.theme === 'tablet' || hass.themes.theme === 'Glass and Metal'
+                          ? 'none'
+                          : 'initial';
+                    ]]]
+              name:
+                - z-index: 1
+                - overflow: visible
+                - color: red
+                - font-weight: bolder
+                - font-size: xxx-large
+                - background: yellow
+                - white-space: normal
+
           - type: col
             class: col-12 fullheight space-between
+            card_mod:
+              style: |
+                fullheight {
+                  display: none;
+                }
+            styles:
+              card:
+                - display: >
+                    [[[
+                      if (hass.themes.theme === 'tablet' || hass.themes.theme === 'Glass and Metal')
+                        return "none";
+                      return "flex";
+                    ]]]
             cards:
               - type: row
                 cards:
@@ -27,7 +64,7 @@ cards:
                     cards:
                       - type: row ###### chips
                         cards:
-                          - class: col-xs-12 mt-md-5
+                          - class: col-xs-12 mt-xxl-5
                             type: custom:mushroom-chips-card
                             card_mod:
                               class: chipps
@@ -306,7 +343,6 @@ cards:
                               is_state("weather.openweathermap","lightning") %}#f09400 {% elif
                               is_state("weather.openweathermap","thunderstorm") %}#e60000 {% endif %}
                             multiline_secondary: true
-
                           - class: col-xs-6 col-lg-3 pt-2
                             type: custom:mushroom-template-card
                             fill_container: true
@@ -361,7 +397,6 @@ cards:
                             tap_action:
                               action: navigate
                               navigation_path: /lovelace/todo
-
                       - type: row # charts
                         cards:
                           - type: vertical-stack
@@ -428,87 +463,75 @@ cards:
                                     type: area
                                     show:
                                       in_header: false
-
                       - type: row ###### radialBar
                         cards:
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-0
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-0
                             entity: sensor.processor_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-2 order-md-1
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-2 order-md-1
                             entity: sensor.memory_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-4 order-md-2
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-4 order-md-2
                             entity: sensor.disk_use_percent
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-1 order-md-3
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-1 order-md-3
                             entity: sensor.nas_processor_use
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-3 order-md-4
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-3 order-md-4
                             entity: sensor.nas_memory_use
                             tap_action:
                               action: more-info
                           - type: custom:button-card
                             template:
                               - radialBar
-                            class: col-6 col-md-4 col-xl-2 px-2 pt-1 order-5
+                            class: col-6 col-md-4 col-xl-2 px-2 pt-0 order-5
                             entity: sensor.nas_disk_use
                             tap_action:
                               action: more-info
               - type: row ###### footer
-                class: mt-auto
+                class: mt-auto mb-xxl-5
                 cards:
                   - type: custom:button-card
-                    class: col-auto mb-md-5
-                    name: >
-                      <ha-icon icon="mdi:nas"></ha-icon> Server
-                    tap_action:
-                      action: navigate
-                      navigation_path: sub-servers
+                    class: col-auto
                     template: footer
+                    custom_fields:
+                      name: >
+                        [[[
+                          return 'Footer: ' 
+                        ]]]
+
                   - type: custom:button-card
-                    class: col-auto mb-md-5
-                    name: >
-                      <ha-icon icon="mdi:router-network-wireless"></ha-icon> Router
-                    tap_action:
-                      action: navigate
-                      navigation_path: sub-router
+                    class: col-auto
                     template: footer
-                  - type: custom:button-card
-                    class: col-auto mb-md-5
-                    entity: sensor.update_val
                     styles:
                       card:
                         - display: >
                             [[[
-                              if (entity.state == 0)
+                              if (hass.themes.theme === 'tablet' || hass.themes.theme === 'Glass and Metal')
                                 return "none";
                               return "flex";
                             ]]]
-                    name: >
-                      <ha-icon icon="mdi:arrow-up-bold-circle-outline"></ha-icon> Updates
-                    tap_action:
-                      action: navigate
-                      navigation_path: /config/updates
                     custom_fields:
-                      notification: >
-                        [[[ return parseInt(entity?.state); ]]]
-                    template: footer
+                      name: >
+                        [[[
+                          return 'TEST ' 
+                        ]]]

@@ -1,6 +1,6 @@
 substitutions:
-  name: voiceassistant-out
-  friendly_name: VoiceAssistant Out
+  name: voiceassistant
+  friendly_name: VoiceAssistant
   lrclk_pin: GPIO12 #LRC
   bclk_pin: GPIO14 #BCLK
   player_pin: GPIO11 #DIN

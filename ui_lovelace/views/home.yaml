@@ -8,6 +8,31 @@ cards:
     cards:
       - type: row
         cards:
+          - type: custom:button-card
+            class: m-0 p-0
+            name: SET THEME TO "tablet" or "Glass and Metal" IN PROFILE
+            tap_action:
+              action: navigate
+              navigation_path: /profile
+            styles:
+              grid:
+                - grid-template-areas: |
+                    "n"
+              card:
+                - display: >
+                    [[[
+                      return hass.themes.theme === 'tablet' || hass.themes.theme === 'Glass and Metal'
+                          ? 'none'
+                          : 'initial';
+                    ]]]
+              name:
+                - z-index: 1
+                - overflow: visible
+                - color: red
+                - font-weight: bolder
+                - font-size: xxx-large
+                - background: yellow
+                - white-space: normal
           - type: col
             class: col-12 fullheight space-between
             cards:
@@ -525,7 +550,6 @@ cards:
                     class: col-auto d-none d-md-flex
                     entity: sensor.home_mode
                     show_name: false
-
                     custom_fields:
                       name: >
                         [[[
@@ -535,7 +559,6 @@ cards:
                       action: more-info
                       entity: input_boolean.away_mode
                     template: footer
-
                   - type: custom:button-card
                     class: col-auto d-none d-md-flex
                     entity: alarm_control_panel.alarm_panel
@@ -577,7 +600,6 @@ cards:
                     tap_action:
                       action: more-info
                     template: footer
-
                   - type: custom:button-card
                     class: col-auto
                     entity: sensor.update_val

@@ -32,9 +32,9 @@ sun:
   latitude: !secret latitude
   longitude: !secret longitude
 web_server:
-i2c:
-  sda: 17
-  scl: 16
+# i2c:
+#   sda: 17
+#   scl: 16
 dallas:
   - pin: 25
 text_sensor:
@@ -47,27 +47,29 @@ text_sensor:
     type: sunset
     update_interval: 299s
 sensor:
-
-
   - platform: homeassistant
     id: humidity
     entity_id: sensor.openweathermap_humidity
+  - platform: homeassistant
+    id: pressure
+    entity_id: sensor.openweathermap_pressure
 
   - platform: dallas
     address: 0x3b3c01d60756cf28
     id: dallas_sensor
     name: "Dallas ${upper_devicename} Temperature"
-  - platform: bme680
-    address: 0x77
-    temperature:
-      name: "BME ${upper_devicename} Temperature"
-      id: bme_temperature
-    pressure:
-      name: "BME ${upper_devicename} Pressure"
-      id: pressure
-    humidity:
-      # name: "BME ${upper_devicename} Humidity"
-      id: humidity_old
+
+  # - platform: bme680
+  #   address: 0x77
+  #   temperature:
+  #     name: "BME ${upper_devicename} Temperature"
+  #     id: bme_temperature
+  #   pressure:
+  #     # name: "BME ${upper_devicename} Pressure"
+  #     id: pressure_old
+  #   humidity:
+  #     # name: "BME ${upper_devicename} Humidity"
+  #     id: humidity_old
   - platform: pulse_counter
     pin: 
       number: 19
