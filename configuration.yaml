@@ -74,6 +74,7 @@ bluetooth:
 conversation:
 tts: !include includes/tts.yaml
 stream:
+  ll_hls: true
 assist_pipeline:
 battery_notes:
 template: !include includes/template_sensors.yaml
