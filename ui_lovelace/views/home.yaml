@@ -494,7 +494,7 @@ cards:
                             tap_action:
                               action: more-info
               - type: row ###### footer
-                class: mt-auto mb-xxl-5
+                class: mt-auto mb-xxl-5 pt-2 bt-solid border-w1 border-color-divider
                 cards:
                   - type: custom:button-card
                     class: col-auto
