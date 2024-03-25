@@ -291,10 +291,31 @@ radialBar:
               dataLabels:
                 name:
                   show: true
+                  fontSize: 1rem
                 value:
                   show: true
+                  offsetY: -2px
           legend:
             show: false
+          fill:
+            type: gradient
+            gradient:
+              type: horizontal
+              gradientToColors: "#ABE5A1"
+              inverseColors: true
+              opacityFrom: 0
+              opacityTo: 1
+              stops:
+                - 0
+                - 100
+              colorStops:
+                - offset: 0
+                  color: "#2adea8"
+                  opacity: 1
+                - offset: 100
+                  color: "#4e8cd6"
+                  opacity: 1
+
         series:
           - entity: >
               [[[return entity.entity_id]]]
