@@ -179,7 +179,7 @@ cards:
                               - type: conditional
                                 conditions:
                                   - entity: sensor.ua_alarms
-                                    state_not: Safe1
+                                    state_not: Safe
                                 chip:
                                   type: template
                                   entity: sensor.ua_alarms
