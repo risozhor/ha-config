@@ -29,6 +29,12 @@ extra_styles:
       }
       return `
 
+      @keyframes pulse{
+      0%{box-shadow:red 0 0 0 0;}
+      70%{box-shadow:#ff69b400 0 0 0 10px;}
+      100%{box-shadow:none;}
+      }
+
 
        /* * * * * * * * * * * * * * * * * *
         *                                 *

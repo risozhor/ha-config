@@ -179,18 +179,14 @@ cards:
                               - type: conditional
                                 conditions:
                                   - entity: sensor.ua_alarms
-                                    state_not: Safe
+                                    state_not: Safe1
                                 chip:
                                   type: template
                                   entity: sensor.ua_alarms
                                   card_mod:
+                                    class: pulse
                                     style: |
                                       ha-card {animation:pulse 1500ms infinite!important;}
-                                      @keyframes pulse{
-                                        0%{box-shadow:red 0 0 0 0;}
-                                        70%{box-shadow:#ff69b400 0 0 0 10px;}
-                                        100%{box-shadow:none;}
-                                      }
                                   icon: >-
                                     {%- if is_state("binary_sensor.teritorialna_gromada_air",
                                     "on")%}mdi:cloud{%- elif
@@ -515,13 +511,6 @@ cards:
                   - type: custom:button-card
                     class: col-auto d-none d-md-flex
                     entity: sensor.socket_connections_2
-                    card_mod:
-                      style: |
-                        @keyframes pulse{
-                          0%{box-shadow:red 0 0 0 0;}
-                          70%{box-shadow:#ff69b400 0 0 0 10px;}
-                          100%{box-shadow:none;}
-                        }
                     styles:
                       card:
                         - background: >
@@ -538,7 +527,8 @@ cards:
                         - animation: >
                             [[[
                               if (entity.state == 0)
-                                return "pulse 1500ms infinite!important";
+                                return "pulse 1500ms infinite";
+                              else return "none";
                             ]]]
                     name: >
                       <ha-icon icon="mdi:zigbee"></ha-icon> Gateway
@@ -563,13 +553,6 @@ cards:
                     class: col-auto d-none d-md-flex
                     entity: alarm_control_panel.alarm_panel
                     show_name: false
-                    card_mod:
-                      style: |
-                        @keyframes pulse{
-                          0%{box-shadow:red 0 0 0 0;}
-                          70%{box-shadow:#ff69b400 0 0 0 10px;}
-                          100%{box-shadow:none;}
-                        }
                     styles:
                       card:
                         - background: >
@@ -586,7 +569,8 @@ cards:
                         - animation: >
                             [[[
                               if (entity.state != 'disarmed')
-                                return "pulse 1500ms infinite!important";
+                                return "pulse 1500ms infinite";
+                              else return "none";
                             ]]]
                     custom_fields:
                       name: >
