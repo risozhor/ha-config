@@ -2,18 +2,14 @@ button_card_templates: !include_dir_merge_named button_card_templates
 background: var(--background-image)
 views:
   - !include ui_lovelace/views/home.yaml
-  # - !include ui_lovelace/views/security.yaml
   - !include ui_lovelace/views/doors.yaml
   - !include ui_lovelace/views/lights.yaml
-  # - !include ui_lovelace/views/rooms.yaml
   - !include ui_lovelace/views/camera.yaml
   - !include ui_lovelace/views/users.yaml
   # - !include ui_lovelace/views/energy.yaml
-  # - !include ui_lovelace/views/net.yaml
   - !include ui_lovelace/views/sensors.yaml
   - !include ui_lovelace/views/weather.yaml
   - !include ui_lovelace/views/floorplan.yaml
-  # - !include ui_lovelace/views/batteries.yaml
   - !include ui_lovelace/views/shopping-list.yaml
   - !include ui_lovelace/views/x-alerts.yaml
   - !include ui_lovelace/views/sub-weather.yaml

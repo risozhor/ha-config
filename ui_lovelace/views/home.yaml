@@ -550,7 +550,7 @@ cards:
                       entity: input_boolean.away_mode
                     template: footer
                   - type: custom:button-card
-                    class: col-auto d-none d-md-flex
+                    class: col-auto d-flex
                     entity: alarm_control_panel.alarm_panel
                     show_name: false
                     styles:
