@@ -351,7 +351,6 @@ cards:
                               pink
                               {%- endif -%}
                             icon_color: "#ffb300"
-                            # tap_action: !include popup/shoppinglist.yaml
                             tap_action:
                               action: navigate
                               navigation_path: /lovelace/shopping-list
