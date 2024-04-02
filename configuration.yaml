@@ -57,8 +57,6 @@ blueprint:
 lovelace:
   mode: yaml
   resources: !include ui_lovelace/resources.yaml
-# input_number: !include includes/input_number.yaml
-# input_select: !include includes/input_select.yaml
 # google_assistant: !include includes/google_assistant.yaml
 # google: !include includes/google_calendars.yaml
 alarm_control_panel: !include includes/alarm_control_panel.yaml
