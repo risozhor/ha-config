@@ -11,7 +11,43 @@
     ha-card {
         padding: 0;
     }
-    `];var mt=function(t,r,i,e){var n,o=arguments.length,m=o<3?r:null===e?e=Object.getOwnPropertyDescriptor(r,i):e;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)m=Reflect.decorate(t,r,i,e);else for(var a=t.length-1;a>=0;a--)(n=t[a])&&(m=(o<3?n(m):o>3?n(r,i,m):n(r,i))||m);return o>3&&m&&Object.defineProperty(r,i,m),m},at=function(t,r){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,r)},lt=function(t,r,i,e){return new(i||(i=Promise))((function(n,o){function m(t){try{l(e.next(t))}catch(t){o(t)}}function a(t){try{l(e.throw(t))}catch(t){o(t)}}function l(t){var r;t.done?n(t.value):(r=t.value,r instanceof i?r:new i((function(t){t(r)}))).then(m,a)}l((e=e.apply(t,r||[])).next())}))};console.info("%c  BOOTSTRAP-GRID-CARD  \n%c  Version 0.2.0        ","color: white; font-weight: bold; background: #563d7c","color: #563d7c; font-weight: bold; background: white");class pt extends tt{setConfig(t){this._config=(t=>{if(!t.cards||!t.cards.length)throw new Error("No cards configured!");let r=!t.use_hass_style_gutter||t.use_hass_style_gutter,i=t.hass_style_gutter_size?t.hass_style_gutter_size:"4px";i=i.replace(";","");let e="";return r&&(e+=`\n    .row {\n      margin-top: 0px !important;\n      margin-bottom: 0px !important;\n      margin-right: 0px !important;\n      margin-left: 0px !important;\n    }\n    .col, [class^="col-"] {\n      padding-top: ${i} !important;\n      padding-bottom: ${i} !important;\n      padding-right: ${i} !important;\n      padding-left: ${i} !important;\n    }\n    `),e+=`\n  #staging {\n    ${t.container_padding?`padding: ${t.container_padding} !important;`:""}\n    box-sizing: border-box;\n  }\n  `,{custom_style:e,global_row_class:t.global_row_class?` ${t.global_row_class}`:"",global_col_class:t.global_col_class?` ${t.global_col_class}`:"",class:t.class||"container-fluid",raw:Object.assign({},JSON.parse(JSON.stringify(t)))}})(t),this.load()}load(){return lt(this,void 0,void 0,(function*(){this._helpers=yield window.loadCardHelpers(),this._helpers?(this._tree=document.createElement("div"),this._cards=this.build_configured_cards(this._config,this._tree)):console.error("Failed to load custom card helpers from Home Assistant")}))}static get styles(){return ot}render(){return this._config&&this._tree?R`
+    `];var mt=function(t,r,i,e){var n,o=arguments.length,m=o<3?r:null===e?e=Object.getOwnPropertyDescriptor(r,i):e;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)m=Reflect.decorate(t,r,i,e);else for(var a=t.length-1;a>=0;a--)(n=t[a])&&(m=(o<3?n(m):o>3?n(r,i,m):n(r,i))||m);return o>3&&m&&Object.defineProperty(r,i,m),m},at=function(t,r){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,r)},lt=function(t,r,i,e){return new(i||(i=Promise))((function(n,o){function m(t){try{l(e.next(t))}catch(t){o(t)}}function a(t){try{l(e.throw(t))}catch(t){o(t)}}function l(t){var r;t.done?n(t.value):(r=t.value,r instanceof i?r:new i((function(t){t(r)}))).then(m,a)}l((e=e.apply(t,r||[])).next())}))};console.info("%c  BOOTSTRAP-GRID-CARD  \n%c  Version 0.2.0        ","color: white; font-weight: bold; background: #563d7c","color: #563d7c; font-weight: bold; background: white");class pt extends tt{setConfig(t){this._config=(t=>{if(!t.cards||!t.cards.length)throw new Error("No cards configured!");let r=!t.use_hass_style_gutter||t.use_hass_style_gutter,i=t.hass_style_gutter_size?t.hass_style_gutter_size:"4px";i=i.replace(";","");let e="";return r&&(e+=`\n    .row {\n      margin-top: 0px !important;\n      margin-bottom: 0px !important;\n      margin-right: 0px !important;\n      margin-left: 0px !important;\n    }\n    .col, [class^="col-"] {\n      padding-top: ${i} !important;\n      padding-bottom: ${i} !important;\n      padding-right: ${i} !important;\n      padding-left: ${i} !important;\n    }\n    `),e+=`
+	\n  #staging {		
+	\n    ${t.container_padding?`padding: ${t.container_padding} !important;`:""}
+	\n    box-sizing: border-box;\n  }
+	\n    .fullheight {
+	\n    min-height: calc(100vh - var(--header-height));
+	\n    }
+	\n    .bt-solid {
+	\n    border-top: solid;
+	\n    }
+	\n    .bb-solid {
+	\n    border-bottom: solid;
+	\n    }
+	\n    .br-solid {
+	\n    border-right: solid;
+	\n    }
+	\n    .bl-solid {
+	\n    border-left: solid;
+	\n    }
+	\n    .border-w1 {
+	\n    border-width: 1px;
+	\n    }
+	\n    .border-w2 {
+	\n    border-width: 2px;
+	\n    }
+	\n    .border-color-divider{
+	\n    border-color: var(--divider-color);
+	\n    }
+	\n    .pulse {
+	\n    animation: pulse 1500ms infinite;
+	\n    }
+	\n    .space-between {
+	\n    justify-content: space-between;
+	\n    display: flex;
+	\n    flex-direction: column;
+	\n    } 
+	\n  `,{custom_style:e,global_row_class:t.global_row_class?` ${t.global_row_class}`:"",global_col_class:t.global_col_class?` ${t.global_col_class}`:"",class:t.class||"container-fluid",raw:Object.assign({},JSON.parse(JSON.stringify(t)))}})(t),this.load()}load(){return lt(this,void 0,void 0,(function*(){this._helpers=yield window.loadCardHelpers(),this._helpers?(this._tree=document.createElement("div"),this._cards=this.build_configured_cards(this._config,this._tree)):console.error("Failed to load custom card helpers from Home Assistant")}))}static get styles(){return ot}render(){return this._config&&this._tree?R`
       <div id="staging" class="${this._config.class}">
         ${this._tree}
       </div>

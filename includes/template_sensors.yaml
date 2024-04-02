@@ -34,7 +34,6 @@
           {% elif  hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good afternoon
           {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening
           {% else %}{{"\U0001f31a"}} Good night{% endif %}!</b><br>
-
           {% set lights = [
             states.light.0x0017880103aa4b71,
             states.light.livingroom_lights,
@@ -79,7 +78,6 @@
           {%- else %}
             Everything is turned off
           {%- endif %}</b>
-
     - unique_id: domain_counter
       state: >
         {{ states | count }}
@@ -117,7 +115,6 @@
           states.vacuum | count +
           states.weather | count +
           states.zone | count }}
-
     - unique_id: "Boiler is heating"
       name: "Boiler is heating"
       unit_of_measurement: "°C"
@@ -173,6 +170,3 @@
         {% else %}
         mdi:battery-alert
         {% endif %}
-
-
-

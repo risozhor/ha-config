@@ -14,7 +14,7 @@
 #   type: module
 - url: /local/community/button-card/button-card.js
   type: module
-- url: /local/custom_styles.js?v=1
+- url: /local/custom_styles.js
   type: module
 - url: /hacsfiles/apexcharts-card/apexcharts-card.js
   type: module
