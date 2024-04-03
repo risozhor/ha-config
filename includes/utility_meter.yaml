@@ -1,20 +1,14 @@
 monthly_energy:
-  source: sensor.power_meter_energy
+  source: sensor.inward_energy_a
   name: Monthly Energy
   cycle: monthly
-  tariffs:
-    - normal
 
 daily_energy:
-  source: sensor.power_meter_energy
+  source: sensor.inward_energy_a
   name: Daily Energy
   cycle: daily
-  tariffs:
-    - normal
 
 hourly_energy:
-  source: sensor.power_meter_energy
+  source: sensor.inward_energy_a
   name: Hourly Energy
   cycle: hourly
-  tariffs:
-    - normal

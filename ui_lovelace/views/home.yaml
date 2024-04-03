@@ -44,6 +44,31 @@ cards:
                       - type: custom:button-card
                         entity: sensor.template_sidebar
                         template: sidebar
+                      - type: weather-forecast
+                        card_mod:
+                          style: |
+                            ha-card {
+                              border: none;
+                            }
+                        show_current: true
+                        show_forecast: false
+                        entity: weather.home
+                        forecast_type: daily
+                      - type: custom:energy-overview-card
+                        card_mod:
+                          style: |
+                            ha-card {
+                              border: none;
+                            }
+                        entities:
+                          - power: sensor.inward_energy_a
+                            current: sensor.inward_current_a
+                            voltage: sensor.inward_voltage
+                            color: "#4e8cd6"
+                            animation:
+                              inverted: false
+                            icon_leading: mdi:transmission-tower-export
+                            icon_trailing: mdi:home-import-outline
 
                   - type: col #main
                     class: col-12 col-md-8 col-lg-9
@@ -444,6 +469,91 @@ cards:
                                     type: area
                                     show:
                                       in_header: false
+                          - type: vertical-stack
+                            class: col-xs-12 col-md-6 pt-2
+                            cards:
+                              - type: custom:apexcharts-card
+                                experimental:
+                                  color_threshold: true
+                                cache: true
+                                span:
+                                  end: day
+                                  offset: "-0h"
+                                header:
+                                  show: false
+                                  title: Today's Energy Usage
+                                  show_states: true
+                                  colorize_states: true
+                                show:
+                                  loading: false
+                                card_mod:
+                                  style: |
+                                    ha-card {
+                                      border: none;
+                                    }
+                                apex_config:
+                                  tickAmount: 8
+                                  legend:
+                                    show: true
+                                  dataLabels:
+                                    enabled: true
+                                    offsetY: 2
+                                    background:
+                                      enabled: true
+                                      borderColor: "#fff"
+                                      borderWidth: 2
+                                      borderRadius: 2
+                                      opacity: 0.7
+                                      foreColor: "#ccccff"
+                                      dropShadow:
+                                        enabled: true
+                                        top: 2
+                                        left: 2
+                                        blur: 1
+                                        color: "#000000"
+                                        opacity: 0.5
+                                  stroke:
+                                    show: true
+                                    width: 1
+                                    curve: smooth
+                                  chart:
+                                    height: 200px
+                                  xaxis:
+                                    crosshairs:
+                                      show: false
+                                    labels:
+                                      format: dd-MM
+                                  yaxis:
+                                    forceNiceScale: false
+                                    decimalsInFloat: 0
+                                    min: 0
+                                    show: false
+                                  fill:
+                                    type: gradient
+                                    gradient:
+                                      type: vertical
+                                      shadeIntensity: 0.1
+                                      opacityFrom: 0.25
+                                      opacityTo: 1
+                                      inverseColors: true
+                                      stops:
+                                        - 0
+                                        - 100
+                                graph_span: 24h
+                                locale: ua
+                                series:
+                                  - entity: sensor.hourly_energy
+                                    type: column
+                                    float_precision: 2
+                                    color: "#4e8cd6"
+                                    fill_raw: last
+                                    curve: smooth
+                                    show:
+                                      datalabels: true
+                                    group_by:
+                                      func: max
+                                      duration: 1h
+
                       - type: row ###### radialBar
                         cards:
                           - type: custom:button-card

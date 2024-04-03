@@ -10,8 +10,8 @@
   type: module
 - url: /hacsfiles/lovelace-card-mod/card-mod.js
   type: module
-# - url: /local/community/ha-energy-overview-card/energy-overview-card.js
-#   type: module
+- url: /local/community/ha-energy-overview-card/energy-overview-card.js
+  type: module
 - url: /local/community/button-card/button-card.js
   type: module
 - url: /local/custom_styles.js
