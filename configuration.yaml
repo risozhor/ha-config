@@ -3,7 +3,6 @@ energy:
 logbook:
 my:
 cloud:
-map:
 media_source:
 ssdp:
 zeroconf:
