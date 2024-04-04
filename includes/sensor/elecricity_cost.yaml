@@ -4,4 +4,9 @@
       device_class: monetary
       friendly_name: "Monthly Energy Cost"
       unit_of_measurement: "UAH"
-      value_template: "{{((states.sensor.monthly_energy_normal.state) | float * 2.64) | round(2)}}"
+      value_template: "{{((states.sensor.monthly_energy.state) | float * 2.64) | round(2)}}"
+    last_month_energy_cost:
+      device_class: monetary
+      friendly_name: "Last Month Energy Cost"
+      unit_of_measurement: "UAH"
+      value_template: "{{(state_attr('sensor.monthly_energy','last_period') | float * 2.64) | round(2)}}"
