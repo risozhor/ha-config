@@ -17,16 +17,6 @@
             {{ days[now().weekday()] }} {{ strptime(states('sensor.date'), '%Y-%m-%d').day }} {{ months[now().month-1] }}
           {% endif %}
           </b></font>
-        weather: >
-          {% set entity = 'weather.openweathermap' %}
-          {% if not is_state(entity, 'unknown') %}
-            {% set temp = state_attr(entity, 'temperature') | round %}
-            {% set precip = state_attr(entity, 'forecast')[0]['precipitation'] | round %}
-              Feels like {{ temp }}° with {{ 'no risk of rain' if precip == 0
-              else precip | string + 'mm rain \u2614\uFE0F' }}
-          {% else %}
-            Can't load weather...
-          {% endif %}
         greet: >
           <b>
           {% set hour_num = now().hour | int %} 
