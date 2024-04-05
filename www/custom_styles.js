@@ -34,7 +34,35 @@ style.textContent = `
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-  } 
+  }
+  /* Bold */
+  @font-face {
+    src: url('/local/fonts/alarm-clock.woff2') format('woff2'),
+    url('/local/fonts/alarm_clock.ttf') format('ttf');
+    font-family: 'LCD Bold';
+    font-weight: 700;
+    font-display: swap;
+  }
+
+
+  /* Light */
+  @font-face {
+    src: url('/local/fonts/alarm-clock.woff2') format('woff2'),
+    url('/local/fonts/alarm_clock.ttf') format('ttf');
+    font-family: 'LCD Light';
+    font-weight: 300;
+    font-display: swap;
+  }
+
+
+  /* Regular */
+  @font-face {
+    src: url('/local/fonts/alarm-clock.woff2') format('woff2'),
+    url('/local/fonts/alarm_clock.ttf') format('ttf');
+    font-family: 'LCD Regular';
+    font-weight: 400;
+    font-display: swap;
+  }
 `;
 
 document.head.appendChild(style);

@@ -83,7 +83,18 @@ cards:
                               inverted: false
                             icon_leading: mdi:transmission-tower-export
                             icon_trailing: mdi:home-import-outline
-                      
+                      - type: custom:mushroom-template-card
+                        card_mod:
+                          style: |
+                            ha-card {
+                              font-family: LCD Bold;
+                              --card-primary-font-size: 32px;
+                              --card-primary-line-height: 34px;
+                            }
+                        primary: "{{ states('sensor.energy_utility_meter') }} kWh"
+                        tap_action:
+                          action: none
+                        entity: sensor.energy_utility_meter
 
                   - type: col #main
                     class: col-12 col-md-8 col-lg-9
@@ -497,9 +508,9 @@ cards:
                                 experimental:
                                   color_threshold: true
                                 cache: true
-                                span:
-                                  end: day
-                                  offset: "-0h"
+                                # span:
+                                #   end: day
+                                #   offset: "-0h"
                                 header:
                                   show: false
                                   title: Today's Energy Usage
@@ -543,7 +554,7 @@ cards:
                                     crosshairs:
                                       show: false
                                     labels:
-                                      format: dd-MM
+                                      format: HH:mm
                                   yaxis:
                                     forceNiceScale: false
                                     decimalsInFloat: 0
@@ -564,13 +575,13 @@ cards:
                                 locale: ua
                                 series:
                                   - entity: sensor.hourly_energy
-                                    type: column
+                                    type: area
                                     float_precision: 2
                                     color: "#4e8cd6"
                                     fill_raw: last
                                     curve: smooth
-                                    show:
-                                      datalabels: true
+                                    # show:
+                                    #   datalabels: true
                                     group_by:
                                       func: max
                                       duration: 1h
