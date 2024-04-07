@@ -41,10 +41,7 @@ backyardlightswitch_30off:
 
 diningroom_wled:
   duration: "00:00:30"
-diningroom_wled_from_guestroom:
-  duration: "00:00:30"
-diningroom_wled_from_diningroom:
-  duration: "00:00:30"
+
 
 bathroom_bulb:
   duration: "00:00:30"
