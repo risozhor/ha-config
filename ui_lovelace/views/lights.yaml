@@ -8,7 +8,8 @@ cards:
     cards:
       - type: row
         cards:
-          - type: col
+
+          - type: col # Livingroom
             class: col-md-6 col-lg-4
             cards:
               - type: row
@@ -47,7 +48,8 @@ cards:
                     template:
                       - light
                       - icon_lava
-          - type: col
+
+          - type: col # Kitchen
             class: col-md-6 col-lg-4
             cards:
               - type: row
@@ -76,7 +78,52 @@ cards:
                       - light
                       - icon_lightstrip
                       - loader
-          - type: col
+
+          - type: col # bedroom
+            class: col-md-6 col-lg-2
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Bedroom
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-8
+                    entity: light.kitchen_ceiling_lights
+                    name: Ceil
+                    template:
+                      - light
+                      - icon_bedroomlight
+
+          - type: col #kids
+            class: col-md-6 col-lg-2
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Kids Room
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-8
+                    entity: light.kidsroom_wled
+                    name: WLED
+                    template:
+                      - light
+                      - icon_lightstrip
+
+          - type: col # hallway
             class: col-md-6 col-lg-4
             cards:
               - type: row
@@ -105,49 +152,8 @@ cards:
                       - base
                       - icon_ceiling-flush
                       - loader
-          - type: col
-            class: col-md-6 col-lg-2
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Bedroom
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kitchen_ceiling_lights
-                    name: Ceil
-                    template:
-                      - light
-                      - icon_bedroomlight
-          - type: col
-            class: col-md-6 col-lg-2
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Kids Room
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kidsroom_wled
-                    name: WLED
-                    template:
-                      - light
-                      - icon_lightstrip
-          - type: col
+
+          - type: col #Dining
             class: col-md-6 col-lg-4
             cards:
               - type: row
@@ -158,23 +164,17 @@ cards:
                       style: |
                         ha-card {border: none;}
                     content: >-
-                      ## Guest Zone
+                      ## Dining Room
               - type: row
                 cards:
                   - type: custom:button-card
                     class: col-4 col-lg-4
-                    entity: light.guestroom_color_bulb
-                    name: Guests
+                    entity: light.diningroomlight
+                    name: Ceiling
                     template:
                       - light
                       - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.main_corridor_light
-                    name: Corridor
-                    template:
-                      - light
-                      - icon_hue
+
                   - type: custom:button-card
                     class: col-4 col-lg-4
                     entity: light.dining_room_stripe_3
@@ -182,35 +182,8 @@ cards:
                     template:
                       - light
                       - icon_arch
-          - type: col
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
-                    card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Restroom
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.shelly1
-                    name: Bath
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.toilet_light
-                    name: Toilet
-                    template:
-                      - light
-                      - icon_bathroom
-          - type: col
+
+          - type: col # Outdoor
             class: col-md-6 col-lg-4
             cards:
               - type: row
@@ -245,3 +218,61 @@ cards:
                     template:
                       - light
                       - icon_wall_flood
+
+          - type: col # Restroom
+            class: col-md-6 col-lg-4
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Restroom
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.shelly1
+                    name: Bath
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.toilet_light
+                    name: Toilet
+                    template:
+                      - light
+                      - icon_bathroom
+
+          - type: col #guests
+            class: col-md-6 col-lg-4
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Guest Zone
+              - type: row
+                cards:
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.guestroom_color_bulb
+                    name: Guests
+                    template:
+                      - light
+                      - icon_hue
+                  - type: custom:button-card
+                    class: col-4 col-lg-4
+                    entity: light.main_corridor_light
+                    name: Corridor
+                    template:
+                      - light
+                      - icon_hue

@@ -70,6 +70,7 @@
         'kitchen_ceiling_lights',
         'kitchen_strip',
         'toilet_light',
+        'diningroomlight',
         ] -%}
         {{- states.light | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length -}}
 

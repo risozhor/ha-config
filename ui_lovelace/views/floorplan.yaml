@@ -48,7 +48,7 @@ cards:
           left: 77%
           margin: 0px
           padding: 0px
-          top: 61%
+          top: 58%
         type: state-icon
       - entity: binary_sensor.terrace_door_sensor_contact
         style:
@@ -297,6 +297,20 @@ cards:
         state_image:
           "on": /local/images/light_bulb_on.png
         type: image
+      - entity: light.diningroomlight
+        style:
+          left: 77%
+          top: 63%
+          margin: 0px
+          padding: 0px
+          width: 7%
+        tap_action:
+          action: toggle
+        image: /local/images/light_bulb_off.png
+        state_image:
+          "on": /local/images/light_bulb_on.png
+        type: image
+
       - entity: light.main_corridor_light
         style:
           left: 77%
