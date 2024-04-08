@@ -585,7 +585,17 @@ cards:
                                     group_by:
                                       func: max
                                       duration: 1h
-
+                                  - entity: sensor.water_heater_hourly_energy
+                                    type: area
+                                    float_precision: 2
+                                    color: "#fff000"
+                                    fill_raw: last
+                                    curve: smooth
+                                    # show:
+                                    #   datalabels: true
+                                    group_by:
+                                      func: max
+                                      duration: 1h
                       - type: row ###### radialBar
                         cards:
                           - type: custom:button-card

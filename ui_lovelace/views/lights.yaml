@@ -169,7 +169,7 @@ cards:
                 cards:
                   - type: custom:button-card
                     class: col-4 col-lg-4
-                    entity: light.diningroomlight
+                    entity: light.dining_room_light
                     name: Ceiling
                     template:
                       - light
