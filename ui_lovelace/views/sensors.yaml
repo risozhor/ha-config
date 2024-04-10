@@ -8,55 +8,23 @@ cards:
     cards:
       - type: row
         cards:
+          - type: col # Devices
+            class: col-12
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Devices
+
+      - type: row
+        cards:
           - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.hallway_temperature_humidity_sensor_temperature
-            name: Hallway
-            tap_action: !include popup/modal_hallway_sensors.yaml
-            template:
-              - sensors
-              - icon_thermo_humid
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.livingroom_temperature
-            name: Livingroom
-            tap_action: !include popup/modal_livingroom_sensors.yaml
-            template:
-              - sensors
-              - icon_thermo_humid
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.guestroom_motion_sensor_temperature
-            name: Guestroom
-            tap_action: !include popup/modal_guestroom_sensors.yaml
-            template:
-              - sensors
-              - icon_temp
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.kitchen_smoke_detector_device_temperature
-            name: Kitchen
-            tap_action: !include popup/modal_kitchen_sensors.yaml
-            template:
-              - sensors
-              - icon_temp
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.nspmpanel_temperature
-            name: Kidsroom
-            tap_action: !include popup/modal_kidsroom_sensors.yaml
-            template:
-              - sensors
-              - icon_temp
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.livingroom_aqi
-            name: Livingroom
-            template:
-              - sensors
-              - icon_pm2_5
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
+            class: col-6 col-lg px-2 pt-4
             entity: fan.xiaomi_miio_device
             name: Purifier
             tap_action:
@@ -66,7 +34,16 @@ cards:
               - icon_fan2
               - loader
           - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
+            class: col-6 col-lg px-2 pt-4
+            entity: switch.water_heater_energy_meter
+            name: Water Heater
+            hold_action:
+              action: more-info
+            template:
+              - base
+              - icon_waterheater
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
             entity: climate.boiler_controller_boiler_thermostat
             name: Klimate
             tap_action: !include popup/climate.yaml
@@ -85,16 +62,66 @@ cards:
                 ]]]
               circle_input_unit: "°C"
           - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: binary_sensor.kitchen_smoke_detector_smoke
-            name: Smoke
-            tap_action:
-              action: none
+            class: col-6 col-lg px-2 pt-4
+            entity: switch.outlet
+            name: Kitchen
+            double_tap_action:
+              action: more-info
+            hold_action:
+              action: more-info
             template:
               - base
-              - icon_fire
+              - icon_plug
+              - loader
           - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
+            class: col-6 col-lg px-2 pt-4
+            entity: switch.guestroom_plug_2
+            name: Plug 1
+            double_tap_action:
+              action: more-info
+            tap_action:
+              action: more-info
+            hold_action:
+              action: more-info
+            template:
+              - sensors
+              - icon_plug
+              - circle
+              - loader
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'on'
+                          ? Math.round(entity.attributes.voltage).toString()+'V'
+                          : Math.round(entity.attributes.voltage).toString()+'V';
+                  }
+                ]]]
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: media_player.living_room_tv
+            name: TV
+            tap_action:
+              action: more-info
+            template:
+              - base
+              - icon_tv
+              - loader
+              - circle
+            variables:
+              circle_input: >
+                [[[
+                  if (entity) {
+                      return entity.state === 'playing'
+                          ? Math.round(entity.attributes.volume_level*100)
+                          : Math.round(entity.attributes.volume_level).toString();
+                          }
+                      
+                  
+                ]]]
+              circle_input_unit: "%"
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
             entity: media_player.living_room_speaker
             name: Nest mini
             tap_action: !include popup/nest_mini_livingroom.yaml
@@ -115,6 +142,81 @@ cards:
                   
                 ]]]
               circle_input_unit: "%"
+
+          - type: col # Sensors
+            class: col-12
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                    content: >-
+                      ## Sensors
+
+      - type: row
+        cards:
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.hallway_temperature_humidity_sensor_temperature
+            name: Hallway
+            tap_action: !include popup/modal_hallway_sensors.yaml
+            template:
+              - sensors
+              - icon_thermo_humid
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.livingroom_temperature
+            name: Livingroom
+            tap_action: !include popup/modal_livingroom_sensors.yaml
+            template:
+              - sensors
+              - icon_thermo_humid
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.guestroom_motion_sensor_temperature
+            name: Guestroom
+            tap_action: !include popup/modal_guestroom_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.kitchen_smoke_detector_device_temperature
+            name: Kitchen
+            tap_action: !include popup/modal_kitchen_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.nspmpanel_temperature
+            name: Kidsroom
+            tap_action: !include popup/modal_kidsroom_sensors.yaml
+            template:
+              - sensors
+              - icon_temp
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: sensor.livingroom_aqi
+            name: Livingroom
+            template:
+              - sensors
+              - icon_pm2_5
+          - type: custom:button-card
+            class: col-6 col-lg px-2 pt-4
+            entity: binary_sensor.kitchen_smoke_detector_smoke
+            name: Smoke
+            tap_action:
+              action: more-info
+            template:
+              - base
+              - icon_fire
+
+      - type: row
+        cards:
           - type: custom:button-card
             class: col-6 col-lg-2 px-2 pt-4
             entity: binary_sensor.hallway_presence_sensor_presence
@@ -175,68 +277,9 @@ cards:
             entity: binary_sensor.backyard_motion_sensor_occupancy
             name: Backyard
             double_tap_action: none
-            tap_action: none
+            tap_action:
+              action: more-info
             hold_action: none
             template:
               - sensors
               - icon_walk
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: switch.guestroom_plug_2
-            name: Plug 1
-            double_tap_action:
-              action: more-info
-            tap_action:
-              action: more-info
-            hold_action:
-              action: more-info
-            template:
-              - sensors
-              - icon_plug
-              - circle
-              - loader
-            variables:
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return entity.state === 'on'
-                          ? Math.round(entity.attributes.voltage).toString()+'V'
-                          : Math.round(entity.attributes.voltage).toString()+'V';
-                  }
-                ]]]
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: switch.outlet
-            name: Kitchen
-            double_tap_action:
-              action: more-info
-            hold_action:
-              action: more-info
-            template:
-              - base
-              - icon_plug
-              - loader
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: media_player.living_room_tv
-            name: TV
-            # tap_action: !include popup/nest_mini_livingroom.yaml
-            tap_action:
-              action: more-info
-            template:
-              - base
-              - icon_tv
-              - loader
-              - circle
-            variables:
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return entity.state === 'playing'
-                          ? Math.round(entity.attributes.volume_level*100)
-                          : Math.round(entity.attributes.volume_level).toString();
-                          }
-                      
-                  
-                ]]]
-              circle_input_unit: "%"
