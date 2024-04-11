@@ -54,6 +54,9 @@ cards:
                         show_forecast: false
                         entity: weather.home
                         forecast_type: daily
+                        tap_action:
+                          action: navigate
+                          navigation_path: /lovelace/weather
                       - type: custom:energy-overview-card
                         card_mod:
                           style: |
@@ -200,13 +203,6 @@ cards:
                                 hold_action:
                                   action: none
                                 content: ""
-                              - type: weather
-                                entity: weather.home_2
-                                show_conditions: false
-                                show_temperature: false
-                                tap_action:
-                                  action: navigate
-                                  navigation_path: /lovelace/weather
                               - type: conditional
                                 conditions:
                                   - entity: sensor.ua_alarms
