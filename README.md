@@ -97,7 +97,7 @@ My design is based on [Mattias Persson's design](https://github.com/matt8707/has
 | *not so smart but important devices* ||
 | Argon One M.2 Case for Raspberry 4 and m2 SSD| <img src="git/devices/Argon-One-M.2-Case.jpg"/> |
 | ATIS Lock SS </br>[Rewiev](https://www.smarty.ninja/hard/access-control/%d0%b5%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%bc%d0%b5%d1%85%d0%b0%d0%bd%d1%96%d1%87%d0%bd%d0%b8%d0%b9-%d0%b7%d0%b0%d0%bc%d0%be%d0%ba-atis-lock-ss/) and [How to integrate an electromechanical lock into Home Assistant](https://www.smarty.ninja/hard/access-control/atis-lock-into-home-assistant/) | <img src="git/devices/ATIS-Lock-SS.jpg"/> |
-| MikroTik RB4011iGS+5HacQ2HnD-IN router  | <img src="git/devices/rb4011.jpg"/> |
+| MikroTik RB4011iGS+5HacQ2HnD-IN   | <img src="git/devices/rb4011.jpg"/> |
 | Tecsar Trek SA TS21 controller </br>[Rewiev](https://www.smarty.ninja/hard/access-control/tecsar-trek-sa-ts21/) | <img src="git/devices/Tecsar-Trek-SA-TS21.jpg"/> |
 
 
@@ -117,7 +117,7 @@ My design is based on [Mattias Persson's design](https://github.com/matt8707/has
 ### main screen
 <img src="git/home.png"  />
 
-### router modal window
+### router window
 <img src="git/router.png" />
 
 ### lights
