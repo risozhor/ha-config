@@ -396,18 +396,18 @@ cards:
                       card:
                         - background: >
                             [[[
-                              if (entity.state == 0)
+                              if (entity.state == "on")
                                 return "rgb(255 0 0 / 40%)";
                             ]]]
                         - color: >
                             [[[
-                              if (entity.state == 0)
+                              if (entity.state == "on")
                                 return "#fff";
                               else return "#97989c";
                             ]]]
                         - animation: >
                             [[[
-                              if (entity.state == 0)
+                              if (entity.state == "on")
                                 return "pulse 1500ms infinite";
                               else return "none";
                             ]]]
@@ -423,18 +423,18 @@ cards:
                       card:
                         - background: >
                             [[[
-                              if (entity.state != 0)
+                              if (entity.state == "on")
                                 return "rgb(255 0 0 / 40%)";
                             ]]]
                         - color: >
                             [[[
-                              if (entity.state != 0)
+                              if (entity.state == "on")
                                 return "#fff";
                               else return "#97989c";
                             ]]]
                         - animation: >
                             [[[
-                              if (entity.state != 0)
+                              if (entity.state == "on")
                                 return "pulse 1500ms infinite";
                               else return "none";
                             ]]]
