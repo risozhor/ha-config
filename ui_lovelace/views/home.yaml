@@ -660,9 +660,10 @@ cards:
                         [[[
                           return '<ha-icon icon="mdi:auto-mode"></ha-icon> ' + entity?.state
                         ]]]
-                    tap_action:
-                      action: more-info
-                      entity: input_boolean.away_mode
+                    tap_action: !include popup/modal_homemode.yaml
+                    # tap_action:
+                    #   action: more-info
+                    #   entity: input_boolean.away_mode
                     template: footer
                   - type: custom:button-card
                     class: col-auto d-flex

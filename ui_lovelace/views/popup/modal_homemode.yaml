@@ -1,0 +1,32 @@
+action: fire-dom-event
+browser_mod:
+  service: browser_mod.popup
+  data:
+    # title: Livingroom Nest Mini
+    content:
+      type: vertical-stack
+      cards:
+        - type: entities
+          state_color: true
+          card_mod:
+            class: content
+          entities:
+            - type: custom:mushroom-entity-card
+              entity: sensor.home_mode
+              fill_container: false
+              icon_color: blue
+            - type: custom:mushroom-template-card
+              primary: |-
+                Actualy "{{states.sensor.home_mode.state }}" is on, you can change it to
+                {%- if (states.input_boolean.away_mode.state == 'off') %} "Away Mode"
+                {%- else %} 
+                {% if is_state("binary_sensor.day_tod", "on") %} "Day Mode"
+                {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %} "Sleeping Mode"
+                {% else %} "Night Mode"
+                {% endif %}
+                {%- endif %}
+              secondary: ""
+              icon: ""
+        - type: entities
+          entities:
+            - entity: input_boolean.away_mode

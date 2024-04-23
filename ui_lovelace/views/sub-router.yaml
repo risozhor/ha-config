@@ -38,7 +38,7 @@ cards:
                     - type: row ###### PORTS
                       cards:
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_wan_connection
                           name: WAN
                           tap_action:
@@ -56,7 +56,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether1_connection
                           name: ETH 1
                           tap_action:
@@ -74,7 +74,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether2_connection
                           name: ETH 2
                           tap_action:
@@ -92,7 +92,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether3_connection
                           name: ETH 3
                           tap_action:
@@ -110,7 +110,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether4_connection
                           name: ETH 4
                           tap_action:
@@ -128,7 +128,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether5_connection
                           name: ETH 5
                           tap_action:
@@ -146,7 +146,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether6_connection
                           name: ETH 6
                           tap_action:
@@ -164,7 +164,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether7_connection
                           name: ETH 7
                           tap_action:
@@ -182,7 +182,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether8_connection
                           name: ETH 8
                           tap_action:
@@ -200,7 +200,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether9_connection
                           name: ETH 9
                           tap_action:
@@ -218,7 +218,7 @@ cards:
                               }
                             ]]]
                         - type: custom:button-card
-                          class: col-6 col-md-4 col-lg-2 col-xxl px-2 pt-4
+                          class: col-6 col-md-4 col-lg-2 col-xl px-2 pt-4
                           entity: sensor.mikrotik_ether10_connection
                           name: ETH 10
                           tap_action:

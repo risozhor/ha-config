@@ -3,7 +3,7 @@
     home_mode:
       friendly_name: "Housemode"
       value_template: >-
-        {% if is_state("input_boolean.away_mode", "on") %}Away
+        {% if is_state("input_boolean.away_mode", "on") %}Away Mode
         {% elif is_state("binary_sensor.day_tod", "on") %}Day Mode
         {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}Sleeping Mode
         {% else %}Night Mode
