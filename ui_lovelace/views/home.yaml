@@ -652,7 +652,7 @@ cards:
                       url_path: http://zigstargw.local
                     template: footer
                   - type: custom:button-card
-                    class: col-auto d-none d-md-flex
+                    class: col-auto d-flex
                     entity: sensor.home_mode
                     show_name: false
                     custom_fields:
@@ -661,9 +661,6 @@ cards:
                           return '<ha-icon icon="mdi:auto-mode"></ha-icon> ' + entity?.state
                         ]]]
                     tap_action: !include popup/modal_homemode.yaml
-                    # tap_action:
-                    #   action: more-info
-                    #   entity: input_boolean.away_mode
                     template: footer
                   - type: custom:button-card
                     class: col-auto d-flex
