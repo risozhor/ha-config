@@ -162,7 +162,8 @@ cards:
                       template: footer
                       name: NAS Update Ready
                       tap_action:
-                        action: more-info
+                        action: ur
+                        url_path: http://192.168.10.17:8123/config/updates
                       custom_fields:
                         notification: >
                           [[[
