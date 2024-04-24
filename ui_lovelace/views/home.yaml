@@ -616,7 +616,7 @@ cards:
                       navigation_path: sub-servers
                     template: footer
                   - type: custom:button-card
-                    class: col-auto
+                    class: col-auto d-none d-md-flex
                     name: >
                       <ha-icon icon="mdi:router-network-wireless"></ha-icon> Router
                     tap_action:
