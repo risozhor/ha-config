@@ -2,7 +2,7 @@ action: fire-dom-event
 browser_mod:
   service: browser_mod.popup
   data:
-    # title: Livingroom Nest Mini
+    title: Set House Mode
     content:
       type: vertical-stack
       cards:
