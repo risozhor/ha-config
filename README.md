@@ -1,9 +1,9 @@
 <!-- Shield -->
-[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.4-blue.svg
+[ha-version-shield]: https://img.shields.io/badge/Home%20Assistant-2024.5-blue.svg
 [ha-server]: https://img.shields.io/badge/Raspberry%20PI%204-RAM%204%20Gb-red.svg
 [nas]: https://img.shields.io/badge/Raspberry%20CM4-RAM%204%20Gb-orange.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
-[z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.36-yellow.svg
+[z2m-shield]: https://img.shields.io/badge/zigbee2mqtt-1.37-yellow.svg
 [ring-alarm-shield]: https://img.shields.io/badge/Security%20Kit-Ring-blue.svg
 [zgw-shield]: https://img.shields.io/badge/ZigStar%20-LAN%20GW-green.svg
 
