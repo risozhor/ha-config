@@ -43,34 +43,34 @@ browser_mod:
             #       mushroom-card {
             #         margin: -5px -13px 0 -4px;
             #       }
-            - entity: climate.boiler_controller_boiler_thermostat
-              type: custom:climate-mode-entity-row
-              name: Boiler
-              modes:
-                - hvac_mode: "off"
-                - hvac_mode: "heat"
-                - preset_mode: "home"
-                  color: "green"
-                - preset_mode: "sleep"
-                  color: "blue"
-                - preset_mode: "away"
-                  color: "brown"
-                  icon: "mdi:home-off"
-            - type: custom:mushroom-climate-card
-              entity: climate.boiler_controller_boiler_thermostat
-              icon_type: none
-              secondary_info: none
-              primary_info: none
-              show_temperature_control: true
-              card_mod:
-                style: |
-                  mushroom-card {
-                    margin: -18px -13px -8px -4px
-                  }
-            - entity: sensor.guestroom_motion_sensor_temperature
-              name: Curent Temperature
-            - entity: sensor.livingroom_humidity
-              name: Curent Humidity
+            # - entity: climate.boiler_controller_boiler_thermostat
+            #   type: custom:climate-mode-entity-row
+            #   name: Boiler
+            #   modes:
+            #     - hvac_mode: "off"
+            #     - hvac_mode: "heat"
+            #     - preset_mode: "home"
+            #       color: "green"
+            #     - preset_mode: "sleep"
+            #       color: "blue"
+            #     - preset_mode: "away"
+            #       color: "brown"
+            #       icon: "mdi:home-off"
+            # - type: custom:mushroom-climate-card
+              # entity: climate.boiler_controller_boiler_thermostat
+              # icon_type: none
+              # secondary_info: none
+              # primary_info: none
+              # show_temperature_control: true
+              # card_mod:
+              #   style: |
+              #     mushroom-card {
+              #       margin: -18px -13px -8px -4px
+            #   #     }
+            # - entity: sensor.guestroom_motion_sensor_temperature
+            #   name: Curent Temperature
+            # - entity: sensor.livingroom_humidity
+            #   name: Curent Humidity
 
         - type: custom:apexcharts-card
           layout: minimal

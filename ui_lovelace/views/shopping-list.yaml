@@ -6,3 +6,9 @@ badges: []
 cards:
   - type: shopping-list
     title: Shopping List
+
+
+  - type: shopping-list
+    title: Buying list for Ua 
+    entity: todo.yava_tasks
+

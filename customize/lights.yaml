@@ -1,31 +1,34 @@
-light.wled:
-  friendly_name: "Hallway stripe"
-light.gyver:
-  friendly_name: "Gyver Bulb"
-  entity_id: "gyver bulb"
-  unique_id: gyver_bulb
-  icon: mdi:lava-lamp
-light.shelly1:
-  friendly_name: "Bathroom Bulb"
-  entity_id: "bathroom bulb"
-  unique_id: bathroom_bulb
-  icon: mdi:shower
-light.livingroom_lights:
+# light.wled:
+#   friendly_name: "Kitchen Backlight"
+#   icon: mdi:led-strip-variant
+#   entity_id: Kitchen Backlight
+#   unique_id: Kitchen Backlight
+# light.gyver:
+#   friendly_name: "Gyver Bulb"
+#   entity_id: "gyver bulb"
+#   unique_id: gyver_bulb
+#   icon: mdi:lava-lamp
+# light.shelly1:
+#   friendly_name: "Bathroom Bulb"
+#   entity_id: "bathroom bulb"
+#   unique_id: bathroom_bulb
+#   icon: mdi:shower
+light.living_room_lights:
   friendly_name: "Livingroom Lights"
   icon: mdi:vanity-light
-light.ceiling_lights:
+light.kitchen_lights:
   friendly_name: "Kitchen Ceiling Lights"
   icon: mdi:vanity-light
-light.livingroom_table_background:
-  friendly_name: "Table background"
-  entity_id: "Table background"
-  icon: mdi:television-ambient-light
-light.kitchen_strip:
-  friendly_name: "Kitchen Strip"
-  entity_id: Kitchen Strip
-  icon: mdi:led-strip-variant
-light.wled_3:
-  friendly_name: "Dining Room Stripe"
-  icon: mdi:led-strip-variant
-  entity_id: Dining Room Stripe
-  unique_id: Dining Room Stripe
+# light.livingroom_couch_lights:
+#   friendly_name: "Table background"
+#   entity_id: "Table background"
+#   icon: mdi:television-ambient-light
+# light.wled:
+#   friendly_name: "Kitchen Strip"
+#   entity_id: Kitchen Strip
+#   icon: mdi:led-strip-variant
+# light.wled_3:
+#   friendly_name: "Dining Room Stripe"
+#   icon: mdi:led-strip-variant
+#   entity_id: Dining Room Stripe
+#   unique_id: Dining Room Stripe

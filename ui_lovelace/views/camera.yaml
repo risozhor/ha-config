@@ -17,13 +17,8 @@ cards:
         cards:
           - type: picture-entity
             class: col-xs-12 col-md-4 pt-3
-            entity: camera.wyze
-          - type: picture-entity
-            class: col-xs-12 col-md-4 pt-3
             entity: camera.front_door
-          - type: picture-entity
-            class: col-xs-12 col-md-4 pt-3
-            # show_state: true
-            # show_name: true
-            # camera_view: auto
-            entity: camera.livingroom_prof0_name
+            tap_action:
+              action: more-info
+              entity: camera.front_door
+

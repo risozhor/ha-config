@@ -12,7 +12,7 @@ cards:
         cards:
           - type: entities #HOME ASSISTANT
             class: col-12 col-md-4
-            title: Home Assistant
+            # title: Home Assistant
             show_header_toggle: false
             card_mod:
               style: |
@@ -34,15 +34,16 @@ cards:
                   {{state_attr('update.home_assistant_core_update','latest_version') }}
                   avalable{%- endif %}
                 icon: mdi:home-assistant
-                entity: sensor.nas_ha_installed_version
+                # entity: sensor.nas_ha_installed_version
                 icon_color: >-
                   {% if state_attr('update.home_assistant_core_update','installed_version') ==
                   state_attr('update.home_assistant_core_update','latest_version') -%}green {%-
                   else -%} orange {%- endif %}
-              - entity: sensor.maria_db_size
+
+              - entity: sensor.ha_db_size
                 name: DB Size
                 icon: mdi:database
-              - entity: sensor.last_boot
+              - entity: sensor.uptime
                 name: Last Boot
                 icon: mdi:update
               - type: custom:bar-card
@@ -55,44 +56,127 @@ cards:
                   style: |
                     ha-card {border: none !important;}
                 entities:
-                  - entity: sensor.processor_use_percent
+                  - entity: sensor.system_monitor_processor_use
                     name: Processor
                     icon: mdi:chip
-                  - entity: sensor.memory_use_percent
+                  - entity: sensor.system_monitor_memory_usage
                     name: Memory
                     icon: mdi:memory
-                  - entity: sensor.disk_use_percent
+                  - entity: sensor.system_monitor_disk_usage
                     name: Disk
                     icon: mdi:harddisk
-              - type: custom:stack-in-card
-                mode: horizontal
+              - type: custom:apexcharts-card
+                experimental:
+                  color_threshold: true
+                cache: true
+                header:
+                  show: true
+                  title: CPU Temperature
+                  show_states: true
+                  colorize_states: true
+                show:
+                  loading: false
                 card_mod:
                   style: |
-                    ha-card {border: none !important;border-radius: 0; padding: 15px 0;}
-                cards:
-                  - type: custom:button-card
-                    class: col-auto mb-md-5
-                    template: footer
-                    name: >
-                      <ha-icon icon="mdi:reload"></ha-icon> Restart
+                    ha-card {
+                      border: none;
+                    }
+                apex_config:
+                  tickAmount: 8
+                  legend:
+                    show: true
+                  dataLabels:
+                    enabled: true
+                    offsetY: 2
+                    background:
+                      enabled: true
+                      borderColor: "#fff"
+                      borderWidth: 2
+                      borderRadius: 2
+                      opacity: 0.7
+                      foreColor: "#ccccff"
+                      dropShadow:
+                        enabled: true
+                        top: 2
+                        left: 2
+                        blur: 1
+                        color: "#000000"
+                        opacity: 0.5
+                  stroke:
+                    show: true
+                    width: 1
+                    curve: smooth
+                  chart:
+                    height: 200px
+                  xaxis:
+                    crosshairs:
+                      show: true
+                    labels:
+                      format: HH:mm
+                  yaxis:
+                    forceNiceScale: true
+                    decimalsInFloat: 0
+                    # min: 0
+                    show: true
+                  fill:
+                    type: gradient
+                    gradient:
+                      type: vertical
+                      shadeIntensity: 0.1
+                      opacityFrom: 0.25
+                      opacityTo: 1
+                      inverseColors: true
+                      stops:
+                        - 0
+                        - 100
+                graph_span: 24h
+                locale: ua
+                series:
+                  - entity: sensor.system_monitor_processor_temperature
+                    name: HA CPU
+                    type: area
+                    float_precision: 1
+                    color: "#4e8cd6"
+                    fill_raw: last
+                    curve: smooth
+                    show:
+                      legend_value: false
+                      in_header: false
+                    group_by:
+                      func: max
+                      duration: 10m
+              - type: custom:mushroom-chips-card
+                class: col-auto
+                chips:
+                  - type: template
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border-radius: 0px!important;
+                        }
+                    icon: mdi:reload
+                    content: "Restart"
                     tap_action:
                       action: call-service
                       service: homeassistant.restart
                       target: {}
-                  - type: custom:button-card
-                    class: col-auto mb-md-5
-                    template: footer
-                    name: >
-                      <ha-icon icon="mdi:power-plug-off"></ha-icon> Off
+                  - type: template
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border-radius: 0px!important;
+                        }
+                    icon: mdi:power-plug-off
+                    content: "Off"
                     tap_action:
                       action: call-service
                       service: hassio.host_shutdown
                       target: {}
-          - type: entities # NAS
+
+
+          - type: entities # Zigbee Map
             class: col-12 col-md-4
-            view_layout:
-              grid-area: nas
-            title: NAS
+            title: Zigbee Map
             show_header_toggle: false
             card_mod:
               style: |
@@ -102,79 +186,37 @@ cards:
                 #states > * {margin: 0!important;}
                 #states > :last-child {margin-bottom: 0px;margin-top: auto!important;}
             entities:
-              - type: custom:mushroom-template-card
+              - type: custom:zigbee2mqtt-networkmap
+                entity: sensor.zigbee2mqtt_network_map
+                force: 3000
+                node_size: 12
+                font_size: 12
+                link_width: 1
                 card_mod:
                   style: |
                     ha-card {border: none !important;}
-                primary: >-
-                  {% if (states.sensor.nas_ha_version.state ==
-                  states.sensor.nas_ha_installed_version.state) -%}Installed version: {{states.sensor.nas_ha_installed_version.state }}
-                  {%- else -%}Update to {{states.sensor.nas_ha_version.state }} avalable{%- endif %}
-                secondary: >-
-                  {% if (states.sensor.nas_ha_version.state != states.sensor.nas_ha_installed_version.state) -%}
-                  Installed version: {{states.sensor.nas_ha_installed_version.state }}
-                icon: mdi:home-assistant
-                entity: sensor.nas_ha_installed_version
-                icon_color: >-
-                  {% if (states.sensor.nas_ha_version.state ==
-                  states.sensor.nas_ha_installed_version.state) -%}green
-                  {%- else -%} orange {%- endif %}
-              - entity: sensor.nas_db_size
-                name: DB Size
-                icon: mdi:database
-              - entity: sensor.nas_last_boot
-                name: Last Boot
-                icon: mdi:update
-              - type: custom:bar-card
-                width: 55%
-                height: 2em
-                decimal: 0
-                unit_of_measurement: "%"
-                entity_row: true
-                card_mod:
-                  style: |
-                    ha-card {border: none !important;}
-                entities:
-                  - entity: sensor.nas_processor_use
-                    name: Processor
-                    icon: mdi:chip
-                  - entity: sensor.nas_memory_use
-                    name: Memory
-                    icon: mdi:memory
-                  - entity: sensor.nas_disk_use
-                    name: Disk
-                    icon: mdi:harddisk
-              - type: custom:stack-in-card
-                mode: horizontal
-                card_mod:
-                  style: |
-                    ha-card {border: none !important;border-radius: 0; padding: 15px 0;}
-                cards:
-                  - type: conditional
-                    conditions:
-                      - condition: numeric_state
-                        entity: sensor.nas_addon_updates_count
-                        above: 0
-                    card:
-                      type: custom:button-card
-                      class: col-auto mb-md-5
-                      entity: sensor.nas_updates_names
-                      template: footer
-                      name: NAS Update Ready
-                      tap_action:
-                        action: url
-                        url_path: http://192.168.10.17:8123/config/updates
-                      custom_fields:
-                        notification: >
-                          [[[
-                            let count = states['sensor.nas_addon_updates_count'];
-                            return (count.state).toString();
-                          ]]]
+                css: |
+                  :host {
+                    --zigbee2mqtt-networkmap-node-color: rgba(18, 120, 98, .7);
+                    --zigbee2mqtt-networkmap-node-fill-color: #dcfaf3;
+                    --zigbee2mqtt-networkmap-node-pinned-color: rgba(190, 56, 93, .6);
+                    --zigbee2mqtt-networkmap-link-color: rgba(18, 120, 98, .5);
+                    --zigbee2mqtt-networkmap-hover-color: #be385d;
+                    --zigbee2mqtt-networkmap-link-selected-color: rgba(202, 164, 85, .6);
+                    --zigbee2mqtt-networkmap-label-color: rgba(218, 220, 198, .7);
+                    --zigbee2mqtt-networkmap-arrow-color: rgba(18, 120, 98, 0.7);
+                    --zigbee2mqtt-networkmap-node-coordinator-color: rgba(224, 78, 93, .7);
+                    --zigbee2mqtt-networkmap-node-router-color: rgba(0, 165, 255, .7);
+                  }
+
+
+
+
+
+
           - type: entities # NET
             class: col-12 col-md-4
-            view_layout:
-              grid-area: hard
-            title: Network/Gateway
+            # title: Network/Gateway
             show_header_toggle: false
             card_mod:
               style: |
@@ -184,33 +226,72 @@ cards:
                 #states > * {margin: 0!important;}
                 #states > :last-child {margin-bottom: 0px;margin-top: auto!important;}
             entities:
+
+              - entity: sensor.gl_inet_be9300_cpu_temperature
+                name: Router CPU Temperature
+                icon: mdi:router-network-wireless
+              - entity: sensor.myip
+                name: External IP
+                icon: mdi:server-network
+              #   - entity: sensor.speedtest_ping
+              #     name: Ping
+              #     icon: mdi:speedometer
               - type: custom:mushroom-template-card
+                primary: Speedtest
+                secondary: |-
+                  Ping {{states.sensor.speedtest_ping.state}}ms, 
+                  Download: {{states.sensor.speedtest_download.state | round}} Mbit/s, 
+                  Upload: {{states.sensor.speedtest_upload.state}} Mbit/s
+                icon: mdi:speedometer
+                entity: sensor.speedtest_download
                 card_mod:
                   style: |
                     ha-card {border: none !important;}
-                primary: |-
-                  {% if states.sensor.socket_connections_2.state | int (0) != 0 %} 
-                  Connected to {{states.sensor.socket_connections_2.state -}}
-                  {% if states.sensor.socket_connections_2.state | int (0) > 0 %} socket
-                  {%- else %} sockets{%- endif %}
-                  {%- else %}Sockets disconected{%- endif %}
-                icon: mdi:check-network-outline
-                entity: sensor.socket_connections_2
-                icon_color: |-
-                  {% if states.sensor.socket_connections_2.state ==0  -%}red
-                  {%- else -%}blue{%- endif %}
                 tap_action:
-                  action: url
-                  url_path: http://zigstargw.local
-              - entity: sensor.uptime_2
-                name: Gateway Uptime
-                icon: mdi:clock
-              - entity: sensor.esp_temperature
-                name: Gateway Temp
-                icon: mdi:coolant-temperature
-              - entity: sensor.speedtest_ping
-                name: Ping
-                icon: mdi:speedometer
+                  action: none
+                layout: horizontal
+                multiline_secondary: false
+                picture: ""
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                icon_color: green
+              # - type: custom:mushroom-template-card
+              #   primary: >
+              #     {% if states.binary_sensor.zigbee2mqtt_bridge_connection_state_2.state  == "on" %}Gateway Conected {%- else %}Disconected{%- endif %}
+              #   icon: mdi:zigbee
+              #   entity: binary_sensor.zigbee2mqtt_bridge_connection_state_2
+              #   icon_color: >
+              #     {% if states.binary_sensor.zigbee2mqtt_bridge_connection_state_2.state == "on" %}green{%- else
+              #     %} #97989c{%- endif %}
+              #   tap_action:
+              #     action: none
+              #   card_mod:
+              #     style: |
+              #       ha-card {
+              #           border: none !important;
+              #           {% if states.binary_sensor.zigbee2mqtt_bridge_connection_state_2.state == "on" %}animation: pulse 1500ms infinite;
+              #           {%- endif %}
+              #       }
+              - type: custom:mushroom-template-card
+                primary: SSL sertificate expiry date
+                secondary: >-
+                  {{as_timestamp(states.sensor.home_smarty_ninja_cert_expiry.state) |
+                  timestamp_custom('%d %B %Y') }}
+                icon: mdi:certificate
+                features_position: bottom
+                entity: sensor.home_smarty_ninja_cert_expiry
+                color: green
+                card_mod:
+                  style: |
+                    ha-card {border: none !important;}
+              - entity: sensor.gl_inet_be9300_uptime
+                name: Router Uptime
+                icon: mdi:camera-timer
+              - entity: button.gl_inet_be9300_reboot
+                name: Router reboot
+                icon: mdi:reload-alert
               - type: custom:apexcharts-card
                 card_mod:
                   style: |

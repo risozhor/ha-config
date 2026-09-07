@@ -6,101 +6,1141 @@ subview: true
 cards:
   - type: custom:bootstrap-grid-card
     cards:
+      # - type: row
+      #   cards:
+      #     - type: custom:button-card
+      #       class: col-6 col-lg-2 px-2 pt-4
+      #       entity: sensor.weather_station_info
+      #       name: Weather Station
+      #       tap_action:
+      #         action: navigate
+      #         navigation_path: /lovelace/sub-weather
+      #       template:
+      #         - base
+      #         - icon_weatherstation
+
       - type: row
         cards:
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.weather_station_info
-            name: Weather Station
-            tap_action:
-              action: navigate
-              navigation_path: /lovelace/sub-weather
-            template:
-              - base
-              - icon_weatherstation
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.u_s_air_quality_index
-            name: AQI
-            tap_action:
-              action: more-info
-            template:
-              - sensors
-              - icon_aqi
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: weather.openweathermap
-            name: Weather
-            tap_action:
-              action: more-info
-            template:
-              - sensors
-              - icon_weather
-              - circle
-            variables:
-              circle_input: >
-                [[[
-                  return Math.round(entity.attributes.temperature).toString();
-                ]]]
-              circle_input_unit: "°C"
+          - type: custom:vertical-stack-in-card #weather_temperature
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                      overflow: hidden !important;
+                      }
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.weather_temperature
+                tap_action:
+                  action: more-info
+                icon: mdi:thermometer
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-state-item$: |
+                      {z-index: 99;}
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG ========== #}
+                        {# == Updated: entity auto generated == #}
+                        {% set temp = states(config.entity) | int() %}
+                        {% set rgb = '0,140,255' %}
+                        {% set anim = 'temp-cold-breathe' %}
+                        {% set glow_anim = 'temp-cold-glow' %}
+                        {% set halo_anim = 'temp-cold-halo' %}
+                        {% set duration = 4.0 %}
+                        {% set intensity = 0.5 %}
+                        {# RANGES / COLORS #}
+                        {# You can change temp numbers below if needed #}
+                        {% if temp < -0 %}
+                          {# BLUE #}
+                          {% set rgb = '0,140,255' %}
+                          {% set anim = 'temp-cold-breathe' %}
+                          {% set glow_anim = 'temp-cold-glow' %}
+                          {% set halo_anim = 'temp-cold-halo' %}
+                          {% set duration = 4.4 %}
+                          {% set intensity = 0.4 %}
+                        {% elif temp < 10 %}
+                          {# YELLOW #}
+                          {% set rgb = '255,210,40' %}
+                          {% set anim = 'temp-cool-wave' %}
+                          {% set glow_anim = 'temp-cool-glow' %}
+                          {% set halo_anim = 'temp-cool-halo' %}
+                          {% set duration = 3.4 %}
+                          {% set intensity = 0.55 %}
+                        {% elif temp < 20 %}
+                          {# ORANGE #}
+                          {% set rgb = '255,150,40' %}
+                          {% set anim = 'temp-comfy-breathe' %}
+                          {% set glow_anim = 'temp-comfy-glow' %}
+                          {% set halo_anim = 'temp-comfy-halo' %}
+                          {% set duration = 3.0 %}
+                          {% set intensity = 0.6 %}
+                        {% elif temp < 25 %}
+                          {# DARK ORANGE #}
+                          {% set rgb = '255,115,20' %}
+                          {% set anim = 'temp-warm-pulse' %}
+                          {% set glow_anim = 'temp-warm-glow' %}
+                          {% set halo_anim = 'temp-warm-halo' %}
+                          {% set duration = 2.4 %}
+                          {% set intensity = 0.8 %}
+                        {% else %}
+                          {# RED #}
+                          {% set rgb = '255,40,40' %}
+                          {% set anim = 'temp-hot-shimmer' %}
+                          {% set glow_anim = 'temp-hot-glow' %}
+                          {% set halo_anim = 'temp-hot-halo' %}
+                          {% set duration = 2.0 %}
+                          {% set intensity = 1.0 %}
+                        {% endif %}
+                        {# Apply variables #}
+                        --temp-rgb: {{ rgb }};
+                        --temp-intensity: {{ intensity }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+                        opacity: 1;
+                        /* Icon color follows the temperature */
+                        --icon-color: rgba({{ rgb }}, 1);
+                        /* KILL THE THEME BLUE & MAKE SHAPE NEUTRAL */
+                        background-color: rgba(77, 77, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+                      /* ========== COLD ========== */
+                      @keyframes temp-cold-breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.03); }
+                        100% { transform: scale(0.96); }
+                      }
+                      @keyframes temp-cold-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 6 rgba(var(--temp-rgb), 0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--temp-rgb), 0.95),
+                            0 0 50px 10px rgba(var(--temp-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 6 rgba(var(--temp-rgb), 0.55);
+                        }
+                      }
+                      @keyframes temp-cold-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--temp-rgb), 0.35),
+                            0 -20px 80px -14px rgba(220, 240, 255, 0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 36px rgba(var(--temp-rgb), 0.5),
+                            0 -34px 100px -8px rgba(240, 250, 255, 0.8);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--temp-rgb), 0.35),
+                            0 -20px 80px -14px rgba(220, 240, 255, 0.55);
+                        }
+                      }
+                      /* ========== COOL ========== */
+                      @keyframes temp-cool-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+                      @keyframes temp-cool-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 4 rgba(var(--temp-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 2 rgba(var(--temp-rgb), 0.95),
+                            0 0 48px 12px rgba(var(--temp-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 4 rgba(var(--temp-rgb), 0.7);
+                        }
+                      }
+                      @keyframes temp-cool-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--temp-rgb), 0.35),
+                            0 18px 80px -12px rgba(0, 220, 255, 0.35);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 140px 42px rgba(var(--temp-rgb), 0.45),
+                            0 30px 110px -10px rgba(0, 255, 255, 0.5);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--temp-rgb), 0.35),
+                            0 18px 80px -12px rgba(0, 220, 255, 0.35);
+                        }
+                      }
+                      /* ========== COMFY ========== */
+                      @keyframes temp-comfy-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.05); }
+                        100% { transform: scale(0.98); }
+                      }
+                      @keyframes temp-comfy-glow {
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--temp-rgb), 0.9),
+                            0 0 42px 10px rgba(var(--temp-rgb), 0.85);
+                        }
+                      }
+                      @keyframes temp-comfy-halo {
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--temp-rgb), 0.45),
+                            0 26px 80px -10px rgba(180,255,200,0.5);
+                        }
+                      }
+                      /* ========== WARM ========== */
+                      @keyframes temp-warm-pulse {
+                        0%   { transform: scale(1); }
+                        50%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+                      @keyframes temp-warm-glow {
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--temp-rgb), 0.95),
+                            0 0 54px 14px rgba(var(--temp-rgb), 0.9);
+                        }
+                      }
+                      @keyframes temp-warm-halo {
+                        50% {
+                          box-shadow:
+                            0 0 140px 48px rgba(var(--temp-rgb), 0.55),
+                            0 26px 100px -10px rgba(255,210,150,0.5);
+                        }
+                      }
+                      /* ========== HOT ========== */
+                      @keyframes temp-hot-shimmer {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        50%  { transform: scale(1.08); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+                      @keyframes temp-hot-glow {
+                        50% {
+                          box-shadow:
+                            0 0 34px 6 rgba(var(--temp-rgb), 1),
+                            0 0 62px 14px rgba(var(--temp-rgb), 0.95);
+                        }
+                      }
+                      @keyframes temp-hot-halo {
+                        50% {
+                          box-shadow:
+                            0 0 160px 60px rgba(var(--temp-rgb), 0.6),
+                            0 34px 120px -12px rgba(255,150,100,0.6);
+                        }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.weather_temperature
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: blue
+                      - value: 16
+                        color: lightblue
+                      - value: 18
+                        color: orange
+                      - value: 21
+                        color: red
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+          - type: custom:vertical-stack-in-card # outdoor_pressure
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                      overflow: hidden !important;
+                      }
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.outdoor_pressure
+                tap_action:
+                  action: more-info
+                icon: mdi:car-brake-low-pressure
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-state-item$: |
+                      {z-index: 99;}
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {% set rgb = '110,140,55' %}
+                        --shape-animation: breathe 3s ease-in-out infinite;
+                        opacity: 1;
+                        --icon-color: rgba({{ rgb }}, 1);
+                        background-color: rgba(77, 00, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        position: relative;
+                        transform-origin: 50% 60%;
+                      }
+                      @keyframes breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.10); }
+                        100% { transform: scale(0.96); }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.outdoor_pressure
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+          - type: custom:vertical-stack-in-card # outdoor_humidity
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                      overflow: hidden !important;
+                      }
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.outdoor_humidity
+                icon: mdi:water-percent
+                tap_action:
+                  action: more-info
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    ha-state-icon$: |
+                      ha-icon{position: relative; animation: waterdrop 3s ease-in-out infinite;}
+                      @keyframes waterdrop {
+                          0% {
+                            opacity: 1;
+                            top: -25px;
+                          }
+                          70% {
+                            opacity: 1;
+                            top:0;
+                          }
+                          100% {
+                            opacity: 0;
+                            top:0;
+                          }
+                      }
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {% set hum = states(config.entity) | float(0) %}
+                        {% set rgb = '120,210,255' %}
+                        {% set anim = 'hum-good-breathe' %}
+                        {% set glow_anim = 'hum-good-glow' %}
+                        {% set halo_anim = 'hum-good-halo' %}
+                        {% set duration = 3.2 %}
+                          < 40   -> BAD (dark blue)
+                          40-60  -> GOOD (light blue)
+                          > 60   -> MIDDLE / humid (medium blue)
+                        {% if hum < 40 %}
+                          {% set rgb = '0,80,200' %}
+                          {% set anim = 'hum-bad-pulse' %}
+                          {% set glow_anim = 'hum-bad-glow' %}
+                          {% set halo_anim = 'hum-bad-halo' %}
+                          {% set duration = 2.8 %}
+                        {% elif hum <= 60 %}
+                          {% set rgb = '120,210,255' %}
+                          {% set anim = 'hum-good-breathe' %}
+                          {% set glow_anim = 'hum-good-glow' %}
+                          {% set halo_anim = 'hum-good-halo' %}
+                          {% set duration = 3.4 %}
+                        {% else %}
+                          {% set rgb = '40,140,255' %}
+                          {% set anim = 'hum-mid-wave' %}
+                          {% set glow_anim = 'hum-mid-glow' %}
+                          {% set halo_anim = 'hum-mid-halo' %}
+                          {% set duration = 3.0 %}
+                        {% endif %}
+                        --hum-rgb: {{ rgb }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --hum-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --hum-halo-animation: {{ halo_anim }} {{ (duration * 1.1) | round(2) }}s ease-in-out infinite;
+                        --icon-color: rgba({{ rgb }}, 1);
+                        background-color: rgba(77,77,77,0.2) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        opacity: 1;
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                        overflow: hidden;
+                      }
+                      @keyframes hum-good-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.04); }
+                        100% { transform: scale(0.98); }
+                      }
+                      @keyframes hum-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 4 rgba(var(--hum-rgb), 0.9),
+                            0 0 44px 10px rgba(var(--hum-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                        }
+                      }
 
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.home_uv_index
-            name: UV Index
-            tap_action:
-              action: more-info
-            template:
-              - sensors
-              - icon_uv
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.openweathermap_wind_bearing
-            name: Wind Direction
-            tap_action:
-              action: more-info
-            template:
-              - base
-              - icon_wind_direction
-              - circle
-            variables:
-              circle_input: >
-                [[[
-                  let dir = states['sensor.wind_direction'];
-                  return (dir.state).toString();
-                ]]]
+                      @keyframes hum-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,230,255,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--hum-rgb), 0.45),
+                            0 26px 90px -10px rgba(200,240,255,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,230,255,0.3);
+                        }
+                      }
+                      @keyframes hum-mid-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+                      @keyframes hum-mid-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 3 rgba(var(--hum-rgb), 0.95),
+                            0 0 48px 10px rgba(var(--hum-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                      }
 
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
+                      @keyframes hum-mid-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                            0 18px 80px -12px rgba(80,190,255,0.35);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 135px 42px rgba(var(--hum-rgb), 0.5),
+                            0 28px 105px -10px rgba(100,210,255,0.5);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                            0 18px 80px -12px rgba(80,190,255,0.35);
+                        }
+                      }
+                      @keyframes hum-bad-pulse {
+                        0%   { transform: scale(0.97); }
+                        40%  { transform: scale(1.03); }
+                        100% { transform: scale(0.97); }
+                      }
+                      @keyframes hum-bad-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--hum-rgb), 0.95),
+                            0 0 44px 12px rgba(var(--hum-rgb), 0.9);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                      }
+                      @keyframes hum-bad-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                            0 18px 75px -10px rgba(0,70,160,0.5);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 40px rgba(var(--hum-rgb), 0.6),
+                            0 26px 100px -8px rgba(0,90,190,0.65);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                            0 18px 75px -10px rgba(0,70,160,0.5);
+                        }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.0xa4c1386ff37a512f_humidity
+                    line_color: lightblue
+                    line_width: 5
+                    hours_to_show: 24
+                    tap_action:
+                      action: more-info
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+          - class: col-12 col-md-6 col-lg-3 px-2 pt-4 #outdoor_wind_speed
+            type: custom:vertical-stack-in-card
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                      overflow: hidden !important;
+                      }
+            cards:
+              - type: custom:mushroom-template-card
+                class: col-12 col-md-6 col-lg-3 px-2 pt-4
+                primary: "Wind: {{states.sensor.outdoor_wind_speed.state}}m/s"
+                secondary: >-
+                  Wind direction:  {{states.sensor.wind_bearing.state}}°
+                  ({{states.sensor.wind_direction.state}})
+                entity: sensor.wind_direction
+                tap_action:
+                  action: more-info
+                  entity: sensor.wind_speed
+                multiline_secondary: false
+                picture: '{{- state_attr(config.entity, "entity_picture")  }}'
+                features_position: bottom
+                card_mod:
+                  style: >
+                    ha-tile-icon:before {
+                      content: '';
+                      position: absolute;
+                      inset: 0;
+                      border-radius: inherit;
+                      pointer-events: none;
+                      transform-origin: 50% 50%;
+                      opacity:0.4;
+                      }
+                    ha-tile-icon {
+                      padding:0!important;
+                      margin: 0!important;
+                      position: relative;
+                      background: var(--card-background-color);
+                      border-radius: 50%;
+                      animation: robo-path 10s linear infinite;
+                    }   ha-card {clip-path: inset(0 0 0 0 round
+                    var(--ha-card-border-radius,12px));} ha-card::before {
+                      content: "";
+                      position: absolute;
+                      top: 0; left: 0; bottom: 0;
+                      z-index: -1;
+                      width: 100%;
+                      
+                      animation: AnimationName 3s ease infinite;
+                      background-size: 200% 500%;
+                      transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+                    } @keyframes robo-path {
+                      0%   { transform: rotate(8deg);}
+                      10%  { transform: rotate(-4deg);}
+                      20%  { transform: rotate(6deg);}
+                      30%  { transform: rotate(-2deg);}
+                      40%  { transform: rotate(4deg);}
+                      50%  { transform: rotate(0deg);}
+                      60%  { transform: rotate(-8deg);}
+                      70%  { transform: rotate(2deg);}
+                      80%  { transform: rotate(-6deg);}
+                      90%  { transform: rotate(4deg);}
+                      100% { transform: rotate(0deg);}
+                    }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.wind_speed
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+
+          - type: custom:mushroom-entity-card # lethbridge_aqi
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            entity: sensor.lethbridge_aqi
+            tap_action:
+              action: more-info
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            icon: mdi:air-filter
+            primary_info: state
+            secondary_info: name
+            icon_color: light-grey
+            card_mod:
+              style: |
+                ha-card {
+                  {% set state = states(config.entity) %}
+                  {% set pollution_level = states('sensor.air_pollution_level') %}
+                  {% if pollution_level in ['high', 'very-high', 'red','unhealthy','very_unhealthy','hazardous'] %}
+                    {% set c1 = '255, 0, 0' %}  /* Red RGB */
+                    {% set c2 = '255, 69, 0' %}   /* Orange RGB */
+                    {% set speed = '3s' %}
+                  {% elif pollution_level in ['moderate', 'medium', 'orange','unhealthy_sensitive'] %}
+                    {% set c1 = '255, 69, 0' %}  /* Orange RGB */
+                    {% set c2 = '255, 255, 0' %}   /* Yellow RGB */
+                    {% set speed = '8s' %}
+                  {% else %}
+                    {% set c1 = '0, 242, 96' %}    /* Green RGB */
+                    {% set c2 = '5, 117, 230' %}   /* Blue RGB */
+                    {% set speed = '10s' %}
+                  {% endif %}
+                  --aura-color-1: rgba({{ c1 }}, 0.6);
+                  --aura-color-2: rgba({{ c2 }}, 0.6);
+                  --speed: {{ speed }};
+                  background: #382323ff !important;
+                  border-radius: 4px;
+                  border: 1px solid rgba(255,255,255,0.08);
+                  position: relative;
+                  overflow: hidden;
+                  box-shadow: inset 0 0 20px rgba(116, 74, 74, 0.5);
+                }
+                ha-card::before {
+                  content: "";
+                  position: absolute;
+                  top: -50%; left: -50%;
+                  width: 200%; height: 200%;
+                  z-index: 0;
+                  background-image: 
+                    radial-gradient(circle at 50% 50%, var(--aura-color-1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, var(--aura-color-2) 0%, transparent 50%);
+                  filter: blur(60px);
+                  opacity: 0.8;
+                  animation: rotate-aura var(--speed) linear infinite;
+                }
+                ha-card::after {
+                  content: '{{ pollution_level | replace("_", " ") |capitalize }}';
+                  position: absolute;
+                  top: 50%; 
+                  right: 16px;
+                  transform: translateY(-50%);
+                  z-index: 10;
+                  /* Badge Styling (Like the battery example) */
+                  color: white;
+                  font-weight: 700;
+                  font-size: 14px;
+                  background: rgba(93, 45, 45, 0.4);
+                  border: 1px solid rgba(255, 255, 255, 0.15);
+                  backdrop-filter: blur(4px);
+                  padding: 4px 10px;
+                  border-radius: 4px;
+                  text-shadow: 0 1px 2px black;
+                }
+                ha-card {
+                  clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 4px));
+                  --card-primary-font-size: 1.2rem !important;
+                  --card-primary-line-height: 1.3 !important;
+                }
+                .mushroom-state-info span.primary {
+                  color: white !important;
+                  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                }
+                .mushroom-state-info span.secondary {
+                  color: rgba(255,255,255,0.8) !important;
+                }
+                ha-state-icon {color: white !important;}
+                @keyframes rotate-aura {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+
+          - type: custom:mushroom-entity-card #openuv_current_uv_index
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            entity: sensor.openuv_current_uv_index
+            tap_action:
+              action: more-info
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            icon: mdi:sun-wireless-outline
+            primary_info: state
+            secondary_info: name
+            icon_color: light-grey
+            card_mod:
+              style: |
+                ha-card {
+                  {% set current_uv_index = states(config.entity) %}
+                  {% set uv_level = states('sensor.openuv_current_uv_level') %}
+                  {% if current_uv_index >= '4' %}
+                    {% set c1 = '255, 0, 0' %}  /* Red RGB */
+                    {% set c2 = '255, 75, 0' %}   /* Orange RGB */
+                    {% set speed = '4s' %}
+                  {% elif current_uv_index >= '2' %}
+                    {% set c1 = '247, 69, 30' %}  /* Orange RGB */
+                    {% set c2 = '255, 210, 0' %}   /* Yellow RGB */
+                    {% set speed = '7s' %}
+                  {% else %}
+                    {% set c1 = '0, 142, 196' %}    /* Green RGB */
+                    {% set c2 = '5, 117, 230' %}   /* Blue RGB */
+                    {% set speed = '12s' %}
+                  {% endif %}
+                  --aura-color-1: rgba({{ c1 }}, 0.6);
+                  --aura-color-2: rgba({{ c2 }}, 0.6);
+                  --speed: {{ speed }};
+                  background: #00000000 !important;
+                  border-radius: 4px;
+                  border: 1px solid rgba(255,255,255,0.08);
+                  position: relative;
+                  overflow: hidden;
+                  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+                }
+                ha-card::before {
+                  content: "";
+                  position: absolute;
+                  top: -50%; left: -50%;
+                  width: 200%; height: 200%;
+                  z-index: 0;
+                  background-image: 
+                    radial-gradient(circle at 50% 50%, var(--aura-color-1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, var(--aura-color-2) 0%, transparent 50%);
+                  filter: blur(60px);
+                  opacity: 0.8;
+                  animation: rotate-aura var(--speed) linear infinite;
+                }
+                ha-card::after {
+                  content: '{{ uv_level | capitalize}}';
+                  position: absolute;
+                  top: 50%; 
+                  right: 16px;
+                  transform: translateY(-50%);
+                  z-index: 10;
+                  /* Badge Styling (Like the battery example) */
+                  color: white;
+                  font-weight: 700;
+                  font-size: 14px;
+                  background: rgba(0, 0, 0, 0.0);
+                  border: 1px solid rgba(255, 255, 255, 0.15);
+                  backdrop-filter: blur(4px);
+                  padding: 4px 10px;
+                  border-radius: 4px;
+                  text-shadow: 0 1px 2px black;
+                }
+                ha-card {
+                  clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 4px));
+                  --card-primary-font-size: 1.2rem !important;
+                  --card-primary-line-height: 1.3 !important;
+                }
+                .mushroom-state-info span.primary {
+                  color: white !important;
+                  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                }
+                .mushroom-state-info span.secondary {
+                  color: rgba(255,255,255,0.8) !important;
+                }
+                ha-state-icon {color: white !important;}
+                @keyframes rotate-aura {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+
+          - type: custom:mushroom-template-card # moon_phase_image
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "Moon Phase"
+            secondary: "{{states.sensor.moon_phase_image.state}}"
+            # icon: mdi:raspberry-pi
             entity: sensor.moon_phase_image
-            name: Moon Phase
-            template:
-              - person
+            tap_action:
+              action: more-info
+            multiline_secondary: false
+            picture: '{{- state_attr(config.entity, "entity_picture")  }}'
+            features_position: bottom
+            card_mod:
+              style: >
+                {% set rgb = '#00ffff' %} ha-tile-icon:before {
+                  content: '';
+                  position: absolute;
+                  inset: 0;
+                  border-radius: inherit;
+                  pointer-events: none;
+                  transform-origin: 50% 50%;
+                  opacity:0.4;
+                  }
+                ha-tile-icon {
+                  padding:0!important;
+                  margin: 0!important;
+                  position: relative;
+                  background: var(--card-background-color);
+                  border-radius: 50%;
+                  animation: robo-path 4s linear infinite;
+                }   ha-card {clip-path: inset(0 0 0 0 round
+                var(--ha-card-border-radius,12px));} ha-card::before {
+                  content: "";
+                  position: absolute;
+                  top: 0; left: 0; bottom: 0;
+                  z-index: -1;
+                  width: 100%;
+                  background: linear-gradient(90deg,rgba(0, 0, 0, 0) 0%, {{ rgb }} 100%);
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                  transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+                } @keyframes robo-path {
+                  0%   { transform: rotate(0deg);}
+                  50%  { transform: rotate(10deg);}
+                  100% { transform: rotate(0deg);}
+                }
 
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sun.sun
-            name: Sun
+          - type: custom:mushroom-template-card # aurora_visibility_visibility
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+
+            primary: "{{states.sensor.aurora_visibility_visibility.state}}%"
+            secondary: Aurora Visibility
+            entity: sensor.aurora_visibility_visibility
             tap_action:
               action: more-info
-            template:
-              - base
-              - icon_sun
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.weather_station_weather_station_dew_point
-            name: Dew Point
-            tap_action:
-              action: more-info
-            template:
-              - sensors
-              - icon_dew_point
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: sensor.home_temperature
-            tap_action:
-              action: more-info
-            name: Temperature
-            template:
-              - sensors
-              - icon_thermo_humid
+            multiline_secondary: false
+            picture: local/custom_local_icons/aurora.svg
+            features_position: bottom
+            card_mod:
+              style: |
+                /* 1. Get the alert Sensor Data */
+                  {% set state = states(config.entity)| replace('%','')| int() %}
+                  {% set alert = states('binary_sensor.aurora_visibility_visibility_alert') %}
+                  {% if alert == 'on' %}
+                  {% set txt = 'Visibility Alert' %}  
+                  {% else %}
+                  {% set txt = 'Low chance' %}   
+                  {% endif %}
+                  {% set rgb = '#00ffff' %}
+                  {% if state >= 50 %}
+                    {% set c1 = '255, 65, 108' %}  /* Red RGB */
+                    {% set c2 = '255, 75, 43' %}   /* Orange RGB */
+                    {% set speed = '4s' %}
+                  {% elif state >=20 %}
+                    {% set c1 = '247, 151, 30' %}  /* Orange RGB */
+                    {% set c2 = '255, 210, 0' %}   /* Yellow RGB */
+                    {% set speed = '7s' %}
+                  {% else %}
+                    {% set c1 = '0, 242, 96' %}    /* Green RGB */
+                    {% set c2 = '5, 117, 230' %}   /* Blue RGB */
+                    {% set speed = '12s' %}
+                  {% endif %}
+                ha-tile-icon:before {
+                  content: '';
+                  position: absolute;
+                  inset: 0;
+                  border-radius: inherit;
+                  pointer-events: none;
+                  transform-origin: 50% 50%;
+                  opacity:1;
+                  }
+                ha-tile-icon {
+                  padding:0!important;
+                  margin: 0!important;
+                  position: relative;
+                  border-radius: 50%;
+                }  ha-card {
+                  clip-path: inset(0 0 0 0 round var(--ha-card-border-radius,12px));
+                  /* 3. Pass variables to CSS */
+                  --aura-color-1: rgba({{ c1 }}, 1);
+                  --aura-color-2: rgba({{ c2 }}, 1);
+                  --speed: {{ speed }};
+                  background: #00000000 !important;
+                  position: relative;
+                  overflow: hidden;
+                }  ha-card::before {
+                  content: "";
+                  position: absolute;
+                  top: 0; left: 0; bottom: 0;
+                  z-index: -1;
+                  width: 100%;
+                  background-size: 100% 100%;
+                background-image: 
+                    radial-gradient(circle at 50% 50%, var(--aura-color-1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, var(--aura-color-2) 0%, transparent 50%);
+                  filter: blur(60px);
+                  opacity: 0.9;
+                  animation: rotate-aura var(--speed) linear infinite;
+                }  }  ha-card::before {
+                  top: -50%; left: -50%;
+                  height: 200%;
+                  filter: blur(60px);
+                  opacity: 0.8;
+                  animation: rotate-aura 2s linear infinite;
+                }  ha-card::after {
+                  content: '{{ txt }}';
+                  position: absolute;
+                  top: 50%; 
+                  right: 16px;
+                  transform: translateY(-50%);
+                  z-index: 10;
+                  color: white;
+                  font-weight: 700;
+                  font-size: 14px;
+                  background: rgba(0, 0, 0, 0.7);
+                  border: 1px solid rgba(255, 255, 255, 0.15);
+                  backdrop-filter: blur(4px);
+                  padding: 4px 10px;
+                  border-radius: 6px;
+                  text-shadow: 0 1px 2px black;
+                } /* Animation */
+                  @keyframes rotate-aura {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+
+          - type: custom:vertical-stack-in-card #sunset
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                      overflow: hidden !important;
+                      }
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:horizon-card
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 70%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 100%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+              - type: custom:mushroom-template-card
+                class: col-12 col-md-6 col-lg-3 px-2 pt-4
+                primary: >-
+                  {% if is_state("sun.sun", "above_horizon") -%} The sun rose {{
+                  relative_time(states.sun.sun.last_changed) }} ago {%- else -%}The sun will
+                  rise in {% set t = (state_attr('sun.sun', 'next_rising') | as_datetime -
+                  now()).total_seconds() %}{{ t | timestamp_custom('%-H hr %-M min' if t >
+                  3600 else '%-M min', false) }} {%- endif %}
+                secondary: >-
+                  Sunset at:
+                  {{as_timestamp(states.sensor.astroweather_backyard_sun_next_setting.state)
+                  | timestamp_custom('%H:%M') }} / Sunrise at:
+                  {{as_timestamp(states.sensor.astroweather_backyard_sun_next_rising.state)
+                  | timestamp_custom('%H:%M') }}
+                entity: sensor.wind_direction
+                tap_action:
+                  action: more-info
+                  entity: sun.sun
+                multiline_secondary: false
+                icon: mdi:theme-light-dark
+                picture: local/custom_local_icons/sunmoon.svg
+                color: yellow
+                features_position: bottom
+                card_mod:
+                  style: >
+                    ha-tile-icon:before {
+                      content: '';
+                      position: absolute;
+                      inset: 0;
+                      border-radius: inherit;
+                      pointer-events: none;
+                      transform-origin: 50% 50%;
+                      opacity:0.4;
+                      }
+                    ha-tile-icon {
+                      padding:0!important;
+                      margin: 0!important;
+                      position: relative;
+                      background: var(--card-background-color);
+                      border-radius: 50%;
+                      animation: robo-path 10s linear infinite;
+                    }   ha-card {clip-path: inset(0 0 0 0 round
+                    var(--ha-card-border-radius,12px));} ha-card::before {
+                      content: "";
+                      position: absolute;
+                      top: 0; left: 0; bottom: 0;
+                      z-index: -1;
+                      width: 100%;
+                      animation: AnimationName 3s ease infinite;
+                      background-size: 200% 500%;
+                      transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+                    } @keyframes robo-path {
+                      0%   { transform: rotate(8deg);}
+                      10%  { transform: rotate(-4deg);}
+                      20%  { transform: rotate(6deg);}
+                      30%  { transform: rotate(-2deg);}
+                      40%  { transform: rotate(4deg);}
+                      50%  { transform: rotate(0deg);}
+                      60%  { transform: rotate(-8deg);}
+                      70%  { transform: rotate(2deg);}
+                      80%  { transform: rotate(-6deg);}
+                      90%  { transform: rotate(4deg);}
+                      100% { transform: rotate(0deg);}
+                    }

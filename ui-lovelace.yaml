@@ -1,4 +1,4 @@
-button_card_templates: !include_dir_merge_named button_card_templates
+# button_card_templates: !include_dir_merge_named button_card_templates
 background: var(--background-image)
 views:
   - !include ui_lovelace/views/home.yaml
@@ -8,12 +8,13 @@ views:
   - !include ui_lovelace/views/users.yaml
   - !include ui_lovelace/views/sensors.yaml
   - !include ui_lovelace/views/weather.yaml
-  - !include ui_lovelace/views/floorplan.yaml
+  # - !include ui_lovelace/views/floorplan.yaml
   - !include ui_lovelace/views/shopping-list.yaml
-  - !include ui_lovelace/views/x-alerts.yaml
+  # - !include ui_lovelace/views/x-alerts.yaml
   - !include ui_lovelace/views/sub-weather.yaml
-  - !include ui_lovelace/views/sub-speedtest.yaml
-  - !include ui_lovelace/views/sub-router.yaml
+  # - !include ui_lovelace/views/sub-speedtest.yaml
+  # - !include ui_lovelace/views/sub-router.yaml
   - !include ui_lovelace/views/sub-servers.yaml
   - !include ui_lovelace/views/todo.yaml
-  # - !include ui_lovelace/views/test.yaml
+  - !include ui_lovelace/views/popup/low_batteries.yaml
+#   - !include ui_lovelace/views/test.yaml

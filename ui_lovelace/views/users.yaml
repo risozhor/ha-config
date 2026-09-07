@@ -8,30 +8,151 @@ cards:
     cards:
       - type: row
         cards:
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: person.risozhor
-            name: Aleks
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            entity: person.alex
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: >-
+              {{states(config.entity) | upper}} (Battery:
+              {{states.sensor.sm_s938w_battery_level.state}}%
+              {{states.sensor.sm_s938w_battery_state.state}})
+            # icon: mdi:raspberry-pi
+            picture: "{{- state_attr(config.entity, \"entity_picture\")  }}"
+            features_position: bottom
+            card_mod:
+              style: |
+                ha-card {
+                  {% if states(config.entity) != 'home'  -%}
+                    background: linear-gradient(90deg,
+                    rgba(42, 123, 155, 0) 0%, 
+                    rgba(135, 0, 0, 1) 100%);      /* Red */
+                  {% else %}
+                    background: linear-gradient(
+                    90deg, 
+                    rgba(0, 0, 0, 0) 0%, 
+                    rgba(0, 135, 61, 1) 100%);
+                  {% endif %}
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                }
+                @keyframes AnimationName {
+                    0%{background-position:0% 50%}
+                    50%{background-position:100% 50%}
+                    100%{background-position:0% 50%}
+                }
             tap_action: !include popup/device_tracker_aleks.yaml
-            template:
-              - person
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: >-
+              {{states(config.entity) | upper}} (Battery:
+              {{states.sensor.sm_m526b_battery_level.state}}%
+              {{states.sensor.sm_m526b_battery_state.state}})
+            # icon: mdi:raspberry-pi
             entity: person.yaroslava
-            name: Yaroslava
+            
+            multiline_secondary: false
+            picture: "{{- state_attr(config.entity, \"entity_picture\")  }}"
+            features_position: bottom
+            card_mod:
+              style: |
+                ha-card {
+                  {% if states(config.entity) != 'home'  -%}
+                    background: linear-gradient(90deg,rgba(42, 123, 155, 0) 0%, rgba(135, 0, 0, 1) 100%);      /* Red */
+                  {% else %}
+                    background: linear-gradient(
+                    90deg, 
+                    rgba(0, 0, 0, 0) 0%, 
+                    rgba(0, 135, 61, 1) 100%);
+                  {% endif %}
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                }
+                @keyframes AnimationName {
+                    0%{background-position:0% 50%}
+                    50%{background-position:100% 50%}
+                    100%{background-position:0% 50%}
+                }
             tap_action: !include popup/device_tracker_yaroslava.yaml
-            template:
-              - person
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: >-
+              {{states(config.entity) | upper}} (Battery:
+              {{states.sensor.s24u_battery_level.state}}%
+              {{states.sensor.s24u_battery_state.state}})
+            # icon: mdi:raspberry-pi
+            multiline_secondary: false
+            picture: "{{- state_attr(config.entity, \"entity_picture\")  }}"
+            features_position: bottom
             entity: person.vitaliy
-            name: Vitaliy
-            # tap_action: !include popup/footer_router.yaml
-            template:
-              - person
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: person.maryna
-            name: Maryna
-            template:
-              - person
+            tap_action: !include popup/device_tracker_vitalii.yaml
+            card_mod:
+              style: |
+                ha-card {
+                  {% if states(config.entity) != 'home'  -%}
+                    background: linear-gradient(90deg,rgba(42, 123, 155, 0) 0%, rgba(135, 0, 0, 1) 100%);      /* Red */
+                  {% else %}
+                    background: linear-gradient(
+                    90deg, 
+                    rgba(0, 0, 0, 0) 0%, 
+                    rgba(0, 135, 61, 1) 100%);
+                  {% endif %}
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                }
+                @keyframes AnimationName {
+                    0%{background-position:0% 50%}
+                    50%{background-position:100% 50%}
+                    100%{background-position:0% 50%}
+                }
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: "{{states(config.entity) | upper}}"
+            tap_action:
+              action: more-info
+            multiline_secondary: false
+            picture: "{{- state_attr(config.entity, \"entity_picture\")  }}"
+            features_position: bottom
+            entity: person.marina
+            card_mod:
+              style: |
+                ha-card {
+                  background: linear-gradient(90deg, #00000000, #7b807c);
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                }
+                @keyframes AnimationName {
+                    0%{background-position:0% 50%}
+                    50%{background-position:100% 50%}
+                    100%{background-position:0% 50%}
+                }
+
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: "{{states(config.entity) | upper}}"
+            tap_action: !include popup/device_tracker_car.yaml
+            # tap_action:
+            #   action: more-info
+            # multiline_secondary: false
+            picture: "{{- state_attr(config.entity, \"entity_picture\")  }}"
+            features_position: bottom
+            entity: person.mitsubishi_rvr
+            card_mod:
+              style: |
+                ha-card {
+                  background: linear-gradient(90deg, rgba(0, 51, 171, 0.73), #114d1dff);
+                  animation: AnimationName 3s ease infinite;
+                  background-size: 200% 500%;
+                }
+                @keyframes AnimationName {
+                    0%{background-position:0% 50%}
+                    50%{background-position:100% 50%}
+                    100%{background-position:0% 50%}
+                }

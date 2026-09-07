@@ -34,7 +34,10 @@ blueprint:
       name: Excluded Sensors
       description: Battery sensors (e.g. smartphone) to exclude from detection. Only entities are supported, devices must be expanded!
       default:
-        entity_id: []
+        # entity_id: []
+        entity_id:
+          - sensor.marina_battery_level
+          - sensor.seeed_studio_iot_button_v2_battery_percentage
       selector:
         target:
           entity:

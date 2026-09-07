@@ -1,158 +1,157 @@
-- platform: template
+- platform: my_persistent_notifications
   sensors:
-    home_mode:
-      friendly_name: "Housemode"
-      value_template: >-
-        {% if is_state("input_boolean.away_mode", "on") %}Away Mode
-        {% elif is_state("binary_sensor.day_tod", "on") %}Day Mode
-        {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}Sleeping Mode
-        {% else %}Night Mode
-        {% endif %}
-      icon_template: >
-        {% if is_state("input_boolean.away_mode", "on") %}mdi:shield
-        {% elif is_state("binary_sensor.day_tod", "on") %}mdi:white-balance-sunny
-        {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}mdi:sleep
-        {% else %}mdi:power-sleep
-        {% endif %}
+    persistent_count:
+      friendly_name: "persistent count"
+      unique_id: "persistent_count"
 
-    count_update:
-      friendly_name: "Updates Count"
-      value_template: >-
-        Updates {{states.update | selectattr ('state', 'equalto', 'on') | list | length}} out of {{''}}
-        {%- set domains = ['update'] -%}
-        {%- for domain in domains -%}
-          {%- for item in states[domain] -%}
-            {% if loop.first %}
-              {{-loop.length}}
-            {% endif %}
-          {%- endfor -%}
-        {%- endfor -%}
-      icon_template: >
-        mdi:update
 
-    update_val:
-      friendly_name: "Updates number"
-      value_template: >-
-        {{states.update | selectattr ('state', 'equalto', 'on') | list | length}}
-      icon_template: >
-        mdi:cellphone-arrow-down
+# - platform: template
+  # sensors:
+    # home_mode:
+    #   friendly_name: "Housemode"
+    #   value_template: >-
+    #     {% if is_state("input_boolean.away_mode", "on") %}Away Mode
+    #     {% elif is_state("binary_sensor.day_tod", "on") %}Day Mode
+    #     {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}Sleeping Mode
+    #     {% else %}Night Mode
+    #     {% endif %}
+    #   icon_template: >
+    #     {% if is_state("input_boolean.away_mode", "on") %}mdi:shield
+    #     {% elif is_state("binary_sensor.day_tod", "on") %}mdi:white-balance-sunny
+    #     {% elif is_state("binary_sensor.day_tod", "off") and is_state("input_boolean.virt_sleepingmode", "on") %}mdi:sleep
+    #     {% else %}mdi:power-sleep
+    #     {% endif %}
 
-    livingroom_temperature:
-      friendly_name: "Livingroom temperature"
-      unique_id: livingroom_temperature
-      unit_of_measurement: "°C"
-      value_template: "{{ states.sensor.xiaomi_miio_device_temperature.state }}"
-      device_class: temperature
-    livingroom_humidity:
-      friendly_name: "Livingroom humidity"
-      unique_id: livingroom_humidity
-      unit_of_measurement: "%"
-      value_template: "{{  states.sensor.xiaomi_miio_device_humidity.state }}"
-      device_class: humidity
-    livingroom_aqi:
-      friendly_name: "Livingroom aqi"
-      value_template: "{{ states.sensor.xiaomi_miio_device_pm2_5.state }}"
+    # count_update:
+    #   friendly_name: "Updates Count"
+    #   value_template: >-
+    #     Updates {{states.update | selectattr ('state', 'equalto', 'on') | list | length}} out of {{''}}
+    #     {%- set domains = ['update'] -%}
+    #     {%- for domain in domains -%}
+    #       {%- for item in states[domain] -%}
+    #         {% if loop.first %}
+    #           {{-loop.length}}
+    #         {% endif %}
+    #       {%- endfor -%}
+    #     {%- endfor -%}
+    #   icon_template: >
+    #     mdi:update
 
-    ligts_on:
-      friendly_name: "Ligts turned on"
-      value_template: >
-        {%- set sel = [
-        '0x0017880103aa4b71',
-        'livingroom_lights', 
-        'livingroom_table_background',
-        'kidsroom_wled',
-        'gyver',
-        'dining_room_stripe_3',
-        '0x00178801030318a1',
-        'guestroom_color_bulb',
-        'main_corridor_light',
-        'shelly1',
-        'kitchen_ceiling_lights',
-        'kitchen_strip',
-        'toilet_light',
-        'dining_room_light',
-        ] -%}
-        {{- states.light | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length -}}
+    # update_val:
+    #   friendly_name: "Updates number"
+    #   value_template: >-
+    #     {{states.update | selectattr ('state', 'equalto', 'on') | list | length}}
+    #   icon_template: >
+    #     mdi:cellphone-arrow-down
 
-    switches_on:
-      friendly_name: "Switches (as a light) turned on"
-      value_template: >
-        {%- set sel = [
-        'outdoor_floodlight', 
-        'yard_light', 
-        'backyard_light',
-        'terrace_spotlights',
-        ] -%}
-        {{- states.switch | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+    # livingroom_temperature:
+    #   friendly_name: "Livingroom temperature"
+    #   unique_id: livingroom_temperature
+    #   unit_of_measurement: "°C"
+    #   value_template: "{{ states.sensor.xiaomi_miio_device_temperature.state }}"
+    #   device_class: temperature
+    # livingroom_humidity:
+    #   friendly_name: "Livingroom humidity"
+    #   unique_id: livingroom_humidity
+    #   unit_of_measurement: "%"
+    #   value_template: "{{  states.sensor.xiaomi_miio_device_humidity.state }}"
+    #   device_class: humidity
+    # livingroom_aqi:
+    #   friendly_name: "Livingroom aqi"
+    #   value_template: "{{ states.sensor.xiaomi_miio_device_pm2_5.state }}"
 
-    opened_windows:
-      friendly_name: "Opened Windows"
-      value_template: >
-        {%- set sel = [
-        'toilet_window_sensor_contact',
-        'dining_room_window_sensor_contact',
-        'livingroom_window_sensor_contact',
-        'main_corridor_window_sensor_contact',
-        'kitchen_window_sensor_contact',
-        'kidsroom_window_sensor_contact', 
-        ] -%}
-        {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+    # ligts_on:
+    #   friendly_name: "Ligts turned on"
+    #   value_template: >
+    #     {%- set sel = [
+    #     'kitchen_lights',
+    #     'bedroom', 
+    #     'kidsroom_ceil',
+    #     'bathroom_lights',
+    #     'outdoor_light',
+    #     'hallway_ceiling',
+    #     'living_room_lights',
+    #     'wled',
+    #     'smart_plug_couch',
+    #     'laundry_ceiling',
+    #     'storage_ceiling',
 
-    opened_doors:
-      friendly_name: "Opened Doors"
-      value_template: >
-        {%- set sel = [
-        'terrace_door_sensor_contact',
-        'main_corridor_door_sensor_contact',
-        ] -%}
-        {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+    #     'dining_room_stripe_3',
+    #     ] -%}
+    #     {{- states.light | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length -}}
 
-- platform: template
-  sensors:
-    moon_phase_image:
-      unique_id: moon_phase_img
-      friendly_name: "Moon Phase"
-      value_template: "{{ states.sensor.moon_phase.state | replace('_', ' ')| capitalize }}"
-      icon_template: >
-        mdi:moon-{{states.sensor.moon_phase.state | replace("_", "-")}}
-      entity_picture_template: >-
-        {% if is_state('sensor.moon_phase', 'new_moon') -%}
-        /local/images/MoonPhases/new_moon.png
-        {% elif is_state('sensor.moon_phase', 'waxing_crescent') -%}
-        /local/images/MoonPhases/waxing_crescent.png
-        {% elif is_state('sensor.moon_phase', 'first_quarter') -%}
-        /local/images/MoonPhases/first_quarter.png
-        {% elif is_state('sensor.moon_phase', 'waxing_gibbous') -%}
-        /local/images/MoonPhases/waxing_gibbous.png
-        {% elif is_state('sensor.moon_phase', 'full_moon') -%}
-        /local/images/MoonPhases/full_moon.png
-        {% elif is_state('sensor.moon_phase', 'waning_gibbous') -%}
-        /local/images/MoonPhases/waning_gibbous.png
-        {% elif is_state('sensor.moon_phase', 'last_quarter') -%}
-        /local/images/MoonPhases/last_quarter.png
-        {% elif is_state('sensor.moon_phase', 'waning_crescent') -%}
-        /local/images/MoonPhases/waning_crescent.png
-        {%- endif %}
+    # switches_on:
+    #   friendly_name: "Switches (as a light) turned on"
+    #   value_template: >
+    #     {%- set sel = [
+    #     'terrace_spotlights',
+    #     ] -%}
+    #     {{- states.switch | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
 
-- platform: template
-  sensors:
-    server_status:
-      unique_id: server_status
-      friendly_name: "Server Status Info"
-      value_template: >
-        Server temperature: {{states.sensor.raspberry_c_temp.state| round}}°C, 
-        Power status: {% if is_state("binary_sensor.rpi_power_status", "off")  %}OK{%- else -%}ERROR{%- endif %}
-      icon_template: >
-        mdi:raspberry-pi
-      entity_picture_template: >-
-        /local/images/bg_card/bg_rpi.png
+    # opened_windows:
+    #   friendly_name: "Opened Windows"
+    #   value_template: >
+    #     {%- set sel = [
+    #     'toilet_window_sensor_contact',
+    #     'dining_room_window_sensor_contact', 
+    #     ] -%}
+    #     {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
 
-- platform: template
-  sensors:
-    turned_on_lights:
-      unique_id: turned_on_lights
-      friendly_name: "Turned lights on"
-      value_template: >
-        {{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}
-      icon_template: >
-        mdi:lightbulb-multiple-outline
+    # opened_doors:
+    #   friendly_name: "Opened Doors"
+    #   value_template: >
+    #     {%- set sel = [
+    #     'terrace_door_sensor_contact',
+    #     'main_corridor_door_sensor_contact',
+    #     ] -%}
+    #     {{- states.binary_sensor | selectattr('object_id', 'in', sel) | selectattr('state','eq','on') | list | length }}
+
+# - platform: template
+#   sensors:
+#     moon_phase_image:
+#       unique_id: moon_phase_img
+#       friendly_name: "Moon Phase"
+#       value_template: "{{ states.sensor.moon_phase.state | replace('_', ' ')| capitalize }}"
+#       icon_template: >
+#         mdi:moon-{{states.sensor.moon_phase.state | replace("_", "-")}}
+#       entity_picture_template: >-
+#         {% if is_state('sensor.moon_phase', 'new_moon') -%}
+#         /local/images/MoonPhases/new_moon.png
+#         {% elif is_state('sensor.moon_phase', 'waxing_crescent') -%}
+#         /local/images/MoonPhases/waxing_crescent.png
+#         {% elif is_state('sensor.moon_phase', 'first_quarter') -%}
+#         /local/images/MoonPhases/first_quarter.png
+#         {% elif is_state('sensor.moon_phase', 'waxing_gibbous') -%}
+#         /local/images/MoonPhases/waxing_gibbous.png
+#         {% elif is_state('sensor.moon_phase', 'full_moon') -%}
+#         /local/images/MoonPhases/full_moon.png
+#         {% elif is_state('sensor.moon_phase', 'waning_gibbous') -%}
+#         /local/images/MoonPhases/waning_gibbous.png
+#         {% elif is_state('sensor.moon_phase', 'last_quarter') -%}
+#         /local/images/MoonPhases/last_quarter.png
+#         {% elif is_state('sensor.moon_phase', 'waning_crescent') -%}
+#         /local/images/MoonPhases/waning_crescent.png
+#         {%- endif %}
+
+# - platform: template
+#   sensors:
+#     server_status:
+#       unique_id: server_status
+#       friendly_name: "Server Status Info"
+#       value_template: >
+#         Server temperature: {{states.sensor.raspberry_c_temp.state| round}}°C, 
+#         Power status: {% if is_state("binary_sensor.rpi_power_status", "off")  %}OK{%- else -%}ERROR{%- endif %}
+#       icon_template: >
+#         mdi:raspberry-pi
+#       entity_picture_template: >-
+#         /local/images/bg_card/bg_rpi.png
+
+# - platform: template
+#   sensors:
+#     turned_on_lights:
+#       unique_id: turned_on_lights
+#       friendly_name: "Turned lights on"
+#       value_template: >
+#         {{int(states.sensor.ligts_on.state)+int(states.sensor.switches_on.state)}}
+#       icon_template: >
+#         mdi:lightbulb-multiple-outline

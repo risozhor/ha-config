@@ -9,120 +9,628 @@ cards:
     cards:
       - type: row
         cards:
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.outdoor_themperature_dallas
-            name: Themperature
-            tap_action:
-              action: more-info
-            template:
-              - temperature
-              - icon_temp
-              - circle
-            custom_fields:
-              graph:
-                card:
-                  entities:
-                    - entity: sensor.outdoor_themperature_dallas
-            variables:
-              state_on: >
-                [[[
-                  if (entity) {
-                      return entity.state
-                  }
-                ]]]
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return Math.round(entity.state).toString()
-                  }
-                ]]]
-              circle_input_unit: "°C"
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.weather_station_weather_station_pressure_mmhg
-            name: Pressure
-            tap_action:
-              action: more-info
-            template:
-              - temperature
-              - icon_abonents
-              - circle
-            custom_fields:
-              graph:
-                card:
-                  entities:
-                    - entity: sensor.weather_station_weather_station_pressure_mmhg
-            variables:
-              state_on: >
-                [[[
-                  if (entity) {
-                      return entity.state
-                  }
-                ]]]
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return Math.round(entity.state).toString()
-                  }
-                ]]]
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            # entity: sensor.weather_station_bme_weather_station_humidity
-            entity: sensor.openweathermap_humidity
-            name: Humidity
-            tap_action:
-              action: more-info
-            custom_fields:
-              graph:
-                card:
-                  entities:
-                    - entity: sensor.openweathermap_humidity
-                    # - entity: sensor.weather_station_bme_weather_station_humidity
-            variables:
-              state_on: >
-                [[[
-                  if (entity) {
-                      return entity.state
-                  }
-                ]]]
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return Math.round(entity.state).toString()
-                  }
-                ]]]
-              circle_input_unit: "%"
-            template:
-              - temperature
-              - icon_humidity
-              - circle
-          - type: custom:button-card
-            class: col-6 col-lg-2 px-2 pt-4
-            entity: sensor.weather_station_weather_station_wind_speed_sensor
-            name: Wind Speed
-            tap_action:
-              action: more-info
-            custom_fields:
-              graph:
-                card:
-                  entities:
-                    - entity: sensor.weather_station_weather_station_wind_speed_sensor
-            variables:
-              state_on: >
-                [[[
-                  if (entity) {
-                      return entity.state
-                  }
-                ]]]
-              circle_input: >
-                [[[
-                  if (entity) {
-                      return Math.round(entity.state).toString()
-                  }
-                ]]]
-              circle_input_unit: "m/s"
-            template:
-              - temperature
-              - icon_anemometer
-              - circle
+          - type: custom:vertical-stack-in-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.weather_temperature
+                tap_action:
+                  action: more-info
+                icon: mdi:thermometer
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {# ========== CONFIG ========== #}
+                        {# == Updated: entity auto generated == #}
+                        {% set temp = states(config.entity) | int() %}
+                        {% set rgb = '0,140,255' %}
+                        {% set anim = 'temp-cold-breathe' %}
+                        {% set glow_anim = 'temp-cold-glow' %}
+                        {% set halo_anim = 'temp-cold-halo' %}
+                        {% set duration = 4.0 %}
+                        {% set intensity = 0.5 %}
+                        {# RANGES / COLORS #}
+                        {# You can change temp numbers below if needed #}
+                        {% if temp < -0 %}
+                          {# BLUE #}
+                          {% set rgb = '0,140,255' %}
+                          {% set anim = 'temp-cold-breathe' %}
+                          {% set glow_anim = 'temp-cold-glow' %}
+                          {% set halo_anim = 'temp-cold-halo' %}
+                          {% set duration = 4.4 %}
+                          {% set intensity = 0.4 %}
+                        {% elif temp < 10 %}
+                          {# YELLOW #}
+                          {% set rgb = '255,210,40' %}
+                          {% set anim = 'temp-cool-wave' %}
+                          {% set glow_anim = 'temp-cool-glow' %}
+                          {% set halo_anim = 'temp-cool-halo' %}
+                          {% set duration = 3.4 %}
+                          {% set intensity = 0.55 %}
+                        {% elif temp < 20 %}
+                          {# ORANGE #}
+                          {% set rgb = '255,150,40' %}
+                          {% set anim = 'temp-comfy-breathe' %}
+                          {% set glow_anim = 'temp-comfy-glow' %}
+                          {% set halo_anim = 'temp-comfy-halo' %}
+                          {% set duration = 3.0 %}
+                          {% set intensity = 0.6 %}
+                        {% elif temp < 25 %}
+                          {# DARK ORANGE #}
+                          {% set rgb = '255,115,20' %}
+                          {% set anim = 'temp-warm-pulse' %}
+                          {% set glow_anim = 'temp-warm-glow' %}
+                          {% set halo_anim = 'temp-warm-halo' %}
+                          {% set duration = 2.4 %}
+                          {% set intensity = 0.8 %}
+                        {% else %}
+                          {# RED #}
+                          {% set rgb = '255,40,40' %}
+                          {% set anim = 'temp-hot-shimmer' %}
+                          {% set glow_anim = 'temp-hot-glow' %}
+                          {% set halo_anim = 'temp-hot-halo' %}
+                          {% set duration = 2.0 %}
+                          {% set intensity = 1.0 %}
+                        {% endif %}
+                        {# Apply variables #}
+                        --temp-rgb: {{ rgb }};
+                        --temp-intensity: {{ intensity }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --temp-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --temp-halo-animation: {{ halo_anim }} {{ (duration * 1.15) | round(2) }}s ease-in-out infinite;
+                        opacity: 1;
+                        /* Icon color follows the temperature */
+                        --icon-color: rgba({{ rgb }}, 1);
+                        /* KILL THE THEME BLUE & MAKE SHAPE NEUTRAL */
+                        background-color: rgba(77, 77, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+                      /* ========== COLD ========== */
+                      @keyframes temp-cold-breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.03); }
+                        100% { transform: scale(0.96); }
+                      }
+                      @keyframes temp-cold-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 6 rgba(var(--temp-rgb), 0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--temp-rgb), 0.95),
+                            0 0 50px 10px rgba(var(--temp-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 6 rgba(var(--temp-rgb), 0.55);
+                        }
+                      }
+                      @keyframes temp-cold-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--temp-rgb), 0.35),
+                            0 -20px 80px -14px rgba(220, 240, 255, 0.55);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 36px rgba(var(--temp-rgb), 0.5),
+                            0 -34px 100px -8px rgba(240, 250, 255, 0.8);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 20px rgba(var(--temp-rgb), 0.35),
+                            0 -20px 80px -14px rgba(220, 240, 255, 0.55);
+                        }
+                      }
+                      /* ========== COOL ========== */
+                      @keyframes temp-cool-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+                      @keyframes temp-cool-glow {
+                        0% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 4 rgba(var(--temp-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 2 rgba(var(--temp-rgb), 0.95),
+                            0 0 48px 12px rgba(var(--temp-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 22px 0 rgba(var(--temp-rgb), 0.6),
+                            0 0 34px 4 rgba(var(--temp-rgb), 0.7);
+                        }
+                      }
+                      @keyframes temp-cool-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--temp-rgb), 0.35),
+                            0 18px 80px -12px rgba(0, 220, 255, 0.35);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 140px 42px rgba(var(--temp-rgb), 0.45),
+                            0 30px 110px -10px rgba(0, 255, 255, 0.5);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--temp-rgb), 0.35),
+                            0 18px 80px -12px rgba(0, 220, 255, 0.35);
+                        }
+                      }
+                      /* ========== COMFY ========== */
+                      @keyframes temp-comfy-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.05); }
+                        100% { transform: scale(0.98); }
+                      }
+                      @keyframes temp-comfy-glow {
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--temp-rgb), 0.9),
+                            0 0 42px 10px rgba(var(--temp-rgb), 0.85);
+                        }
+                      }
+                      @keyframes temp-comfy-halo {
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--temp-rgb), 0.45),
+                            0 26px 80px -10px rgba(180,255,200,0.5);
+                        }
+                      }
+                      /* ========== WARM ========== */
+                      @keyframes temp-warm-pulse {
+                        0%   { transform: scale(1); }
+                        50%  { transform: scale(1.07); }
+                        100% { transform: scale(1); }
+                      }
+                      @keyframes temp-warm-glow {
+                        50% {
+                          box-shadow:
+                            0 0 30px 4 rgba(var(--temp-rgb), 0.95),
+                            0 0 54px 14px rgba(var(--temp-rgb), 0.9);
+                        }
+                      }
+                      @keyframes temp-warm-halo {
+                        50% {
+                          box-shadow:
+                            0 0 140px 48px rgba(var(--temp-rgb), 0.55),
+                            0 26px 100px -10px rgba(255,210,150,0.5);
+                        }
+                      }
+                      /* ========== HOT ========== */
+                      @keyframes temp-hot-shimmer {
+                        0%   { transform: scale(1); filter: blur(0); }
+                        50%  { transform: scale(1.08); filter: blur(0.6px); }
+                        100% { transform: scale(1); filter: blur(0); }
+                      }
+                      @keyframes temp-hot-glow {
+                        50% {
+                          box-shadow:
+                            0 0 34px 6 rgba(var(--temp-rgb), 1),
+                            0 0 62px 14px rgba(var(--temp-rgb), 0.95);
+                        }
+                      }
+                      @keyframes temp-hot-halo {
+                        50% {
+                          box-shadow:
+                            0 0 160px 60px rgba(var(--temp-rgb), 0.6),
+                            0 34px 120px -12px rgba(255,150,100,0.6);
+                        }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.weather_temperature
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    color_thresholds:
+                      - value: 0
+                        color: blue
+                      - value: 16
+                        color: lightblue
+                      - value: 18
+                        color: orange
+                      - value: 21
+                        color: red
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+          - type: custom:vertical-stack-in-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.outdoor_pressure
+                tap_action:
+                  action: more-info
+                icon: mdi:car-brake-low-pressure
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {% set rgb = '110,140,55' %}
+                        --shape-animation: breathe 3s ease-in-out infinite;
+                        opacity: 1;
+                        --icon-color: rgba({{ rgb }}, 1);
+                        background-color: rgba(77, 00, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        position: relative;
+                        transform-origin: 50% 60%;
+                      }
+                      @keyframes breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.10); }
+                        100% { transform: scale(0.96); }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.outdoor_pressure
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+
+          - type: custom:vertical-stack-in-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.outdoor_humidity
+                icon: mdi:water-percent
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {% set hum = states(config.entity) | float(0) %}
+                        {% set rgb = '120,210,255' %}
+                        {% set anim = 'hum-good-breathe' %}
+                        {% set glow_anim = 'hum-good-glow' %}
+                        {% set halo_anim = 'hum-good-halo' %}
+                        {% set duration = 3.2 %}
+                          < 40   -> BAD (dark blue)
+                          40-60  -> GOOD (light blue)
+                          > 60   -> MIDDLE / humid (medium blue)
+                        {% if hum < 40 %}
+                          {% set rgb = '0,80,200' %}
+                          {% set anim = 'hum-bad-pulse' %}
+                          {% set glow_anim = 'hum-bad-glow' %}
+                          {% set halo_anim = 'hum-bad-halo' %}
+                          {% set duration = 2.8 %}
+                        {% elif hum <= 60 %}
+                          {% set rgb = '120,210,255' %}
+                          {% set anim = 'hum-good-breathe' %}
+                          {% set glow_anim = 'hum-good-glow' %}
+                          {% set halo_anim = 'hum-good-halo' %}
+                          {% set duration = 3.4 %}
+                        {% else %}
+                          {% set rgb = '40,140,255' %}
+                          {% set anim = 'hum-mid-wave' %}
+                          {% set glow_anim = 'hum-mid-glow' %}
+                          {% set halo_anim = 'hum-mid-halo' %}
+                          {% set duration = 3.0 %}
+                        {% endif %}
+                        --hum-rgb: {{ rgb }};
+                        --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                        --hum-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                        --hum-halo-animation: {{ halo_anim }} {{ (duration * 1.1) | round(2) }}s ease-in-out infinite;
+                        --icon-color: rgba({{ rgb }}, 1);
+                        background-color: rgba(77,77,77,0.2) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        opacity: 1;
+                        position: relative;
+                        transform-origin: 50% 60%;
+                        animation: var(--shape-animation);
+                      }
+                      @keyframes hum-good-breathe {
+                        0%   { transform: scale(0.98); }
+                        50%  { transform: scale(1.04); }
+                        100% { transform: scale(0.98); }
+                      }
+                      @keyframes hum-good-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 24px 4 rgba(var(--hum-rgb), 0.9),
+                            0 0 44px 10px rgba(var(--hum-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                            0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                        }
+                      }
+
+                      @keyframes hum-good-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,230,255,0.3);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 120px 40px rgba(var(--hum-rgb), 0.45),
+                            0 26px 90px -10px rgba(200,240,255,0.45);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                            0 18px 70px -12px rgba(180,230,255,0.3);
+                        }
+                      }
+                      @keyframes hum-mid-wave {
+                        0%   { transform: translateX(0); }
+                        25%  { transform: translateX(-1px); }
+                        50%  { transform: translateX(1px) translateY(-1px); }
+                        75%  { transform: translateX(-1px); }
+                        100% { transform: translateX(0); }
+                      }
+                      @keyframes hum-mid-glow {
+                        0% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 28px 3 rgba(var(--hum-rgb), 0.95),
+                            0 0 48px 10px rgba(var(--hum-rgb), 0.85);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                      }
+
+                      @keyframes hum-mid-halo {
+                        0% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                            0 18px 80px -12px rgba(80,190,255,0.35);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 135px 42px rgba(var(--hum-rgb), 0.5),
+                            0 28px 105px -10px rgba(100,210,255,0.5);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                            0 18px 80px -12px rgba(80,190,255,0.35);
+                        }
+                      }
+                      @keyframes hum-bad-pulse {
+                        0%   { transform: scale(0.97); }
+                        40%  { transform: scale(1.03); }
+                        100% { transform: scale(0.97); }
+                      }
+                      @keyframes hum-bad-glow {
+                        0% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 26px 4 rgba(var(--hum-rgb), 0.95),
+                            0 0 44px 12px rgba(var(--hum-rgb), 0.9);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                            0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                        }
+                      }
+                      @keyframes hum-bad-halo {
+                        0% {
+                          box-shadow:
+                            0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                            0 18px 75px -10px rgba(0,70,160,0.5);
+                        }
+                        50% {
+                          box-shadow:
+                            0 0 130px 40px rgba(var(--hum-rgb), 0.6),
+                            0 26px 100px -8px rgba(0,90,190,0.65);
+                        }
+                        100% {
+                          box-shadow:
+                            0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                            0 18px 75px -10px rgba(0,70,160,0.5);
+                        }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.0xa4c1386ff37a512f_humidity
+                    line_color: lightblue
+                    line_width: 5
+                    hours_to_show: 24
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }
+
+          - type: custom:vertical-stack-in-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.wind_speed
+                tap_action:
+                  action: more-info
+                icon: mdi:windsock
+                primary_info: state
+                secondary_info: name
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        {% set rgb = '0,140,255' %}
+                        --shape-animation: breathe 3s ease-in-out infinite;
+                        opacity: 1;
+                        --icon-color: rgba({{ rgb }}, 1);
+                        background-color: rgba(77, 77, 77,0.1) !important;
+                        box-shadow: none !important;
+                        border: 1px solid rgba(255,255,255,0.06);
+                        position: relative;
+                        transform-origin: 50% 60%;
+                      }
+                      @keyframes breathe {
+                        0%   { transform: scale(0.96); }
+                        50%  { transform: scale(1.10); }
+                        100% { transform: scale(0.96); }
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: custom:mini-graph-card
+                    entities:
+                      - sensor.wind_speed
+                    hours_to_show: 24
+                    line_width: 5
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      labels: false
+                      legend: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          opacity: 50%;
+                          border: none;
+                          width: 400px;
+                          mask-image: radial-gradient(
+                            ellipse at center,
+                            rgba(0,0,0,1) 0%,
+                            rgba(0,0,0,0) 90%
+                          );
+                        }
+                card_mod:
+                  style:
+                    .: |
+                      ha-card {
+                          background: none;
+                          box-shadow: none;
+                          border: none;
+                          margin: 8px 12px; 
+                          position: absolute;
+                          bottom: -10px;
+                          right: -10px;
+                          }

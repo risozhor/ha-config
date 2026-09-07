@@ -1,13 +1,18 @@
 person.risozhor:
   entity_picture: "/local/risozhor.jpg"
   track: true
-  device_trackers:
-    - device_tracker.note20
+  # device_trackers:
+  #   - device_tracker.note20
+person.alex:
+  entity_picture: "/local/risozhor.jpg"
+  track: true
+  # device_trackers:
+  #   - device_tracker.note20
 person.vitaliy:
   entity_picture: "/local/vitaliy.jpg"
   track: true
   device_trackers:
-    - device_tracker.sm_m315f
+    - device_tracker.sm_s928w
 person.maryna:
   entity_picture: "/local/marina.jpg"
   track: true

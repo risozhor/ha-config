@@ -1,163 +1,270 @@
-- sensor:
-    - unique_id: sidebar
-      state: template
-      attributes:
-        time: >
-          {% set hours = now().strftime('%H') %}
-          {% set minutes = now().strftime('%M') %}
-          <span class="time">
-            {{ hours }}<span class="time-colon">:</span>{{ minutes }}
-          </span>
-        date: >
-          <font color='#6a7377'><b>
-          {% if strptime(states('sensor.date'), '%Y-%m-%d').day != None %}
-          {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
-          {% set months = ['January', 'February', 'March', 'April', 'May', 'June',
-          'July', 'August', 'September', 'October', 'November', 'December'] %}
-            {{ days[now().weekday()] }} {{ strptime(states('sensor.date'), '%Y-%m-%d').day }} {{ months[now().month-1] }}
-          {% endif %}
-          </b></font>
-        greet: >
-          <b>
-          {% set hour_num = now().hour | int %} 
-          {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Good morning
-          {% elif  hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good afternoon
-          {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening
-          {% else %}{{"\U0001f31a"}} Good night{% endif %}!</b><br>
-          {% set lights = [
-            states.light.0x0017880103aa4b71,
-            states.light.livingroom_lights,
-            states.light.livingroom_table_background,
-            states.light.wled,
-            states.light.gyver,
-            states.light.dining_room_light,
-            states.light.kidsroom_wled,
-            states.light.dining_room_stripe_3,
-            states.light.0x00178801030318a1,
-            states.light.guestroom_color_bulb,
-            states.light.main_corridor_light,
-            states.light.shelly1,
-            states.light.kitchen_ceiling_lights,
-            states.light.kitchen_strip,
-            states.switch.toilet_light
-          ] %}
-          {%- set devices = [
-            states.switch.outdoor_floodlight,
-            states.fan.xiaomi_miio_device,
-            states.media_player.living_room_tv,
-            states.climate.boiler_controller_boiler_thermostat
-          ] %}
-          <b>
-          {%- set lights_on = lights | selectattr('state','eq','on') | list %}
-          {%- set lights_name = lights | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
-          {%- set devices_on = devices | selectattr('state','search','(on|cool|fan_only|playing)') | list %}
-          {%- set devices_name = devices_on | map(attribute='name') | join(', ') %}
-          {%- if (lights_on | length == 0) and (devices_on | length > 0) %}
-            {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
-          {%- elif (lights_on | length == 1) and (devices_on | length == 1) %}
-            {{ lights_name }} and {{devices_name }} is on
-          {%- elif (lights_on | length == 1) and (devices_on | length > 1) %}
-            {{ lights_name }}, {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
-          {%- elif (lights_on | length > 1) and (devices_on | length == 1) %}
-            {{ lights_on | length }} lamps and {{ devices_name }} is on
-          {%- elif (lights_on | length > 1) and (devices_on | length > 1) %}
-            {{ lights_on | length }} lamps, {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
-          {%- elif (lights_on | length == 1) and (devices_on | length == 0) %}
-            {{ lights_name }} is on
-          {%- elif (lights_on | length > 1) and (devices_on | length == 0) %}
-            {{ lights_on | length }} lights on
-          {%- else %}
-            Everything is turned off
-          {%- endif %}</b>
-    - unique_id: domain_counter
-      state: >
-        {{ states | count }}
-      attributes:
-        automation: >
-          {{ states.automation | count }}
-        binary_sensor: >
-          {{ states.binary_sensor | count }}
-        device_tracker: >
-          {{ states.device_tracker | count }}
-        light: >
-          {{ states.light | count }}
-        media_player: >
-          {{ states.media_player | count }}
-        sensor: >
-          {{ states.sensor | count }}
-        switch: >
-          {{ states.switch | count }}
-        other: >
-          {{ states.calendar | count +
-          states.camera | count +
-          states.climate | count +
-          states.fan | count +
-          states.input_boolean | count +
-          states.input_number | count +
-          states.input_select | count +
-          states.lock | count +
-          states.person | count +
-          states.remote | count +
-          states.scene | count +
-          states.script | count +
-          states.select | count +
-          states.sun | count +
-          states.timer | count +
-          states.vacuum | count +
-          states.weather | count +
-          states.zone | count }}
-    - unique_id: "Boiler is heating"
-      name: "Boiler is heating"
-      unit_of_measurement: "°C"
-      state: >
-        {%- if is_state("binary_sensor.heating_state", "on") -%}
-          {{states.sensor.guestroom_motion_sensor_temperature.state }}
-        {%- else -%}
-          0
-        {%- endif %}
-      attributes:
-        description: "Created for visualisation in apexcharts"
-      icon: >
-        {%- if is_state("binary_sensor.heating_state", "on") -%}
-          mdi:water-boiler
-        {%- else -%}
-          mdi:water-boiler-off
-        {%- endif %}
-    - unique_id: devices_with_low_battery
-      name: "Devices with low battery"
-      unit_of_measurement: devices
-      state: >-
-        {%- set ignore_entities = 50 -%}
-        {%- set class = states.sensor 
-        | selectattr('attributes.device_class', 'defined') 
-        | selectattr('attributes.device_class', 'eq', 'battery') 
-        | rejectattr('state','in',['unavailable','unknown']) -%}
-        {%- set low_battery_sensors = namespace(sensors=[]) -%}
-        {%- for battery in class -%}
-          {%- if not battery.entity_id in integration_entities('mobile_app') and battery.state 
-          | int (0) <= ignore_entities  
-          | int and battery.state 
-          | int (0) != 0 -%}
-          {%- set low_battery_sensors.sensors = low_battery_sensors.sensors+ [battery.name +': '+battery.state +'%'] -%}
-          {%- endif -%}
-        {% endfor %}
-        {{low_battery_sensors.sensors | list | count}}
-      attributes:
-        threshold: >
-          50
-        low_batteries: >
-          {% set threshold = 50 -%}
-          {%- set class = states.sensor | selectattr('attributes.device_class', 'defined')| selectattr('attributes.device_class', 'eq', 'battery') | rejectattr('state','in',['unavailable','unknown']) -%}
-          {% set low_battery_sensors = namespace(sensors=[]) -%}
-          {% for battery in class %}
-          {% if not battery.entity_id in integration_entities('mobile_app') and battery.state | int (0) <= threshold | int and battery.state | int (0) != 0 %}
-          {% set low_battery_sensors.sensors = low_battery_sensors.sensors+ [battery.name +': '+battery.state +'%'] -%}
-          {% endif %}
-          {% endfor %}
-          {{-low_battery_sensors.sensors | replace('[','') | replace(' ','') | replace(']','')| replace(',','\r\n') -}}
-      icon: >-
-        {% if is_state('sensor.devices_with_low_battery', '0') %}
-        mdi:battery-check
-        {% else %}
-        mdi:battery-alert
-        {% endif %}
+# - trigger:
+#     - platform: time_pattern
+#       seconds: "/1"
+#   sensor:
+#     - unique_id: "display_timer_bathroom"
+#       name: "display timer bathroom"
+#       state: >-
+#         {% set f = state_attr('timer.bathroom_ventilation_on_timer', 'finishes_at') %}
+#         {{ '00:00' if f == None else 
+#         (as_datetime(f) - now()).total_seconds() | timestamp_custom('%M:%S', false) }}
+
+# - sensor:
+#     - unique_id: sidebar
+#       state: template
+#       attributes:
+#         time: >
+#           {% set hours = now().strftime('%H') %}
+#           {% set minutes = now().strftime('%M') %}
+#           <span class="time">
+#             {{ hours }}<span class="time-colon">:</span>{{ minutes }}
+#           </span>
+#         date: >
+#           <font color='#6a7377'><b>
+#           {#  {% if strptime(states('sensor.date_time_iso'), '%Y-%m-%d').day != None %} #}
+#           {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+#           {% set months = ['January', 'February', 'March', 'April', 'May', 'June',
+#           'July', 'August', 'September', 'October', 'November', 'December'] %}
+#             {{ days[now().weekday()] }} {{ now().day}} {%- if now().day == 1 or now().day == 11 or now().day == 21or now().day == 31  -%}st
+#             {%- elif now().day == 2 or now().day == 12 or now().day == 22  -%}nd
+#             {%- else -%}th{%- endif %} {{ months[now().month-1] }}
+#             {# {% endif %} #}
+#           </b></font>
+#         greet: >
+#           <b>
+#           {% set hour_num = now().hour | int %} 
+#           {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Good morning
+#           {% elif  hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good afternoon
+#           {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening
+#           {% else %}{{"\U0001f31a"}} Good night{% endif %}!</b><br>
+#           {% set lights = [
+#             states.light.kitchen_lights,
+#             states.light.bedroom,
+#             states.light.kidsroom_ceil,
+#             states.light.bathroom_lights,
+#             states.light.outdoor_light,
+#             states.light.living_room_lights,
+#             states.light.hallway_ceiling,
+#             states.light.wled,
+#             states.light.smart_plug_couch,
+#             states.light.laundry_ceiling,
+#             states.light.storage_ceiling,
+            
+#           ] %}
+#           {%- set devices = [
+#             states.switch.tp_link_smart_plug_7b31_plug_2, 
+#             states.fan.bathroom_ventilation,
+#           ] %}
+#           <b>
+#           {%- set lights_on = lights | selectattr('state','eq','on') | list %}
+#           {%- set lights_name = lights | selectattr('state','eq','on') | map(attribute='name') | join(', ') %}
+#           {%- set devices_on = devices | selectattr('state','search','(on|cool|fan_only|playing)') | list %}
+#           {%- set devices_name = devices_on | map(attribute='name') | join(', ') %}
+#           {%- if (lights_on | length == 0) and (devices_on | length > 0) %}
+#             {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
+#           {%- elif (lights_on | length == 1) and (devices_on | length == 1) %}
+#             {{ lights_name }} and {{devices_name }} is on
+#           {%- elif (lights_on | length == 1) and (devices_on | length > 1) %}
+#             {{ lights_name }}, {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
+#           {%- elif (lights_on | length > 1) and (devices_on | length == 1) %}
+#             {{ lights_on | length }} lamps and {{ devices_name }} is on
+#           {%- elif (lights_on | length > 1) and (devices_on | length > 1) %}
+#             {{ lights_on | length }} lamps, {{ devices_name | regex_replace(',([^,]*)$',' and\\1') }} is on
+#           {%- elif (lights_on | length == 1) and (devices_on | length == 0) %}
+#             {{ lights_name }} is on
+#           {%- elif (lights_on | length > 1) and (devices_on | length == 0) %}
+#             {{ lights_on | length }} lights on
+#           {%- else %}
+#             Everything is turned off
+#           {%- endif %}</b>
+          
+#     - unique_id: domain_counter
+#       state: >
+#         {{ states | count }}
+#       attributes:
+#         automation: >
+#           {{ states.automation | count }}
+#         binary_sensor: >
+#           {{ states.binary_sensor | count }}
+#         device_tracker: >
+#           {{ states.device_tracker | count }}
+#         light: >
+#           {{ states.light | count }}
+#         media_player: >
+#           {{ states.media_player | count }}
+#         sensor: >
+#           {{ states.sensor | count }}
+#         switch: >
+#           {{ states.switch | count }}
+#         other: >
+#           {{ states.calendar | count +
+#           states.camera | count +
+#           states.climate | count +
+#           states.fan | count +
+#           states.input_boolean | count +
+#           states.input_number | count +
+#           states.input_select | count +
+#           states.lock | count +
+#           states.person | count +
+#           states.remote | count +
+#           states.scene | count +
+#           states.script | count +
+#           states.select | count +
+#           states.sun | count +
+#           states.timer | count +
+#           states.vacuum | count +
+#           states.weather | count +
+#           states.zone | count }}
+
+
+
+#     - unique_id: devices_with_low_battery
+#       name: "Devices with low battery"
+#       unit_of_measurement: devices
+#       state: >-
+#         {%- set ignore_entities = 50 -%}
+#         {%- set class = states.sensor 
+#         | selectattr('attributes.device_class', 'defined') 
+#         | selectattr('attributes.device_class', 'eq', 'battery') 
+#         | rejectattr('state','in',['unavailable','unknown']) -%}
+#         {%- set low_battery_sensors = namespace(sensors=[]) -%}
+#         {%- for battery in class -%}
+#           {%- if not battery.entity_id in integration_entities('mobile_app') and battery.state 
+#           | int (0) <= ignore_entities  
+#           | int and battery.state 
+#           | int (0) != 0 -%}
+#           {%- set low_battery_sensors.sensors = low_battery_sensors.sensors+ [battery.name +': '+battery.state +'%'] -%}
+#           {%- endif -%}
+#         {% endfor %}
+#         {{low_battery_sensors.sensors | list | count}}
+#       attributes:
+#         threshold: >
+#           50
+#         low_batteries: >
+#           {% set threshold = 50 -%}
+#           {%- set class = states.sensor | selectattr('attributes.device_class', 'defined')| selectattr('attributes.device_class', 'eq', 'battery') | rejectattr('state','in',['unavailable','unknown']) -%}
+#           {% set low_battery_sensors = namespace(sensors=[]) -%}
+#           {% for battery in class %}
+#           {% if not battery.entity_id in integration_entities('mobile_app') and battery.state 
+#           | int (0) <= threshold 
+#           | int and battery.state 
+#           | int (0) != 0 %}
+#           {% set low_battery_sensors.sensors = low_battery_sensors.sensors+ [battery.name +': '+battery.state +'%'] -%}
+#           {% endif %}
+#           {% endfor %}
+#           {{-low_battery_sensors.sensors | replace('[','') | replace(' ','') | replace(']','')| replace(',','\r\n') -}}
+#       icon: >-
+#         {% if is_state('sensor.devices_with_low_battery', '0') %}
+#         mdi:battery-check
+#         {% else %}
+#         mdi:battery-alert
+#         {% endif %}
+#     # Outdoor weather sensors
+#     - unique_id: "Outdoor Humidity"
+#       name: "Outdoor Humidity"
+#       unit_of_measurement: "%"
+#       state: >
+#         {{state_attr("weather.home", "humidity")}}
+#       attributes:
+#         description: "Created from template sensor"
+#       icon: mdi:water-percent
+#     - unique_id: "Outdoor Pressure"
+#       name: "Outdoor Pressure"
+#       unit_of_measurement: "mmHg"
+#       state: >
+#         {{state_attr("weather.home", "pressure")}}
+#       attributes:
+#         description: "Created from template sensor"
+#       icon: mdi:car-brake-low-pressure
+#     - unique_id: "Outdoor Wind Speed"
+#       name: "Outdoor Wind Speed"
+#       unit_of_measurement: "m/s"
+#       state: >
+#         {{state_attr("weather.home", "wind_speed")}}
+#       attributes:
+#         description: "Created from template sensor"
+#       icon: mdi:wind-power
+
+#     - unique_id: "Marina Battery level"
+#       name: "Marina Battery level"
+#       unit_of_measurement: "%"
+#       state_class: measurement
+#       device_class: battery
+#       icon: mdi:battery-unknown
+#       state: >
+#         0
+#       attributes:
+#         description: "Created from template sensor"
+#     - unique_id: "Marina Battery state"
+#       name: "Marina Battery state"
+#       state_class: measurement
+#       device_class: enum
+#       icon: mdi:battery-unknown
+#       state: >
+#         not_charging
+#       attributes:
+#         description: "Created from template sensor"
+
+#     - unique_id: "List of persons at home"
+#       name: "List of persons at home"
+#       icon: mdi:battery-unknown
+#       state: >
+#         {%- set count = states.person | selectattr ('state', 'equalto', 'home') | list | length -%}
+#         {%- set person = [
+#         states.person.risozhor,
+#         states.person.vitaliy,
+#         states.person.yaroslava,
+#         states.person.maryna,
+#         ] -%}
+#         {% if count==1 -%}{{- person | selectattr('state','eq','home') | map(attribute='attributes.friendly_name') | list | join(', ') }} {{'is home '-}}
+#         {% elif count >= 1 -%}
+#         {{-count-}}{{' persons home'-}}
+#         {%- else -%}
+#           Nobody home
+#         {%- endif %}
+#       attributes:
+#         description: "Created from template sensor"
+#         athome_is: >
+#           {%- set person = [
+#           states.person.risozhor,
+#           states.person.vitaliy,
+#           states.person.yaroslava,
+#           states.person.maryna,
+#           ] -%}
+#           {{ person | selectattr('state','eq','home') | map(attribute='attributes.friendly_name') | list | join(', ') }}
+
+#     - unique_id: "waste"
+#       name: "waste sensor"
+#       state: >
+#         {% set garbage_days_to_collecting = states.sensor.garbage.state | replace("Garbage in ", "") | replace(" days", "") | int -%}
+#         {% set recycling_days_to_collecting = states.sensor.recycling.state | replace("Recycling in ", "") | replace(" days", "") | int -%}
+#         {% set organics_days_to_collecting = states.sensor.organics.state | replace("Organics in ", "")| replace(" days", "") | int -%}
+
+#         Next collecting: 
+#         {% if garbage_days_to_collecting<=1 and organics_days_to_collecting !=1 -%}Garbage
+#         {% elif organics_days_to_collecting <= 1 -%}Organics
+#         {% elif recycling_days_to_collecting <=1 and organics_days_to_collecting !=1 -%}Recycling
+#         {% elif recycling_days_to_collecting < organics_days_to_collecting and recycling_days_to_collecting < garbage_days_to_collecting  -%}Recycling
+#         {% elif garbage_days_to_collecting < organics_days_to_collecting and garbage_days_to_collecting < recycling_days_to_collecting  -%}Garbage
+#         {% elif organics_days_to_collecting < garbage_days_to_collecting and organics_days_to_collecting < recycling_days_to_collecting  -%}Organics
+#         {% else -%}Unknown
+#         {%- endif -%}
+#         {% if garbage_days_to_collecting == 0 and organics_days_to_collecting !=1 -%}today!
+#         {% elif recycling_days_to_collecting == 0 and organics_days_to_collecting != 1 %}today!
+#         {% elif garbage_days_to_collecting == 1 or organics_days_to_collecting == 1 or recycling_days_to_collecting == 1 %}tomorrow!
+#         {%- elif recycling_days_to_collecting < organics_days_to_collecting and recycling_days_to_collecting < garbage_days_to_collecting  %} in {{recycling_days_to_collecting}} days
+#         {%- elif garbage_days_to_collecting < organics_days_to_collecting and garbage_days_to_collecting < recycling_days_to_collecting  %} in {{garbage_days_to_collecting}} days
+#         {%- elif organics_days_to_collecting < garbage_days_to_collecting and organics_days_to_collecting < recycling_days_to_collecting  %} in {{organics_days_to_collecting}} days
+#         {%- else -%}{{ state_attr('calendar.waste', 'message') }}
+#         {%- endif %}
+#       attributes:
+#         description: "Created from template sensor"
+#         Garbage: >
+#           {{states.sensor.garbage.state | replace("Garbage", "Collecting")}}
+#         Recycling: >
+#           {{states.sensor.recycling.state | replace("Recycling", "Collecting")}}
+#         Organics: >
+#           {{states.sensor.organics.state | replace("Organics", "Collecting")}}
+#       icon: mdi:trash-can-outline
+
+[]

@@ -1,37 +1,3 @@
-- id: notify-kitchenfire
-  alias: Kitchen fire detected
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.0x00158d0002edf7f8_smoke
-      to: "on"
-  action:
-    - service: notify.telegram
-      data:
-        title: '{{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}} *FIRE* {{"\U0001F525"}}{{"\U0001F525"}}{{"\U0001F525"}}'
-        message: "О {{ states('sensor.time_date') }} smoke was detected in the kitchen"
-        data:
-          inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-    - service: notify.mobile_app_note20
-      data:
-        title: "The house is on fire! Smoke detected"
-        message: TTS
-        data:
-          ttl: 0
-          color: red
-          priority: high
-          channel: alarm_stream_max
-    - service: notify.mobile_app_note20
-      data:
-        title: "Smoke detected"
-        message: The house is on fire! Smoke detected
-        data:
-          ttl: 0
-          color: red
-          priority: high
-          channel: alarm_stream_max
-
 # Start Home Assistant Notify
 - id: notify-hass-start
   alias: Home Assistant Start - Notify
@@ -40,365 +6,377 @@
     platform: homeassistant
     event: start
   action:
-    - service: notify.telegram
+    - service: notify.mobile_app_sm_s938w
       data:
-        message: >-
-          {{'\U0001F525'}} Home Assistant Started at {{ states('sensor.time_date') }}
+        title: HA Started
+        message: "{{'\U0001F525'}} Home Assistant Started {{ as_timestamp(states.sensor.date_time_iso.state) | timestamp_custom('%d-%m-%Y at %H:%M') }}"
         data:
-          inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+          color: "#2DF56D"
+          # actions:
+          #   - action: "URI"
+          #     title: "Release Notes"
+          #     uri: "https://www.home-assistant.io/latest-release-notes/"
+          #   - action: "URI"
+          #     title: "Update"
+          #     uri: "/config/updates"
+    # - action: notify.send_message
+    #   data:
+    #     message: >-
+    #       {{'\U0001F525'}} Home Assistant Started {{ as_timestamp(states.sensor.date_time_iso.state) | timestamp_custom("%d-%m-%Y at %H:%M") }}
+    #     entity_id: notify.telegram_bot_1237123148_66507631
+    #     inline_keyboard:
+    #       - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 # Press TELEGRAM "/start" Home Assistant Notify
-- id: telegram-control-pannel-start
-  alias: "Telegram Control Pannel Command"
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: telegram_command
-    event_data:
-      command: "/start"
-  action:
-    - service: telegram_bot.send_message
-      data_template:
-        target: "{{ trigger.event.data.user_id }}"
-        message: >
-          {{ [
-          "Greetings",
-          "To the stars",
-          "Sir, Yes sir!",
-          "Well, well, well!",
-          "Me alegro!",
-          "Hello!",
-          "What up",
-          "Let's go!",
-          "Hello, amigo",
-          "Buenos noches!"
-          ] | random }}
-        data:
-        inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
-          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
-          - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
+# - id: telegram-control-pannel-start
+#   alias: "Telegram Control Pannel Command"
+#   initial_state: on
+#   trigger:
+#     platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: "/start"
+#   action:
+#     - action: telegram_bot.send_message
+#       data_template:
+#         message_id: last
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         # title: '{{"\U0001F4CC"}} *Locaton*'
+#         message: >
+#           {{ [
+#           "Greetings",
+#           "To the stars",
+#           "Sir, Yes sir!",
+#           "Well, well, well!",
+#           "Me alegro!",
+#           "Hello!",
+#           "What up",
+#           "Let's go!",
+#           "Hello, amigo",
+#           "Buenos noches!"
+#           ] | random }}
+#         inline_keyboard:
+#           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
+#           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+#     - delay:
+#         seconds: 7
 
-- id: telegram-ik-ping-pong
-  alias: "telegram ping pong"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/ping"
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: >-
-          {{"\U0001F501"}} Callback received from {{ trigger.event.data.from_first }}.
-          Message id: {{ trigger.event.data.message.message_id }}.
-          Data: {{ trigger.event.data.data }}
-          {{now().strftime("%H:%M:%S %Y-%m-%d")}} Pong, Message from {{ trigger.event.data["user_id"] }}.
-        show_alert: true
 
-- id: telegram-user-location
-  alias: "telegram User location"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/location"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F4CC"}} *Locaton*'
-        message: >-
-          {{"__________________________________ \n"}}
-          {{now().strftime("%H:%M:%S %Y-%m-%d")}}
-          {{"__________________________________ \n"}}
-          {%- for value in range(integration_entities('places') | length) -%}
-          *{{- state_attr((integration_entities('places')[value]), 'friendly_name')}}*: {{ states(integration_entities('places')[value])}}{{"\n"}}
-          {%- endfor -%}
-        inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
-          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
-# - id: telegram-ik-security-alarm
-#   alias: "Telegram Alarm"
+# - id: telegram-ik-ping-pong
+#   alias: "telegram ping pong"
 #   trigger:
 #     - platform: event
 #       event_type: telegram_callback
 #       event_data:
-#         data: "/security"
+#         data: "/ping"
 #   action:
 #     - service: telegram_bot.answer_callback_query
 #       data_template:
 #         callback_query_id: "{{ trigger.event.data.id }}"
-#         message: "Alarm control"
+#         message: >-
+#           {{"\U0001F501"}} Callback received from {{ trigger.event.data.from_first }}.
+#           Message id: {{ trigger.event.data.message.message_id }}.
+#           Data: {{ trigger.event.data.data }}
+#           {{now().strftime("%H:%M:%S %Y-%m-%d")}} Pong, Message from {{ trigger.event.data["user_id"] }}.
+#         show_alert: true
+
+# - id: telegram-user-location
+#   alias: "telegram User location"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/location"
+#   action:
 #     - service: telegram_bot.edit_message
 #       data_template:
 #         message_id: "{{ trigger.event.data.message.message_id }}"
 #         chat_id: "{{ trigger.event.data.chat_id }}"
-#         message: >
-#           {% if is_state("alarm_control_panel.sweet_home_alarm", "disarmed") %}Disarmed. {% else %}{{ "\u26D4" }} Alarm is ON. {% endif %}
+#         title: '{{"\U0001F4CC"}} *Locaton*'
+#         message: >-
+#           {{"__________________________________ \n"}}
+#           {{now().strftime("%H:%M:%S %Y-%m-%d")}}
+#           {{"__________________________________ \n"}}
+#           {%- for value in range(integration_entities('places') | length) -%}
+#           *{{- state_attr((integration_entities('places')[value]), 'friendly_name')}}*: {{ states(integration_entities('places')[value])}}{{"\n"}}
+#           {%- endfor -%}
 #         inline_keyboard:
-#           - '{{ "\u26D4" }} Arm (away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
+#           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
+#           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
 #           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
-- id: telegram-ik-set-security-arm_away
-  alias: "Telegram Alarm SET arm_away"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/arm_away"
-  action:
-    - service: alarm_control_panel.alarm_arm_away
-      data:
-        entity_id: alarm_control_panel.sweet_home_alarm
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{ "\u26D4" }} *Security*'
-        message: "Armed (Away)"
-        inline_keyboard:
-          - '{{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - id: telegram-ik-set-security-arm_away
+#   alias: "Telegram Alarm SET arm_away"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/arm_away"
+#   action:
+#     - service: alarm_control_panel.alarm_arm_away
+#       data:
+#         entity_id: alarm_control_panel.manual_alarm
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{ "\u26D4" }} *Security*'
+#         message: "Armed (Away)"
+#         inline_keyboard:
+#           - '{{ "\u2B55" }} Arm (home):/arm_home, {{ "\u2611" }} Disarm:/disarm'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
-- id: telegram-ik-set-security-arm_home
-  alias: "Telegram Alarm SET arm_home"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/arm_home"
-  action:
-    - service: alarm_control_panel.alarm_arm_away
-      data:
-        entity_id: alarm_control_panel.sweet_home_alarm
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{ "\u26D4" }}*Security*'
-        message: "Armed (Home)"
-        inline_keyboard:
-          - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2611" }} Disarm:/disarm'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- id: telegram-ik-set-security-disarm
-  alias: "Telegram Alarm SET disarm"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/disarm"
-  action:
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.sweet_home_alarm
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: "*Security*"
-        message: "Disarmed"
-        inline_keyboard:
-          - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - id: telegram-ik-set-security-arm_home
+#   alias: "Telegram Alarm SET arm_home"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/arm_home"
+#   action:
+#     - service: alarm_control_panel.alarm_arm_away
+#       data:
+#         entity_id: alarm_control_panel.manual_alarm
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{ "\u26D4" }}*Security*'
+#         message: "Armed (Home)"
+#         inline_keyboard:
+#           - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2611" }} Disarm:/disarm'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - id: telegram-ik-set-security-disarm
+#   alias: "Telegram Alarm SET disarm"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/disarm"
+#   action:
+#     - service: alarm_control_panel.alarm_disarm
+#       data:
+#         entity_id: alarm_control_panel.manual_alarm
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: "*Security*"
+#         message: "Disarmed"
+#         inline_keyboard:
+#           - '{{ "\u26D4" }} Arm (Away):/arm_away, {{ "\u2B55" }} Arm (home):/arm_home'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
-- id: telegram-ik-to-cp
-  alias: "Telegram Control Panel"
-  trigger:
-    - platform: event
-      event_type: telegram_callback
-      event_data:
-        data: "/to_cp"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: "*Control Panel*"
-        message: >-
-          {{'\n'}}
-          {% set hour_num = now().hour | int %}
-          {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Good morning!
-          {% elif hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good day!
-          {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening!
-          {% else %}{{"\U0001f31a"}} Good night!{% endif -%}
-          {%- set weekday_list = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
-          {%- set month_list = ["January","February","March","April","May","June","July","August","September","October","November","December"] %}
-          {%- set date = as_timestamp(now()) -%}
-          {%- set wd_ok = date | timestamp_custom("%w") | int %}
-          {%- set weekday = weekday_list[wd_ok-1] -%}
-          {{'\n'}}Сьогодні {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, зараз {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Select a section*{{'\n\n'}}
-        inline_keyboard:
-          - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
-          - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
-          - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
-- alias: "Lights Actions"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/lights"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F4A1"}} *Lighting control*'
-        message: "Choose a room to control the lighting"
-        inline_keyboard:
-          - '{{"\U0001F39B"}} Kitchen:/light_kitchen, {{"\U0001F6AA"}} Hallway:/light_hallway, {{"\U0001F9F8"}} Children room :/light_kids'
-          - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001f9f3"}} Guestroom:/light_guestroom, {{"\U0001f6aa"}} Main Corridor:/light_main_corridor'
-          - '{{"\U0001f96c"}} Dining Room:/light_dining_room, {{"\U0001F333"}} Outside:/light_outdoor'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "HA System Actions"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/system"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6E0"}} *HA System Actions*'
-        message: "It sounds like you want to do something with your Home Assistant. What action do you want to perform?"
-        inline_keyboard:
-          - '{{"\u2B07\uFE0F"}} Shut down:/hashutdown, {{"\U0001F503"}} Restart:/hassioreboot'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "IK - Telegram - Host Reboot"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/hassioreboot"
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: '{{"\U0001F503"}} Restart'
-    - service: hassio.host_reboot
-    - service: notify.telegram
-      data:
-        message: '{{"\U0001F503"}} Host - Reboot - Triggered'
-        data:
-          inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "IK - Telegram - Host Shutdown"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/hashutdown"
-  action:
-    - service: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: '{{"\U0001F503"}} Shut down'
-    - service: hassio.host_shutdown
-    - service: notify.telegram
-      data:
-        message: '{{"\u2B07\uFE0F"}} Host - Shutdown - Triggered'
-        data:
-          inline_keyboard:
-            - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "IK - Telegram - System status sstatus"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/sstatus"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F6E0"}} *System status*'
-        message: >
-          ------------------------------------------------{{'\n'}}
-          {{"\U0001F525"}} *CPU Usage*: {{  states.sensor.processor_use_percent.state }}%{{'\n'}}
-          {{"\U0001F4E6"}} *Db Size*: {{ states.sensor.maria_db_size.state }} Mb{{'\n'}}
-          {{"\u23F0"}} *Last Boot*: {{  states.sensor.last_boot.state }}{{'\n'}}
-          {{"\U0001F4BF"}} *Disk Free*: {{  states.sensor.disk_free.state }}Gb{{'\n'}}
-          {{"\U0001F4C0"}} *HDD Used*: {{  states.sensor.disk_use_percent.state }}%{{'\n'}}
-          {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
-        inline_keyboard:
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "IK - Telegram - status weather"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/weather"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F324"}} *Weather*'
-        message: |
-          {{"\U0001F3E0"}} Weather, report on {{ states('sensor.time_date') }}
-          {{"\U0001F321"}} Temperature - {{ states('sensor.openweathermap_temperature') }} °C
-          {{"\U0001F32B"}} Humidity - {{ states('sensor.openweathermap_humidity') }} %
-          {{"\U0001F4AA"}} Pressure - {{ (states('sensor.openweathermap_pressure')|float * 0.7500637)|round(2) }} mm Hg
-          {{"\U0001f4a8"}} Wind speed {{ states('sensor.wind_speed') }} m/s.
-          {{"\U00002600"}} Weather - {{ states('sensor.openweathermap_weather') }}
-          {{"\U0001f4a7"}} Dewpoint {{ states('sensor.weather_station_weather_station_dew_point') }} °C.
-          ------------------------------------------------
-          {{"\U0001f305"}} Sunrise {{ states('sensor.weather_station_next_sunrise') }}
-          {{"\U0001f307"}} Sunset {{ states('sensor.weather_station_next_sunset') }}
-          ------------------------------------------------
-          *Forecast *
-          {{"\U00002B50"}} Forecast for today - {{ states('sensor.openweathermap_forecast_temperature') }} °C
-          {{"\U0001F327"}} Rain forecast - {{ states('sensor.openweathermap_rain') }}
-          {{"\U0001F328"}} Snow forecast - {{ states('sensor.openweathermap_snow') }}
-        inline_keyboard:
-          - "Forecast for tomorrow:/weather_tomorrow"
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "IK - Telegram - status weather tomorrow"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/weather_tomorrow"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F324"}} *Weather Forecast for tomorrow*'
-        message: |
-          {{'________________ \n'}}
-          {{"\U0001F321"}} Temperature: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} °C
-          {{"\U0001F324"}} Weather - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }} 
-          {{"\U0001F327"}} Precipitation - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
-          {{"\U0001f4a8"}} Wind speed {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} m/s.
-        inline_keyboard:
-          - '{{"\U0001F324"}} Back:/weather'
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
-- alias: "Telegram - status shopinglist"
-  trigger:
-    platform: event
-    event_type: telegram_callback
-    event_data:
-      data: "/shopinglist"
-  action:
-    - service: telegram_bot.edit_message
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        title: '{{"\U0001F4B5"}} *Shopping list *'
-        message: |
-          {% if ((states.sensor.shopping_list.state)  | count > 0) %}
-          List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s):{{-'\n'-}}{{ states('sensor.shopping_list_items_2') }}
-          {%else%}List is empty{%- endif %}
-        inline_keyboard:
-          - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - id: telegram-ik-to-cp
+#   alias: "Telegram Control Panel"
+#   trigger:
+#     - platform: event
+#       event_type: telegram_callback
+#       event_data:
+#         data: "/to_cp"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: "*Control Panel*"
+#         message: >-
+#           {{'\n'}}
+#           {% set hour_num = now().hour | int %}
+#           {% if hour_num >=6 and hour_num <12 %}{{"\U00002600"}} Good morning!
+#           {% elif hour_num>=12 and hour_num<17 %}{{"\U0001f31e"}} Good day!
+#           {% elif hour_num>=17 and hour_num<22 %}{{"\U0001f31d"}} Good evening!
+#           {% else %}{{"\U0001f31a"}} Good night!{% endif -%}
+#           {%- set weekday_list = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] %}
+#           {%- set month_list = ["January","February","March","April","May","June","July","August","September","October","November","December"] %}
+#           {%- set date = as_timestamp(now()) -%}
+#           {%- set wd_ok = date | timestamp_custom("%w") | int %}
+#           {%- set weekday = weekday_list[wd_ok-1] -%}
+#           {{'\n'}}Today is {{ weekday }}, {{ now().day|int }} {{ month_list[now().month-1] }}, now {% if now().hour <10 %}0{% endif %}{{now().hour}}:{%- if now().minute <10 %}0{% endif -%}{{now().minute}}{{'\n'}}*Select a section*{{'\n\n'}}
+#         inline_keyboard:
+#           - '{{"\U0001F4A1"}} Lights:/lights, {{"\u2753"}} Status:/sstatus'
+#           - '{{"\U0001F6E0"}} System:/system, {{"\U0001F501"}} Ping:/ping, {{"\U0001F4CC"}} User location:/location '
+#           - '{{"\U0001F324"}} Weather:/weather, {{"\U0001F4B5"}} Shoping :/shopinglist'
+# - alias: "Lights Actions"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/lights"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{"\U0001F4A1"}} *Lighting control*'
+#         message: "Choose a room to control the lighting"
+#         inline_keyboard:
+#           - '{{"\U0001F39B"}} Kitchen:/light_kitchen, {{"\U0001F6AA"}} Hallway:/light_hallway'
+#           - '{{"\U0001F6CB"}} Livingroom:/light_livingroom, {{"\U0001F9F8"}} Children room :/light_kids'
+#           - '{{"\U0001F333"}} Outside:/light_outdoor'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - alias: "HA System Actions"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/system"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{"\U0001F6E0"}} *HA System Actions*'
+#         message: "It sounds like you want to do something with your Home Assistant. What action do you want to perform?"
+#         inline_keyboard:
+#           - '{{"\u2B07\uFE0F"}} Shut down:/hashutdown, {{"\U0001F503"}} Restart:/hassioreboot'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - alias: "IK - Telegram - Host Reboot"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/hassioreboot"
+#   action:
+#     - service: telegram_bot.answer_callback_query
+#       data_template:
+#         callback_query_id: "{{ trigger.event.data.id }}"
+#         message: '{{"\U0001F503"}} Restart'
+#     - service: hassio.host_reboot
+#     - action: notify.send_message
+#       data:
+#         title: '{{"\U0001F6E1"}} *Alarm*'
+#         message: '{{"\U0001F503"}} Host - Reboot - Triggered'
+#         entity_id: notify.telegram_bot_1237123148_66507631
+#         # inline_keyboard:
+#         #   - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+
+# - alias: "IK - Telegram - Host Shutdown"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/hashutdown"
+#   action:
+#     - service: telegram_bot.answer_callback_query
+#       data_template:
+#         callback_query_id: "{{ trigger.event.data.id }}"
+#         message: '{{"\U0001F503"}} Shut down'
+#     - service: hassio.host_shutdown
+#     - action: notify.send_message
+#       data:
+#         title: '{{"\U0001F6E1"}} *Alarm*'
+#         message: '{{"\u2B07\uFE0F"}} Host - Shutdown - Triggered'
+#         entity_id: notify.telegram_bot_1237123148_66507631
+#         # inline_keyboard:
+#         #   - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+
+# - alias: "IK - Telegram - System status sstatus"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/sstatus"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{"\U0001F6E0"}} *System status*'
+#         message: >
+#           ------------------------------------------------{{'\n'}}
+#           {{"\U0001F525"}} *CPU Usage*: {{  states.sensor.processor_use_percent.state }}%{{'\n'}}
+#           {{"\U0001F4E6"}} *Db Size*: {{ states.sensor.maria_db_size.state }} Mb{{'\n'}}
+#           {{"\u23F0"}} *Last Boot*: {{  states.sensor.last_boot.state }}{{'\n'}}
+#           {{"\U0001F4BF"}} *Disk Free*: {{  states.sensor.disk_free.state }}Gb{{'\n'}}
+#           {{"\U0001F4C0"}} *HDD Used*: {{  states.sensor.disk_use_percent.state }}%{{'\n'}}
+#           {{"\U0001F4C8"}} *Memory Used*: {{  states.sensor.memory_use_percent.state }}% {{'\n\n'}}
+#         inline_keyboard:
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+# - alias: "IK - Telegram - status weather"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/weather"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{"\U0001F324"}} *Weather*'
+#         message: |
+#           {{"\U0001F3E0"}} Weather, report on {{ as_timestamp(now()) | timestamp_custom("%H:%M") }}
+#           {{"\U0001F321"}} Temperature - {{ states('sensor.weather_temperature') }} °C
+#           {{"\U0001F32B"}} Humidity - {{ states('sensor.outdoor_humidity') }} %
+#           {{"\U0001F4AA"}} Pressure - {{ states('sensor.outdoor_pressure') }} mm Hg
+#           {{"\U0001f4a8"}} Wind speed {{ states('sensor.outdoor_wind_speed') }} m/s.
+#           {{"\U0001f4a7"}} Dewpoint {{ states('sensor.dew_point') }} °C.
+#           ------------------------------------------------
+#           {{"\U0001f305"}} Sunrise {{ as_timestamp(state_attr("sun.sun", "next_dawn")) | timestamp_custom('%d %A %H:%M')  }}
+#           {{"\U0001f307"}} Sunset {{ as_timestamp(state_attr("sun.sun", "next_dusk")) | timestamp_custom('%d %A %H:%M')  }}
+#         inline_keyboard:
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+
+# - "Forecast for tomorrow:/weather_tomorrow"
+
+# - alias: "IK - Telegram - status weather tomorrow"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/weather_tomorrow"
+#   action:
+#     - service: telegram_bot.edit_message
+#       data_template:
+#         message_id: "{{ trigger.event.data.message.message_id }}"
+#         chat_id: "{{ trigger.event.data.chat_id }}"
+#         title: '{{"\U0001F324"}} *Weather Forecast for tomorrow*'
+#         message: |
+#           {{'________________ \n'}}
+#           {{"\U0001F321"}} Temperature: {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} - {{ state_attr('weather.openweathermap', 'forecast')[1].templow }} °C
+#           {{"\U0001F324"}} Weather - {{ state_attr('weather.openweathermap', 'forecast')[1].condition }}
+#           {{"\U0001F327"}} Precipitation - {{ state_attr('weather.openweathermap', 'forecast')[1].precipitation_probability }} %
+#           {{"\U0001f4a8"}} Wind speed {{ state_attr('weather.openweathermap', 'forecast')[1].wind_speed }} m/s.
+#         inline_keyboard:
+#           - '{{"\U0001F324"}} Back:/weather'
+#           - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
+
+# - alias: "Telegram - status shopinglist"
+#   trigger:
+#     platform: event
+#     event_type: telegram_callback
+#     event_data:
+#       data: "/shopinglist"
+#   action:
+#     - action: notify.mobile_app_sm_s938w
+#       data:
+#         message: |-
+#           {% if ((states.sensor.shopping_list.state)  | count > 0) %}
+#                     List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s):{{-'\n'-}}{{ states('sensor.shopping_list_items_2') }}
+#                     {%else%}List is empty{%- endif %}
+#         title: "{{\"\\U0001F4B5\"}} *Shopping list *"
+#         data:
+          
+#           actions:
+#             - action: URI
+#               title: "Open Shopping list "
+#               uri: /config/updates
+#           color: "#2DF56D"
+
+    # - service: telegram_bot.edit_message
+    #   data_template:
+    #     message_id: "{{ trigger.event.data.message.message_id }}"
+    #     chat_id: "{{ trigger.event.data.chat_id }}"
+    #     title: '{{"\U0001F4B5"}} *Shopping list *'
+    #     message: |
+    #       {% if ((states.sensor.shopping_list.state)  | count > 0) %}
+    #       List has {% for state in states.sensor.shopping_list.state -%}{{-state-}}{%-endfor%} item(s):{{-'\n'-}}{{ states('sensor.shopping_list_items_2') }}
+    #       {%else%}List is empty{%- endif %}
+    #     inline_keyboard:
+    #       - '{{ "\u21a9\ufe0f" }} Control Panel:/to_cp'
 
 - alias: "Home Assistant Update Avalable"
   trigger:
@@ -406,7 +384,7 @@
       entity_id: update.home_assistant_core_update
       to: "on"
   action:
-    service: notify.mobile_app_note20
+    service: notify.mobile_app_sm_s938w
     data:
       title: Home Assistant Update Avalable
       message: >-

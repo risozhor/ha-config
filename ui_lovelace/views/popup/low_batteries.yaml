@@ -1,19 +1,56 @@
-action: fire-dom-event
-browser_mod:
-  service: browser_mod.popup
-  data:
-    title: Low Batteries
-    style: >
-      --popup-max-width: 400px;
-    content:
-      type: markdown
-      content: >-
-        {%- set threshold = 50 -%}
-        {%- set class = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'eq', 'battery') | rejectattr('state','in',['unavailable','unknown']) -%}
-        {%- set low_battery_sensors = namespace(sensors=[]) -%}
-        {%- for battery in class -%}
-          {%- if not battery.entity_id in integration_entities('mobile_app') and battery.state | int (0) <= threshold  | int and battery.state | int (0) != 0 -%}
-            {%- set low_battery_sensors.sensors = low_battery_sensors.sensors+[battery.name +': '+battery.state +'%'] -%}
-          {%- endif -%}
-        {% endfor %}
-        {{low_battery_sensors.sensors | replace('[','') | replace(']','') | replace('\'','')| replace(',',',\r\n')}}
+title: Low Batteries
+theme: Backend-selected
+path: low-bat
+subview: true
+type: panel
+cards:
+  - type: custom:bootstrap-grid-card
+    cards:
+      - type: row
+        cards:
+          - type: custom:auto-entities
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4 col-m-auto
+            card:
+              type: entities
+            filter:
+              include:
+                - options: {}
+                  entity_id: /sensor.*_battery/
+              exclude:
+                - options: {}
+                  state: "> 60"
+                - options: {}
+                  state: "=0"
+                - options: {}
+                  state: "off"
+                - options: {}
+                  state: unavailable
+                - options: {}
+                  state: Unknown
+                - options: {}
+                  state: not_charging
+                - options: {}
+                  hidden_by: user
+                - options: {}
+                  integration: mobile_app
+                - options: {}
+                  integration: battery_notes
+                - options: {}
+                  entity_id: sensor.devices_with_low_battery
+                - options: {}
+                  entity_id: sensor.seeedstudio_iot_button_thread_battery_voltage
+                - options: {}
+                  entity_id: sensor.seeed_studio_iot_button_v2_battery_voltage
+                - options: {}
+                  entity_id: sensor.seeed_studio_iot_button_v2_battery_percentage
+      # type: markdown
+      # content: >-
+      #   {%- set threshold = 50 -%}
+      #   {%- set class = states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'eq', 'battery') | rejectattr('state','in',['unavailable','unknown']) -%}
+      #   {%- set low_battery_sensors = namespace(sensors=[]) -%}
+      #   {%- for battery in class -%}
+      #     {%- if not battery.entity_id in integration_entities('mobile_app') and battery.state | int (0) <= threshold  | int and battery.state | int (0) != 0 -%}
+      #       {%- set low_battery_sensors.sensors = low_battery_sensors.sensors+[battery.name +': '+battery.state +'%'] -%}
+      #     {%- endif -%}
+      #   {% endfor %}
+      #   {{low_battery_sensors.sensors | replace('[','') | replace(']','') | replace('\'','')| replace(',',',\r\n')}}

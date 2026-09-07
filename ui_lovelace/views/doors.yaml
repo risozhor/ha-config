@@ -8,63 +8,139 @@ cards:
     cards:
       - type: row
         cards:
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.main_corridor_door_sensor_contact
-            name: Front door
-            template:
-              - sensors
-              - icon_closet
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: "{%- if is_state(config.entity, \"on\")-%}On{% else%}Off{%- endif -%}"
+            icon: >-
+              {%- if is_state(config.entity, "on")-%}hue:room-front-door{%
+              else%}hue:room-front-door-off{%- endif -%}
+            entity: binary_sensor.0xa4c138ac2143fba6_contact
             tap_action:
-              action: more-info
-              entity: lock.frontdoor
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.terrace_door_sensor_contact
-            name: Terrace
-            template:
-              - sensors
-              - icon_closet
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.livingroom_window_sensor_contact
-            name: Livingroom
-            template:
-              - sensors
-              - icon_window
-              - loader
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.kitchen_window_sensor_contact
-            name: Kitchen
-            template:
-              - sensors
-              - icon_window
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.main_corridor_window_sensor_contact
-            name: Corridor
-            template:
-              - sensors
-              - icon_window
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.dining_room_window_sensor_contact
-            name: Dining
-            template:
-              - sensors
-              - icon_window
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.toilet_window_sensor_contact
-            name: Toilet
-            template:
-              - sensors
-              - icon_window
-          - type: custom:button-card
-            class: col-6 col-lg px-2 pt-4
-            entity: binary_sensor.kidsroom_window_sensor_contact
-            name: Kids
-            template:
-              - sensors
-              - icon_window
+              action: none
+            features_position: bottom
+            color: |
+              {%- if is_state(config.entity, "on")-%}green{% else%}blue{%- endif -%}
+            card_mod:
+              style: >
+                  ha-tile-icon:before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border-radius: inherit;
+                    pointer-events: none;
+                    transform-origin: 50% 50%;
+                    opacity:0.4;
+                    {%- if is_state(config.entity, "on")-%}
+                      animation: fan-warp 1.4s ease-in-out infinite; 
+                    {% else %}
+                      animation: none;
+                    {% endif %}
+                  }
+                  ha-tile-icon {
+                    padding:0!important;
+                    margin: 0!important;
+                    position: relative;
+                    border-radius: 50%;
+                  }
+                  @keyframes fan-warp {
+                    0% {box-shadow:0px 0px 0px 0px rgba(0, 255, 255, 0.7),0px 0px 0px 0px rgba(0, 255, 255, 0.25);}
+                    100% {box-shadow:0 0 48px 48px rgba(0, 255, 255, 0),0 0 48px 48px rgba(0, 255, 255, 0);}
+                  }
+                  ha-card {clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));}
+
+
+          #   tap_action:
+          #     action: more-info
+          #     # entity: lock.frontdoor
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: "{%- if is_state(config.entity, \"on\")-%}On{% else%}Off{%- endif -%}"
+            icon: >-
+              {%- if is_state(config.entity, "on")-%}mdi:window-open-variant{%
+              else%}mdi:window-closed-variant{%- endif -%}
+            entity: binary_sensor.0xa4c1386c6fc34588_contact
+            tap_action:
+              action: none
+            features_position: bottom
+            color: |
+              {%- if is_state(config.entity, "on")-%}green{% else%}blue{%- endif -%}
+            card_mod:
+              style: >
+                ha-tile-icon:before {
+                  content: '';
+                  position: absolute;
+                  inset: 0;
+                  border-radius: inherit;
+                  pointer-events: none;
+                  transform-origin: 50% 50%;
+                  opacity:0.4;
+                  {%- if is_state(config.entity, "on")-%}
+                    animation: fan-warp 1.4s ease-in-out infinite; 
+                  {% else %}
+                    animation: none;
+                  {% endif %}
+                }
+                ha-tile-icon {
+                  padding:0!important;
+                  margin: 0!important;
+                  position: relative;
+                  border-radius: 50%;
+                } @keyframes fan-warp {
+                  0% {box-shadow:0px 0px 0px 0px rgba(0, 255, 255, 0.7),0px 0px 0px 0px rgba(0, 255, 255, 0.25);}
+                  100% {box-shadow:0 0 48px 48px rgba(0, 255, 255, 0),0 0 48px 48px rgba(0, 255, 255, 0);}
+                }
+                ha-card {clip-path: inset(0 0 0 0 round var(--ha-card-border-radius,
+                12px));}
+
+          - type: custom:mushroom-template-card
+            class: col-12 col-md-6 col-lg-3 px-2 pt-4
+            primary: "{{state_attr(config.entity, 'friendly_name') | capitalize }}"
+            secondary: "{%- if is_state(config.entity, \"on\")-%}On{% else%}Off{%- endif -%}"
+            icon: >-
+              {%- if is_state(config.entity, "on")-%}hue:room-front-door{%
+              else%}hue:room-front-door-off{%- endif -%}
+            entity: binary_sensor.0xa4c1381f5f425be9_contact
+            tap_action:
+              action: none
+            features_position: bottom
+            color: |
+              {%- if is_state(config.entity, "on")-%}green{% else%}blue{%- endif -%}
+            card_mod:
+              style: >
+                ha-tile-icon:before {
+                  content: '';
+                  position: absolute;
+                  inset: 0;
+                  border-radius: inherit;
+                  pointer-events: none;
+                  transform-origin: 50% 50%;
+                  opacity:0.4;
+                  {%- if is_state(config.entity, "on")-%}
+                    animation: fan-warp 1.4s ease-in-out infinite; 
+                  {% else %}
+                    animation: none;
+                  {% endif %}
+                }
+                ha-tile-icon {
+                  padding:0!important;
+                  margin: 0!important;
+                  position: relative;
+                  border-radius: 50%;
+                } @keyframes fan-warp {
+                  0% {box-shadow:0px 0px 0px 0px rgba(0, 255, 255, 0.7),0px 0px 0px 0px rgba(0, 255, 255, 0.25);}
+                  100% {box-shadow:0 0 48px 48px rgba(0, 255, 255, 0),0 0 48px 48px rgba(0, 255, 255, 0);}
+                }
+                ha-card {clip-path: inset(0 0 0 0 round var(--ha-card-border-radius,
+                12px));}
+
+          # - type: custom:button-card
+          #   class: col-6 col-lg px-2 pt-4
+          #   entity: binary_sensor.0xa4c1381f5f425be9_contact
+          #   name: Kitchen
+          #   template:
+          #     - sensors
+          #     - icon_window
+        

@@ -1,122 +1,123 @@
-# - platform: pirateweather
-#   api_key: !secret pirateweather_api_key
-#   scan_interval: 00:30:00
-#   # mode: daily
-#   monitored_conditions:
-#     - temperature
-#     - precip_probability
-#     - humidity
-#     - pressure
 
-- platform: template
-  sensors:
-    weather_temperature:
-      friendly_name: "Weather Temperature"
-      unit_of_measurement: "degrees"
-      value_template: "{{ state_attr('weather.openweathermap', 'temperature') }}"
-    weather_precipitation_probability:
-      friendly_name: "Precipitation probability"
-      unit_of_measurement: "%"
-      value_template: "{{ state_attr('weather.openweathermap', 'forecast')[0].precipitation_probability }}"
-      icon_template: >
-        mdi:water-percent-alert
-      unique_id: precipitation_probability
-    pressure:
-      friendly_name: "Air Pressure hPa openweather"
-      unit_of_measurement: "hPa"
-      value_template: "{{ state_attr('weather.openweathermap', 'pressure') }}"
-      icon_template: >
-        mdi:gauge-full
-      unique_id: pressureopenweather
-    wind_speed:
-      friendly_name: "wind speed"
-      unit_of_measurement: "m/s"
-      value_template: "{{ (state_attr('weather.openweathermap', 'wind_speed')|float()/3.6) | round(2) }}"
-    wind_bearing:
-      friendly_name: "wind bearing"
-      unit_of_measurement: "degrees"
-      value_template: "{{ state_attr('weather.openweathermap', 'wind_bearing') }}"
+# - platform: template
+#   sensors:
+    # weather_temperature:
+    #   unique_id: weather_temperature
+    #   friendly_name: "Weather Temperature"
+    #   unit_of_measurement: "°C"
+    #   value_template: "{{ state_attr('weather.home', 'temperature') }}"
+    # weather_precipitation_probability:
+    #   friendly_name: "Precipitation probability"
+    #   unit_of_measurement: "%"
+    #   value_template: "{{ state_attr('weather.home', 'forecast')[0].precipitation_probability }}"
+    #   icon_template: >
+    #     mdi:water-percent-alert
+    #   unique_id: precipitation_probability
+    # pressure:
+    #   friendly_name: "Air Pressure hPa openweather"
+    #   unit_of_measurement: "hPa"
+    #   value_template: "{{ state_attr('weather.home', 'pressure') }}"
+    #   icon_template: >
+    #     mdi:gauge-full
+    #   unique_id: pressureopenweather
+    # wind_speed:
+    #   friendly_name: "wind speed"
+    #   unit_of_measurement: "m/s"
+    #   value_template: "{{ (state_attr('weather.home', 'wind_speed')|float()/3.6) | round(2) }}"
+    # wind_bearing:
+    #   friendly_name: "wind bearing"
+    #   unit_of_measurement: "°"
+    #   value_template: "{{ state_attr('weather.home', 'wind_bearing') }}"
+    #   unique_id: wind_bearing
+    # dew_point:
+    #   friendly_name: "Dew point"
+    #   unit_of_measurement: "°C"
+    #   value_template: "{{ state_attr('weather.home', 'dew_point')  }}"
+    #   unique_id: dew_point
+    #   icon_template: >
+    #     mdi:water-alert
 
-- platform: template
-  sensors:
-    weather_station_info:
-      unique_id: weather_station_info
-      friendly_name: "Weather Station Info"
-      unit_of_measurement: "°C"
-      value_template: >-
-        {{states.sensor.outdoor_themperature_dallas.state| round}}
-      attribute_templates:
-        humidity: "{{states.sensor.weather_station_bme_weather_station_humidity.state | round }}%"
-        pressure: "{{states.sensor.weather_station_weather_station_pressure_mmhg.state | round}} mmHg"
-      icon_template: >
-        {%- if states.sensor.openweathermap_condition.state=='clear-day' -%}mdi:weather-sunny
-        {% elif states.sensor.openweathermap_condition.state=='sunny' -%}mdi:weather-sunny
-        {% elif states.sensor.openweathermap_condition.state=='clear-night' -%}mdi:weather-night
-        {% elif states.sensor.openweathermap_condition.state=='Clear,night' -%}mdi:weather-night
-        {% elif states.sensor.openweathermap_condition.state=='rainy' -%}mdi:weather-rainy
-        {% elif states.sensor.openweathermap_condition.state=='snowy' -%}mdi:weather-snowy
-        {% elif states.sensor.openweathermap_condition.state=='fogy' -%}mdi:weather-fog
-        {% elif states.sensor.openweathermap_condition.state=='sleet' -%}mdi:weather-partly-snowy-rainy
-        {% elif states.sensor.openweathermap_condition.state=='snowy-rainy' -%}mdi:partly-snowy-rainy
-        {% elif states.sensor.openweathermap_condition.state=='wind' -%}mdi:weather-windy
-        {% elif states.sensor.openweathermap_condition.state=='windy' -%}mdi:weather-windy
-        {% elif states.sensor.openweathermap_condition.state=='cloudy' -%}mdi:weather-cloudy
-        {% elif states.sensor.openweathermap_condition.state=='partly-cloudy-day' -%}mdi:weather-partly-cloudy
-        {% elif states.sensor.openweathermap_condition.state=='partlycloudy' -%}mdi:weather-partly-cloudy
-        {% elif states.sensor.openweathermap_condition.state=='partly-cloudy-night' -%}mdi:weather-night-partly-cloudy
-        {% elif states.sensor.openweathermap_condition.state=='hail' -%}mdi:weather-hail
-        {% elif states.sensor.openweathermap_condition.state=='lightning' -%}mdi:weather-sunny
-        {% elif states.sensor.openweathermap_condition.state=='thunderstorm' -%}mdi:weather-lightning-rainy
-        {%- endif -%}
-      entity_picture_template: >-
-        /local/images/bg_card/station.png
+# - platform: template
+#   sensors:
+#     weather_station_info:
+#       unique_id: weather_station_info
+#       friendly_name: "Weather Station Info"
+#       unit_of_measurement: "°C"
+#       value_template: >-
+#         {{states.sensor.weather_temperature.state| round}}
+#       attribute_templates:
+#         humidity: "{{states.sensor.outdoor_humidity.state | round }}%"
+#         pressure: "{{states.sensor.outdoor_pressure.state | round}} mmHg"
+#       icon_template: >
+#         {%- if states.sensor.home_condition.state=='clear-day' -%}mdi:weather-sunny
+#         {% elif states.sensor.home_condition.state=='sunny' -%}mdi:weather-sunny
+#         {% elif states.sensor.home_condition.state=='clear-night' -%}mdi:weather-night
+#         {% elif states.sensor.home_condition.state=='Clear,night' -%}mdi:weather-night
+#         {% elif states.sensor.home_condition.state=='rainy' -%}mdi:weather-rainy
+#         {% elif states.sensor.home_condition.state=='snowy' -%}mdi:weather-snowy
+#         {% elif states.sensor.home_condition.state=='fogy' -%}mdi:weather-fog
+#         {% elif states.sensor.home_condition.state=='fog' -%}mdi:weather-fog
+#         {% elif states.sensor.home_condition.state=='sleet' -%}mdi:weather-partly-snowy-rainy
+#         {% elif states.sensor.home_condition.state=='snowy-rainy' -%}mdi:partly-snowy-rainy
+#         {% elif states.sensor.home_condition.state=='wind' -%}mdi:weather-windy
+#         {% elif states.sensor.home_condition.state=='windy' -%}mdi:weather-windy
+#         {% elif states.sensor.home_condition.state=='cloudy' -%}mdi:weather-cloudy
+#         {% elif states.sensor.home_condition.state=='partly-cloudy-day' -%}mdi:weather-partly-cloudy
+#         {% elif states.sensor.home_condition.state=='partlycloudy' -%}mdi:weather-partly-cloudy
+#         {% elif states.sensor.home_condition.state=='partly-cloudy-night' -%}mdi:weather-night-partly-cloudy
+#         {% elif states.sensor.home_condition.state=='hail' -%}mdi:weather-hail
+#         {% elif states.sensor.home_condition.state=='lightning' -%}mdi:weather-sunny
+#         {% elif states.sensor.home_condition.state=='thunderstorm' -%}mdi:weather-lightning-rainy
+#         {%- endif -%}
+#       entity_picture_template: >-
+#         /local/images/bg_card/station.png
 
-- platform: template
-  sensors:
-    wind_direction:
-      unique_id: wind_direction
-      friendly_name: "Wind"
-      value_template: >-
-        {%- set wind_bearing = states('sensor.openweathermap_wind_bearing') | int %}
-        {%- if wind_bearing <= 11 %}N
-        {% elif wind_bearing > 11 and wind_bearing < 34 %}NNE
-        {% elif wind_bearing >= 34 and wind_bearing < 57 %}NE
-        {% elif wind_bearing >= 57 and wind_bearing < 79 %}ENE
-        {% elif wind_bearing >= 79 and wind_bearing < 102 %}E
-        {% elif wind_bearing >= 102 and wind_bearing < 124 %}ESE
-        {% elif wind_bearing >= 124 and wind_bearing < 147 %}SE
-        {% elif wind_bearing >= 147 and wind_bearing < 169 %}SEE
-        {% elif wind_bearing >= 169 and wind_bearing < 192 %}S
-        {% elif wind_bearing >= 192 and wind_bearing < 214 %}SSW
-        {% elif wind_bearing >= 214 and wind_bearing < 236 %}SW
-        {% elif wind_bearing >= 236 and wind_bearing < 259 %}SWW
-        {% elif wind_bearing >= 259 and wind_bearing < 281 %}W
-        {% elif wind_bearing >= 281 and wind_bearing < 304 %}WWN
-        {% elif wind_bearing >= 304 and wind_bearing < 326 %}WN
-        {% elif wind_bearing >= 326 and wind_bearing < 349 %}WNN
-        {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
-        {% else %}NA
-        {%- endif %}
-      icon_template: >
-        mdi:kubernetes
-      entity_picture_template: >-
-        {%- set wind_bearing = states('sensor.openweathermap_wind_bearing') | int %}
-        {%- if wind_bearing <= 11 %}/local/images/compas/N.png
-        {% elif wind_bearing > 11 and wind_bearing < 34 %}/local/images/compas/NNE.png
-        {% elif wind_bearing >= 34 and wind_bearing < 57 %}/local/images/compas/NE.png
-        {% elif wind_bearing >= 57 and wind_bearing < 79 %}/local/images/compas/ENE.png
-        {% elif wind_bearing >= 79 and wind_bearing < 102 %}/local/images/compas/E.png
-        {% elif wind_bearing >= 102 and wind_bearing < 124 %}/local/images/compas/ESE.png
-        {% elif wind_bearing >= 124 and wind_bearing < 147 %}/local/images/compas/SE.png
-        {% elif wind_bearing >= 147 and wind_bearing < 169 %}/local/images/compas/SEE.png
-        {% elif wind_bearing >= 169 and wind_bearing < 192 %}/local/images/compas/S.png
-        {% elif wind_bearing >= 192 and wind_bearing < 214 %}/local/images/compas/SSW.png
-        {% elif wind_bearing >= 214 and wind_bearing < 236 %}/local/images/compas/SW.png
-        {% elif wind_bearing >= 236 and wind_bearing < 259 %}/local/images/compas/SWW.png
-        {% elif wind_bearing >= 259 and wind_bearing < 281 %}/local/images/compas/W.png
-        {% elif wind_bearing >= 281 and wind_bearing < 304 %}/local/images/compas/WWN.png
-        {% elif wind_bearing >= 304 and wind_bearing < 326 %}/local/images/compas/WN.png
-        {% elif wind_bearing >= 326 and wind_bearing < 349 %}/local/images/compas/WNN.png
-        {% elif wind_bearing >= 349 and wind_bearing <= 360 %}/local/images/compas/N.png
-        {% else %}/local/images/compas/NA.png
-        {%- endif %}
+# - platform: template
+#   sensors:
+#     wind_direction:
+#       unique_id: wind_direction
+#       friendly_name: "Wind"
+#       value_template: >-
+#         {%- set wind_bearing = states('sensor.wind_bearing') | int %}
+#         {%- if wind_bearing <= 11 %}N
+#         {% elif wind_bearing > 11 and wind_bearing < 34 %}NNE
+#         {% elif wind_bearing >= 34 and wind_bearing < 57 %}NE
+#         {% elif wind_bearing >= 57 and wind_bearing < 79 %}ENE
+#         {% elif wind_bearing >= 79 and wind_bearing < 102 %}E
+#         {% elif wind_bearing >= 102 and wind_bearing < 124 %}ESE
+#         {% elif wind_bearing >= 124 and wind_bearing < 147 %}SE
+#         {% elif wind_bearing >= 147 and wind_bearing < 169 %}SEE
+#         {% elif wind_bearing >= 169 and wind_bearing < 192 %}S
+#         {% elif wind_bearing >= 192 and wind_bearing < 214 %}SSW
+#         {% elif wind_bearing >= 214 and wind_bearing < 236 %}SW
+#         {% elif wind_bearing >= 236 and wind_bearing < 259 %}SWW
+#         {% elif wind_bearing >= 259 and wind_bearing < 281 %}W
+#         {% elif wind_bearing >= 281 and wind_bearing < 304 %}WWN
+#         {% elif wind_bearing >= 304 and wind_bearing < 326 %}WN
+#         {% elif wind_bearing >= 326 and wind_bearing < 349 %}WNN
+#         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}N
+#         {% else %}NA
+#         {%- endif %}
+#       icon_template: >
+#         mdi:kubernetes
+#       entity_picture_template: >-
+#         {%- set wind_bearing = states('sensor.wind_bearing') | int %}
+#         {%- if wind_bearing <= 11 %}/local/images/compas/N.png
+#         {% elif wind_bearing > 11 and wind_bearing < 34 %}/local/images/compas/NNE.png
+#         {% elif wind_bearing >= 34 and wind_bearing < 57 %}/local/images/compas/NE.png
+#         {% elif wind_bearing >= 57 and wind_bearing < 79 %}/local/images/compas/ENE.png
+#         {% elif wind_bearing >= 79 and wind_bearing < 102 %}/local/images/compas/E.png
+#         {% elif wind_bearing >= 102 and wind_bearing < 124 %}/local/images/compas/ESE.png
+#         {% elif wind_bearing >= 124 and wind_bearing < 147 %}/local/images/compas/SE.png
+#         {% elif wind_bearing >= 147 and wind_bearing < 169 %}/local/images/compas/SEE.png
+#         {% elif wind_bearing >= 169 and wind_bearing < 192 %}/local/images/compas/S.png
+#         {% elif wind_bearing >= 192 and wind_bearing < 214 %}/local/images/compas/SSW.png
+#         {% elif wind_bearing >= 214 and wind_bearing < 236 %}/local/images/compas/SW.png
+#         {% elif wind_bearing >= 236 and wind_bearing < 259 %}/local/images/compas/SWW.png
+#         {% elif wind_bearing >= 259 and wind_bearing < 281 %}/local/images/compas/W.png
+#         {% elif wind_bearing >= 281 and wind_bearing < 304 %}/local/images/compas/WWN.png
+#         {% elif wind_bearing >= 304 and wind_bearing < 326 %}/local/images/compas/WN.png
+#         {% elif wind_bearing >= 326 and wind_bearing < 349 %}/local/images/compas/WNN.png
+#         {% elif wind_bearing >= 349 and wind_bearing <= 360 %}/local/images/compas/N.png
+#         {% else %}/local/images/compas/NA.png
+#         {%- endif %}

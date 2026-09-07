@@ -1,6 +1,4 @@
-- url: /local/community/battery-state-card/battery-state-card.js
-  type: module
-- url: /local/community/bootstrap-grid-card/bootstrap-grid-card.js?v=0.2.2a.1
+- url: /local/community/bootstrap-grid-card/bootstrap-grid-card.js?v=0.2.2a.3
   type: module
 - url: /local/community/hass-hue-icons/hass-hue-icons.js
   type: module
@@ -8,17 +6,35 @@
   type: module
 - url: /local/community/stack-in-card/stack-in-card.js
   type: module
-- url: /hacsfiles/lovelace-card-mod/card-mod.js
-  type: module
-- url: /local/community/ha-energy-overview-card/energy-overview-card.js
-  type: module
-- url: /local/community/button-card/button-card.js
-  type: module
-- url: /local/custom_styles.js?v=002
-  type: module
+# - url: /local/community/ha-energy-overview-card/energy-overview-card.js
+#   type: module
 - url: /hacsfiles/apexcharts-card/apexcharts-card.js
   type: module
 - url: /local/community/bar-card/bar-card.js
   type: module
 - url: /hacsfiles/lovelace-climate-mode-entity-row/climate-mode-entity-row.js
+  type: module
+- url: /hacsfiles/tabbed-card/tabbed-card.js
+  type: module
+- url: /hacsfiles/modern-circular-gauge/modern-circular-gauge.js?v=0.13
+  type: module
+- url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+  type: module
+- url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+  type: module
+- url: /hacsfiles/lovelace-advanced-digital-clock/advanced-digital-clock.js
+  type: module
+- url: /hacsfiles/lovelace-navbar-card/navbar-card.js
+  type: module
+- url: /local/custom_styles.js?v=07.a8
+  type: module
+- url: /hacsfiles/historymapcard/history-map-card.js
+  type: module
+- url: /hacsfiles/sensor-bar-card-plus/sensor-bar-card-plus.js
+  type: module
+- url: /hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+  type: module
+- url: /hacsfiles/button-card/button-card.js
+  type: module
+- url: /local/lovelace-horizon-card.js?v=0.074
   type: module

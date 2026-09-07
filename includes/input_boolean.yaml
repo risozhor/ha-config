@@ -7,3 +7,10 @@ away_mode:
   name: Away Mode
   initial: off
   icon: mdi:shield-lock
+
+# test_input_bulean:
+#   name: Test Input Bulean
+#   initial: off
+#   icon: mdi:test-tube
+
+# testlighttwo:

@@ -1,21 +1,34 @@
-brightness:
-  name: Brightness
-  initial: 10
-  min: 1
-  max: 255
-  step: 1
-  icon: mdi:brightness-6
-speed:
-  name: Speed
-  initial: 30
-  min: 1
-  max: 255
-  step: 1
-  icon: mdi:speedometer
-scale:
-  name: Scale
-  initial: 30
-  min: 1
-  max: 100
-  step: 1
-  icon: mdi:ruler
+# brightness:
+#   name: Brightness
+#   initial: 10
+#   min: 1
+#   max: 255
+#   step: 1
+#   icon: mdi:brightness-6
+# speed:
+#   name: Speed
+#   initial: 30
+#   min: 1
+#   max: 255
+#   step: 1
+#   icon: mdi:speedometer
+# scale:
+#   name: Scale
+#   initial: 30
+#   min: 1
+#   max: 100
+#   step: 1
+#   icon: mdi:ruler
+
+# testlighttwo_brightness:
+#     min: 0
+#     max: 255
+#     name: "Test Light Color Two Brightness"
+# testlighttwo_h:
+#     min: 0
+#     max: 360
+#     name: "Test Light Color Two H"
+# testlighttwo_s:
+#     min: 0
+#     max: 100
+#     name: "Test Light Color Two S"

@@ -1,1 +1,17 @@
-
+- id: '1779146335313'
+  alias: Wled Oplle Switch button_4_single
+  description: ''
+  triggers:
+  - trigger: mqtt
+    options:
+      topic: zigbee2mqtt/Wled Oplle Switch
+      payload: button_4_single
+  conditions: []
+  actions:
+  - action: select.select_option
+    metadata: {}
+    target:
+      entity_id: select.wled_preset
+    data:
+      option: White
+  mode: single

@@ -3,11 +3,11 @@
   after: sunrise
   before: sunset
 
-- platform: template
-  sensors:
-    heating_state:
-      friendly_name: "Boiler heating state"
-      value_template: >
-        {{state_attr('climate.boiler_controller_boiler_thermostat', 'hvac_action') == 'heating'}}
-#       device_class: motion
+# - platform: template
+#   sensors:
+#     heating_state:
+#       friendly_name: "Boiler heating state"
+#       value_template: >
+#         {{state_attr('climate.boiler_controller_boiler_thermostat', 'hvac_action') == 'heating'}}
+# #       device_class: motion
 

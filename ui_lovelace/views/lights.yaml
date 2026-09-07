@@ -8,9 +8,8 @@ cards:
     cards:
       - type: row
         cards:
-
           - type: col # Livingroom
-            class: col-md-6 col-lg-4
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -19,38 +18,287 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
                       ## Livingroom
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.livingroom_lights
-                    name: Ceil Lights
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.livingroom_table_background
-                    name: Table
-                    template:
-                      - light
-                      - icon_lightstrip
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.gyver
-                    name: Lava Lamp
-                    double_tap_action:
-                      action: more-info
-                    hold_action:
-                      action: more-info
-                    template:
-                      - light
-                      - icon_lava
+                  - type: custom:mushroom-light-card
+                    entity: light.living_room_lights
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.living_room_lights' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+
+                  - type: custom:mushroom-light-card
+                    entity: light.coach_light
+                    icon: hue:room-living
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.coach_light' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+
+                  - type: custom:mushroom-entity-card
+                    entity: switch.fireplace
+                    tap_action:
+                      action: toggle
+                    icon: mdi:fire
+                    icon_color: deep-orange
+                    name: Fireplace
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {# ========== USER CONFIG ========== #}
+                            {# true = number mode, false = state mode #}
+                            {% set use_number      = false %}
+                            {# STATE MODE SETTINGS #}
+                            {% set state_entity    = 'switch.fireplace' %}
+                            {% set active_value    = 'on' %}
+                            {# OPTIONAL: NUMBER MODE SETTINGS #}
+                            {% set number_entity   = 'sensor.fireplace_power' %}
+                            {% set number_operator = '>' %}
+                            {% set threshold       = 0.0 %}
+                            {# ========== END USER CONFIG ====== #}
+                            {% if use_number %}
+                              {% set num = states(number_entity) | float(0) %}
+                              {% if number_operator == '>' %}
+                                {% set trigger_active = (num > threshold) %}
+                              {% elif number_operator == '<' %}
+                                {% set trigger_active = (num < threshold) %}
+                              {% elif number_operator == '=' %}
+                                {% set trigger_active = (num == threshold) %}
+                              {% elif number_operator == '>=' %}
+                                {% set trigger_active = (num >= threshold) %}
+                              {% elif number_operator == '<=' %}
+                                {% set trigger_active = (num <= threshold) %}
+                              {% else %}
+                                {% set trigger_active = false %}
+                              {% endif %}
+                            {% else %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: flame-core 1.4s infinite;
+                              --flame-layer1: flame-layers 1.8s infinite;
+                              --flame-layer2: ember-pulse 2.4s infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              --flame-layer1: none;
+                              --flame-layer2: none;
+                              opacity: 0.6;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 75%;
+                          }
+                          /* Flame layers */
+                          .shape::before,
+                          .shape::after {
+                            content: "";
+                            position: absolute;
+                            inset: -8px;
+                            border-radius: inherit;
+                            pointer-events: none;
+                            filter: blur(3px);
+                          }
+                          .shape::before {
+                            animation: var(--flame-layer1);
+                          }
+                          .shape::after {
+                            animation: var(--flame-layer2);
+                          }
+                          @keyframes flame-core {
+                            0%   { transform: translateY(0)    scale(1);     filter: brightness(1.1) hue-rotate(0deg); }
+                            12%  { transform: translateY(-2px) scale(1.05);  filter: brightness(1.4) hue-rotate(-10deg); }
+                            25%  { transform: translateY(1px)  scale(0.98);  filter: brightness(0.9) hue-rotate(8deg); }
+                            40%  { transform: translateY(-3px) scale(1.07);  filter: brightness(1.5) hue-rotate(-18deg); }
+                            55%  { transform: translateY(0)    scale(1.02);  filter: brightness(1.2) hue-rotate(10deg); }
+                            70%  { transform: translateY(-1px) scale(1.04);  filter: brightness(1.35) hue-rotate(-6deg); }
+                            85%  { transform: translateY(2px)  scale(0.97);  filter: brightness(0.95) hue-rotate(6deg); }
+                            100% { transform: translateY(0)    scale(1);     filter: brightness(1.1) hue-rotate(0deg); }
+                          }
+                          @keyframes flame-layers {
+                            0% {
+                              box-shadow:
+                                0 0 14px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.8),
+                                0 -12px 24px -6px rgba(255, 200, 0, 0.4);
+                            }
+                            33% {
+                              box-shadow:
+                                0 0 20px 10px rgba(var(--rgb-{{ config.icon_color }}), 1),
+                                0 -16px 30px -8px rgba(255, 160, 0, 0.5);
+                            }
+                            66% {
+                              box-shadow:
+                                0 0 18px 9px rgba(var(--rgb-{{ config.icon_color }}), 0.9),
+                                0 -8px 20px -6px rgba(255, 220, 0, 0.35);
+                            }
+                            100% {
+                              box-shadow:
+                                0 0 14px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.8),
+                                0 -12px 24px -6px rgba(255, 200, 0, 0.4);
+                            }
+                          }
+                          @keyframes ember-pulse {
+                            0% {
+                              box-shadow:
+                                0 0 30px 10px rgba(var(--rgb-{{ config.icon_color }}), 0.25),
+                                0 0 60px 20px rgba(255, 120, 0, 0.15);
+                            }
+                            50% {
+                              box-shadow:
+                                0 0 50px 18px rgba(var(--rgb-{{ config.icon_color }}), 0.5),
+                                0 0 90px 35px rgba(255, 150, 0, 0.25);
+                            }
+                            100% {
+                              box-shadow:
+                                0 0 30px 10px rgba(var(--rgb-{{ config.icon_color }}), 0.25),
+                                0 0 60px 20px rgba(255, 120, 0, 0.15);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
 
           - type: col # Kitchen
-            class: col-md-6 col-lg-4
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -59,28 +307,480 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
                       ## Kitchen
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.kitchen_ceiling_lights
-                    name: Ceiling Lights
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.kitchen_strip
-                    name: Strip
-                    template:
-                      - light
-                      - icon_lightstrip
-                      - loader
+                  - type: custom:mushroom-light-card
+                    entity: light.coffee_zone
+                    icon: mdi:coffee
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.coffee_zone' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+                  - type: custom:mushroom-light-card
+                    entity: light.cooking_zone
+                    icon: hue:room-kitchen
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.cooking_zone' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+                  - class: col-12
+                    ##########################################
+
+                    type: custom:vertical-stack-in-card
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                                overflow: hidden !important;
+                              }
+                          ha-card div {
+                                display: flex!important;
+                                flex-direction: row!important;
+                                width: 100%!important;
+                              }
+                          ha-card div mushroom-light-card {
+                                  flex-grow: 1 !important;
+                              }
+                    cards:
+                      - type: custom:mushroom-light-card
+                        entity: light.wled
+                        fill_container: false
+                        use_light_color: true
+                        show_color_temp_control: false
+                        collapsible_controls: false
+                        show_color_control: false
+                        show_brightness_control: false
+                        tap_action:
+                          action: toggle
+                        double_tap_action:
+                          action: none
+                        hold_action:
+                          action: more-info
+                        card_mod:
+                          style:
+                            mushroom-shape-icon$: |
+                              .shape {
+                                {% set state_entity    = 'light.wled' %}
+                                {% set active_value    = 'on' %}
+                                  {% set trigger_active = (states(state_entity) == active_value) %}
+                                {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                                {% if rgb is not none %}
+                                  {% set r = (rgb[0] | int) %}
+                                  {% set g = (rgb[1] | int) %}
+                                  {% set b = (rgb[2] | int) %}
+                                {% else %}
+                                  {% set r = 255 %}
+                                  {% set g = 240 %}
+                                  {% set b = 200 %}
+                                {% endif %}
+                                {% if trigger_active %}
+                                  --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                                  opacity: 1;
+                                {% else %}
+                                  --shape-animation: none;
+                                  opacity: 0.5;
+                                {% endif %}
+
+
+                              }
+                              @keyframes lamp-sweep {
+                                0% {
+                                  filter: brightness(1.1);
+                                  box-shadow:
+                                    0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                    0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                                  transform: rotate(-4deg) scale(1);
+                                }
+                                25% {
+                                  filter: brightness(1.4);
+                                  box-shadow:
+                                    0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                    -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                                  transform: rotate(3deg) scale(1.02);
+                                }
+                                50% {
+                                  filter: brightness(1.2);
+                                  box-shadow:
+                                    0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                    8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                                  transform: rotate(-2deg) scale(1.03);
+                                }
+                                75% {
+                                  filter: brightness(1.5);
+                                  box-shadow:
+                                    0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                    -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                                  transform: rotate(2deg) scale(1.01);
+                                }
+                                100% {
+                                  filter: brightness(1.1);
+                                  box-shadow:
+                                    0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                    0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                                  transform: rotate(-4deg) scale(1);
+                                }
+                              }
+                            .: |
+                              ha-card {
+                                clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));    float: inline-start;
+                              }
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            entity: light.wled
+                            icon: mdi:led-strip-variant-off
+                        tap_action:
+                          action: light.turn_off
+                          target:
+                            entity_id: light.wled
+                          data:
+                            transition: 1
+                        card_mod:
+                          style: |
+                            ha-card {
+                              {% set pos_y = 'top' %}               
+                              {% set pos_y_val = '0' %}
+                              {% set pos_x = 'right' %}             
+                              {% set pos_x_val = '0%' %}
+                              {% set icon_size = '25px' %}          
+                              {% set badge_height = '7px' %}            
+                              {% set border_thickness = '0.5px' %}
+                              {% set active_border = '#777' %}
+                              {% set active_opacity = 0.3 %}
+                              --chip-padding: {{ badge_height }};
+                              --chip-border-radius: 10px;
+                              --chip-box-shadow: 0 0 0 {{ border_thickness }} {{ active_border }} !important;
+                              --color: white !important; 
+                              --chip-icon-size: {{ icon_size }} !important; 
+                              --mdc-icon-size: {{ icon_size }} !important;   
+                              --chip-height: auto !important;
+                              top: {{ pos_y_val }};
+                              padding: 5px !important;
+                              float: inline-end;
+                              animation: none !important;
+                              transition: none!important; 
+                            }
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            entity: select.wled_preset
+                            icon: mdi:skip-forward
+                            tap_action:
+                              action: perform-action
+                              perform_action: rest_command.next_wled_preset
+                              target: {}
+                        alignment: end
+                        card_mod:
+                          style: |
+                            ha-card {
+                              {% set pos_y_val = '0px' %}  
+                              {% set pos_x_val = '10%' %}
+                              {% set icon_size = '25px' %}          
+                              {% set text_size = '12px' %}          
+                              {% set badge_height = '7px' %}       
+                              {% set border_radius = '10px' %}      
+                              {% set border_thickness = '0.5px' %}
+                              {% set active_bg = '#5096ff' %} 
+                              {% set active_icon = 'white' %}
+                              {% set active_text = 'white' %}
+                              {% set active_border = 'white' %}
+                              {% set active_opacity = 0.3 %}
+                              {% set current_bg = '#5096ff' %}
+                              {% set current_icon = 'white' %}
+                              {% set current_border = 'white' %}
+                              {% set current_op = 0.3 %}
+                              --chip-box-shadow: 0 0 0 {{ border_thickness }} {{ active_border }} !important;
+                              --chip-icon-size: {{ icon_size }} !important; 
+                              --mdc-icon-size: {{ icon_size }} !important; 
+                              --chip-padding: {{ badge_height }};
+                              --chip-border-radius: {{ border_radius }};
+                              --chip-border-width: 0px !important;
+                              --ha-card-border-width: 0px !important;  
+                              --color: {{ current_icon }} !important; 
+                              --chip-background: color-mix(in srgb, {{ current_bg }},  transparent {{ (1 - current_op) * 100 }}%) !important;
+                              --chip-icon-size: {{ icon_size }} !important; 
+                              --mdc-icon-size: {{ icon_size }} !important;   
+                              --chip-height: auto !important;
+                              top: {{ pos_y_val }};
+                              padding: 5px !important;
+                              float: inline-end; animation: none !important;transition: none!important;
+                            }
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            entity: select.wled_preset
+                            icon: mdi:palette
+                            tap_action:
+                              action: call-service
+                              service: select.select_option
+                              target:
+                                entity_id: select.wled_preset
+                              data:
+                                option: "White "
+                        alignment: end
+                        card_mod:
+                          style: |
+                            ha-card {              
+                              {% set pos_y_val = '0' %}           
+                              {% set pos_x_val = '20%' %}
+                              {% set icon_size = '25px' %}          
+                              {% set badge_height = '7px' %}            
+                              {% set border_thickness = '0.5px' %}
+                              {% set active_border = '#777' %}
+                              {% set active_opacity = 0.3 %}
+                              --chip-padding: {{ badge_height }};
+                              --chip-border-radius: 10px;
+                              --chip-box-shadow: 0 0 0 {{ border_thickness }} {{ active_border }} !important;
+                              --color: #aaa !important; 
+                              --chip-icon-size: {{ icon_size }} !important; 
+                              --mdc-icon-size: {{ icon_size }} !important;   
+                              --chip-height: auto !important;
+                              top: {{ pos_y_val }};
+                              padding: 5px !important;
+                              float: inline-end; 
+                            animation: none !important;transition: none!important;}
+
+                  # - type: custom:button-card
+                  #   class: col-6 col-sm-4 col-md-6 col-lg-6
+                  #   entity: light.kitchen_lights
+                  #   name: Ceiling Lights
+                  #   template:
+                  #     - light
+                  #     - icon_ceiling-flush
+
+                  # - type: custom:mushroom-entity-card
+                  #   class: col-12
+                  #   entity: light.wled
+                  #   tap_action: !include popup/kitchen_wled.yaml
+                  #   double_tap_action:
+                  #     action: !include popup/kitchen_wled.yaml
+                  #   hold_action:
+                  #     action: !include popup/kitchen_wled.yaml
+                  #   icon: mdi:led-strip-variant
+                  #   icon_color: blue
+                  #   name: LED Strip
+                  #   card_mod:
+                  #     style:
+                  #       mushroom-shape-icon$: |
+                  #         .shape {
+                  #           {# true = number mode, false = state mode #}
+                  #           {% set use_number      = false %}
+                  #           {% set state_entity    = 'light.wled' %}
+                  #           {% set active_value    = 'on' %}
+                  #           {% set number_entity   = 'sensor.plug_power' %}
+                  #           {# '>' '<' '=' '>=' '<=' #}
+                  #           {% set number_operator = '>' %}
+                  #           {% set threshold       = 0.0 %}
+                  #           {% if use_number %}
+                  #             {% set num = states(number_entity) | float(0) %}
+                  #             {% if number_operator == '>' %}
+                  #               {% set trigger_active = (num > threshold) %}
+                  #             {% elif number_operator == '<' %}
+                  #               {% set trigger_active = (num < threshold) %}
+                  #             {% elif number_operator == '=' %}
+                  #               {% set trigger_active = (num == threshold) %}
+                  #             {% elif number_operator == '>=' %}
+                  #               {% set trigger_active = (num >= threshold) %}
+                  #             {% elif number_operator == '<=' %}
+                  #               {% set trigger_active = (num <= threshold) %}
+                  #             {% else %}
+                  #               {% set trigger_active = false %}
+                  #             {% endif %}
+                  #           {% else %}
+                  #             {% set trigger_active = (states(state_entity) == active_value) %}
+                  #           {% endif %}
+                  #           {# =========== END TRIGGER LOGIC =========== #}
+                  #           {% if trigger_active %}
+                  #             --shape-animation: rgb-wave 2.2s linear infinite;
+                  #             opacity: 1;
+                  #           {% else %}
+                  #             --shape-animation: rgb-off 3s ease-in-out infinite;
+                  #             opacity: 0.5;
+                  #           {% endif %}
+                  #           transform-origin: 50% 50%;
+                  #         }
+                  #         @keyframes rgb-wave {
+                  #           0% {
+                  #             filter: hue-rotate(0deg) brightness(1.1);
+                  #             box-shadow:
+                  #               0 0 12px 3px rgba(var(--rgb-{{ config.icon_color }}), 0.9);
+                  #             transform: scale(1);
+                  #           }
+                  #           25% {
+                  #             filter: hue-rotate(90deg) brightness(1.3);
+                  #             box-shadow:
+                  #               0 0 16px 6px rgba(var(--rgb-{{ config.icon_color }}), 1);
+                  #             transform: scale(1.04);
+                  #           }
+                  #           50% {
+                  #             filter: hue-rotate(180deg) brightness(1.15);
+                  #             box-shadow:
+                  #               0 0 20px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.9);
+                  #             transform: scale(1.02);
+                  #           }
+                  #           75% {
+                  #             filter: hue-rotate(270deg) brightness(1.3);
+                  #             box-shadow:
+                  #               0 0 16px 6px rgba(var(--rgb-{{ config.icon_color }}), 1);
+                  #             transform: scale(1.04);
+                  #           }
+                  #           100% {
+                  #             filter: hue-rotate(360deg) brightness(1.1);
+                  #             box-shadow:
+                  #               0 0 12px 3px rgba(var(--rgb-{{ config.icon_color }}), 0.9);
+                  #             transform: scale(1);
+                  #           }
+                  #         }
+                  #         @keyframes rgb-off {
+                  #           0%   { filter: brightness(0.7); }
+                  #           50%  { filter: brightness(0.9); }
+                  #           100% { filter: brightness(0.7); }
+                  #         }
+                  #       .: |
+                  #         ha-card {
+                  #           clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                  #         }
 
           - type: col # bedroom
-            class: col-md-6 col-lg-2
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -89,20 +789,329 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
                       ## Bedroom
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kitchen_ceiling_lights
-                    name: Ceil
-                    template:
-                      - light
-                      - icon_bedroomlight
+                  - type: custom:mushroom-light-card
+                    entity: light.bedroom
+                    name: Ceiling Lights
+                    class: col-6
+                    use_light_color: true
+                    collapsible_controls: false
+                    icon_color: auto
+                    icon: hue:recessed-ceiling
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.bedroom' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+                  - type: custom:mushroom-light-card
+                    class: col-6
+                    entity: light.bedroom_night_lamp
+                    icon_color: auto
+                    icon: mdi:lava-lamp
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.bedroom_night_lamp' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+
+                  - type: custom:mushroom-light-card
+                    entity: light.0x001788010e72656e
+                    icon: hue:table-shade
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.0x001788010e72656e' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+                  - type: custom:mushroom-light-card
+                    entity: light.bedroom_bed_light_left
+                    icon: hue:table-shade
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.bedroom_bed_light_left' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+
+                  # light.0x001788010e72656e
+
+                  # - type: custom:button-card
+                  #   class: col-6 col-sm-4 col-md-6 col-lg-6
+                  #   entity: light.bedroom_night_lamp
+                  #   name: Lava Lamp
+                  #   double_tap_action:
+                  #     action: more-info
+                  #   hold_action:
+                  #     action: more-info
+                  #   template:
+                  #     - light
+                  #     - icon_lava
 
           - type: col #kids
-            class: col-md-6 col-lg-2
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -111,20 +1120,194 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
-                      ## Kids Room
+                      ## KidsRoom
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-8
-                    entity: light.kidsroom_wled
-                    name: WLED
-                    template:
-                      - light
-                      - icon_lightstrip
+                  - type: custom:mushroom-light-card
+                    entity: light.kidsroom_ceil
+                    name: Ceiling Lights
+                    class: col-12
+                    use_light_color: false
+                    show_color_temp_control: false
+                    show_brightness_control: false
+                    collapsible_controls: false
+                    show_color_control: false
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.kidsroom_ceil' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+
+          - type: col # stairway
+            class: col-12 col-md-4 col-lg-3
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
+                    content: >-
+                      ## Stairway
+              - type: row
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.stairs
+                    name: Stairway Lamp
+                    class: col-12
+                    use_light_color: true
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    collapsible_controls: false
+                    show_color_control: true
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.stairs' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
 
           - type: col # hallway
-            class: col-md-6 col-lg-4
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -133,28 +1316,96 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
                       ## Hallway
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4
-                    entity: light.0x00178801030318a1
+                  - type: custom:mushroom-light-card
+                    entity: light.hallway_ceiling1
                     name: Hallway Lamp
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4
-                    entity: switch.terrace_spotlights
-                    name: Terrace
-                    template:
-                      - base
-                      - icon_ceiling-flush
-                      - loader
+                    class: col-12
+                    use_light_color: true
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    collapsible_controls: false
+                    show_color_control: true
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.hallway_ceiling1' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
 
-          - type: col #Dining
-            class: col-md-6 col-lg-4
+          - type: col # Balcony
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -163,64 +1414,141 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
-                      ## Dining Room
+                      ## Balcony
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.dining_room_light
-                    name: Ceiling
-                    template:
-                      - light
-                      - icon_hue
-
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.dining_room_stripe_3
-                    name: Arch
-                    template:
-                      - light
-                      - icon_arch
-
-          - type: col # Outdoor
-            class: col-md-6 col-lg-4
-            cards:
-              - type: row
-                cards:
-                  - type: markdown
-                    class: col
+                  - class: col-12
+                    type: custom:mushroom-entity-card
+                    entity: light.balcony_tp_link_smart_plug_7b31_balcony_lights
+                    tap_action:
+                      action: toggle
+                    icon: mdi:string-lights
+                    icon_color: blue
+                    name: Balcony String Lights
                     card_mod:
-                      style: |
-                        ha-card {border: none;}
-                    content: >-
-                      ## Outdoor
-              - type: row
-                cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: switch.yard_light
-                    name: Yard
-                    template:
-                      - light
-                      - icon_spot
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.outdoor_floodlight
-                    name: Pathway
-                    template:
-                      - light
-                      - icon_wall_runner
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: switch.backyard_light
-                    name: Backyard
-                    template:
-                      - light
-                      - icon_wall_flood
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {# ========== USER CONFIG ========== #}
+                            {# true = number mode, false = state mode #}
+                            {% set use_number      = false %}
+                            {# STATE MODE SETTINGS #}
+                            {% set state_entity    = 'light.balcony_tp_link_smart_plug_7b31_balcony_lights' %}
+                            {% set active_value    = 'on' %}
+                            {# OPTIONAL: NUMBER MODE SETTINGS #}
+                            {% set number_entity   = 'sensor.fireplace_power' %}
+                            {% set number_operator = '>' %}
+                            {% set threshold       = 0.0 %}
+                            {# ========== END USER CONFIG ====== #}
+                            {% if use_number %}
+                              {% set num = states(number_entity) | float(0) %}
+                              {% if number_operator == '>' %}
+                                {% set trigger_active = (num > threshold) %}
+                              {% elif number_operator == '<' %}
+                                {% set trigger_active = (num < threshold) %}
+                              {% elif number_operator == '=' %}
+                                {% set trigger_active = (num == threshold) %}
+                              {% elif number_operator == '>=' %}
+                                {% set trigger_active = (num >= threshold) %}
+                              {% elif number_operator == '<=' %}
+                                {% set trigger_active = (num <= threshold) %}
+                              {% else %}
+                                {% set trigger_active = false %}
+                              {% endif %}
+                            {% else %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: flame-core 1.4s infinite;
+                              --flame-layer1: flame-layers 1.8s infinite;
+                              --flame-layer2: ember-pulse 2.4s infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              --flame-layer1: none;
+                              --flame-layer2: none;
+                              opacity: 0.6;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 75%;
+                          }
+                          /* Flame layers */
+                          .shape::before,
+                          .shape::after {
+                            content: "";
+                            position: absolute;
+                            inset: -8px;
+                            border-radius: inherit;
+                            pointer-events: none;
+                            filter: blur(3px);
+                          }
+                          .shape::before {
+                            animation: var(--flame-layer1);
+                          }
+                          .shape::after {
+                            animation: var(--flame-layer2);
+                          }
+                          @keyframes flame-core {
+                            0%   { transform: translateY(0)    scale(1);     filter: brightness(1.1) hue-rotate(0deg); }
+                            12%  { transform: translateY(-2px) scale(1.05);  filter: brightness(1.4) hue-rotate(-10deg); }
+                            25%  { transform: translateY(1px)  scale(0.98);  filter: brightness(0.9) hue-rotate(8deg); }
+                            40%  { transform: translateY(-3px) scale(1.07);  filter: brightness(1.5) hue-rotate(-18deg); }
+                            55%  { transform: translateY(0)    scale(1.02);  filter: brightness(1.2) hue-rotate(10deg); }
+                            70%  { transform: translateY(-1px) scale(1.04);  filter: brightness(1.35) hue-rotate(-6deg); }
+                            85%  { transform: translateY(2px)  scale(0.97);  filter: brightness(0.95) hue-rotate(6deg); }
+                            100% { transform: translateY(0)    scale(1);     filter: brightness(1.1) hue-rotate(0deg); }
+                          }
+                          @keyframes flame-layers {
+                            0% {
+                              box-shadow:
+                                0 0 14px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.8),
+                                0 -12px 24px -6px rgba(255, 200, 0, 0.4);
+                            }
+                            33% {
+                              box-shadow:
+                                0 0 20px 10px rgba(var(--rgb-{{ config.icon_color }}), 1),
+                                0 -16px 30px -8px rgba(255, 160, 0, 0.5);
+                            }
+                            66% {
+                              box-shadow:
+                                0 0 18px 9px rgba(var(--rgb-{{ config.icon_color }}), 0.9),
+                                0 -8px 20px -6px rgba(255, 220, 0, 0.35);
+                            }
+                            100% {
+                              box-shadow:
+                                0 0 14px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.8),
+                                0 -12px 24px -6px rgba(255, 200, 0, 0.4);
+                            }
+                          }
+                          @keyframes ember-pulse {
+                            0% {
+                              box-shadow:
+                                0 0 30px 10px rgba(var(--rgb-{{ config.icon_color }}), 0.25),
+                                0 0 60px 20px rgba(255, 120, 0, 0.15);
+                            }
+                            50% {
+                              box-shadow:
+                                0 0 50px 18px rgba(var(--rgb-{{ config.icon_color }}), 0.5),
+                                0 0 90px 35px rgba(255, 150, 0, 0.25);
+                            }
+                            100% {
+                              box-shadow:
+                                0 0 30px 10px rgba(var(--rgb-{{ config.icon_color }}), 0.25),
+                                0 0 60px 20px rgba(255, 120, 0, 0.15);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
 
           - type: col # Restroom
-            class: col-md-6 col-lg-4
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -229,27 +1557,525 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
-                      ## Restroom
+                      ## Bathroom
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.shelly1
-                    name: Bath
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.toilet_light
-                    name: Toilet
-                    template:
-                      - light
-                      - icon_bathroom
+                  - type: custom:mushroom-template-card
+                    primary: Fan
+                    secondary: |
+                      {%- set timer = states.sensor.display_timer_bathroom.state -%}
+                      {% if timer == '00:00' -%}{{(states.fan.bathroom_ventilation.state)}}
+                      {%- else -%} {{timer}}
+                      {%- endif %}
+                    icon: mdi:fan
+                    entity: fan.bathroom_ventilation
+                    tap_action:
+                      action: toggle
+                    features_position: bottom
+                    color: |
+                      {%- if is_state("fan.bathroom_ventilation", "on")-%}cyan
+                      {% else%}grey{%- endif -%}
+                    card_mod:
+                      style: |
+                        {% set state_entity = 'fan.bathroom_ventilation' %}
+                        {% set active_value = 'on' %}
+                        {% set sensor_entity = state_entity %}
+                        {% if states(sensor_entity) == active_value %}
+                        {% set trigger_active = true %}
+                        {% else %}
+                        {% set trigger_active = false %}
+                        {% endif %}
+                        ha-tile-icon:before {
+                          content: '';
+                          position: absolute;
+                          inset: 0;
+                          border-radius: inherit;
+                          pointer-events: none;
+                          transform-origin: 50% 50%;
+                          opacity:0.4;
+                          {% if trigger_active %}
+                            animation: fan-warp 1.4s ease-in-out infinite; 
+                          {% else %}
+                            animation: none;
+                          {% endif %}
+                        }
+                        ha-tile-icon {
+                          padding:0!important;
+                          margin: 0!important;
+                          position: relative;
+                          transform-origin: 50% 50%;
+                          border-radius: 50%;
+                          {% if trigger_active %}
+                            animation: fan-ultra-spin 1.6s linear infinite;
 
-          - type: col #guests
-            class: col-md-6 col-lg-4
+                          {% else %}
+                            animation: none;
+                          {% endif %}
+                        }
+                          @keyframes fan-ultra-spin {
+                            0% {
+                              transform: rotate(0deg) scale(1);
+                              filter: drop-shadow(0 0 3px rgba(0, 255, 255 / 0%)));
+                            }
+                            20% { transform: rotate(72deg) scale(1.03); }
+                            40% { transform: rotate(144deg) scale(1.05); }
+                            60% { transform: rotate(216deg) scale(1.03); }
+                            80% { transform: rotate(288deg) scale(1.02); }
+                            100% {
+                              transform: rotate(360deg) scale(1);
+                              filter: drop-shadow(0 0 5px rgb(0, 255, 255 / 10%)));
+                            }
+                          }
+                          @keyframes fan-warp {
+                            0% {
+                                box-shadow: rgba(0, 255, 255, 0.7) 0px 0px 0px 0px, rgba(0, 255, 255, 0.25) 0px 0px 0px 0px;
+                            }
+                            40% {
+                              box-shadow:
+                                0 0 0 8px rgba(0, 255, 255, 4), 0 0 24px 6px rgba(0, 255, 255, 2.5);
+                            }
+                            100% {
+                              box-shadow:
+                                0 0 0 18px rgba(0, 255, 255, 0), 0 0 40px 12px rgba(0, 255, 255, 0);
+                            }
+                          }
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card {
+                              overflow: hidden !important;
+                              }
+                    cards:
+                      - type: custom:mushroom-entity-card
+                        entity: sensor.bathroom_temperature_humidity_sensor_humidity
+                        name: Bathroom Humidity
+                        tap_action:
+                          action: more-info
+                        icon: mdi:water-percent
+                        primary_info: state
+                        secondary_info: name
+                        card_mod:
+                          style:
+                            mushroom-shape-icon$: |
+                              .shape {
+                                {# ========== CONFIG ========== #}
+                                {# == Updated: entity auto generated == #}
+                                {% set hum = states(config.entity) | float(0) %}
+                                {# DEFAULTS #}
+                                {% set rgb = '120,210,255' %}
+                                {% set anim = 'hum-good-breathe' %}
+                                {% set glow_anim = 'hum-good-glow' %}
+                                {% set halo_anim = 'hum-good-halo' %}
+                                {% set duration = 3.2 %}
+                                {# RANGES
+                                  < 40   -> BAD (dark blue)
+                                  40-60  -> GOOD (light blue)
+                                  > 60   -> MIDDLE / humid (medium blue)
+                                #}
+                                {% if hum < 40 %}
+                                  {# BAD - dry - dark blue #}
+                                  {% set rgb = '0,80,200' %}
+                                  {% set anim = 'hum-bad-pulse' %}
+                                  {% set glow_anim = 'hum-bad-glow' %}
+                                  {% set halo_anim = 'hum-bad-halo' %}
+                                  {% set duration = 2.8 %}
+                                {% elif hum <= 60 %}
+                                  {# GOOD - light blue #}
+                                  {% set rgb = '120,210,255' %}
+                                  {% set anim = 'hum-good-breathe' %}
+                                  {% set glow_anim = 'hum-good-glow' %}
+                                  {% set halo_anim = 'hum-good-halo' %}
+                                  {% set duration = 3.4 %}
+                                {% else %}
+                                  {# MIDDLE / humid - medium blue #}
+                                  {% set rgb = '40,140,255' %}
+                                  {% set anim = 'hum-mid-wave' %}
+                                  {% set glow_anim = 'hum-mid-glow' %}
+                                  {% set halo_anim = 'hum-mid-halo' %}
+                                  {% set duration = 3.0 %}
+                                {% endif %}
+                                --hum-rgb: {{ rgb }};
+                                --shape-animation: {{ anim }} {{ duration }}s ease-in-out infinite;
+                                --hum-glow-animation: {{ glow_anim }} {{ (duration * 0.9) | round(2) }}s ease-in-out infinite;
+                                --hum-halo-animation: {{ halo_anim }} {{ (duration * 1.1) | round(2) }}s ease-in-out infinite;
+                                /* Icon color follows humidity color */
+                                --icon-color: rgba({{ rgb }}, 1);
+                                /* Neutral pill so theme blue does not leak through */
+                                background-color: rgba(77,77,77,0.2) !important;
+                                box-shadow: none !important;
+                                border: 1px solid rgba(255,255,255,0.06);
+                                opacity: 1;
+                                position: relative;
+                                transform-origin: 50% 60%;
+                                animation: var(--shape-animation);
+                              }
+                              /* ========== GOOD - light blue ========== */
+                              @keyframes hum-good-breathe {
+                                0%   { transform: scale(0.98); }
+                                50%  { transform: scale(1.04); }
+                                100% { transform: scale(0.98); }
+                              }
+                              @keyframes hum-good-glow {
+                                0% {
+                                  box-shadow:
+                                    0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                                    0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 24px 4 rgba(var(--hum-rgb), 0.9),
+                                    0 0 44px 10px rgba(var(--hum-rgb), 0.85);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 18px 0 rgba(var(--hum-rgb), 0.55),
+                                    0 0 30px 4 rgba(var(--hum-rgb), 0.6);
+                                }
+                              }
+                              @keyframes hum-good-halo {
+                                0% {
+                                  box-shadow:
+                                    0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                                    0 18px 70px -12px rgba(180,230,255,0.3);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 120px 40px rgba(var(--hum-rgb), 0.45),
+                                    0 26px 90px -10px rgba(200,240,255,0.45);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 80px 24px rgba(var(--hum-rgb), 0.35),
+                                    0 18px 70px -12px rgba(180,230,255,0.3);
+                                }
+                              }
+                              /* ========== MIDDLE / humid - medium blue ========== */
+                              @keyframes hum-mid-wave {
+                                0%   { transform: translateX(0); }
+                                25%  { transform: translateX(-1px); }
+                                50%  { transform: translateX(1px) translateY(-1px); }
+                                75%  { transform: translateX(-1px); }
+                                100% { transform: translateX(0); }
+                              }
+                              @keyframes hum-mid-glow {
+                                0% {
+                                  box-shadow:
+                                    0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                                    0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 28px 3 rgba(var(--hum-rgb), 0.95),
+                                    0 0 48px 10px rgba(var(--hum-rgb), 0.85);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 20px 0 rgba(var(--hum-rgb), 0.6),
+                                    0 0 32px 4 rgba(var(--hum-rgb), 0.7);
+                                }
+                              }
+                              @keyframes hum-mid-halo {
+                                0% {
+                                  box-shadow:
+                                    0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                                    0 18px 80px -12px rgba(80,190,255,0.35);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 135px 42px rgba(var(--hum-rgb), 0.5),
+                                    0 28px 105px -10px rgba(100,210,255,0.5);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 90px 26px rgba(var(--hum-rgb), 0.4),
+                                    0 18px 80px -12px rgba(80,190,255,0.35);
+                                }
+                              }
+                              /* ========== BAD - dry - dark blue ========== */
+                              @keyframes hum-bad-pulse {
+                                0%   { transform: scale(0.97); }
+                                40%  { transform: scale(1.03); }
+                                100% { transform: scale(0.97); }
+                              }
+                              @keyframes hum-bad-glow {
+                                0% {
+                                  box-shadow:
+                                    0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                                    0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 26px 4 rgba(var(--hum-rgb), 0.95),
+                                    0 0 44px 12px rgba(var(--hum-rgb), 0.9);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 18px 0 rgba(var(--hum-rgb), 0.6),
+                                    0 0 28px 4 rgba(var(--hum-rgb), 0.7);
+                                }
+                              }
+                              @keyframes hum-bad-halo {
+                                0% {
+                                  box-shadow:
+                                    0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                                    0 18px 75px -10px rgba(0,70,160,0.5);
+                                }
+                                50% {
+                                  box-shadow:
+                                    0 0 130px 40px rgba(var(--hum-rgb), 0.6),
+                                    0 26px 100px -8px rgba(0,90,190,0.65);
+                                }
+                                100% {
+                                  box-shadow:
+                                    0 0 80px 22px rgba(var(--hum-rgb), 0.45),
+                                    0 18px 75px -10px rgba(0,70,160,0.5);
+                                }
+                              }
+                      - type: custom:vertical-stack-in-card
+                        cards:
+                          - type: custom:mini-graph-card
+                            entities:
+                              - sensor.bathroom_temperature_humidity_sensor_humidity
+                            line_color: lightblue
+                            line_width: 5
+                            hours_to_show: 24
+                            show:
+                              name: false
+                              icon: false
+                              state: false
+                              labels: false
+                              legend: false
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  background: none;
+                                  box-shadow: none;
+                                  opacity: 50%;
+                                  border: none;
+                                  width: 400px;
+                                  mask-image: radial-gradient(
+                                    ellipse at center,
+                                    rgba(0,0,0,1) 0%,
+                                    rgba(0,0,0,0) 90%
+                                  );
+                                }
+                        card_mod:
+                          style:
+                            .: |
+                              ha-card {
+                                  background: none;
+                                  box-shadow: none;
+                                  border: none;
+                                  margin: 8px 12px; 
+                                  position: absolute;
+                                  bottom: -10px;
+                                  right: -10px;
+                                  }
+
+                  # - type: custom:mushroom-light-card
+                  #   class: col-12
+                  #   entity: light.bathroom_lights
+                  #   use_light_color: true
+                  #   collapsible_controls: false
+                  #   show_color_control: true
+                  #   icon: hue:room-toilet
+                  #   icon_color: auto
+                  #   card_mod:
+                  #     style:
+                  #       mushroom-shape-icon$: |
+                  #         .shape {
+                  #           {% set state_entity    = 'light.bathroom_lights' %}
+                  #           {% set active_value    = 'on' %}
+                  #             {% set trigger_active = (states(state_entity) == active_value) %}
+                  #           {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                  #           {% if rgb is not none %}
+                  #             {% set r = (rgb[0] | int) %}
+                  #             {% set g = (rgb[1] | int) %}
+                  #             {% set b = (rgb[2] | int) %}
+                  #           {% else %}
+                  #             {# fallback for CT-only lights #}
+                  #             {% set r = 255 %}
+                  #             {% set g = 240 %}
+                  #             {% set b = 200 %}
+                  #           {% endif %}
+                  #           {% if trigger_active %}
+                  #             --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                  #             opacity: 1;
+                  #           {% else %}
+                  #             --shape-animation: none;
+                  #             opacity: 0.5;
+                  #           {% endif %}
+                  #           position: relative;
+                  #           transform-origin: 50% 60%;
+                  #         }
+                  #         @keyframes lamp-sweep {
+                  #           0% {
+                  #             filter: brightness(1.1);
+                  #             box-shadow:
+                  #               0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                  #               0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                  #             transform: rotate(-4deg) scale(1);
+                  #           }
+                  #           25% {
+                  #             filter: brightness(1.4);
+                  #             box-shadow:
+                  #               0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                  #               -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                  #             transform: rotate(3deg) scale(1.02);
+                  #           }
+                  #           50% {
+                  #             filter: brightness(1.2);
+                  #             box-shadow:
+                  #               0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                  #               8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                  #             transform: rotate(-2deg) scale(1.03);
+                  #           }
+                  #           75% {
+                  #             filter: brightness(1.5);
+                  #             box-shadow:
+                  #               0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                  #               -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                  #             transform: rotate(2deg) scale(1.01);
+                  #           }
+                  #           100% {
+                  #             filter: brightness(1.1);
+                  #             box-shadow:
+                  #               0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                  #               0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                  #             transform: rotate(-4deg) scale(1);
+                  #           }
+                  #         }
+                  #       .: |
+                  #         ha-card {
+                  #           clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                  #         }
+
+                  # - type: custom:button-card
+                  #   class: col-4 col-md-4 col-lg-6
+                  #   entity: light.bathroom_lights
+                  #   name: Lights
+                  #   template:
+                  #     - light
+                  #     - icon_bathroom
+
+                  # - type: custom:button-card
+                  #   class: col-4 col-md-4 col-lg-4
+                  #   entity: sensor.bathroom_temperature_humidity_sensor_humidity
+                  #   name: Humidity
+                  #   tap_action: !include popup/modal_bathroom_sensors.yaml
+                  #   template:
+                  #     - sensors
+                  #     - icon_thermo_humid
+
+          # - type: col #Laundry
+          #   class: col-12 col-md-4 col-lg-3
+          #   cards:
+          #     - type: row
+          #       cards:
+          #         - type: markdown
+          #           class: col
+          #           card_mod:
+          #             style: |
+          #               ha-card {border: none;}
+          #               ha-markdown {
+          #                 padding: 16px 0px 16px!important;
+          #                 overflow-wrap: normal!important;
+          #               }
+          #           content: >-
+          #             ## Laundry
+          #     - type: row
+          #       cards:
+          #         - type: custom:mushroom-light-card
+          #           class: col-12
+          #           entity: light.laundry_ceiling
+          #           name: Laundry Light
+          #           use_light_color: true
+          #           show_color_temp_control: true
+          #           show_brightness_control: true
+          #           collapsible_controls: false
+          #           show_color_control: true
+          #           icon_color: auto
+          #           card_mod:
+          #             style:
+          #               mushroom-shape-icon$: |
+          #                 .shape {
+          #                   {% set state_entity    = 'light.laundry_ceiling' %}
+          #                   {% set active_value    = 'on' %}
+          #                     {% set trigger_active = (states(state_entity) == active_value) %}
+          #                   {% set rgb = state_attr(config.entity, 'rgb_color') %}
+          #                   {% if rgb is not none %}
+          #                     {% set r = (rgb[0] | int) %}
+          #                     {% set g = (rgb[1] | int) %}
+          #                     {% set b = (rgb[2] | int) %}
+          #                   {% else %}
+          #                     {# fallback for CT-only lights #}
+          #                     {% set r = 255 %}
+          #                     {% set g = 240 %}
+          #                     {% set b = 200 %}
+          #                   {% endif %}
+          #                   {% if trigger_active %}
+          #                     --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+          #                     opacity: 1;
+          #                   {% else %}
+          #                     --shape-animation: none;
+          #                     opacity: 0.5;
+          #                   {% endif %}
+          #                   position: relative;
+          #                   transform-origin: 50% 60%;
+          #                 }
+          #                 @keyframes lamp-sweep {
+          #                   0% {
+          #                     filter: brightness(1.1);
+          #                     box-shadow:
+          #                       0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+          #                       0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+          #                     transform: rotate(-4deg) scale(1);
+          #                   }
+          #                   25% {
+          #                     filter: brightness(1.4);
+          #                     box-shadow:
+          #                       0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+          #                       -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+          #                     transform: rotate(3deg) scale(1.02);
+          #                   }
+          #                   50% {
+          #                     filter: brightness(1.2);
+          #                     box-shadow:
+          #                       0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+          #                       8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+          #                     transform: rotate(-2deg) scale(1.03);
+          #                   }
+          #                   75% {
+          #                     filter: brightness(1.5);
+          #                     box-shadow:
+          #                       0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+          #                       -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+          #                     transform: rotate(2deg) scale(1.01);
+          #                   }
+          #                   100% {
+          #                     filter: brightness(1.1);
+          #                     box-shadow:
+          #                       0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+          #                       0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+          #                     transform: rotate(-4deg) scale(1);
+          #                   }
+          #                 }
+          #               .: |
+          #                 ha-card {
+          #                   clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+          #                 }
+
+          - type: col # storage
+            class: col-12 col-md-4 col-lg-3
             cards:
               - type: row
                 cards:
@@ -258,21 +2084,198 @@ cards:
                     card_mod:
                       style: |
                         ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
                     content: >-
-                      ## Guest Zone
+                      ## Storage
               - type: row
                 cards:
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.guestroom_color_bulb
-                    name: Guests
-                    template:
-                      - light
-                      - icon_hue
-                  - type: custom:button-card
-                    class: col-4 col-lg-4
-                    entity: light.main_corridor_light
-                    name: Corridor
-                    template:
-                      - light
-                      - icon_hue
+                  - type: custom:mushroom-light-card
+                    class: col-12
+                    entity: light.storage_ceiling
+                    name: Storage Lamp
+                    use_light_color: true
+                    show_color_temp_control: true
+                    show_brightness_control: true
+                    collapsible_controls: false
+                    show_color_control: true
+                    icon_color: auto
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            {% set state_entity    = 'light.storage_ceiling' %}
+                            {% set active_value    = 'on' %}
+                              {% set trigger_active = (states(state_entity) == active_value) %}
+                            {% set rgb = state_attr(config.entity, 'rgb_color') %}
+                            {% if rgb is not none %}
+                              {% set r = (rgb[0] | int) %}
+                              {% set g = (rgb[1] | int) %}
+                              {% set b = (rgb[2] | int) %}
+                            {% else %}
+                              {# fallback for CT-only lights #}
+                              {% set r = 255 %}
+                              {% set g = 240 %}
+                              {% set b = 200 %}
+                            {% endif %}
+                            {% if trigger_active %}
+                              --shape-animation: lamp-sweep 1.8s ease-in-out infinite;
+                              opacity: 1;
+                            {% else %}
+                              --shape-animation: none;
+                              opacity: 0.5;
+                            {% endif %}
+                            position: relative;
+                            transform-origin: 50% 60%;
+                          }
+                          @keyframes lamp-sweep {
+                            0% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                            25% {
+                              filter: brightness(1.4);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(3deg) scale(1.02);
+                            }
+                            50% {
+                              filter: brightness(1.2);
+                              box-shadow:
+                                0 0 24px 10px rgba({{ r }}, {{ g }}, {{ b }}, 0.9),
+                                8px 35px 45px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.5);
+                              transform: rotate(-2deg) scale(1.03);
+                            }
+                            75% {
+                              filter: brightness(1.5);
+                              box-shadow:
+                                0 0 18px 8px rgba({{ r }}, {{ g }}, {{ b }}, 1),
+                                -6px 30px 40px -12px rgba({{ r }}, {{ g }}, {{ b }}, 0.4);
+                              transform: rotate(2deg) scale(1.01);
+                            }
+                            100% {
+                              filter: brightness(1.1);
+                              box-shadow:
+                                0 0 12px 4px rgba({{ r }}, {{ g }}, {{ b }}, 0.8),
+                                0 30px 40px -10px rgba({{ r }}, {{ g }}, {{ b }}, 0.0);
+                              transform: rotate(-4deg) scale(1);
+                            }
+                          }
+                        .: |
+                          ha-card {
+                            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                          }
+          - type: col # laundry
+            class: col-12 col-md-4 col-lg-3
+            cards:
+              - type: row
+                cards:
+                  - type: markdown
+                    class: col
+                    card_mod:
+                      style: |
+                        ha-card {border: none;}
+                        ha-markdown {
+                          padding: 16px 0px 16px!important;
+                          overflow-wrap: normal!important;
+                        }
+                    content: >-
+                      ## Laundry
+              - type: row
+                cards:
+                  - class: col-12
+                    type: custom:mushroom-entity-card
+                    entity: light.laundry_switch
+                    tap_action:
+                      action: toggle
+                    icon: hue:room-laundry
+                    primary_info: name
+                    secondary_info: none
+                    card_mod:
+                      style: |
+                        ha-card {
+                          {% set state = states(config.entity) %}
+                          {% set motionstate = states('timer.laundry_light_manual_timer') %}
+                          {% set motion_timer = states('timer.laundry_light_on_by_motion_timer') %}
+                          {% if state in ['off'] %}
+                            {% set c1 = '0, 40, 255' %} 
+                            {% set c2 = '100, 100, 20' %}
+                            {% set opacity = '0.3' %}
+                            {% set speed = '9s' %}
+                            {% set motionstate ='Off' %}
+                          {% elif motion_timer in ['active'] %}
+                            {% set c1 = '255, 69, 0' %}  /* Orange RGB */
+                            {% set c2 = '255, 255, 0' %}   /* Yellow RGB */
+                            {% set opacity = '0.6' %}
+                            {% set speed = '3s' %}
+                            {% set motionstate ='On By Motion' %}
+                          {% else %}
+                            {% set c1 = '0, 242, 96' %}    /* Green RGB  */
+                            {% set c2 = '5, 117, 230' %}   /* Blue RGB */
+                            {% set opacity = '0.6' %}
+                            {% set speed = '5s' %}
+                            {% set motionstate ='On' %}
+                          {% endif %}
+                          --aura-color-1: rgba({{ c1 }}, {{ opacity }});
+                          --aura-color-2: rgba({{ c2 }}, {{ opacity }});
+                          --speed: {{ speed }};
+                          border-radius: 4px;
+                          border: 1px solid rgba(255,255,255,0.08);
+                          position: relative;
+                          overflow: hidden;
+                          
+                        }
+                        ha-card::before {
+                          content: "";
+                          position: absolute;
+                          top: -50%; left: -50%;
+                          width: 200%; height: 200%;
+                          z-index: 0;
+                          background-image: 
+                            radial-gradient(circle at 50% 50%, var(--aura-color-1) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 80%, var(--aura-color-2) 0%, transparent 50%);
+                          filter: blur(60px);
+                          opacity: 0.8;
+                          animation: rotate-aura var(--speed) linear infinite;
+                        }
+                        ha-card::after {
+                          content: '{{ motionstate | replace("_", " ") |capitalize }}';
+                          position: absolute;
+                          top: 50%; 
+                          right: 16px;
+                          transform: translateY(-50%);
+                          z-index: 10;
+                          /* Badge Styling (Like the battery example) */
+                          color: white;
+                          font-weight: 700;
+                          font-size: 14px;
+                          background: rgba(93, 45, 45, 0.4);
+                          border: 1px solid rgba(255, 255, 255, 0.15);
+                          backdrop-filter: blur(4px);
+                          padding: 4px 10px;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 2px black;
+                        }
+                        ha-card {
+                          clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 4px));
+                          --card-primary-font-size: 1.2rem !important;
+                          --card-primary-line-height: 1.3 !important;
+                        }
+                        .mushroom-state-info span.primary {
+                          color: white !important;
+                          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                        }
+                        .mushroom-state-info span.secondary {
+                          color: rgba(255,255,255,0.8) !important;
+                        }
+                        ha-state-icon {color: white !important;}
+                        @keyframes rotate-aura {
+                          0% { transform: rotate(0deg); }
+                          100% { transform: rotate(360deg); }
+                        }

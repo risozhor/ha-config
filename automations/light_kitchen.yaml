@@ -1,68 +1,109 @@
-- alias: kitchenlight_on
+- alias: Kitchen_wled_on_by_motion
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id:
+        - binary_sensor.0xb40e060fffe10466_occupancy
+      to:
+        - "on"
+  conditions:
+    - condition: state
+      entity_id: light.wled
+      state:
+        - "off"
+    - condition: state
+      entity_id: binary_sensor.day_tod
+      state:
+        - "off"
+  actions:
+    - action: select.select_option
+      target:
+        entity_id: select.wled_preset
+      data:
+        option: "White "
+    - action: timer.start
+      target:
+        entity_id: timer.kitchen_wled_night_on_timer_1m
+      data: {}
+- alias: kitchen_wled_night_finished
   initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kitchen_opple_action
-      to: "button_3_single"
+  triggers:
+    - trigger: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.kitchen_wled_night_on_timer_1m
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen Color lamp/set
-        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen ceiling lamp/set
-        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen table lamp/set
-        payload: '{"state": "ON","transition": 1,"hue_power_on_behavior": "off","brightness": 254,"color_temp": 270}'
-        retain: true
-- alias: kitchenlight_off
+    - action: light.turn_off
+      data: {}
+      target:
+        entity_id: light.wled
+    - action: timer.cancel
+      target:
+        entity_id: timer.kitchen_wled_night_on_timer_1m
+      data: {}
+
+- alias: kitchen_wled_nigh_timer_cancel_if_wled_off
   initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kitchen_opple_action
-      to: "button_4_single"
+  triggers:
+    - trigger: state
+      entity_id:
+        - light.wled
+      to:
+        - "off"
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen Color lamp/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen ceiling lamp/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen table lamp/set
-        payload: '{"state": "OFF","transition": 1,"hue_power_on_behavior": "off"}'
-        retain: true
-- alias: kitchenstripe_on
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kitchen_opple_action
-      to: "button_1_single"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen strip/set
-        payload: '{"state": "ON","brightness": 254,"color_temp": 270}'
-        retain: true
-- alias: kitchenstripe_off
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.kitchen_opple_action
-      to: "button_2_single"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/Kitchen strip/set
-        payload: '{"state": "OFF"}'
-        retain: true
+    - action: timer.cancel
+      target:
+        entity_id: timer.kitchen_wled_night_on_timer_1m
+      data: {}
+
+- id: "wled_oplle_switch_b_4_single"
+  alias: Wled Oplle Switch button_4_single
+  description: "Wled Oplle Switch button_4_single"
+  mode: single
+  triggers:
+    - trigger: mqtt
+      options:
+        topic: "zigbee2mqtt/wled_oplle_switch/action"
+        payload: "button_4_single"
+  conditions: []
+  actions:
+    - action: select.select_option
+      target:
+        entity_id: select.wled_preset
+      data:
+        option: "White "
+
+- id: "wled_oplle_switch_b_3_single"
+  alias: Wled Oplle Switch button_3_single
+  description: "Wled Oplle Switch button_3_single"
+  mode: single
+  triggers:
+    - trigger: mqtt
+      options:
+        topic: "zigbee2mqtt/wled_oplle_switch/action"
+        payload: "button_3_single"
+  conditions: []
+  actions:
+    - action: rest_command.next_wled_preset
+      metadata: {}
+      data: {}
+
+
+
+- id: "wled_oplle_switch_b_1_single_b_2_single"
+  alias: Wled Oplle Switch button 1 and 2 single
+  description: "Wled Oplle Switch button 1 and 2 single"
+  mode: single
+  triggers:
+    - trigger: mqtt
+      options:
+        topic: "zigbee2mqtt/wled_oplle_switch/action"
+        payload: "button_1_single"
+    - trigger: mqtt
+      options:
+        topic: "zigbee2mqtt/wled_oplle_switch/action"
+        payload: "button_2_single"
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.wled

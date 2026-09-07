@@ -1,22 +1,12 @@
-- platform: template
-  panels:
-    alarm_panel:
-      unique_id: alarm_panel
-      value_template: "{{ states('alarm_control_panel.home_alarm') }}"
-      arm_away:
-        service: alarm_control_panel.alarm_arm_away
-        target:
-          entity_id: alarm_control_panel.home_alarm
-      arm_home:
-        service: alarm_control_panel.alarm_arm_home
-        target:
-          entity_id: alarm_control_panel.home_alarm
-      disarm:
-        - service: alarm_control_panel.alarm_disarm
-          target:
-            entity_id: alarm_control_panel.home_alarm
-          data:
-            code: !secret alarm_code
-
 - platform: manual
-  name: Home Alarm
+  name: Manual Alarm
+  unique_id: manual_alarm
+  code: !secret alarm_code
+  arming_time: 30
+  delay_time: 20
+  trigger_time: 4
+  disarmed:
+    trigger_time: 0
+  arming_states:
+    - armed_away
+    - armed_home

@@ -1,11 +1,22 @@
-lock:
-  - name: "Frontdoor"
-    unique_id: "frontdoor_lock"
-    state_topic: "zigbee2mqtt_lan/Lock Switch"
-    command_topic: "zigbee2mqtt_lan/Lock Switch/right/set"
-    payload_lock: "OFF"
-    payload_unlock: "ON"
-    state_locked: "OFF"
-    state_unlocked: "ON"
-    qos: 1
-    value_template: "{{ value_json.state_right }}"
+# lock:
+#   - name: "Frontdoor"
+#     unique_id: "frontdoor_lock"
+#     state_topic: "zigbee2mqtt_lan/Lock Switch"
+#     command_topic: "zigbee2mqtt_lan/Lock Switch/right/set"
+#     payload_lock: "OFF"
+#     payload_unlock: "ON"
+#     state_locked: "OFF"
+#     state_unlocked: "ON"
+#     qos: 1
+#     value_template: "{{ value_json.state_right }}"
+
+# wled/e526f8/
+# []
+# mqtt:
+sensor:
+    - name: Zigbee2MQTT Network Map
+      state_topic: zigbee2mqtt/bridge/response/networkmap
+      unique_id: zigbee2mqtt_networkmap
+      value_template: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+      json_attributes_topic: zigbee2mqtt/bridge/response/networkmap
+      json_attributes_template: "{{ value_json.data.value | tojson }}"

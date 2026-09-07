@@ -4,5 +4,10 @@ icon: mdi:clipboard-list-outline
 subview: true
 cards:
   - type: shopping-list
-    title: To Do
+    title: Alex Todo 
     entity: todo.todo
+    # visibility:
+    #   - condition: user
+    #     users:
+    #       - ca6b753fa3864510837d851649a752d3
+

@@ -1,11 +1,10 @@
 tablet:
   #enable mode
   modes: { dark: { .: . } }
-
   #edited default dark mode
+
   ha-card-box-shadow: none
   ha-card-background: none
-
   grid-card-gap: 5%
   masonry-view-card-margin: 0px
   state-icon-color: "#9da0a2"
@@ -142,10 +141,11 @@ tablet:
   #                     CARD-MOD                     #
   #                                                  #
   ####################################################
+    #view {background: url('/local/background.png')!important;background-size: cover!important;}
 
   card-mod-theme: tablet
   card-mod-root: |
-    #view {background: url('/local/background.png');background-size: cover;}
+    #view {background: url('/local/background.png')!important;background-size: cover!important;}
     paper-tab ha-icon:after {
         content: "";
         left: calc(var(--mdc-icon-size,24px) / 2);
@@ -214,53 +214,57 @@ tablet:
       hui-view {
         background: none !important;
       }
+      dialog {
+        border: grey solid 1px;
+        box-shadow: grey 4px 4px 8px;
+      }
     #################################################
     #                                               #
     #                    FOOTER                     #
     #                                               #
     #################################################
-  card-mod-card: |
-    .header .card-header {
-      letter-spacing: 0.005em;
-      font-size: 1.6em;
-      font-weight: 500;
-      padding: 0.8em 0 0 1.3em;
-      line-height: initial;
-      cursor: default;
-    }
-    .content .card-content {
-      padding: var(--tablet-popup-content-padding);
-    }
-    /* * * * * * * * * * * * * * * * * *
-      *                                 *
-      *         CUSTOM BAR CARD         *
-      *                                 *
-      * * * * * * * * * * * * * * * * * */
+  # card-mod-card: |
+  #   .header .card-header {
+  #     letter-spacing: 0.005em;
+  #     font-size: 1.6em;
+  #     font-weight: 500;
+  #     padding: 0.8em 0 0 1.3em;
+  #     line-height: initial;
+  #     cursor: default;
+  #   }
+  #   .content .card-content {
+  #     padding: var(--tablet-popup-content-padding);
+  #   }
+  #   /* * * * * * * * * * * * * * * * * *
+  #     *                                 *
+  #     *         CUSTOM BAR CARD         *
+  #     *                                 *
+  #     * * * * * * * * * * * * * * * * * */
 
-    .type-custom-bar-card bar-card-name {
-      padding-left: 0.25em;
-      letter-spacing: normal;
-    }
-    .type-custom-bar-card bar-card-iconbar {
-      padding-left: 0.23em;
-    }
-    .type-custom-bar-card bar-card-value {
-      font-size: 0.9em;
-      font-weight: 400;
-      color: #e0e1e1;
-      letter-spacing: 0.01em;
-      text-shadow: none;
-      margin-right: auto;
-    }
-    .type-custom-bar-card bar-card-backgroundbar {
-      background: none;
-    }
-    .type-custom-bar-card bar-card-background {
-      background: radial-gradient(circle, rgba(52, 57, 58, 0.1) 0%, rgba(17, 18, 18, 0.2) 75%);
-      box-shadow: inset 0 0 25px #00000045;
-      border-radius: 0.3em;
-      overflow: hidden;
-    }
+    # .type-custom-bar-card bar-card-name {
+    #   padding-left: 0.25em;
+    #   letter-spacing: normal;
+    # }
+    # .type-custom-bar-card bar-card-iconbar {
+    #   padding-left: 0.23em;
+    # }
+    # .type-custom-bar-card bar-card-value {
+    #   font-size: 0.9em;
+    #   font-weight: 400;
+    #   color: #e0e1e1;
+    #   letter-spacing: 0.01em;
+    #   text-shadow: none;
+    #   margin-right: auto;
+    # }
+    # .type-custom-bar-card bar-card-backgroundbar {
+    #   background: none;
+    # }
+    # .type-custom-bar-card bar-card-background {
+    #   background: radial-gradient(circle, rgba(52, 57, 58, 0.1) 0%, rgba(17, 18, 18, 0.2) 75%);
+    #   box-shadow: inset 0 0 25px #00000045;
+    #   border-radius: 0.3em;
+    #   overflow: hidden;
+    # }
   card-mod-more-info-yaml: |
     .: |
       :host {

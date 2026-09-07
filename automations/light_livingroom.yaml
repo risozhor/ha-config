@@ -1,108 +1,29 @@
-- alias: livingroom_light_on_by_sw
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.livingroom_light_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "hold"
-  condition:
-    - condition: state
-      entity_id: light.livingroom_lights
-      state: "off"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "ON","brightness": 255,"color_temp": 270,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
+# turn on light on night when kitchen and livingroom off
 
-- alias: livingroom_light_on20_by_sw
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.livingroom_light_switch_action
-      to: "double"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "double"
-  condition:
-    - condition: state
-      entity_id: light.livingroom_lights
-      state: "off"
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "ON","brightness": 51,"color_temp": 370,"transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-
-- alias: livingroom_light_off_by_sw
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id: sensor.livingroom_light_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.livingroom_light_switch_action
-      to: "double"
-    - platform: state
-      entity_id: sensor.livingroom_light_switch_action
-      to: "hold"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "single"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "double"
-    - platform: state
-      entity_id: sensor.livingroom_switch_action
-      to: "hold"
-  condition:
-    - condition: state
-      entity_id: light.livingroom_lights
-      state: "on"
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.livingroom_lights
-        transition: 1
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x001788010383c41f/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103b01125/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: zigbee2mqtt_lan/0x0017880103f273e3/set
-        payload: '{"state": "OFF","transition":1,"hue_power_on_behavior": "off"}'
-        retain: true
+# - alias: livingroom_light_on_by_motion
+#   triggers:
+#     - trigger: state
+#       entity_id:
+#         - binary_sensor.0xb40e060fffe10466_occupancy
+#       to:
+#         - "on"
+#   conditions:
+#     - condition: state
+#       entity_id: light.living_room_lights
+#       state:
+#         - "off"
+#     - condition: state
+#       entity_id: light.kitchen_lights
+#       state:
+#         - "off"
+#     - condition: state
+#       entity_id: binary_sensor.day_tod
+#       state:
+#         - "off"
+#   actions:
+#     - action: light.turn_on
+#       metadata: {}
+#       target:
+#         entity_id: light.living_room_lights
+#       data: {}
+#   mode: single

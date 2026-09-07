@@ -4,7 +4,6 @@ icon: mdi:auto-fix
 type: panel
 cards:
   - type: custom:bootstrap-grid-card
-
     cards:
       - type: row
         cards:
@@ -424,7 +423,7 @@ cards:
                               {%- if count < 10 -%}mdi:numeric-{{ count }}-circle
                               {%- else -%}numeric-9-plus-circle{%- endif -%}
                               {%- endif -%}
-                            entity: sensor.todo_list_items_2
+                            entity: sensor.todo_list_items
                             badge_color: |-
                               {% set count = states(entity) | int(default=0) %}
                               {%- if count > 0 -%}blue{%- endif -%}
@@ -508,9 +507,6 @@ cards:
                                 experimental:
                                   color_threshold: true
                                 cache: true
-                                # span:
-                                #   end: day
-                                #   offset: "-0h"
                                 header:
                                   show: false
                                   title: Today's Energy Usage
@@ -556,10 +552,17 @@ cards:
                                     labels:
                                       format: HH:mm
                                   yaxis:
-                                    forceNiceScale: false
-                                    decimalsInFloat: 0
-                                    min: 0
-                                    show: false
+                                    - id: humidity
+                                      show: false
+                                      opposite: true
+                                      decimals: 0
+                                      apex_config:
+                                        tickAmount: 5
+                                    - id: temperature
+                                      show: false
+                                      opposite: false
+                                      apex_config:
+                                        tickAmount: 5
                                   fill:
                                     type: gradient
                                     gradient:
@@ -574,28 +577,37 @@ cards:
                                 graph_span: 24h
                                 locale: ua
                                 series:
-                                  - entity: sensor.hourly_energy
+                                  - entity: sensor.bathroom_temperature_humidity_sensor_temperature
+                                    name: temperature
                                     type: area
-                                    float_precision: 2
-                                    color: "#4e8cd6"
-                                    fill_raw: last
+                                    float_precision: 1
+                                    extend_to: now
                                     curve: smooth
-                                    # show:
-                                    #   datalabels: true
+                                    color: orange
+                                    opacity: 0.6
+                                    yaxis_id: Temperature
+                                    show:
+                                      legend_value: true
+                                      in_header: false
                                     group_by:
-                                      func: max
-                                      duration: 1h
-                                  - entity: sensor.water_heater_hourly_energy
+                                      func: last
+                                      duration: 10m
+                                  - entity: sensor.bathroom_temperature_humidity_sensor_humidity
+                                    name: humidity
+                                    float_precision: 1
                                     type: area
-                                    float_precision: 2
-                                    color: "#fff000"
-                                    fill_raw: last
+                                    color: '#4e8cd6'
+                                    opacity: 0.6
+                                    yaxis_id: Humidity
+                                    extend_to: now
                                     curve: smooth
-                                    # show:
-                                    #   datalabels: true
+                                    show:
+                                      legend_value: true
+                                      in_header: false
                                     group_by:
-                                      func: max
-                                      duration: 1h
+                                      func: last
+                                      duration: 10m
+
                       - type: row ###### radialBar
                         cards:
                           - type: custom:button-card

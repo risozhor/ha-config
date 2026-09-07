@@ -6,14 +6,39 @@
     input:
       exclude:
         entity_id:
-          - sensor.a50_maryna_battery_level
+
           - sensor.note20_battery_level
-          - sensor.yaroslava_battery_level
-          - sensor.sm_m315f_battery_level
-          - sensor.sm_a505fn_battery_level
+          - sensor.alex_s25u_battery_level
+          - sensor.sm_s938w_battery_level
+          - sensor.galaxy_watch8_classic_battery_level
+
+          - sensor.sm_s928w_battery_level
+          - sensor.alex_s24u_battery_level
+          - sensor.s24u_battery_level
+
+          - sensor.sm_m526b_battery_level
+          
+          - sensor.marina_battery_level
+          
+          - sensor.seeed_studio_iot_button_v2_battery_percentage
+
+
+          
       threshold: 60
       actions:
-        - service: telegram_bot.send_message
+        # - action: notify.send_message
+        #   data:
+        #     message: The battery of the sensor(s) {{sensors}} is low
+        #     entity_id: notify.telegram_bot_1237123148_66507631
+        - service: notify.mobile_app_sm_s938w
           data:
-            target: 66507631
-            message: The battery of the sensor(s) {{sensors}} is low!
+            title: 'Low batteries:'
+            message: The battery of the sensor(s) {{sensors}} is low
+            data:
+              color: "#ff1100"
+              actions:
+                - action: "URI"
+                  title: "View"
+                  uri: "lovelace/low-bat"
+
+

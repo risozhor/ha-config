@@ -1,8 +1,0 @@
-- platform: cert_expiry
-  host: !secret host
-- platform: time_date
-  display_options:
-    - "time"
-    - "date"
-    - "time_date"
-

@@ -1,15 +1,13 @@
 - platform: group
-  name: Livingroom Lights
-  unique_id: livingroom_lights
+  name: Livingroom Couch Lights
+  unique_id: livingroom_couch_lights
   entities:
-    - light.livingroom_color_lamp_1
-    - light.livingroom_color_lamp_2
-    - light.livingroom_color_lamp_3
+    - light.0x001788010e72656e
+    # - light.smart_plug_couch
 
 - platform: group
-  name: Kitchen Ceiling Lights
+  name: Kitchen Lights
   unique_id: kitchen_lights
   entities:
-    - light.kitchen_table_lamp
-    - light.kitchen_ceiling_lamp
-    - light.kitchen_color_lamp
+    - light.coffee_zone
+    - light.cooking_zone

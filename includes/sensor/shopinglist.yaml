@@ -1,22 +1,22 @@
-- platform: template
-  sensors:
-    shopping_list_items:
-      unique_id: shopping_list_items
-      friendly_name: "Shopping List Items"
-      value_template: >
-        {%- set produce_list = state_attr('sensor.shopping_list', 'incomplete')%}
-        {% for value in produce_list %}
-        {{-'\n'-}}{{value.name}}{% if loop.last %}.{% else %},{% endif -%}
-        {%-  endfor %}
-      icon_template: >
-        mdi:basket
+# - platform: template
+#   sensors:
+#     shopping_list_items:
+#       unique_id: shopping_list_items
+#       friendly_name: "Shopping List Items"
+#       value_template: >
+#         {%- set produce_list = state_attr('sensor.shopping_list', 'incomplete')%}
+#         {% for value in produce_list %}
+#         {{-'\n'-}}{{value.name}}{% if loop.last %}.{% else %},{% endif -%}
+#         {%-  endfor %}
+#       icon_template: >
+#         mdi:basket
 
-- platform: template
-  sensors:
-    todo_list:
-      unique_id: todo_list
-      friendly_name: "Todo List Incomplete"
-      value_template: >
-        {{ states.todo.todo.state }}
-      icon_template: >
-        mdi:checkbox-multiple-blank
+# - platform: template
+#   sensors:
+#     todo_list:
+#       unique_id: todo_list
+#       friendly_name: "Todo List Incomplete"
+#       value_template: >
+#         {{ states.todo.alex_tasks.state }}
+#       icon_template: >
+#         mdi:checkbox-multiple-blank
